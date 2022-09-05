@@ -4,17 +4,17 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:50502",
-      "sslPort": 44375
+      "applicationUrl": "http://localhost:10407",
+      "sslPort": 44314
     }
   },
   "profiles": {
-    "Hospitality": {
+    "Hospitality.Patient.API": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7230;http://localhost:5230",
+      "applicationUrl": "https://localhost:7043;http://localhost:5043",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
