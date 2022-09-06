@@ -1,6 +1,10 @@
-﻿namespace Hospitality.CheckUp.API.Service.Interface
+﻿using Hospitality.Common.DTO.CheckUp;
+
+namespace Hospitality.CheckUp.API.Service.Interface
 {
-    public class ICheckUpService
+    public interface ICheckUpService
     {
+
+        void AddNewCheckUp(NewCheckUpDTO newCheckUpDTO);
     }
 }

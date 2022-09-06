@@ -1,4 +1,5 @@
 ﻿using Hospitality.CheckUp.API.Service.Interface;
+using Hospitality.Common.DTO.CheckUp;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
