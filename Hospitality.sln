@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Gateway.API", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Web", "src\Hospitality.Web\Hospitality.Web.csproj", "{3EC26491-3FE2-4402-8BC1-B78A62CEC154}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospitality.Identity.Data", "Hospitality.Identity.Data\Hospitality.Identity.Data.csproj", "{A23F8505-4E3D-4316-B2B4-4E1A798D6759}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Identity.Data", "src\Hospitality.Identity.Data\Hospitality.Identity.Data.csproj", "{CCAEC609-B217-4C63-9C75-DBC767D5BE16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,10 @@ Global
 		{3EC26491-3FE2-4402-8BC1-B78A62CEC154}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EC26491-3FE2-4402-8BC1-B78A62CEC154}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EC26491-3FE2-4402-8BC1-B78A62CEC154}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A23F8505-4E3D-4316-B2B4-4E1A798D6759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A23F8505-4E3D-4316-B2B4-4E1A798D6759}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A23F8505-4E3D-4316-B2B4-4E1A798D6759}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A23F8505-4E3D-4316-B2B4-4E1A798D6759}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCAEC609-B217-4C63-9C75-DBC767D5BE16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCAEC609-B217-4C63-9C75-DBC767D5BE16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCAEC609-B217-4C63-9C75-DBC767D5BE16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCAEC609-B217-4C63-9C75-DBC767D5BE16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
