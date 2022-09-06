@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SecondExam.AuthContext.Context.Seeders;
 
 namespace Hospitality.Identity.Data.Context
 {
@@ -12,7 +13,7 @@ namespace Hospitality.Identity.Data.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            //builder.Seed();
+            builder.Seed();
         }
     }
 }
