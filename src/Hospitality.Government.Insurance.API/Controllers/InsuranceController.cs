@@ -13,6 +13,10 @@ namespace Hospitality.Government.Insurance.API.Controllers
 
         [HttpPost]
         public async Task<IActionResult> CheckIfIsured(int idOfPerson)
-            => Ok(random.Next(0, 1));
+        {
+            var randomized = random.Next(0,2);
+            if (randomized == 0) return Ok(false);
+            return Ok(true);
+        }
     }
 }
