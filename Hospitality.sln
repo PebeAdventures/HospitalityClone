@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Web", "src\Hosp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.CheckUp.API", "src\Hospitality.CheckUp.API\Hospitality.CheckUp.API.csproj", "{8CFB959C-B1FC-4DF8-9539-E4CBAFAD8359}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Common", "src\Hospitality.Common\Hospitality.Common.csproj", "{A005AAC8-0B27-4A22-8C8A-07AD1E7BA500}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Common", "src\Hospitality.Common\Hospitality.Common.csproj", "{6E0FC478-7D87-4274-BC6F-BB4AB5BB629B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +53,10 @@ Global
 		{8CFB959C-B1FC-4DF8-9539-E4CBAFAD8359}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CFB959C-B1FC-4DF8-9539-E4CBAFAD8359}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CFB959C-B1FC-4DF8-9539-E4CBAFAD8359}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A005AAC8-0B27-4A22-8C8A-07AD1E7BA500}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A005AAC8-0B27-4A22-8C8A-07AD1E7BA500}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A005AAC8-0B27-4A22-8C8A-07AD1E7BA500}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A005AAC8-0B27-4A22-8C8A-07AD1E7BA500}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E0FC478-7D87-4274-BC6F-BB4AB5BB629B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E0FC478-7D87-4274-BC6F-BB4AB5BB629B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E0FC478-7D87-4274-BC6F-BB4AB5BB629B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E0FC478-7D87-4274-BC6F-BB4AB5BB629B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
