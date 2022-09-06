@@ -9,7 +9,7 @@ namespace Hospitality.Examination.API.Model
         {
         }
 
-        public DbSet<Examination> Examinations { get; set; }
+        public DbSet<ExaminationInfo> Examinations { get; set; }
         public DbSet<ExaminationType> ExaminationTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
