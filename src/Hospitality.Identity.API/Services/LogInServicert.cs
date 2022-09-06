@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Hospitality.Identity.API.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -6,13 +7,13 @@ using System.Text;
 
 namespace SecondExam.Services.Services.Auth
 {
-    public class LogInService
+    public class LogInServicert : ILogInService
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
 
-        public LogInService(IConfiguration configuration, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public LogInServicert(IConfiguration configuration, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -26,7 +27,7 @@ namespace SecondExam.Services.Services.Auth
             if (!isCorrect) return null;
             return await GenerateJwtToken(existingUser);
         }
-        public async Task<string> GenerateJwtToken(IdentityUser user)
+        private async Task<string> GenerateJwtToken(IdentityUser user)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var claims = await GetValidClaims(user);
@@ -40,9 +41,8 @@ namespace SecondExam.Services.Services.Auth
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-        public async Task<List<Claim>> GetValidClaims(IdentityUser user)
+        private async Task<List<Claim>> GetValidClaims(IdentityUser user)
         {
-            IdentityOptions _options = new IdentityOptions();
             var claims = new List<Claim>
             {
                 new Claim("Id", user.Id),

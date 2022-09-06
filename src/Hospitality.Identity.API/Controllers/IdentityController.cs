@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Hospitality.Identity.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using SecondExam.Services.Services.Auth;
 
 namespace Hospitality.Identity.API.Controllers
 {
@@ -8,12 +7,12 @@ namespace Hospitality.Identity.API.Controllers
     [ApiController]
     public class IdentityController : ControllerBase
     {
-        private LogInService LogInService;
-        public IdentityController(LogInService logInService)
+        private ILogInService LogInService;
+        public IdentityController(ILogInService logInService)
             => LogInService = logInService;
 
         [HttpPost]
         public async Task<IActionResult> Login(string email, string password)
-            => Ok(LogInService.Login(email, password));
+            => Ok(await LogInService.Login(email, password));
     }
 }
