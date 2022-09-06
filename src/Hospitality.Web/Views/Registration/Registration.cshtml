@@ -6,10 +6,9 @@
 </head>
 
 <content>
-                <h2>Patient register form</h2>
-
 
                 <div id="registrationForm">
+                    <h2>Patient register form</h2>
 
                     <div>                    
                         <p>
@@ -31,23 +30,28 @@
                             <input id="addressInput" name="addressInput" type="text">
                         </p>
                         <p>
-                            <label id="emailLabel" for="">Email</label><br>
-                            <input id="emailInput" name="emailInput" type="text">
+                            <label id="phoneNumberLabel" for="">Phone number</label><br>
+                            <input id="phoneNumberInput" name="phoneNumberInput" type="text"><br>
+                            <br>
                         </p>
                         <p>
-                            <label id="phoneNumberLabel" for="">Phone number</label><br>
-                            <input id="phoneNumberInput" name="phoneNumberInput" type="text">
+                            <select id="spetialistList">
+                                       <option value=""> -- select a specialist -- </option>
+                                       <option value="dentist">Dentist</option>
+                                       <option value="q">q</option>
+                                       <option value="b">b</option>
+                                       <option value="c">c</option>
+                            </select>
                         </p>
                         <p>
                              <label id="insuranceLabel" for="">Health Insurance</label><br>
                              <input id="insuranseInput" type="text" disabled></input>
                              <button id="insuranseButton" type="submit" class="btn btn-primary"> Check </button>
-
                         </p>
+
                      </div><br>
                      <p class="buttons">
-                        <button id="sendButton" type="submit" class="btn btn-primary">  Log in  </button>
-                        <button id="resetButton" class="btn btn-primary" type="reset">  Reset  </button> 
+                        <button id="sendButton" type="submit" class="btn btn-primary"> Book visit  </button>
                      </p>
 
     </div>
