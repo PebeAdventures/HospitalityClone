@@ -1,0 +1,55 @@
+﻿body::before {
+    content: '';
+    position: absolute;
+    margin-bottom: 60px;
+    background-image: url("../Resources/Welcome_2.jpg");
+    background-size: cover;
+    background-position: center;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.1;
+}
+h2 {
+    position: center;
+    margin-left: 25%;
+    font-size: 30px;
+}
+#registrationForm {
+    background-color: #d4ebf3;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    border: 1px solid black;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding: 4%;
+    padding-bottom: 2%;
+}
+
+label, input, #checkButton, #sendButton, #resetButton, #insuranseButton{
+    font-size: 18px;
+}
+
+input {
+    width: 100%;
+}
+#peselLabel, #dateOfBirthLabel, #peselInput, #dateOfBirthInput {
+    width: 47%;
+}
+#insuranseInput {
+    width: 25%
+}
+#resetButton, #insuranseButton, #dateOfBirthLabel, #dateOfBirthInput {
+    margin-left: 5%;
+}
+
+#insuranseButton {
+    width: 16%;
+    margin-left: 5%;
+}
+
+#sendButton, #resetButton {
+    width: 47%;
+}
