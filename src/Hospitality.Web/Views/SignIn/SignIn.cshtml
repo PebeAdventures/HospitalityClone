@@ -1,14 +1,32 @@
 ﻿@{
     ViewData["Title"] = "Sign In Page";
 }
+<head>
+    <link rel="stylesheet" href="~/css/SignIn.css" asp-append-version="true" />
+</head>
+
 
 <content>
-    
-     <div class="overlay row">
-        <p class="content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+
+                <div id="signInForm">
+
+           
+                    <div>                    
+                        <p>
+                            <label id="loginLabel" for="">Login</label><br>
+                            <input id="loginInput" name="loginInput" type="text">
+                        </p>
+                        <p>
+                            <label id="passwordLabel" for="">Password</label><br>
+                            <input id="phoneInput" name="phoneInput" type="text">
+                        </p>
+                     </div><br><br>
+                     <p class="buttons">
+                        <button id="sendButton" type="submit" class="btn btn-primary">  Log in  </button>
+                        <button id="resetButton" class="btn btn-primary" type="reset">  Reset  </button> 
+                     </p>
+
     </div>
+
+
 </content>
