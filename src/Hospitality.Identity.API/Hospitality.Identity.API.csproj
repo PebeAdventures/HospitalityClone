@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Hospitality.Identity.Data\Hospitality.Identity.Data.csproj" />
     <ProjectReference Include="..\Hospitality.Identity.Data\Hospitality.Identity.Data.csproj" />
   </ItemGroup>
 
