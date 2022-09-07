@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Registration Page";
+}
+<head>
+    <link rel="stylesheet" href="~/css/Registration.css" asp-append-version="true" />
+</head>
+
+<content>
+
+                <div id="registrationForm">
+                    <h2>Patient register form</h2>
+
+                    <div>                    
+                        <p>
+                            <label id="nameLabel" for="">Name</label><br>
+                            <input id="nameInput" name="nameInput" type="text">
+                        </p>
+                        <p>
+                            <label id="surnameLabel" for="">Surname</label><br>
+                            <input id="surnameInput" name="surnameInput" type="text">
+                        </p>
+                        <p>
+                            <label id="peselLabel" for="">Pesel</label>
+                            <label id="dateOfBirthLabel" for="">Date of birth</label><br>
+                            <input id="peselInput" name="peselInput" type="text">
+                            <input id="dateOfBirthInput" name="dateOfBirthInput" type="date"  min="1922-01-01" max="2022-09-07"> <br>
+                        </p>
+                        <p>
+                            <label id="addressLabel" for="">Address</label><br>
+                            <input id="addressInput" name="addressInput" type="text">
+                        </p>
+                        <p>
+                            <label id="phoneNumberLabel" for="">Phone number</label><br>
+                            <input id="phoneNumberInput" name="phoneNumberInput" type="text"><br>
+                            <br>
+                        </p>
+                        <p>
+                            <select id="spetialistList">
+                                       <option value=""> -- select a specialist -- </option>
+                                       <option value="Internist">Internist</option>
+                                       <option value="Ophthalmologist">Ophthalmologist</option>
+                                       <option value="Orthopedist">Orthopedist</option>
+                                       <option value="Allergist">Allergist</option>
+                                       <option value="Dentist">Dentist</option>
+                                       <option value="Physiotherapist">Physiotherapist</option>
+                                       <option value="Dermatologist">Dermatologist</option>
+                            </select>
+                        </p>
+                        <p>
+                             <label id="insuranceLabel" for="">Health Insurance</label><br>
+                             <input id="insuranseInput" type="text" disabled></input>
+                             <button id="insuranseButton" type="submit" class="btn btn-primary"> Check </button>
+                        </p>
+
+                     </div><br>
+                     <p class="buttons">
+                        <button id="sendButton" type="submit" class="btn btn-primary"> Book visit  </button>
+                     </p>
+
+    </div>
+
+
+</content>

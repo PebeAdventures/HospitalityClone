@@ -1,18 +1,36 @@
-html {
-  font-size: 14px;
+﻿body::before {
+    content: '';
+    position: absolute;
+    margin-bottom: 60px;
+    background-image: url("../Resources/Welcome_2.jpg");
+    background-size: cover;
+    background-position: center;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: 0.1;
 }
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
+    
 html {
-  position: relative;
-  min-height: 100%;
+    font-size: 14px;
 }
 
 body {
-  margin-bottom: 60px;
+    background-color: #d4ebf3;
+}
+#navlogo {
+    height: 58px;
+}
+header {
+    color: #d4ebf3;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1%;
 }

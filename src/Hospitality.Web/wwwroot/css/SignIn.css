@@ -1,0 +1,24 @@
+﻿
+#signInForm {
+    background-color: #d4ebf3;
+    margin-top: 12%;
+    border: 1px solid black;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding: 4%;
+}
+
+#loginLabel, #passwordLabel, #loginInput, #phoneInput, #sendButton, #resetButton {
+    font-size: 18px;
+}
+
+#loginInput, #phoneInput {
+    width: 100%;
+}
+
+#resetButton{
+    margin-left:5%;
+}
+#sendButton, #resetButton{
+    width: 47%;
+}
