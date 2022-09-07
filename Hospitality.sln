@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Specialist", "Specialist", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Identity.Data", "src\Hospitality.Identity.Data\Hospitality.Identity.Data.csproj", "{CCAEC609-B217-4C63-9C75-DBC767D5BE16}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Government.Insurance.API", "src\Hospitality.Government.Insurance.API\Hospitality.Government.Insurance.API.csproj", "{5FC4B60A-68F1-40B1-8A93-726B51CFB0B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{3EC26491-3FE2-4402-8BC1-B78A62CEC154}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EC26491-3FE2-4402-8BC1-B78A62CEC154}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EC26491-3FE2-4402-8BC1-B78A62CEC154}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FC4B60A-68F1-40B1-8A93-726B51CFB0B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FC4B60A-68F1-40B1-8A93-726B51CFB0B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FC4B60A-68F1-40B1-8A93-726B51CFB0B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FC4B60A-68F1-40B1-8A93-726B51CFB0B0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8CFB959C-B1FC-4DF8-9539-E4CBAFAD8359}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8CFB959C-B1FC-4DF8-9539-E4CBAFAD8359}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CFB959C-B1FC-4DF8-9539-E4CBAFAD8359}.Release|Any CPU.ActiveCfg = Release|Any CPU
