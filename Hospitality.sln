@@ -15,9 +15,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Gateway.API", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Web", "src\Hospitality.Web\Hospitality.Web.csproj", "{3EC26491-3FE2-4402-8BC1-B78A62CEC154}"
 EndProject
-<<<<<<< HEAD
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hospitality.Patient", "Hospitality.Patient", "{2F5AE8F4-1152-46B9-9E1F-08F543F340C1}"
-=======
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.CheckUp.API", "src\Hospitality.CheckUp.API\Hospitality.CheckUp.API.csproj", "{8CFB959C-B1FC-4DF8-9539-E4CBAFAD8359}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Common", "src\Hospitality.Common\Hospitality.Common.csproj", "{6E0FC478-7D87-4274-BC6F-BB4AB5BB629B}"
@@ -39,7 +36,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Government.Insurance.API", "src\Hospitality.Government.Insurance.API\Hospitality.Government.Insurance.API.csproj", "{5FC4B60A-68F1-40B1-8A93-726B51CFB0B0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Insurance", "Insurance", "{FA164707-DAC5-422A-B13B-B21CB9DE225C}"
->>>>>>> master
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,8 +67,6 @@ Global
 		{3EC26491-3FE2-4402-8BC1-B78A62CEC154}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EC26491-3FE2-4402-8BC1-B78A62CEC154}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EC26491-3FE2-4402-8BC1-B78A62CEC154}.Release|Any CPU.Build.0 = Release|Any CPU
-<<<<<<< HEAD
-=======
 		{8CFB959C-B1FC-4DF8-9539-E4CBAFAD8359}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8CFB959C-B1FC-4DF8-9539-E4CBAFAD8359}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CFB959C-B1FC-4DF8-9539-E4CBAFAD8359}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -89,15 +83,11 @@ Global
 		{5FC4B60A-68F1-40B1-8A93-726B51CFB0B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FC4B60A-68F1-40B1-8A93-726B51CFB0B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FC4B60A-68F1-40B1-8A93-726B51CFB0B0}.Release|Any CPU.Build.0 = Release|Any CPU
->>>>>>> master
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-<<<<<<< HEAD
-		{D8DF0A34-3098-4633-91D3-EEA1560E7358} = {2F5AE8F4-1152-46B9-9E1F-08F543F340C1}
-=======
 		{39B6E93E-35F8-4C4C-B7C9-6FAC945ED1E9} = {EAFAC99B-AE6A-4ED1-9375-ED69562B7090}
 		{0D58F988-8D04-4CBF-AF74-B2202598CC42} = {2D52CFF1-2152-4FD6-A0E4-72DBE6FC0FD3}
 		{D8DF0A34-3098-4633-91D3-EEA1560E7358} = {5A97550F-FE28-4C08-8EA1-8706C3EA8796}
@@ -106,7 +96,6 @@ Global
 		{8CFB959C-B1FC-4DF8-9539-E4CBAFAD8359} = {3D5382F7-551A-4CFB-B16A-A894A91C1757}
 		{CCAEC609-B217-4C63-9C75-DBC767D5BE16} = {2D52CFF1-2152-4FD6-A0E4-72DBE6FC0FD3}
 		{5FC4B60A-68F1-40B1-8A93-726B51CFB0B0} = {FA164707-DAC5-422A-B13B-B21CB9DE225C}
->>>>>>> master
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {21E21703-2D81-423F-877B-43FE7B22F2C8}

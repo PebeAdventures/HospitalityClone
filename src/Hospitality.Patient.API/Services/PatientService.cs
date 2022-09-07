@@ -16,9 +16,6 @@ namespace Hospitality.Patient.API.Services
         }
 
 
-
-        // GET (single by pesel)
-
         // POST (register new patient - add)
         public async Task<PatientDoctorViewDTO> AddPatientAsync(PatientReceptionistViewDTO patientDTO)
         {

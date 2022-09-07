@@ -1,17 +1,20 @@
 ﻿namespace Hospitality.Patient.API.DTOs
 {
-    public class PatientDoctorViewDTO
+    public record PatientDoctorViewDTO
     {
         [Required]
-        public string PatientName { get; set; }
+        [MinLength(3), MaxLength(25)]
+        public string PatientName { get; init; }
 
         [Required]
-        public string PatientSurname { get; set; }
+        [MinLength(3), MaxLength(25)]
+        public string PatientSurname { get; init; }
         
         [Required]
-        public string PatientPesel { get; set; }
+        [MinLength(11), MaxLength(11)]
+        public string PatientPesel { get; init; }
         
         [Required]
-        public DateTime BirthDate { get; set; }
+        public DateTime BirthDate { get; init; }
     }
 }
