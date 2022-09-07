@@ -12,6 +12,7 @@ namespace Hospitality.Gateway.API.Controllers
         private HttpClient _httpClient;
         public PatientController(IHttpClientFactory httpClientFactory)
              => _httpClient = httpClientFactory.CreateClient();
+
         [HttpGet]
         public async Task<IActionResult> GetPatientByPeselAsync(string pesel)
             => Ok(await _httpClient.GetStringAsync($"/{pesel}"));// LINK DO UZUPEŁNIENIA !!! 

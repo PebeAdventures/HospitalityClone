@@ -15,7 +15,7 @@ namespace Hospitality.Gateway.API.Controllers
 
         [HttpPost]
         public async Task<IActionResult> CreateNewCheckupAsync(string email, string password)
-            => await GetContentAsync(email, password, ""); // LINK DO UZUPEŁNIENIA !!! 
+            => await GetContentAsync(email, password, "https://localhost:7272/api/Identity/Login"); // LINK DO UZUPEŁNIENIA !!! 
         private async Task<IActionResult> GetContentAsync(string email, string password, string url)
         {
             object credentials = new {email, password};

@@ -13,11 +13,11 @@ namespace Hospitality.Gateway.API.Controllers
         public ExaminationController(IHttpClientFactory httpClientFactory)
              => _httpClient = httpClientFactory.CreateClient();
 
-        [HttpGet]
+        [HttpGet("TypesOfExaminations")]
         public async Task<IActionResult> GetListOfTypesExaminationAsync()
             => Ok(await _httpClient.GetStringAsync("")); // LINK DO UZUPEŁNIENIA !!! 
 
-        [HttpGet]
+        [HttpGet("PatientExaminationsResults")]
         public async Task<IActionResult> GetCurrentPatientExaminationsResultsAsync()
             => Ok(await _httpClient.GetStringAsync("")); // LINK DO UZUPEŁNIENIA !!! 
 

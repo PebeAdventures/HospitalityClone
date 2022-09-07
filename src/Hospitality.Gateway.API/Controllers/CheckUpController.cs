@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
+using Hospitality.Common.DTO.CheckUp;
 
 namespace Hospitality.Gateway.API.Controllers
 {
@@ -14,8 +15,8 @@ namespace Hospitality.Gateway.API.Controllers
              => _httpClient = httpClientFactory.CreateClient();
 
         [HttpPost]
-        public async Task<IActionResult> CreateNewCheckupAsync(object newCheckup)
-            => await GetContentAsync(newCheckup, ""); // LINK DO UZUPEŁNIENIA !!! 
+        public async Task<IActionResult> CreateNewCheckupAsync(NewCheckUpDTO newCheckup)
+            => await GetContentAsync(newCheckup, "https://localhost:7280/api/CheckUp/AddNewCheckUp"); // LINK DO UZUPEŁNIENIA !!! 
         private async Task<IActionResult> GetContentAsync(object newCheckup, string url)
         {
             var json = JsonConvert.SerializeObject(newCheckup);
