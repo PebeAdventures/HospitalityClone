@@ -1,5 +1,8 @@
-﻿@{
+﻿@using Hospitality.Common.DTO.CheckUp
+@model NewCheckUpDTO
+@{
     ViewData["Title"] = "Check Up";
+    
 }
 <head>
     <link rel="stylesheet" href="~/css/CheckUp.css" asp-append-version="true" />
@@ -7,15 +10,18 @@
 
 
 <content>
-     <div id="checkUpForm">
-                     <h3>Symptoms and recommendations </h3><br>
+    @using (Html.BeginForm("CheckUp", "CheckUp"))
+             {
+        <div id="checkUpForm">
+            <h3>Symptoms and recommendations </h3><br>
 
         <div class="wrapper">
-
-
-
+           
+           
+             
+     
                    <div class="checkUp">
-                        <textarea name="textareaInput" rows="15"></textarea>
+                       @Html.TextAreaFor(x=>x.Description, new { @class = "checkUp",  @rows = 15})                  
                     </div>
                                              
                     <div class="buttons">
@@ -25,8 +31,9 @@
 
                     </div>
                       <br>
-                        <button id="finishButton" type="submit" class="btn btn-primary">  Finish visit  </button>
+                     
+                        <button id="finishButton" typeof="submit" class="btn btn-primary">  Finish visit  </button>
                     </div>
-
+             }
 
 </content>

@@ -12,11 +12,10 @@ namespace Hospitality.CheckUp.API.Controllers
     {
 
         private readonly ICheckUpService _checkUpService;
-        private readonly HttpClient _httpClient;
-        public CheckUpController(ICheckUpService checkUpService, HttpClient httpClient)
+
+        public CheckUpController(ICheckUpService checkUpService)
         {
             _checkUpService = checkUpService;
-            _httpClient = httpClient;
         }
 
 

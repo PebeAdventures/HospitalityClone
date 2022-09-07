@@ -1,3 +1,8 @@
+using Hospitality.CheckUp.API.DataBase.Context;
+using Hospitality.CheckUp.API.Service;
+using Hospitality.CheckUp.API.Service.Interface;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
