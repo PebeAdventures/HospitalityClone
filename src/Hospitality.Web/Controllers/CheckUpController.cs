@@ -6,8 +6,9 @@ namespace Hospitality.Web.Controllers
 {
     public class CheckUpController : Controller
     {
-        public IActionResult CheckUp()
+        public IActionResult CheckUp(PatientDataForStartVisit model)
         {
+            string patientPesel = model.PatientPesel;
             return View();
         }
     }
