@@ -8,6 +8,7 @@ namespace Hospitality.CheckUp.API.DataBase.Context
 
         public CheckUpContext(DbContextOptions<CheckUpContext> options) : base(options)
         {
+
         }
     }
 }

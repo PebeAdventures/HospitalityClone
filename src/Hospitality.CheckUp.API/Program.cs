@@ -1,5 +1,7 @@
+using Hospitality.CheckUp.API.DataBase.Context;
 using Hospitality.CheckUp.API.Service;
 using Hospitality.CheckUp.API.Service.Interface;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<CheckUpContext>(builder =>
+{
+    builder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=CheckUp;Integrated Security=True");
+});
 builder.Services.AddScoped<ICheckUpService, CheckUpService>();
 var app = builder.Build();
 
