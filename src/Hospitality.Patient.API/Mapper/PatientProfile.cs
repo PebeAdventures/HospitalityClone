@@ -6,6 +6,8 @@
         {
             CreateMap<HospitalPatient, PatientDoctorViewDTO>();
             CreateMap<HospitalPatient, PatientReceptionistViewDTO>();
+            CreateMap<PatientReceptionistViewDTO, PatientDoctorViewDTO>();
+            CreateMap<PatientReceptionistViewDTO, HospitalPatient>();
         }
     }
 }

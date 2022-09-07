@@ -6,29 +6,33 @@ namespace Hospitality.Patient.API.Services
     public class PatientService : IPatientService
     {
         private readonly IPatientRepository _patientRepository;
-        //private IMapper _mapper;
+        private readonly IMapper _mapper;
+        private readonly IBaseRepository<HospitalPatient> _hospitalRepository;
 
-        public PatientService(IPatientRepository patientRepository /*IMapper mapper*/)
+        public PatientService(IPatientRepository patientRepository, IMapper mapper)
         {
             _patientRepository = patientRepository;
-            //_mapper = mapper;
+            _mapper = mapper;
         }
 
 
 
-        // GET (single by id)
+        // GET (single by pesel)
 
         // POST (register new patient - add)
         public async Task<PatientDoctorViewDTO> AddPatientAsync(PatientReceptionistViewDTO patientDTO)
         {
-            throw new NotImplementedException();
+
+            var newPatient = _mapper.Map<HospitalPatient>(patientDTO);
+
+            var insertMaterial = await _hospitalRepository.AddAsync(newPatient);
+            return _mapper.Map<PatientDoctorViewDTO>(insertMaterial);
         }
 
-        public async Task<PatientDoctorViewDTO> GetPatientByIdDoctorViewAsync(int id)
+        public async Task<PatientDoctorViewDTO> GetPatientByPeselAsync(string pesel)
         {
-            throw new NotImplementedException();
-            //var patient = await _patientRepository.GetById(id);
-            //return _mapper.Map<PatientDoctorViewDTO>(patient);
+            var patient = await _patientRepository.GetByPesel(pesel);
+            return _mapper.Map<PatientDoctorViewDTO>(patient);
         }
     }
 }

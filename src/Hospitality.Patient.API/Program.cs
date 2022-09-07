@@ -21,6 +21,7 @@ var mapConfig = new MapperConfiguration(c =>
 });
 
 var mapper = mapConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 

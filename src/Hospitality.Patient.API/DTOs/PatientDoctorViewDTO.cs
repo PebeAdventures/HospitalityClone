@@ -1,19 +1,17 @@
 ﻿namespace Hospitality.Patient.API.DTOs
 {
-    public record PatientDoctorViewDTO
+    public class PatientDoctorViewDTO
     {
-        public int PatientId { get; init; }
+        [Required]
+        public string PatientName { get; set; }
 
         [Required]
-        public string PatientName { get; init; }
-
-        [Required]
-        public string PatientSurname { get; init; }
+        public string PatientSurname { get; set; }
         
         [Required]
-        public string PatientPesel { get; init; }
+        public string PatientPesel { get; set; }
         
         [Required]
-        public DateTime BirthDate { get; init; }
+        public DateTime BirthDate { get; set; }
     }
 }

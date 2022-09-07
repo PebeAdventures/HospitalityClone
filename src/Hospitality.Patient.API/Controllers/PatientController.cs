@@ -11,17 +11,22 @@
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public async Task<IActionResult> GetPatientByIdAsync(int id)
+        [Route("{pesel}")]
+        public async Task<IActionResult> GetPatientByPeselAsync(string pesel)
         {
-            var operationResult = await _service.GetPatientByIdDoctorViewAsync(id);
-            return Ok();
+            var operationResult = await _service.GetPatientByPeselAsync(pesel);
+            return Ok(operationResult);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> AddPatientAsync(PatientReceptionistViewDTO patientAddDTO)
-        //{
-        //    return Created();
-        //}
+        [HttpPost]
+        public async Task<IActionResult> AddPatientAsync(PatientReceptionistViewDTO patientAddDTO)
+        {
+            PatientDoctorViewDTO? operationResult = await _service.AddPatientAsync(patientAddDTO);
+            if (operationResult == null)
+            {
+                return BadRequest("Material not added");
+            }
+            return Ok(operationResult);
+        }
     }
 }

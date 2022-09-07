@@ -7,12 +7,14 @@ namespace Hospitality.Patient.API.DAL
     {
         private readonly PatientContext _context;
         public PatientRepository(PatientContext context) : base(context)
-        { }
+        {
+            _context = context;
+        }
 
-        public async Task<HospitalPatient> GetById(int id)
+        public async Task<HospitalPatient> GetByPesel(string pesel)
         {
             return await _context.Patients
-                .Where(p => id == p.HospitalPatientId)
+                .Where(p => pesel == p.PatientPesel)
                 .FirstOrDefaultAsync();
         }
 

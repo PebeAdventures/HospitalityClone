@@ -2,6 +2,6 @@
 {
     public interface IPatientRepository
     {
-        Task<HospitalPatient> GetById(int id);
+        Task<HospitalPatient> GetByPesel(string pesel);
     }
 }

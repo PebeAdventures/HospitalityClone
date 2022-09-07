@@ -1,15 +1,15 @@
 ﻿namespace Hospitality.Patient.API.Data
 {
-    public record HospitalPatient
+    public class HospitalPatient
     {
-        public int HospitalPatientId { get; init; } 
-        public string PatientName { get; init; }
-        public string PatientSurname { get; init; }
-        public string PatientPesel { get; init; }
-        public DateTime BirthDate { get; init; }
-        public string Address { get; init; }
-        public string Email { get; init; }
-        public string PhoneNumber { get; init; }
-        public bool IsInsured { get; init; }
+        public int HospitalPatientId { get; set; } 
+        public string PatientName { get; set; }
+        public string PatientSurname { get; set; }
+        public string PatientPesel { get; set; }
+        public DateTime BirthDate { get; set; }
+        public string Address { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public bool IsInsured { get; set; }
     }
 }
