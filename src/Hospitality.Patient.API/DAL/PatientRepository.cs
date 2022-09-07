@@ -1,4 +1,5 @@
 ﻿using Hospitality.Patient.API.DAL.Interfaces;
+using Hospitality.Patient.API.Data.Context;
 
 namespace Hospitality.Patient.API.DAL
 {

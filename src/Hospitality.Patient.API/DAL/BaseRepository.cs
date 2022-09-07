@@ -1,4 +1,6 @@
-﻿namespace Hospitality.Patient.API.DAL
+﻿using Hospitality.Patient.API.Data.Context;
+
+namespace Hospitality.Patient.API.DAL
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {

@@ -1,6 +1,6 @@
 ﻿namespace Hospitality.Patient.API.DTOs
 {
-    public record PatentReceptionistViewDTO
+    public record PatientReceptionistViewDTO
     {
         public int PatientId { get; init; }
 

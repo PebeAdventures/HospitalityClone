@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Gateway.API", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Web", "src\Hospitality.Web\Hospitality.Web.csproj", "{3EC26491-3FE2-4402-8BC1-B78A62CEC154}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hospitality.Patient", "Hospitality.Patient", "{2F5AE8F4-1152-46B9-9E1F-08F543F340C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D8DF0A34-3098-4633-91D3-EEA1560E7358} = {2F5AE8F4-1152-46B9-9E1F-08F543F340C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {21E21703-2D81-423F-877B-43FE7B22F2C8}

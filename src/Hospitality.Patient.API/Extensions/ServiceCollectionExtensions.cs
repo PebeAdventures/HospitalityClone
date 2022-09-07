@@ -1,11 +1,14 @@
-﻿namespace Hospitality.Patient.API.Extensions
+﻿
+
+namespace Hospitality.Patient.API.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static void SetUpDatabase(this IServiceCollection services, IConfiguration configuration)
+        public static void AddCustomServices(this IServiceCollection services)
         {
-            var patientDBconnectionString = configuration["ConnectionStrings:PatientDB"];
-            services.AddSqlServer<PatientContext>(patientDBconnectionString);
+            services.AddScoped<IPatientRepository, PatientRepository>();
+            services.AddScoped<IPatientService, PatientService>();
         }
+
     }
 }

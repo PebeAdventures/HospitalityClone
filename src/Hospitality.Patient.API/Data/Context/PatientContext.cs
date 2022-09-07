@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Hospitality.Patient.API.Data
+namespace Hospitality.Patient.API.Data.Context
 {
     public class PatientContext : DbContext
     {
@@ -9,10 +9,9 @@ namespace Hospitality.Patient.API.Data
 
         public DbSet<HospitalPatient> Patients { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            optionsBuilder.UseSqlServer(
-                @"Server=(localdb)\mssqllocaldb;Database=PatientDB;Integrated Security=True");
+            builder.SeedPatientDb();
         }
     }
 }
