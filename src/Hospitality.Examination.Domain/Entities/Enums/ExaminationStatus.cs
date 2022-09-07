@@ -1,4 +1,4 @@
-﻿namespace Hospitality.Examination.API.Model.Enums
+﻿namespace Hospitality.Examination.Domain.Entities.Enums
 {
     public enum ExaminationStatus
     {

@@ -31,6 +31,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hospitality.Common\Hospitality.Common.csproj" />
+    <ProjectReference Include="..\Hospitality.Examination.Domain\Hospitality.Examination.Domain.csproj" />
+    <ProjectReference Include="..\Hospitality.Examination.Persistance\Hospitality.Examination.Persistance.csproj" />
   </ItemGroup>
 
 </Project>

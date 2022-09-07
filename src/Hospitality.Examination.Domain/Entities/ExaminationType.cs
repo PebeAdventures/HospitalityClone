@@ -1,4 +1,4 @@
-﻿namespace Hospitality.Examination.API.Model
+﻿namespace Hospitality.Examination.Domain.Entities
 {
     public class ExaminationType
     {

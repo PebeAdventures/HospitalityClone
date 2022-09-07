@@ -1,6 +1,6 @@
-﻿using Hospitality.Examination.API.Model.Enums;
+﻿using Hospitality.Examination.Domain.Entities.Enums;
 
-namespace Hospitality.Examination.API.Model
+namespace Hospitality.Examination.Domain.Entities
 {
     public class ExaminationInfo
     {

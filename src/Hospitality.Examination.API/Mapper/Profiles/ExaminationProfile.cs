@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Hospitality.Common.DTO.Examination;
-using Hospitality.Examination.API.Model;
+using Hospitality.Examination.Domain.Entities;
 
 namespace Hospitality.Examination.API.Mapper.Profiles
 {
