@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.CheckUp.API", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Common", "src\Hospitality.Common\Hospitality.Common.csproj", "{A005AAC8-0B27-4A22-8C8A-07AD1E7BA500}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CheckUp", "CheckUp", "{3D5382F7-551A-4CFB-B16A-A894A91C1757}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CheckUp_", "CheckUp_", "{3D5382F7-551A-4CFB-B16A-A894A91C1757}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examination", "Examination", "{26F43724-84EC-4AFF-B0ED-421A75278704}"
 EndProject

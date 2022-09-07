@@ -1,6 +1,6 @@
-﻿namespace Hospitality.CheckUp.API.Model
+﻿namespace Hospitality.CheckUp.API.DataBase.Entity
 {
-    public class CheckUp
+    public class CheckUpModel
     {
         private int Id { get; set; }
         private string Description { get; set; }
