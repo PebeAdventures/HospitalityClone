@@ -5,6 +5,6 @@ namespace Hospitality.CheckUp.API.Service.Interface
     public interface ICheckUpService
     {
 
-        void AddNewCheckUp(NewCheckUpDTO newCheckUpDTO);
+        Task AddNewCheckUp(NewCheckUpDTO newCheckUpDTO);
     }
 }

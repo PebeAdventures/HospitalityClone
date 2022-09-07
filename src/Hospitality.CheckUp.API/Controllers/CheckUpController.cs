@@ -19,29 +19,14 @@ namespace Hospitality.CheckUp.API.Controllers
             _httpClient = httpClient;
         }
 
-        /*  private async Task<ContentResult> ProxyTo(string url, string value)
-          {
-
-              var content = new StringContent(value, Encoding.UTF8, "application/json");
-              var respond = await _httpClient.PostAsync(url, content);
-              var result = await respond.Content.ReadAsStringAsync();
-              return Content(result);
-
-          }
 
 
-          [HttpPost]
-          [Route("/bubble")]
-          public async Task<IActionResult> Bubble([FromBody] List<int> list)
-          {
-              var jsonstring = JsonConvert.SerializeObject(list);
-              return await ProxyTo("http://algdataapi.algorithm/bubble", jsonstring);
-          }*/
         // POST api/<CheckUpController>
         [HttpPost]
-        public void AddNewCheckUp([FromBody] NewCheckUpDTO newCheckUpDTO)
+        public async Task<ActionResult<NewCheckUpDTO>> AddNewCheckUp([FromBody] NewCheckUpDTO newCheckUpDTO)
         {
-
+            var x = _checkUpService.AddNewCheckUp(newCheckUpDTO);
+            return Ok(x);
         }
 
     }
