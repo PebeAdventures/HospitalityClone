@@ -36,6 +36,11 @@ input {
     margin-left: 5%;
 }
 
-#sendButton, #resetButton {
-    width: 47%;
+#sendButton {
+    width: 100%;
+}
+
+#insuranceValue {
+    width: 30%;
+    border:groove;
 }

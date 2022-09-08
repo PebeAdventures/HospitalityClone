@@ -21,6 +21,6 @@ namespace Hospitality.Web.Models
         public string? phoneNumber { get; set; }
 
         public SpecialistEnum specialist { get; set; }
-        public bool isHealthInsurance { get; set; }
+        public string isHealthInsurance { get; set; }
     }
 }

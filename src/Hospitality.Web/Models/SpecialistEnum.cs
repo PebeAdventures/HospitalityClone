@@ -2,6 +2,7 @@
 {
     public enum SpecialistEnum
     {
+        none,
         Internist,
         Ophthalmologist,
         Orthopedist,
