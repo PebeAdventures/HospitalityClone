@@ -18,23 +18,12 @@ namespace Hospitality.Patient.API.Services
             _context = context;
         }
 
-
-        // POST (register new patient - add)
-        //public async Task<PatientDoctorViewDTO> AddPatientAsync(PatientReceptionistViewDTO patientDTO)
-        //{
-
-        //    var newPatient = _mapper.Map<HospitalPatient>(patientDTO);
-
-        //    var insertMaterial = await _context.Patients.AddAsync(newPatient);
-        //    return _mapper.Map<PatientDoctorViewDTO>(insertMaterial);
-        //} 
         public async Task AddPatientAsync(PatientReceptionistViewDTO patientDTO)
         {
-
-            PatientDoctorViewDTO newPatient = _mapper.Map<PatientDoctorViewDTO>(patientDTO);
-            HospitalPatient patientToBase = _mapper.Map<HospitalPatient>(newPatient);
+            //PatientDoctorViewDTO newPatient = _mapper.Map<PatientDoctorViewDTO>(patientDTO);
+            HospitalPatient patientToBase = _mapper.Map<HospitalPatient>(patientDTO);
             await _context.Patients.AddAsync(patientToBase);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public async Task<PatientDoctorViewDTO> GetPatientByPeselAsync(string pesel)
