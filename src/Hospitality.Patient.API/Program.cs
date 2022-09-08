@@ -1,11 +1,27 @@
+using Hospitality.Patient.API.Data.Context;
+using Hospitality.Patient.API.Mapper;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddDbContext<PatientContext>(builder =>
+{
+    builder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=PatientDB;Integrated Security=True");
+});
+
+builder.Services.AddCustomServices();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var mapConfig = new MapperConfiguration(c =>
+{
+    c.AddProfile(new PatientProfile());
+});
+
+var mapper = mapConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
 
@@ -15,8 +31,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

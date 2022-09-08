@@ -7,7 +7,6 @@ namespace Hospitality.CheckUp.API.Service
 {
     public class CheckUpService : ICheckUpService
     {
-
         private CheckUpContext CheckUpContext { get; set; }
 
         public CheckUpService(CheckUpContext checkUpContext)

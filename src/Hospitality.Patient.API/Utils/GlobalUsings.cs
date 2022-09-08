@@ -1,0 +1,11 @@
+﻿global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.EntityFrameworkCore;
+global using System.ComponentModel.DataAnnotations;
+global using Hospitality.Patient.API.DAL.Interfaces;
+global using Hospitality.Patient.API.Data;
+global using Hospitality.Patient.API.DAL;
+global using Hospitality.Patient.API.Extensions;
+global using Hospitality.Patient.API.Services;
+global using Hospitality.Patient.API.Services;
+global using AutoMapper;
+global using Hospitality.Common.DTO.Patient;
