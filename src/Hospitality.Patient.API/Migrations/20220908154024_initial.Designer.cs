@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hospitality.Patient.API.Migrations
 {
     [DbContext(typeof(PatientContext))]
-    [Migration("20220907120216_initial")]
+    [Migration("20220908154024_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,20 +65,6 @@ namespace Hospitality.Patient.API.Migrations
                     b.HasKey("HospitalPatientId");
 
                     b.ToTable("Patients");
-
-                    b.HasData(
-                        new
-                        {
-                            HospitalPatientId = 1,
-                            Address = "Wrzosowa",
-                            BirthDate = new DateTime(1999, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "aniela.nowak@gmail.com",
-                            IsInsured = true,
-                            PatientName = "Aniela",
-                            PatientPesel = "99112234543",
-                            PatientSurname = "Nowak",
-                            PhoneNumber = "213769420"
-                        });
                 });
 #pragma warning restore 612, 618
         }

@@ -3,10 +3,10 @@ using Hospitality.Patient.API.Data.Context;
 
 namespace Hospitality.Patient.API.DAL
 {
-    public class PatientRepository : BaseRepository<HospitalPatient>, IPatientRepository
+    public class PatientRepository : IPatientRepository
     {
         private readonly PatientContext _context;
-        public PatientRepository(PatientContext context) : base(context)
+        public PatientRepository(PatientContext context)
         {
             _context = context;
         }
@@ -16,6 +16,13 @@ namespace Hospitality.Patient.API.DAL
             return await _context.Patients
                 .Where(p => pesel == p.PatientPesel)
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<HospitalPatient> AddNewPatientAsync(HospitalPatient patient)
+        {
+            var result = await _context.Patients.AddAsync(patient);
+            await _context.SaveChangesAsync();
+            return patient;
         }
 
     }

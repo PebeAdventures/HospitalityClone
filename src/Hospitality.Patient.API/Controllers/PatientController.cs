@@ -11,7 +11,7 @@
         }
 
         [HttpGet]
-        [Route("{pesel}")]
+        [Route("Pesel")]
         public async Task<IActionResult> GetPatientByPeselAsync(string pesel)
         {
             var operationResult = await _service.GetPatientByPeselAsync(pesel);

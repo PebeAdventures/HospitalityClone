@@ -9,9 +9,9 @@ namespace Hospitality.Patient.API.Data.Context
 
         public DbSet<HospitalPatient> Patients { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            builder.SeedPatientDb();
-        }
+        //protected override void OnModelCreating(ModelBuilder builder)
+        //{
+        //    builder.SeedPatientDb();
+        //}
     }
 }

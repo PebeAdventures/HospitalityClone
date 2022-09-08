@@ -28,11 +28,6 @@ namespace Hospitality.Patient.API.Migrations
                 {
                     table.PrimaryKey("PK_Patients", x => x.HospitalPatientId);
                 });
-
-            migrationBuilder.InsertData(
-                table: "Patients",
-                columns: new[] { "HospitalPatientId", "Address", "BirthDate", "Email", "IsInsured", "PatientName", "PatientPesel", "PatientSurname", "PhoneNumber" },
-                values: new object[] { 1, "Wrzosowa", new DateTime(1999, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "aniela.nowak@gmail.com", true, "Aniela", "99112234543", "Nowak", "213769420" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
