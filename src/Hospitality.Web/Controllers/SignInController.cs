@@ -47,7 +47,7 @@ namespace Hospitality.Web.Controllers
             var jsonEmail = JsonConvert.SerializeObject(credentials);
             var content = new StringContent(jsonEmail, Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync("https://localhost:7236/api/Identity", content);
-            if (!response.IsSuccessStatusCode || response is null)
+            if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
             {
                 return RedirectToAction("SignIn", "SignIn", new { result = false });
 
