@@ -16,8 +16,8 @@ namespace Hospitality.Gateway.API.Controllers
              => _httpClient = httpClientFactory.CreateClient();
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetExaminationById()
-            => Ok(await _httpClient.GetStringAsync("https://localhost:7230/api/Examination/Id?id="));
+        public async Task<IActionResult> GetExaminationById(int id)
+            => Ok(await _httpClient.GetStringAsync("https://localhost:7230/api/Examination/Id?id=" + id));
 
         [HttpGet("TypesOfExaminations")]
         public async Task<IActionResult> GetListOfTypesExaminationAsync()
