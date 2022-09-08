@@ -16,16 +16,14 @@ namespace Hospitality.Gateway.API.Controllers
         [HttpPost]
         public async Task<IActionResult> LogIn(Credentials credentials)
             => await GetContentAsync(credentials, "https://localhost:7272/api/Identity"); // LINK DO UZUPEŁNIENIA !!! 
-
-
         private async Task<IActionResult> GetContentAsync(Credentials credentials, string url)
         {
             var jsonEmail = JsonConvert.SerializeObject(credentials);
             var content = new StringContent(jsonEmail, Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync(url, content);
-            if (!response.IsSuccessStatusCode || response is null) return StatusCode(404);
-            return StatusCode(204);
+            if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                return NoContent();
+            return Ok(response);
         }
-
     }
 }

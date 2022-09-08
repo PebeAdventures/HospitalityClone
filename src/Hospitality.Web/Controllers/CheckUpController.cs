@@ -40,7 +40,7 @@ namespace Hospitality.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> CheckUp(NewCheckUpDTO newCheckUpDTO)
         {
-
+        //"https://localhost:7236/api/CheckUp";
             newCheckUpDTO.IdPatient = (int)TempData["patientId"];
             if (!ModelState.IsValid)
             {
