@@ -9,21 +9,11 @@ namespace Hospitality.CheckUp.API.Controllers
     [ApiController]
     public class CheckUpController : ControllerBase
     {
-
         private readonly ICheckUpService _checkUpService;
 
         public CheckUpController(ICheckUpService checkUpService)
         {
             _checkUpService = checkUpService;
         }
-
-
-        // POST api/<CheckUpController>
-        [HttpPost]
-        public void AddNewCheckUp([FromBody] NewCheckUpDTO newCheckUpDTO)
-        {
-
-        }
-
     }
 }
