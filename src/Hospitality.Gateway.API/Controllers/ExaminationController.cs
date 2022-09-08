@@ -15,17 +15,21 @@ namespace Hospitality.Gateway.API.Controllers
         public ExaminationController(IHttpClientFactory httpClientFactory)
              => _httpClient = httpClientFactory.CreateClient();
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetExaminationById(int id)
+            => Ok(await _httpClient.GetStringAsync("https://localhost:7230/api/Examination/Id?id=" + id));
+
         [HttpGet("TypesOfExaminations")]
         public async Task<IActionResult> GetListOfTypesExaminationAsync()
-            => Ok(await _httpClient.GetStringAsync("")); // LINK DO UZUPEŁNIENIA !!! 
+            => Ok(await _httpClient.GetStringAsync("https://localhost:7230/api/ExaminationType/GetAllAvailableExaminationTypes")); // LINK DO UZUPEŁNIENIA !!! 
 
         [HttpGet("PatientExaminationsResults")]
-        public async Task<IActionResult> GetCurrentPatientExaminationsResultsAsync()
-            => Ok(await _httpClient.GetStringAsync("")); // LINK DO UZUPEŁNIENIA !!! 
+        public async Task<IActionResult> GetCurrentPatientExaminationsResultsAsync(int id)
+            => Ok(await _httpClient.GetStringAsync("https://localhost:7230/api/Examination/PatientId?patientId=/" + id)); // LINK DO UZUPEŁNIENIA !!! 
 
         [HttpPost]
         public async Task<IActionResult> AddNewExaminationAsync(object newExamination)
-            => await GetContent(newExamination, ""); // LINK DO UZUPEŁNIENIA !!! 
+            => await GetContent(newExamination, "https://localhost:7230/api/Examination"); // LINK DO UZUPEŁNIENIA !!! 
         private async Task<IActionResult> GetContent(object newExamination, string url)
         {
             var json = JsonConvert.SerializeObject(newExamination);

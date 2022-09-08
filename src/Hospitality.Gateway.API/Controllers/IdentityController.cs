@@ -21,8 +21,9 @@ namespace Hospitality.Gateway.API.Controllers
             var jsonEmail = JsonConvert.SerializeObject(credentials);
             var content = new StringContent(jsonEmail, Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync(url, content);
-            if (!response.IsSuccessStatusCode || response is null) return StatusCode(404);
-            return StatusCode(204);
+            if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+                return NoContent();
+            return Ok(response);
         }
     }
 }

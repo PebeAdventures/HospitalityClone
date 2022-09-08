@@ -1,6 +1,6 @@
 ﻿namespace Hospitality.Web.Models
 {
-    public class TestResultClass
+    public class ResultClass
     {
         public string name { get; set; }
         public string result { get; set; }
