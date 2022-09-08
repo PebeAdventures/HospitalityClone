@@ -12,18 +12,21 @@ namespace Hospitality.CheckUp.API.Controllers
     {
 
         private readonly ICheckUpService _checkUpService;
-
-        public CheckUpController(ICheckUpService checkUpService)
+        private readonly HttpClient _httpClient;
+        public CheckUpController(ICheckUpService checkUpService, HttpClient httpClient)
         {
             _checkUpService = checkUpService;
+            _httpClient = httpClient;
         }
+
 
 
         // POST api/<CheckUpController>
         [HttpPost]
-        public void AddNewCheckUp([FromBody] NewCheckUpDTO newCheckUpDTO)
+        public async Task<ActionResult<NewCheckUpDTO>> AddNewCheckUp([FromBody] NewCheckUpDTO newCheckUpDTO)
         {
-
+            var x = _checkUpService.AddNewCheckUp(newCheckUpDTO);
+            return Ok(x);
         }
 
     }
