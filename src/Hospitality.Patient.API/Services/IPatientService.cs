@@ -4,6 +4,6 @@ namespace Hospitality.Patient.API.Services
     public interface IPatientService
     {
         Task<PatientDoctorViewDTO> GetPatientByPeselAsync(string pesel);
-        Task<PatientDoctorViewDTO> AddPatientAsync(PatientReceptionistViewDTO patientDTO);
+        Task AddPatientAsync(PatientReceptionistViewDTO patientDTO);
     }
 }

@@ -19,12 +19,12 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPatientAsync(PatientReceptionistViewDTO patientAddDTO)
+        public async Task<ActionResult<PatientDoctorViewDTO>> AddPatientAsync(PatientReceptionistViewDTO patientAddDTO)
         {
-            PatientDoctorViewDTO? operationResult = await _service.AddPatientAsync(patientAddDTO);
+            var operationResult = _service.AddPatientAsync(patientAddDTO);
             if (operationResult == null)
             {
-                return BadRequest("Material not added");
+                return BadRequest("Patient not added");
             }
             return Ok(operationResult);
         }

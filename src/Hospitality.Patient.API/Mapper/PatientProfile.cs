@@ -8,6 +8,7 @@
             CreateMap<HospitalPatient, PatientReceptionistViewDTO>();
             CreateMap<PatientReceptionistViewDTO, PatientDoctorViewDTO>();
             CreateMap<PatientReceptionistViewDTO, HospitalPatient>();
+            CreateMap<PatientDoctorViewDTO, HospitalPatient>();
         }
     }
 }
