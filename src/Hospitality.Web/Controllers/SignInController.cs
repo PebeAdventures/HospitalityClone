@@ -33,6 +33,7 @@ namespace Hospitality.Web.Controllers
                 return RedirectToAction("StartVisit", "StartVisit", null);
 
             }
+            //HttpContext.Session.SetString("token", await response.Content.ReadAsStringAsync()); - kod zapisujący JWT w Sesji 
         }
     }
 }
