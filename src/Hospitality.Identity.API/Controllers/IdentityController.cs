@@ -1,5 +1,7 @@
-﻿using Hospitality.Identity.API.Services.Interfaces;
+﻿using Hospitality.Common.DTO.Identity;
+using Hospitality.Identity.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 
 namespace Hospitality.Identity.API.Controllers
 {
@@ -12,7 +14,7 @@ namespace Hospitality.Identity.API.Controllers
             => LogInService = logInService;
 
         [HttpPost]
-        public async Task<IActionResult> Login(string email, string password)
-            => Ok(await LogInService.Login(email, password));
+        public async Task<IActionResult> Login(Credentials credentials)
+            => Ok(await LogInService.Login(credentials.email, credentials.password));
     }
 }

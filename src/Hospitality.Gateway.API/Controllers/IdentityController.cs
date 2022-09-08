@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Hospitality.Common.DTO.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -14,17 +14,15 @@ namespace Hospitality.Gateway.API.Controllers
              => _httpClient = httpClientFactory.CreateClient();
 
         [HttpPost]
-        public async Task<IActionResult> CreateNewCheckupAsync(string email, string password)
-            => await GetContentAsync(email, password, ""); // LINK DO UZUPEŁNIENIA !!! 
-        private async Task<IActionResult> GetContentAsync(string email, string password, string url)
+        public async Task<IActionResult> LogIn(Credentials credentials)
+            => await GetContentAsync(credentials, "https://localhost:7272/api/Identity"); // LINK DO UZUPEŁNIENIA !!! 
+        private async Task<IActionResult> GetContentAsync(Credentials credentials, string url)
         {
-            object credentials = new {email, password};
             var jsonEmail = JsonConvert.SerializeObject(credentials);
             var content = new StringContent(jsonEmail, Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync(url, content);
             if (!response.IsSuccessStatusCode || response is null) return StatusCode(404);
-            return StatusCode(201);
-            // Chuj wie czy to zadziała
+            return StatusCode(204);
         }
     }
 }

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
 
 namespace Hospitality.Gateway.API.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
     [Route("api/[controller]")]
     [ApiController]
     public class ExaminationController : ControllerBase
@@ -13,11 +15,11 @@ namespace Hospitality.Gateway.API.Controllers
         public ExaminationController(IHttpClientFactory httpClientFactory)
              => _httpClient = httpClientFactory.CreateClient();
 
-        [HttpGet]
+        [HttpGet("TypesOfExaminations")]
         public async Task<IActionResult> GetListOfTypesExaminationAsync()
             => Ok(await _httpClient.GetStringAsync("")); // LINK DO UZUPEŁNIENIA !!! 
 
-        [HttpGet]
+        [HttpGet("PatientExaminationsResults")]
         public async Task<IActionResult> GetCurrentPatientExaminationsResultsAsync()
             => Ok(await _httpClient.GetStringAsync("")); // LINK DO UZUPEŁNIENIA !!! 
 

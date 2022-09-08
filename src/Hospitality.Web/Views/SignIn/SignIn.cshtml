@@ -1,32 +1,68 @@
-﻿@{
-    ViewData["Title"] = "Sign In Page";
-}
+﻿@model SingInModel
+
 <head>
     <link rel="stylesheet" href="~/css/SignIn.css" asp-append-version="true" />
+
 </head>
 
+<body>
 
-<content>
-
-                <div id="signInForm">
-
-           
+    <div id="signInForm">
+           @using(Html.BeginForm("SignIn", "SignIn", FormMethod.Post))
+           {
+                    <h2>Sign In</h2><br>
                     <div>                    
                         <p>
                             <label id="loginLabel" for="">Login</label><br>
-                            <input id="loginInput" name="loginInput" type="text">
+                            @Html.TextBoxFor(x => x.login, new { style="width:100%;" })
+
                         </p>
                         <p>
                             <label id="passwordLabel" for="">Password</label><br>
-                            <input id="phoneInput" name="phoneInput" type="text">
+                            @Html.TextBoxFor(x => x.password, new { style="width:100%;" })
                         </p>
                      </div><br>
                      <p class="buttons">
-                        <button id="sendButton" type="submit" class="btn btn-primary">  Log in  </button>
+
+                        <button id="sendButton" type="submit" class="btn btn-primary" data-toggle="modal">  Log in  </button>
                         <button id="resetButton" class="btn btn-primary" type="reset">  Reset  </button> 
+
                      </p>
+           }
 
     </div>
 
+   @if (ViewBag.Show == "show") {
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel"></h5>
+                    <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                    <div class="modal-body">
+                        <h5>Wrong login or password</h5>
+                    </div>
+                <div class="modal-footer" id="modalForm">                    
+                </div>
+                </div>
+            </div>
+        </div>
+    }
 
-</content>
+</body>
+
+
+@section Scripts {
+    @if (ViewBag.Show == "show")
+    {
+        <script>
+        $(function(){
+            $("#exampleModal").modal("show");
+        });
+        </script>
+    }
+    
+}
