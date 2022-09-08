@@ -1,10 +1,21 @@
 ﻿using Hospitality.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-
+using Hospitality.Web.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Hospitality.Common.DTO.CheckUp;
+using Hospitality.Web.Models;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Hospitality.Web.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Receptionist")]
     public class RegistrationController : Controller
     {
         [HttpGet]
@@ -24,6 +35,8 @@ namespace Hospitality.Web.Controllers
                 return RedirectToAction("Registration", "Registration", new { result = false });
             }
             string isHealthInsurance = "true";
+
+
             //return RedirectToAction("Registration", "Registration", 
             //    new RegistrationPatientModel { name = model.name, surname = model.surname, pesel = model.pesel,
             //                                    date = model.date, address = model.address, phoneNumber = model.phoneNumber, 

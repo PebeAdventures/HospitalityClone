@@ -28,7 +28,7 @@
                     <div class="buttons">
                           <button id="orderButton" type="submit" class="btn btn-primary">  Order an examination </button><br>
                         <a asp-controller="Result" asp-action="Result">
-                          <button id="resultButton" type="submit" class="btn btn-primary">  Test results  </button>
+                          <button id="resultButton" type="button" class="btn btn-primary">  Test results  </button>
                         </a>
 
                      </div>
@@ -36,8 +36,29 @@
                     </div>
                       <br>
                      
-                        <button id="finishButton" typeof="submit" class="btn btn-primary">  Finish visit  </button>
+                        <button id="finishButton" typeof="submit" class="btn btn-primary"  data-bs-toggle="modal"  data-bs-target="#exampleModal" >  Finish visit  </button>
                     </div>
+
+
+
+                     <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header  text-black">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body justify-content-center" id="modalContactBody">
+                <p class="errorMessage">Would you like to save patient visit</p>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-footer " id="modalForm">                    
+                    <button id="saveButton" type="submit" class="btn btn-secondary" data-save="modal">Save</button>
+                     <button id="cancelButton" type="reset" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
              }
 
 

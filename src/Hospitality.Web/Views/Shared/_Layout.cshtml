@@ -32,9 +32,14 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="SignIn" asp-action="SignIn">Sign In</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Redirect" asp-action="Redirect">Start work</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="Registration">Registration</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="StartVisit" asp-action="StartVisit">Start Visit</a>
                         </li>
                     </ul>
+
+                        <a id="signOutButton" class="nav-link text-dark" asp-area="" asp-controller="SignOut" asp-action="SignOut">Sign Out</a>
                 </div>
             </div>
         </nav>
@@ -44,6 +49,7 @@
             @RenderBody()
         </main>
     </div>
+ 
 
     <footer class="footer text-muted">
         <div class="container">

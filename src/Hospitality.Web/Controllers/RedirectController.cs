@@ -7,7 +7,7 @@ namespace Hospitality.Web.Controllers
 {
     public class RedirectController : Controller
     {
-       // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
         //[HttpGet]
         //public IActionResult Redirect()
         //{
@@ -15,7 +15,8 @@ namespace Hospitality.Web.Controllers
         //}
 
 
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Receptionist")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Receptionist")]
+        [HttpGet]
         public IActionResult Redirect(string? role)
         {
             return RedirectToAction("Registration", "Registration", null);

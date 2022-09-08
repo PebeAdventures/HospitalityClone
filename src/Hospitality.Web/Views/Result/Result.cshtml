@@ -28,13 +28,14 @@
     </div>                    <br> <br> <br>  <br>
 
 
-                @using(Html.BeginForm("CheckUp", "CheckUp"))
-                {
+               
 
                      <p class="buttons">
-                             <button id="backButton" type="submit" class="btn btn-primary" data-toggle="modal">  Back to check up  </button>
+                             <a asp-controller="CheckUp" asp-action="CheckUp">
+                             <button id="backButton" type="button" class="btn btn-primary" data-toggle="modal">  Back to check up  </button>
+                        </a>
                      </p>
-                 }
+                 
 
 </body>
  

@@ -15,8 +15,6 @@
                         <p>
                             <label id="nameLabel" for="">Name</label><br>
 	                        @Html.TextBoxFor(x => x.name, new { Value =  TempData["Name"] })
-                            @Html.IdFor(m => m.name)
-
 
                         </p>
                         <p>
@@ -73,7 +71,7 @@
             <div class="modal-footer">
                 <div class="modal-footer " id="modalForm">                    
                     <button id="saveButton" type="submit" class="btn btn-secondary" data-save="modal">Save</button>
-                     <button id="cancelButton" type="reset" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        
 
                 </div>
             </div>

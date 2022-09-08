@@ -4,9 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Hospitality.Web.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
+
     public class CheckUpController : Controller
     {
 
@@ -27,12 +31,12 @@ namespace Hospitality.Web.Controllers
 
         public IActionResult CheckUp(PatientDataForStartVisit patientDataForStartVisit)
         {
-            int patientID = 0;
+            string patientID = "";
             if (patientDataForStartVisit.PatientPesel != null)
             {
-                patientID = Int32.Parse(patientDataForStartVisit.PatientPesel);
+               // patientID = Int32.Parse(patientDataForStartVisit.PatientPesel);
             }
-            TempData["patientId"] = patientID;
+            TempData["patientId"] = patientDataForStartVisit.PatientPesel;
             return View();
         }
 

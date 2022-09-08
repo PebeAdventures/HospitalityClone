@@ -35,7 +35,6 @@ namespace Hospitality.Web.Controllers
                 ViewBag.Show = "show";
 
             }
-
             return View();
         }
         [HttpPost]
@@ -55,7 +54,7 @@ namespace Hospitality.Web.Controllers
             {
                 var token = response.Content.ReadAsStringAsync().Result;
                 HttpContext.Session.SetString("token", token);
-                return RedirectToAction("Redirect", "Redirect", null);
+                return RedirectToAction("Index", "Home", null);
             }
 
 
