@@ -1,25 +1,45 @@
-﻿@{
-    ViewData["Title"] = "Start  Visit";
-}
+﻿@model PatientDataForStartVisit
+
 <head>
     <link rel="stylesheet" href="~/css/StartVisit.css" asp-append-version="true" />
 </head>
 
+<body>
 
 <content>
 
     <div id="startVisitForm">
+        @using(Html.BeginForm("StartVisit", "StartVisit", FormMethod.Post))
+        {
                     <div>                    
                         <p>
-                            <label id="peselLabel" for="">Patient PESEL</label><br>
-                            <input id="peselInput" name="peselInput" type="text">
+                            <label id="peselLabel" for="">Patient PESEL or Passport number</label><br>
+                             @Html.TextBoxFor(x => x.PatientPesel, new { style="width:100%;" })
                         </p>
                      </div><br>
                      <p class="buttons">
-                        <button id="startButton" type="submit" class="btn btn-primary">  Start visit  </button>
-                    </p>
+                             <button id="startButton" type="submit" class="btn btn-primary" data-toggle="modal">  Start visit  </button>
+                     </p>
+         }
 
     </div>
-
-
 </content>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <h5>Wrong PESEL</h5>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
