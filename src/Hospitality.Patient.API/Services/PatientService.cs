@@ -1,4 +1,5 @@
-﻿namespace Hospitality.Patient.API.Services
+﻿using Hospitality.Common.DTO.Patient;
+namespace Hospitality.Patient.API.Services
 {
     public class PatientService : IPatientService
     {
@@ -11,12 +12,12 @@
             _mapper = mapper;
         }
 
-        public async Task<PatientDoctorViewDTO> AddPatientAsync(PatientReceptionistViewDTO patientDTO)
+        public async Task<PatientReceptionistViewDTO> AddPatientAsync(PatientReceptionistViewDTO patientDTO)
         {
             HospitalPatient patientToBase = _mapper.Map<HospitalPatient>(patientDTO);
             HospitalPatient createdPatient = await _patientRepository.AddNewPatientAsync(patientToBase);
             //HospitalPatient existingPatient = await _patientRepository.GetByPesel(createdPatient.PatientPesel);
-            return _mapper.Map<PatientDoctorViewDTO>(createdPatient);
+            return _mapper.Map<PatientReceptionistViewDTO>(createdPatient);
         }
 
         public async Task<PatientDoctorViewDTO> GetPatientByPeselAsync(string pesel)
