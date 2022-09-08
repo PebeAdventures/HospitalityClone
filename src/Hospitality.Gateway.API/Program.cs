@@ -33,8 +33,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseSession();
-
 app.UseAuthorization();
 app.UseAuthentication();
 
