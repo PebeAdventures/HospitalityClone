@@ -18,9 +18,12 @@
 
         public IActionResult CheckUp(PatientDataForStartVisit patientDataForStartVisit)
         {
-            int patientID = Int32.Parse(patientDataForStartVisit.PatientId = "123123123");
-
-            TempData["Message"] = patientID;
+            int patientID = 0;
+            if (patientDataForStartVisit.PatientPesel != null)
+            {
+                patientID = Int32.Parse(patientDataForStartVisit.PatientPesel);
+            }
+            TempData["patientId"] = patientID;
             return View();
         }
 
@@ -29,14 +32,14 @@
         public async Task<IActionResult> CheckUp(NewCheckUpDTO newCheckUpDTO)
         {
 
-            newCheckUpDTO.IdPatient = (int)TempData["Message"];
+            newCheckUpDTO.IdPatient = (int)TempData["patientId"];
             if (!ModelState.IsValid)
             {
                 return View(newCheckUpDTO);
             }
             //  await GetContentAsync(newCheckUpDTO, "ADRES GATEWAY CHECKUP");
 
-            return RedirectToAction("CheckUp");
+            return RedirectToAction("Index", "Home", null);
         }
     }
 }
