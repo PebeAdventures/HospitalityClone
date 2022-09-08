@@ -6,6 +6,8 @@ namespace Hospitality.Web.Controllers
 {
     public class StartVisitController : Controller
     {
+
+
         [HttpGet]
 
         public IActionResult StartVisit()

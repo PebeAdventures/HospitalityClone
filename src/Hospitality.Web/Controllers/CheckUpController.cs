@@ -2,6 +2,7 @@
 using Hospitality.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace Hospitality.Web.Controllers
@@ -16,6 +17,8 @@ namespace Hospitality.Web.Controllers
         {
             var json = JsonConvert.SerializeObject(newCheckup);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var token = HttpContext.Session.GetString("token");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.PostAsync(url, content);
             if (!response.IsSuccessStatusCode || response is null) return StatusCode(404);
             return StatusCode(201);

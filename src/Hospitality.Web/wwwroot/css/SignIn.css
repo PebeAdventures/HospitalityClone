@@ -8,11 +8,11 @@
     padding: 4%;
 }
 
-#loginLabel, #passwordLabel, #loginInput, #phoneInput, #sendButton, #resetButton {
+#emailLabel, #passwordLabel, #emailInput, #phoneInput, #sendButton, #resetButton {
     font-size: 18px;
 }
 
-#loginInput, #phoneInput {
+#emailInput, #phoneInput {
     width: 100%;
 }
 
