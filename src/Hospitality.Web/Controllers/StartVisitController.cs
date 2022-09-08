@@ -1,4 +1,5 @@
 ﻿using Hospitality.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,9 +8,7 @@ namespace Hospitality.Web.Controllers
     public class StartVisitController : Controller
     {
 
-
         [HttpGet]
-
         public IActionResult StartVisit()
         {
             return View();

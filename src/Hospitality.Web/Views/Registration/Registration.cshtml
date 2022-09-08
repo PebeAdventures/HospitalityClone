@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="~/css/Registration.css" asp-append-version="true" />
 </head>
 
+<body>
 <content>
                 <div id="registrationForm">
                 @using(Html.BeginForm("RegistrationPost", "Registration", FormMethod.Post))
@@ -14,16 +15,18 @@
                         <p>
                             <label id="nameLabel" for="">Name</label><br>
 	                        @Html.TextBoxFor(x => x.name, new { Value =  TempData["Name"] })
+                            @Html.IdFor(m => m.name)
+
 
                         </p>
                         <p>
                             <label id="surnameLabel" for="">Surname</label><br>
-                             @Html.TextBoxFor(x => x.surname, new { style="width:100%;", @Value = @Model.surname.ToString() })
+                             @Html.TextBoxFor(x => x.surname, new { style="width:100%;" })
                         </p>
                         <p>
                             <label id="peselLabel" for="">Pesel or Passport number</label>
                             @Html.TextBoxFor(x => x.pesel, new { style="width:100%;" })
-                                                    </p>
+                        </p>
                         <p>
                             <label id="dateOfBirthLabel" for="">Date of birth</label><br>
                             @Html.EditorFor(x => x.date, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @min= "1900-01-01", @max= DateTime.Today.ToString("yyyy'-'MM'-'dd")}})
@@ -52,9 +55,31 @@
                         </p>
 
                      </div><br>
-                        <p class="buttons">
-                                    <button id="sendButton" type="submit" class="btn btn-primary"> Book visit  </button>
-                        </p>
+                        <p class="full-width">
+                        <button id="sendButton" type="button" class="btn-link modal-action"   data-bs-toggle="modal"  data-bs-target="#exampleModal" data-bs-dismiss="modal">Enviar</button>
+
+                     </p>
+
+                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header  text-black">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body justify-content-center" id="modalContactBody">
+                <p class="errorMessage">Would you like to save patient visit</p>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-footer " id="modalForm">                    
+                    <button id="saveButton" type="submit" class="btn btn-secondary" data-save="modal">Save</button>
+                     <button id="cancelButton" type="reset" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
         }
 
          
@@ -63,13 +88,48 @@
 
 </content>
 
+</body>
+
 
 @section Scripts {
 
+     @if (ViewBag.Invalid == "invalid")
+    {
         <script>
-     $("#insuranseButton").on('click',function(){
-         document.getElementById('insuranceValue').innerHTML = 'Yes';      });
+        $(function(){
+                alert("Wrong personal data. \n Visit was't created. \n Fill in all fields.");
+        });
+        </script>
+    }
+    @if (ViewBag.Invalid == "valid")
+    {
+        <script>
+        $(function(){
+                alert("New visit was created");
+        });
+        </script>
+    }
+        <script>
+             $("#insuranseButton").on('click',function(){
+             document.getElementById('insuranceValue').innerHTML = 'Yes';      });
+        </script>
+    }
+
+        <script>
+        $(function(){
+            $("#exampleModal").modal("show");
+            $e.preventDefault();
+        });
         </script>
     }
     
+    
+        <script>
+         $("#cancelButton").on('click',function(){
+            $("#exampleModal").modal('hide'));
+         }
+       </script>
+    
 }
+
+

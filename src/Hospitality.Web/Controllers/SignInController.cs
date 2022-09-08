@@ -4,9 +4,11 @@ using Hospitality.Common.DTO.Identity;
 using Newtonsoft.Json;
 using System.Text;
 using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Hospitality.Web.Controllers
 {
+
     public class SignInController : Controller
     {
 
@@ -41,25 +43,21 @@ namespace Hospitality.Web.Controllers
         {
             ViewBag.Show = "show";
 
-
-
-
             var jsonEmail = JsonConvert.SerializeObject(credentials);
             var content = new StringContent(jsonEmail, Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync("https://localhost:7236/api/Identity", content);
+
             if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
             {
                 return RedirectToAction("SignIn", "SignIn", new { result = false });
 
             } else
             {
-                return RedirectToAction("StartVisit", "StartVisit", null);
-
+                var token = response.Content.ReadAsStringAsync().Result;
+                HttpContext.Session.SetString("token", token);
+                return RedirectToAction("Redirect", "Redirect", null);
             }
-            // return StatusCode(404);
-            // return StatusCode(204);
 
-            HttpContext.Session.SetString("token", await response.Content.ReadAsStringAsync());
 
         }
     }
