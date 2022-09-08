@@ -8,8 +8,14 @@ namespace Hospitality.Web.Controllers
     public class SignInController : Controller
     {
         [HttpGet]
-        public IActionResult SignIn()
+        public IActionResult SignIn(bool? result)
         {
+            if (result == false)
+            {
+                ViewBag.Show = "show";
+
+            }
+
             return View();
         }
         [HttpPost]
@@ -17,7 +23,16 @@ namespace Hospitality.Web.Controllers
         {
             string login = singInData.login;
             string password = singInData.password;
-            return RedirectToAction("StartVisit", "StartVisit", null);
+            ViewBag.Show = "show";
+            if (password != "aaa")
+            {
+               
+                return RedirectToAction("SignIn", "SignIn", new { result  = false});
+            } else
+            {
+                return RedirectToAction("StartVisit", "StartVisit", null);
+
+            }
         }
     }
 }
