@@ -1,6 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Registration Page";
-}
+﻿@model RegistrationPatientModel
 <head>
     <link rel="stylesheet" href="~/css/Registration.css" asp-append-version="true" />
 </head>
@@ -8,56 +6,56 @@
 <content>
 
                 <div id="registrationForm">
+                @using(Html.BeginForm("Registration", "Registration", FormMethod.Post))
+                {
+
                     <h2>Patient register form</h2>
 
                     <div>                    
                         <p>
                             <label id="nameLabel" for="">Name</label><br>
-                            <input id="nameInput" name="nameInput" type="text">
+	                        @Html.TextBoxFor(x => x.name, new { style="width:100%;" })
+
                         </p>
                         <p>
                             <label id="surnameLabel" for="">Surname</label><br>
-                            <input id="surnameInput" name="surnameInput" type="text">
+                             @Html.TextBoxFor(x => x.surname, new { style="width:100%;" })
                         </p>
                         <p>
-                            <label id="peselLabel" for="">Pesel</label>
+                            <label id="peselLabel" for="">Pesel or Passport number</label>
                             <label id="dateOfBirthLabel" for="">Date of birth</label><br>
-                            <input id="peselInput" name="peselInput" type="text">
-                            <input id="dateOfBirthInput" name="dateOfBirthInput" type="date"  min="1922-01-01" max="2022-09-07"> <br>
+                            @Html.TextBoxFor(x => x.pesel, new { style="width:47%;" })
+                            @Html.EditorFor(x => x.date, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @min= "1900-01-01", @max= DateTime.Today.ToString("yyyy'-'MM'-'dd")} })
+
                         </p>
                         <p>
                             <label id="addressLabel" for="">Address</label><br>
-                            <input id="addressInput" name="addressInput" type="text">
+                             @Html.TextBoxFor(x => x.address, new { style="width:100%;" })
                         </p>
                         <p>
                             <label id="phoneNumberLabel" for="">Phone number</label><br>
-                            <input id="phoneNumberInput" name="phoneNumberInput" type="text"><br>
+                             @Html.TextBoxFor(x => x.phoneNumber, new { style="width:100%;" })
                             <br>
                         </p>
                         <p>
-                            <select id="spetialistList">
-                                       <option value=""> -- select a specialist -- </option>
-                                       <option value="Internist">Internist</option>
-                                       <option value="Ophthalmologist">Ophthalmologist</option>
-                                       <option value="Orthopedist">Orthopedist</option>
-                                       <option value="Allergist">Allergist</option>
-                                       <option value="Dentist">Dentist</option>
-                                       <option value="Physiotherapist">Physiotherapist</option>
-                                       <option value="Dermatologist">Dermatologist</option>
-                            </select>
+                            @Html.DropDownListFor(m => m.specialist, new SelectList(Enum.GetValues(typeof(SpecialistEnum))), "--Select Specialist--", new { style="font-size:120%;"})
                         </p>
+        
+
                         <p>
                              <label id="insuranceLabel" for="">Health Insurance</label><br>
-                             <input id="insuranseInput" type="text" disabled></input>
-                             <button id="insuranseButton" type="submit" class="btn btn-primary"> Check </button>
+                             <label id="insuranceLabel" for="">@ViewData["isHealthInsurance"]</label
+                             <button id="insuranseButton" type="button" class="btn btn-primary"> Check </button>
                         </p>
 
                      </div><br>
                      <p class="buttons">
                         <button id="sendButton" type="submit" class="btn btn-primary"> Book visit  </button>
                      </p>
+                }
+
+         
 
     </div>
-
 
 </content>
