@@ -1,4 +1,10 @@
-﻿namespace Hospitality.Web.Controllers
+﻿using Hospitality.Common.DTO.CheckUp;
+using Hospitality.Web.Models;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Text;
+
+namespace Hospitality.Web.Controllers
 {
     public class CheckUpController : Controller
     {
