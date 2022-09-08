@@ -25,8 +25,6 @@ namespace Hospitality.Web.Controllers
             return StatusCode(201);
         }
 
-
-
         [HttpGet]
         public IActionResult SignIn(bool? result)
         {
@@ -63,26 +61,6 @@ namespace Hospitality.Web.Controllers
 
             HttpContext.Session.SetString("token", await response.Content.ReadAsStringAsync());
 
-
-
-
-
-
-
-
-            //if (password != "aaa")
-            //{
-               
-            //    return RedirectToAction("SignIn", "SignIn", new { result  = false});
-            //} else
-            //{
-            //    return RedirectToAction("StartVisit", "StartVisit", null);
-
-            //}
-
-
-
-            //HttpContext.Session.SetString("token", await response.Content.ReadAsStringAsync()); - kod zapisujący JWT w Sesji 
         }
     }
 }
