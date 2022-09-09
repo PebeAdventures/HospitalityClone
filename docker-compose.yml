@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  hospitality.gateway.api:
+    image: ${DOCKER_REGISTRY-}hospitalitygatewayapi
+    build:
+      context: .
+      dockerfile: src/Hospitality.Gateway.API/Dockerfile
+    ports:
+      - 5003:80
+
+  hospitality.checkup.api:
+    image: ${DOCKER_REGISTRY-}hospitalitycheckupapi
+    build:
+      context: .
+      dockerfile: src/Hospitality.CheckUp.API/Dockerfile
+    ports:
+      - 5004:80
+
+  checkupdb:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - MSSQL_SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports:
+      - "1433:1433"
+    

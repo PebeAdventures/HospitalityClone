@@ -37,6 +37,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Government.Insu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Insurance", "Insurance", "{FA164707-DAC5-422A-B13B-B21CB9DE225C}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F7D9366E-1FCE-43DE-98C4-479A073C1CA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{5FC4B60A-68F1-40B1-8A93-726B51CFB0B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FC4B60A-68F1-40B1-8A93-726B51CFB0B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FC4B60A-68F1-40B1-8A93-726B51CFB0B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7D9366E-1FCE-43DE-98C4-479A073C1CA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7D9366E-1FCE-43DE-98C4-479A073C1CA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7D9366E-1FCE-43DE-98C4-479A073C1CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7D9366E-1FCE-43DE-98C4-479A073C1CA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

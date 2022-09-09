@@ -8,13 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddHttpClient();
 builder.Services.AddControllers();
-builder.Services.AddHttpClient();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CheckUpContext>(builder =>
 {
-    builder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=CheckUp;Integrated Security=True");
+    builder.UseSqlServer(@"Server=checkupdb;Database=master;User=sa;Password=Pass@word; Database=CheckUp;Integrated Security=True");
 });
 builder.Services.AddScoped<ICheckUpService, CheckUpService>();
 var app = builder.Build();

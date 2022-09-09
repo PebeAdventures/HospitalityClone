@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Hospitality.CheckUp.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/checkup")]
     [ApiController]
     public class CheckUpController : ControllerBase
     {
@@ -20,10 +20,12 @@ namespace Hospitality.CheckUp.API.Controllers
 
 
 
-        // POST api/<CheckUpController>
+
         [HttpPost]
-        public async Task<ActionResult<NewCheckUpDTO>> AddNewCheckUp([FromBody] NewCheckUpDTO newCheckUpDTO)
+        [Route("/newcheckup")]
+        public ActionResult<string> AddNewCheckUp([FromBody] NewCheckUpDTO newCheckUpDTO)
         {
+            // NewCheckUpDTO newCheckUpDTO1 = new NewCheckUpDTO() { Description = "iii", IdDoctor = 1, IdPatient = 1 };
             var x = _checkUpService.AddNewCheckUp(newCheckUpDTO);
             return Ok(x);
         }
