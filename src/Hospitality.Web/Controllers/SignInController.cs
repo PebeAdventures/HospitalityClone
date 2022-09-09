@@ -4,9 +4,11 @@ using Hospitality.Common.DTO.Identity;
 using Newtonsoft.Json;
 using System.Text;
 using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Hospitality.Web.Controllers
 {
+
     public class SignInController : Controller
     {
 
@@ -31,36 +33,33 @@ namespace Hospitality.Web.Controllers
             if (result == false)
             {
                 ViewBag.Show = "show";
-
             }
-
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> SignIn(Credentials credentials)
         {
             ViewBag.Show = "show";
 
-
-
-
-            var jsonEmail = JsonConvert.SerializeObject(credentials);
-            var content = new StringContent(jsonEmail, Encoding.UTF8, "application/json");
+            var jsonCredentials = JsonConvert.SerializeObject(credentials);
+            var content = new StringContent(jsonCredentials, Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync("https://localhost:7236/api/Identity", content);
             if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
             {
                 return RedirectToAction("SignIn", "SignIn", new { result = false });
-
-            } else
-            {
-                return RedirectToAction("StartVisit", "StartVisit", null);
-
             }
-            // return StatusCode(404);
-            // return StatusCode(204);
-
-            HttpContext.Session.SetString("token", await response.Content.ReadAsStringAsync());
-
+            if (response.IsSuccessStatusCode && response.Content is not null)
+            {
+                var token = await response.Content.ReadAsStringAsync();
+                HttpContext.Session.Clear();
+                HttpContext.Session.SetString("token", token);
+                return RedirectToAction("Index", "Home", null);
+            } 
+            else
+            {
+                return RedirectToAction("SignIn", "SignIn", new { result = false });
+            }
         }
     }
 }

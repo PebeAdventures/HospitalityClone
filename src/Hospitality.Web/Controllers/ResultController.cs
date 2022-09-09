@@ -1,8 +1,12 @@
 ﻿using Hospitality.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace Hospitality.Web.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
     public class ResultController : Controller
     {
         private List<ResultClass> results;

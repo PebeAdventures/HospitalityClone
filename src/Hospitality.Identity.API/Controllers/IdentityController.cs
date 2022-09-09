@@ -16,9 +16,9 @@ namespace Hospitality.Identity.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(Credentials credentials)
         {
-            var kupa = await LogInService.Login(credentials.email, credentials.password);
-            if (kupa == null) return NoContent();
-            return Ok(kupa);
+            var jwt = await LogInService.Login(credentials.email, credentials.password);
+            if (jwt == null) return NoContent();
+            return Ok(jwt);
         }
     }
 }

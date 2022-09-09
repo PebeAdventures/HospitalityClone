@@ -34,3 +34,7 @@ footer {
     width: 100%;
     height: 1%;
 }
+#signOutButton{
+    magrin-left:50%;
+    border:double;
+}
