@@ -33,31 +33,30 @@ namespace Hospitality.Web.Controllers
             if (result == false)
             {
                 ViewBag.Show = "show";
-
             }
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> SignIn(Credentials credentials)
         {
             ViewBag.Show = "show";
 
-            var jsonEmail = JsonConvert.SerializeObject(credentials);
-            var content = new StringContent(jsonEmail, Encoding.UTF8, "application/json");
+            var jsonCredentials = JsonConvert.SerializeObject(credentials);
+            var content = new StringContent(jsonCredentials, Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync("https://localhost:7236/api/Identity", content);
 
-            if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+            if (response.IsSuccessStatusCode && response.Content is not null)
             {
-                return RedirectToAction("SignIn", "SignIn", new { result = false });
-
-            } else
-            {
-                var token = response.Content.ReadAsStringAsync().Result;
+                var token = await response.Content.ReadAsStringAsync();
+                HttpContext.Session.Clear();
                 HttpContext.Session.SetString("token", token);
                 return RedirectToAction("Index", "Home", null);
+            } 
+            else
+            {
+                return RedirectToAction("SignIn", "SignIn", new { result = false });
             }
-
-
         }
     }
 }

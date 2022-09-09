@@ -26,7 +26,6 @@ namespace Hospitality.Gateway.API.Controllers
             var json = JsonConvert.SerializeObject(newCheckup);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync(url, content);
-            if (!response.IsSuccessStatusCode || response is null) return response;
             return response;
         }
     }

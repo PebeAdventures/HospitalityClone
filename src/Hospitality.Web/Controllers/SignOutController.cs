@@ -1,9 +1,4 @@
-﻿using Hospitality.Web.Models;
-using Microsoft.AspNetCore.Mvc;
-using Hospitality.Common.DTO.Identity;
-using Newtonsoft.Json;
-using System.Text;
-using System.Net.Http.Headers;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Hospitality.Web.Controllers
 {
@@ -12,7 +7,7 @@ namespace Hospitality.Web.Controllers
         [HttpGet]
         public IActionResult SignOut()
         {
-            HttpContext.Session.SetString("token", "");
+            HttpContext.Session.Remove("token");
             return RedirectToAction("SignIn", "SignIn", null);
         }
     }

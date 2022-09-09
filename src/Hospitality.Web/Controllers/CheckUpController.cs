@@ -17,12 +17,13 @@ namespace Hospitality.Web.Controllers
         private HttpClient _httpClient;
         public CheckUpController(IHttpClientFactory httpClientFactory)
              => _httpClient = httpClientFactory.CreateClient();
-        private async Task<IActionResult> GetContentAsync(object newCheckup, string url)
+        private async Task<IActionResult> GetContentAsync(NewCheckUpDTO newCheckup, string url)
         {
             var json = JsonConvert.SerializeObject(newCheckup);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var token = HttpContext.Session.GetString("token");
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            //var token = HttpContext.Session.GetString("token");
+            var kupa = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            _httpClient.DefaultRequestHeaders.Authorization = kupa;
             var response = await _httpClient.PostAsync(url, content);
             if (!response.IsSuccessStatusCode || response is null) return StatusCode(404);
             return StatusCode(201);
@@ -44,13 +45,17 @@ namespace Hospitality.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> CheckUp(NewCheckUpDTO newCheckUpDTO)
         {
-        //"https://localhost:7236/api/CheckUp";
-            newCheckUpDTO.IdPatient = (int)TempData["patientId"];
+            //newCheckUpDTO.IdPatient = (int)TempData["patientId"];
+            newCheckUpDTO.IdPatient = 123;
             if (!ModelState.IsValid)
             {
                 return View(newCheckUpDTO);
             }
-            //  await GetContentAsync(newCheckUpDTO, "ADRES GATEWAY CHECKUP");
+            var json = JsonConvert.SerializeObject(newCheckUpDTO);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            await GetContentAsync(newCheckUpDTO, "https://localhost:7236/api/CheckUp");
+            //await _httpClient.PostAsync("https://localhost:7236/api/CheckUp", content);
 
             return RedirectToAction("Index", "Home", null);
         }
