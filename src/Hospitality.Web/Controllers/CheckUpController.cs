@@ -15,7 +15,7 @@ namespace Hospitality.Web.Controllers
 
     public class CheckUpController : Controller
     {
-        private int pesel;
+        private string pesel;
         private HttpClient _httpClient;
         public CheckUpController(IHttpClientFactory httpClientFactory)
              => _httpClient = httpClientFactory.CreateClient();
@@ -23,19 +23,20 @@ namespace Hospitality.Web.Controllers
         [HttpGet]
         public IActionResult CheckUp(string peselInString)
         {
-            TempData["pesel"] = peselInString;
-            return View();
+            //TempData["pesel"] = peselInString;
+            return View(new NewCheckUpDTO() { PeselOfPatient = peselInString});
         }
 
         [HttpPost]
         public async Task<IActionResult> CheckUp(NewCheckUpDTO newCheckUpDTO)
         {
-            var idOfPatient = await GetIdOfPatient(newCheckUpDTO.PeselOfPatient);
-            if (idOfPatient == 0)
-            {
-                return RedirectToAction("StartVisit", "StartVisit");
-            }
-            newCheckUpDTO.IdPatient = idOfPatient;
+            //var idOfPatient = await GetIdOfPatient(newCheckUpDTO.PeselOfPatient);
+            //if (idOfPatient == 0)
+            //{
+            //    return RedirectToAction("StartVisit", "StartVisit");
+            //}
+            //newCheckUpDTO.IdPatient = idOfPatient;
+            newCheckUpDTO.IdPatient = 1;
             if (!ModelState.IsValid)
             {
                 return View(newCheckUpDTO);
