@@ -28,16 +28,14 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @if (User.Identity.IsAuthenticated!)
-                        {
-                        }
-                        @if (User.Identity.IsAuthenticated)
+
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Receptionist"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="Registration">Registration</a>
                             </li>
                         }
-                        @if (User.Identity.IsAuthenticated)
+                        @if( User.Identity.IsAuthenticated && User.IsInRole("Doctor"))
                         {
 
                             <li class="nav-item">

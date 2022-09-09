@@ -58,7 +58,7 @@ namespace Hospitality.Web.Controllers
             } 
             else
             {
-                return RedirectToAction("SignIn", "SignIn", new { result = false });
+                return RedirectToAction("Index", "Home", null);
             }
         }
     }

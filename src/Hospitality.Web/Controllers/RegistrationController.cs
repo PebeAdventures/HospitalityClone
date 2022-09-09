@@ -36,12 +36,6 @@ namespace Hospitality.Web.Controllers
             }
             string isHealthInsurance = "true";
 
-
-            //return RedirectToAction("Registration", "Registration", 
-            //    new RegistrationPatientModel { name = model.name, surname = model.surname, pesel = model.pesel,
-            //                                    date = model.date, address = model.address, phoneNumber = model.phoneNumber, 
-            //                                    specialist = model.specialist, isHealthInsurance = ""});
-            // return RedirectToAction("StartVisit", "StartVisit", null);
             return RedirectToAction("Registration", "Registration", new { result = true });
 
         }
