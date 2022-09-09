@@ -10,18 +10,23 @@ services:
       - 5003:80
 
   hospitality.checkup.api:
-    image: ${DOCKER_REGISTRY-}hospitalitycheckupapi
+    image: ${DOCKER_REGISTRY-}hospitalitycheckupapi 
     build:
       context: .
       dockerfile: src/Hospitality.CheckUp.API/Dockerfile
+    environment:
+      - ConnectionString=Server=sqldata;Initial Catalog=CatalogData;User Id=sa;Password=Pass@word
     ports:
       - 5004:80
 
   checkupdb:
     image: mcr.microsoft.com/mssql/server:2022-latest
+    hostname: 'checkupdb'
     environment:
       - MSSQL_SA_PASSWORD=Pass@word
       - ACCEPT_EULA=Y
     ports:
       - "1433:1433"
+    expose:
+      - "1433"
     

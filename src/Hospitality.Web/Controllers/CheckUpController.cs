@@ -29,7 +29,7 @@ namespace Hospitality.Web.Controllers
             if (patientDataForStartVisit.PatientPesel != null)
             {
                 patientID = Int32.Parse(patientDataForStartVisit.PatientPesel);
-            }
+            };
             TempData["patientId"] = patientID;
             return View();
         }

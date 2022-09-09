@@ -13,11 +13,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CheckUpContext>(builder =>
 {
-    builder.UseSqlServer(@"Server=checkupdb;Database=master;User=sa;Password=Pass@word; Database=CheckUp;Integrated Security=True");
+    builder.UseSqlServer(@"Server=checkupdb;Database=dbcheckup;User Id=sa;Password=Pass@word;Integrated Security=True");
 });
 builder.Services.AddScoped<ICheckUpService, CheckUpService>();
 var app = builder.Build();
-
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<CheckUpContext>();
+    context.Database.Migrate();
+}
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
