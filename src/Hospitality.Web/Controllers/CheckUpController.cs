@@ -21,7 +21,7 @@ namespace Hospitality.Web.Controllers
         [HttpGet]
         public IActionResult CheckUp(string peselInString)
         {
-            int.TryParse(peselInString, out pesel);
+            TempData["pesel"] = peselInString;
             return View();
         }
 
@@ -29,7 +29,7 @@ namespace Hospitality.Web.Controllers
         public async Task<IActionResult> CheckUp(NewCheckUpDTO newCheckUpDTO)
         {
             // dopisać request do patient api o Id pacjęta
-            //newCheckUpDTO.IdPatient = 
+            //newCheckUpDTO.IdPatient = ;
             newCheckUpDTO.IdPatient = 1; // - to do zmiany
             if (!ModelState.IsValid)
             {
