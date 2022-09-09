@@ -25,12 +25,7 @@ namespace Hospitality.Web.Controllers
         [HttpPost]
 
         public IActionResult StartVisit(PatientDataForStartVisit model)
-        {
-            string pesel = model.PatientPesel;
-
-            return RedirectToAction("CheckUp", "CheckUp", new PatientDataForStartVisit { PatientPesel  = model.PatientPesel});
-        }
-
+            => RedirectToAction("CheckUp", "CheckUp", model.PatientPesel);
 
     }
 }
