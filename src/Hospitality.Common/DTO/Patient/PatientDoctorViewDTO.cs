@@ -5,6 +5,9 @@ namespace Hospitality.Common.DTO.Patient
     public record PatientDoctorViewDTO
     {
         [Required]
+        public int HospitalPatientId { get; set; }
+
+        [Required]
         [MinLength(3), MaxLength(25)]
         public string PatientName { get; init; }
 
