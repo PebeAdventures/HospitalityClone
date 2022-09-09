@@ -2,7 +2,7 @@
 @model NewCheckUpDTO
 @{
     ViewData["Title"] = "Check Up";
-    
+    Model.PeselOfPatient = TempData["pesel"].ToString();
 }
 <head>
     <link rel="stylesheet" href="~/css/CheckUp.css" asp-append-version="true" />
@@ -22,8 +22,10 @@
              
      
                    <div class="checkUp">
-                       @Html.TextAreaFor(x=>x.Description, new { @class = "checkUp",  @rows = 15})                  
+                       @Html.TextAreaFor(x=>x.Description, new { @class = "checkUp",  @rows = 15} )                  
                     </div>
+
+                       @Html.
                                              
                     <div class="buttons">
                           <button id="orderButton" type="submit" class="btn btn-primary">  Order an examination </button><br>
