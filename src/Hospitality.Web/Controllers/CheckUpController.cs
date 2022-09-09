@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Hospitality.Common.DTO.Patient;
 
 namespace Hospitality.Web.Controllers
 {
@@ -28,9 +30,12 @@ namespace Hospitality.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> CheckUp(NewCheckUpDTO newCheckUpDTO)
         {
-            // dopisać request do patient api o Id pacjęta
-            //newCheckUpDTO.IdPatient = ;
-            newCheckUpDTO.IdPatient = 1; // - to do zmiany
+            var idOfPatient = await GetIdOfPatient(newCheckUpDTO.PeselOfPatient);
+            if (idOfPatient == 0)
+            {
+                return RedirectToAction("StartVisit", "StartVisit");
+            }
+            newCheckUpDTO.IdPatient = idOfPatient;
             if (!ModelState.IsValid)
             {
                 return View(newCheckUpDTO);
@@ -38,6 +43,16 @@ namespace Hospitality.Web.Controllers
             var json = JsonConvert.SerializeObject(newCheckUpDTO);
             await GetContentAsync(newCheckUpDTO, "https://localhost:7236/api/CheckUp");
             return RedirectToAction("Index", "Home", null);
+        }
+        private async Task<int> GetIdOfPatient(string pesel)
+        {
+            var json = JsonConvert.SerializeObject(pesel);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            var response = await _httpClient.PostAsync($"https://localhost:7236/api/Patient?pesel={pesel}", content);
+            var dupa = System.Text.Json.JsonSerializer.Deserialize<PatientDoctorViewDTO>(await response.Content.ReadAsStringAsync());
+            if (dupa is null) return 0;
+            return dupa.HospitalPatientId;
         }
         private async Task<IActionResult> GetContentAsync(NewCheckUpDTO newCheckup, string url)
         {
