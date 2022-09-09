@@ -26,24 +26,7 @@ namespace Hospitality.Patient.API.Services
                 PhoneNumber = patientDTO.PhoneNumber,
                 IsInsured = patientDTO.IsInsured
             });
-            //HospitalPatient patientToBase = _mapper.Map<HospitalPatient>(patientDTO);
-            //HospitalPatient createdPatient = await _patientRepository.AddNewPatientAsync(patientToBase);
-            ////HospitalPatient existingPatient = await _patientRepository.GetByPesel(createdPatient.PatientPesel);
-            //return _mapper.Map<PatientReceptionistViewDTO>(createdPatient);
         }
-
-        //public async Task AddNewCheckUp(NewCheckUpDTO newCheckUpDTO)
-        //{
-
-        //    await CheckUpContext.CheckUps.AddAsync(new CheckUpModel
-        //    {
-        //        Description = newCheckUpDTO.Description,
-        //        IdDoctor = newCheckUpDTO.IdDoctor,
-        //        IdPatient = newCheckUpDTO.IdPatient,
-        //        Time = DateTime.Now
-        //    });
-        //    CheckUpContext.SaveChanges();
-        //}
 
         public async Task<PatientDoctorViewDTO> GetPatientByPeselAsync(string pesel)
         {
