@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  examinationdb:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    environment:
+         - ACCEPT_EULA=Y
+         - MSSQL_SA_PASSWORD=1Secure*Password1
+    ports:
+        - 1433:1433
+    volumes:
+      - database:/var/opt/mssql
+  hospitality.checkup.api:
+    image: ${DOCKER_REGISTRY-}hospitalitycheckupapi
+    build:
+      context: .
+      dockerfile: src/Hospitality.CheckUp.API/Dockerfile
+
+  hospitality.examination.api:
+    image: ${DOCKER_REGISTRY-}hospitalityexaminationapi
+    build:
+      context: .
+      dockerfile: src/Hospitality.Examination.API/Dockerfile
+    depends_on:
+      - examinationdb
+volumes:
+  database:    
+ 

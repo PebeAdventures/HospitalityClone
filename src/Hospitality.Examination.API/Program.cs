@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationServices();
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ExaminationContext>(options => options
-    .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Examination_Dev;Trusted_Connection=True;MultipleActiveResultSets=true"));
+    .UseSqlServer("Server=examinationdb;Database=ExaminationDb;User=sa;Password=1Secure*Password1;TrustServerCertificate=true"));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IExaminationRepository, ExaminationRepository>();
@@ -20,7 +20,12 @@ builder.Services.AddScoped<IExaminationTypesRepository, ExaminationTypesReposito
 builder.Services.AddAutoMapper(typeof(ExaminationProfile));
 
 var app = builder.Build();
-
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<ExaminationContext>();
+    context.Database.Migrate();
+}
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
