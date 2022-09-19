@@ -23,6 +23,8 @@ var mapConfig = new MapperConfiguration(c =>
 var mapper = mapConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
 
+builder.Services.AddCustomCors();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

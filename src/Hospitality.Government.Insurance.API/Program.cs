@@ -1,8 +1,11 @@
+using Hospitality.Government.Insurance.API.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCustomCors();
 
 var app = builder.Build();
 

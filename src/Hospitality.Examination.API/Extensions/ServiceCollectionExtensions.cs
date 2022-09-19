@@ -1,16 +1,10 @@
-﻿
+﻿using Hospitality.Examination.Application.Contracts.Persistence;
+using Hospitality.Examination.Persistance.Repositories;
 
-namespace Hospitality.Patient.API.Extensions
+namespace Hospitality.Examination.API.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static void AddCustomServices(this IServiceCollection services)
-        {
-            services.AddScoped<IPatientRepository, PatientRepository>();
-            services.AddScoped<IPatientService, PatientService>();
-        }
-
-        
         public static void AddCustomCors(this IServiceCollection services)
         {
             services.AddCors(options =>
@@ -25,7 +19,12 @@ namespace Hospitality.Patient.API.Extensions
                     });
             });
         }
-        
 
+        public static void AddCustomServices(this IServiceCollection services)
+        {
+            services.AddScoped<IExaminationRepository, ExaminationRepository>();
+            services.AddScoped<IExaminationTypesRepository, ExaminationTypesRepository>();
+
+        }
     }
 }

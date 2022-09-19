@@ -1,3 +1,4 @@
+using Hospitality.Examination.API.Extensions;
 using Hospitality.Examination.API.Model;
 using Hospitality.Examination.Application;
 using Hospitality.Examination.Application.Contracts.Persistence;
@@ -15,9 +16,10 @@ builder.Services.AddDbContext<ExaminationContext>(options => options
     .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Examination_Dev;Trusted_Connection=True;MultipleActiveResultSets=true"));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IExaminationRepository, ExaminationRepository>();
-builder.Services.AddScoped<IExaminationTypesRepository, ExaminationTypesRepository>();
+builder.Services.AddCustomServices();
 builder.Services.AddAutoMapper(typeof(ExaminationProfile));
+
+builder.Services.AddCustomCors();
 
 var app = builder.Build();
 

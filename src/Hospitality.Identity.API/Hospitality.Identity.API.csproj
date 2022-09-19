@@ -26,4 +26,8 @@
     <ProjectReference Include="..\Hospitality.Identity.Data\Hospitality.Identity.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Middlewares\" />
+  </ItemGroup>
+
 </Project>

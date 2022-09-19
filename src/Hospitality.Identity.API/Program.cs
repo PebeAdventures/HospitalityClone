@@ -1,3 +1,4 @@
+using Hospitality.Identity.API.Extensions;
 using Hospitality.Identity.API.Services.Interfaces;
 using Hospitality.Identity.Data.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -10,7 +11,7 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<IdentityContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AuthDataBase")));
-
+builder.Services.AddCustomCors();
 builder.Services.AddScoped<ILogInService, LogInServicert>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
