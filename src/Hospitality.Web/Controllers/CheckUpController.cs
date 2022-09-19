@@ -1,13 +1,11 @@
 ﻿using Hospitality.Common.DTO.CheckUp;
-using Hospitality.Web.Models;
+using Hospitality.Common.DTO.Patient;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Text.Json;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Hospitality.Common.DTO.Patient;
 
 namespace Hospitality.Web.Controllers
 {
@@ -19,12 +17,12 @@ namespace Hospitality.Web.Controllers
         private HttpClient _httpClient;
         public CheckUpController(IHttpClientFactory httpClientFactory)
              => _httpClient = httpClientFactory.CreateClient();
-        
+
         [HttpGet]
         public IActionResult CheckUp(string peselInString)
         {
             //TempData["pesel"] = peselInString;
-            return View(new NewCheckUpDTO() { PeselOfPatient = peselInString});
+            return View(new NewCheckUpDTO() { PeselOfPatient = peselInString });
         }
 
         [HttpPost]
@@ -37,12 +35,12 @@ namespace Hospitality.Web.Controllers
             //}
             //newCheckUpDTO.IdPatient = idOfPatient;
             newCheckUpDTO.IdPatient = 1;
-            if (!ModelState.IsValid)
-            {
-                return View(newCheckUpDTO);
-            }
+            //  if (!ModelState.IsValid)
+            //  {
+            //     return View(newCheckUpDTO);
+            //  }
             var json = JsonConvert.SerializeObject(newCheckUpDTO);
-            await GetContentAsync(newCheckUpDTO, "https://localhost:7236/api/CheckUp");
+            await GetContentAsync(newCheckUpDTO, "http://localhost:7236/api/CheckUp");
             return RedirectToAction("Index", "Home", null);
         }
         private async Task<int> GetIdOfPatient(string pesel)
