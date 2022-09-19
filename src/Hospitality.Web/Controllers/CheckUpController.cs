@@ -1,59 +1,43 @@
-﻿using Hospitality.Common.DTO.CheckUp;
-using Hospitality.Common.DTO.Patient;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.Net.Http.Headers;
-using System.Text;
-
-namespace Hospitality.Web.Controllers
+﻿namespace Hospitality.Web.Controllers
 {
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
 
     public class CheckUpController : Controller
     {
-        private string pesel;
         private HttpClient _httpClient;
         public CheckUpController(IHttpClientFactory httpClientFactory)
              => _httpClient = httpClientFactory.CreateClient();
 
         [HttpGet]
-        public IActionResult CheckUp(string peselInString)
+        public async Task<IActionResult> CheckUp(PatientDataForStartVisit patientDataForStartVisit)
         {
-            //TempData["pesel"] = peselInString;
-            return View(new NewCheckUpDTO() { PeselOfPatient = peselInString });
+            var idOfPatient = await GetIdOfPatient($"https://localhost:7236/api/Patient?pesel={patientDataForStartVisit.PatientPesel}");
+            if (idOfPatient != 0)
+            {
+                var newCheckUpDTO = new NewCheckUpDTO { PeselOfPatient = patientDataForStartVisit.PatientPesel, IdPatient = idOfPatient };
+                return View(newCheckUpDTO);
+            }
+            return RedirectToAction("StartVisit", "StartVisit", patientDataForStartVisit);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> CheckUp(NewCheckUpDTO newCheckUpDTO)
         {
-            //var idOfPatient = await GetIdOfPatient(newCheckUpDTO.PeselOfPatient);
-            //if (idOfPatient == 0)
-            //{
-            //    return RedirectToAction("StartVisit", "StartVisit");
-            //}
-            //newCheckUpDTO.IdPatient = idOfPatient;
-            newCheckUpDTO.IdPatient = 1;
-            //  if (!ModelState.IsValid)
-            //  {
-            //     return View(newCheckUpDTO);
-            //  }
-            var json = JsonConvert.SerializeObject(newCheckUpDTO);
-            await GetContentAsync(newCheckUpDTO, "http://localhost:7236/api/CheckUp");
+            newCheckUpDTO.IdDoctor = 1; // Napisać coś co na podstawie jwt bedzie zapisywać w sesji id doktora i w tym miejscu będzie można pobierać id doktora z sesji
+            await SaveNewCheckupAsync(newCheckUpDTO, "https://localhost:7236/api/CheckUp");
             return RedirectToAction("Index", "Home", null);
         }
-        private async Task<int> GetIdOfPatient(string pesel)
+        private async Task<int> GetIdOfPatient(string url)
         {
-            var json = JsonConvert.SerializeObject(pesel);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
-            var response = await _httpClient.PostAsync($"https://localhost:7236/api/Patient?pesel={pesel}", content);
-            var dupa = System.Text.Json.JsonSerializer.Deserialize<PatientDoctorViewDTO>(await response.Content.ReadAsStringAsync());
-            if (dupa is null) return 0;
-            return dupa.HospitalPatientId;
+            var response = await _httpClient.GetAsync(url);
+            if (!response.IsSuccessStatusCode || response is null) return 0;
+            var patientDoctorViewDTO = JsonConvert.DeserializeObject<PatientDoctorViewDTO>(await response.Content.ReadAsStringAsync());
+            if (patientDoctorViewDTO is null) return 0;
+            return patientDoctorViewDTO.HospitalPatientId;
         }
-        private async Task<IActionResult> GetContentAsync(NewCheckUpDTO newCheckup, string url)
+        private async Task<IActionResult> SaveNewCheckupAsync(NewCheckUpDTO newCheckup, string url)
         {
             var json = JsonConvert.SerializeObject(newCheckup);
             var content = new StringContent(json, Encoding.UTF8, "application/json");

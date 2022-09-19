@@ -18,7 +18,7 @@ namespace Hospitality.Gateway.API.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
         [HttpGet]
         public async Task<IActionResult> GetPatientByPeselAsync(string pesel)
-            => Ok(await _httpClient.GetStringAsync($"https://localhost:7043/api/Patient/Pesel?pesel=/{pesel}"));// LINK DO UZUPEŁNIENIA !!! 
+            => Ok(await _httpClient.GetStringAsync($"https://localhost:7043/api/Patient/Pesel?pesel={pesel}"));// LINK DO UZUPEŁNIENIA !!! 
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Receptionist")]
         [HttpPost]
