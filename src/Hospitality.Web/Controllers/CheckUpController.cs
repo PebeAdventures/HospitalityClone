@@ -13,44 +13,44 @@ namespace Hospitality.Web.Controllers
 
     public class CheckUpController : Controller
     {
-
         private HttpClient _httpClient;
         public CheckUpController(IHttpClientFactory httpClientFactory)
              => _httpClient = httpClientFactory.CreateClient();
-       
 
-
-        public IActionResult CheckUp(PatientDataForStartVisit patientDataForStartVisit)
+        [HttpGet]
+        public async Task<IActionResult> CheckUp(PatientDataForStartVisit patientDataForStartVisit)
         {
-            string patientID = "";
-            if (patientDataForStartVisit.PatientPesel != null)
+            var idOfPatient = await GetIdOfPatient($"https://localhost:7236/api/Patient?pesel={patientDataForStartVisit.PatientPesel}");
+            if (idOfPatient != 0)
             {
-               // patientID = Int32.Parse(patientDataForStartVisit.PatientPesel);
+                var newCheckUpDTO = new NewCheckUpDTO {PeselOfPatient = patientDataForStartVisit.PatientPesel, IdPatient = idOfPatient};
+                return View(newCheckUpDTO);
             }
-            TempData["patientId"] = patientDataForStartVisit.PatientPesel;
-            return View();
+            return RedirectToAction("StartVisit", "StartVisit", patientDataForStartVisit);
         }
 
 
         [HttpPost]
         public async Task<IActionResult> CheckUp(NewCheckUpDTO newCheckUpDTO)
         {
-            //newCheckUpDTO.IdPatient = (int)TempData["patientId"];
-            newCheckUpDTO.IdPatient = 123;
-            
-            var json = JsonConvert.SerializeObject(newCheckUpDTO);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            await GetContentAsync(newCheckUpDTO, "https://localhost:7236/api/CheckUp");
-
+            newCheckUpDTO.IdDoctor = 1; // Napisać coś co na podstawie jwt bedzie zapisywać w sesji id doktora i w tym miejscu będzie można pobierać id doktora z sesji
+            await SaveNewCheckupAsync(newCheckUpDTO, "https://localhost:7236/api/CheckUp");
             return RedirectToAction("Index", "Home", null);
         }
-        private async Task<IActionResult> GetContentAsync(NewCheckUpDTO newCheckup, string url)
+        private async Task<int> GetIdOfPatient(string url)
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            var response = await _httpClient.GetAsync(url);
+            if (!response.IsSuccessStatusCode || response is null) return 0;
+            var patientDoctorViewDTO = JsonConvert.DeserializeObject<PatientDoctorViewDTO>(await response.Content.ReadAsStringAsync()); 
+            if (patientDoctorViewDTO is null) return 0;
+            return patientDoctorViewDTO.HospitalPatientId;
+        }
+        private async Task<IActionResult> SaveNewCheckupAsync(NewCheckUpDTO newCheckup, string url)
         {
             var json = JsonConvert.SerializeObject(newCheckup);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var token = HttpContext.Session.GetString("token");
-            var kupa = new AuthenticationHeaderValue("Bearer", token);
-            _httpClient.DefaultRequestHeaders.Authorization = kupa;
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             var response = await _httpClient.PostAsync(url, content);
             if (!response.IsSuccessStatusCode || response is null) return StatusCode(404);
             return StatusCode(201);
