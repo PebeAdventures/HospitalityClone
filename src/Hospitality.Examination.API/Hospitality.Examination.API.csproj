@@ -35,6 +35,8 @@
     <ProjectReference Include="..\Hospitality.Common\Hospitality.Common.csproj" />
     <ProjectReference Include="..\Hospitality.Examination.Domain\Hospitality.Examination.Domain.csproj" />
     <ProjectReference Include="..\Hospitality.Examination.Persistance\Hospitality.Examination.Persistance.csproj" />
+	<ProjectReference Include="..\Hospitality.Examination.RabbitMQ\Hospitality.Examination.RabbitMQ.csproj" />
+
   </ItemGroup>
 
 </Project>

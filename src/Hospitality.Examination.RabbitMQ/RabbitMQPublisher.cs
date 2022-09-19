@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System.Text;
 using System.Diagnostics;
 
-namespace Hospitality.Examination.API.RabbitMQ
+namespace Hospitality.Examination.RabbitMQ
 {
     public class RabbitMQPublisher : IRabbitMqService
     {

@@ -2,8 +2,9 @@
 using RabbitMQ.Client.Events;
 using System.Diagnostics;
 using System.Text;
+using Microsoft.Extensions.Hosting;
 
-namespace Hospitality.Examination.API.RabbitMQ
+namespace Hospitality.Examination.RabbitMQ
 {
     public class RabbitMQConsumer : BackgroundService
     {

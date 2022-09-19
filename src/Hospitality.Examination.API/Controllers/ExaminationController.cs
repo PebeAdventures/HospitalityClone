@@ -3,7 +3,7 @@ using Hospitality.Examination.Application.Functions.Examinations.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
-using Hospitality.Examination.API.RabbitMQ;
+using Hospitality.Examination.RabbitMQ;
 
 
 namespace Hospitality.Examination.API.Controllers
@@ -34,7 +34,7 @@ namespace Hospitality.Examination.API.Controllers
         public async Task<IActionResult> AddNewExamination(AddNewExaminationCommand addPostCommand)
         {
             var examination = await _mediator.Send(addPostCommand);
-            _mqService.SendMessage(addPostCommand.Description);
+           // _mqService.SendMessage(addPostCommand.Description);
             return CreatedAtAction("GetExaminationById", new { id = examination.Id }, examination);
         }
 

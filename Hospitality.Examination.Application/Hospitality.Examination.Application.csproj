@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\src\Hospitality.Common\Hospitality.Common.csproj" />
     <ProjectReference Include="..\src\Hospitality.Examination.Domain\Hospitality.Examination.Domain.csproj" />
+    <ProjectReference Include="..\src\Hospitality.Examination.RabbitMQ\Hospitality.Examination.RabbitMQ.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Hospitality.Examination.API.RabbitMQ
+﻿namespace Hospitality.Examination.RabbitMQ
 {
         public interface IRabbitMqService
         {

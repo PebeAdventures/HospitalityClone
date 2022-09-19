@@ -4,7 +4,7 @@ using Hospitality.Examination.Application.Contracts.Persistence;
 using Hospitality.Examination.Application.Mapper.Profiles;
 using Hospitality.Examination.Persistance.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Hospitality.Examination.API.RabbitMQ;
+using Hospitality.Examination.RabbitMQ;
 
 var builder = WebApplication.CreateBuilder(args);
 

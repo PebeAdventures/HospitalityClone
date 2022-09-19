@@ -3,6 +3,7 @@ using Hospitality.Common.DTO.Examination;
 using Hospitality.Examination.Application.Contracts.Persistence;
 using Hospitality.Examination.Domain.Entities;
 using MediatR;
+using Hospitality.Examination.RabbitMQ;
 
 namespace Hospitality.Examination.Application.Functions.Examinations.Commands
 {
@@ -10,11 +11,13 @@ namespace Hospitality.Examination.Application.Functions.Examinations.Commands
     {
         private readonly IExaminationRepository _examinationRepository;
         private readonly IMapper _mapper;
+        private readonly IRabbitMqService _mqService;
 
-        public AddNewExaminationCommandHandler(IExaminationRepository examinationRepository, IMapper mapper)
+        public AddNewExaminationCommandHandler(IExaminationRepository examinationRepository, IMapper mapper, IRabbitMqService mqService)
         {
             _examinationRepository = examinationRepository;
             _mapper = mapper;
+            _mqService = mqService;
         }
 
         public async Task<ExaminationInfoDto> Handle(AddNewExaminationCommand request, CancellationToken cancellationToken)
@@ -22,6 +25,8 @@ namespace Hospitality.Examination.Application.Functions.Examinations.Commands
             var examination = _mapper.Map<ExaminationInfo>(request);
             var createdExamination = await _examinationRepository.AddNewExaminationAsync(examination);
             var existingExamination = await _examinationRepository.GetExaminationByIdAsync(createdExamination.Id);
+            _mqService.SendMessage(existingExamination.Description);
+
             return _mapper.Map<ExaminationInfoDto>(existingExamination);
         }
     }
