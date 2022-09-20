@@ -25,7 +25,8 @@ namespace Hospitality.Examination.Application.Functions.Examinations.Commands
             var examination = _mapper.Map<ExaminationInfo>(request);
             var createdExamination = await _examinationRepository.AddNewExaminationAsync(examination);
             var existingExamination = await _examinationRepository.GetExaminationByIdAsync(createdExamination.Id);
-            _mqService.SendMessage(existingExamination.Description);
+            var examinationExacutionDTO = _mapper.Map<ExaminationExecutionDto>(existingExamination);
+            _mqService.SendMessage(examinationExacutionDTO);
 
             return _mapper.Map<ExaminationInfoDto>(existingExamination);
         }

@@ -31,6 +31,7 @@ namespace HostedService
             consumer.Received += (ch, ea) =>
             {
                 var content = Encoding.UTF8.GetString(ea.Body.ToArray());
+                //var jsonString = JsonConvert.DeserializeObject<>;
                 Debug.WriteLine($"HostedService: Received message from Examination.API: {content}");
                 _examinationPublisher.SendMessage(content);
             };

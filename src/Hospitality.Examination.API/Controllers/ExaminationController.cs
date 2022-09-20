@@ -37,12 +37,5 @@ namespace Hospitality.Examination.API.Controllers
            // _mqService.SendMessage(addPostCommand.Description);
             return CreatedAtAction("GetExaminationById", new { id = examination.Id }, examination);
         }
-
-        //[HttpPost]
-        //public async Task<IActionResult> SendExaminationToHostedService(AddNewExaminationCommand addPostCommand,int id)
-        //{
-        //    await _mediator.Send(new GetExaminationByIdQuery() { ExaminationId = id });
-
-        //}
     }
 }
