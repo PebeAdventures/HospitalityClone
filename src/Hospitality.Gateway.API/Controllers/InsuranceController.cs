@@ -12,16 +12,10 @@ namespace Hospitality.Gateway.API.Controllers
         public InsuranceController(IHttpClientFactory httpClientFactory)
              => _httpClient = httpClientFactory.CreateClient();
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> CreateNewCheckupAsync(int id)
-            => Ok(await GetContentAsync(id, "https://localhost:7101/api/Insurance")); // LINK DO UZUPEŁNIENIA !!! 
-        private async Task<HttpResponseMessage> GetContentAsync(int id, string url)
-        {
-            var json = JsonConvert.SerializeObject(id);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync(url, content);
-            if (!response.IsSuccessStatusCode || response is null) return response;
-            return response;
-        }
+            => Ok(await GetContentAsync($"https://localhost:7101/api/Insurance?idOfPerson={id}")); // LINK DO UZUPEŁNIENIA !!! 
+        private async Task<HttpResponseMessage> GetContentAsync(string url)
+            => await _httpClient.GetAsync(url);
     }
 }

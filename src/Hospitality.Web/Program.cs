@@ -3,12 +3,23 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.Extensions.DependencyInjection;
+using AutoMapper;
+using Hospitality.Web.Models;
+using Hospitality.Web.Mapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDistributedMemoryCache();
+var mapConfig = new MapperConfiguration(c =>
+{
+    c.AddProfile(new PatientResultViewModelProfile());
+});
+
+var mapper = mapConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 builder.Services.AddSession(options =>
 {
