@@ -1,45 +1,39 @@
-﻿using RabbitMQ.Client.Events;
-using RabbitMQ.Client;
-using System.Text;
-using Newtonsoft.Json;
+﻿using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System.Diagnostics;
-using Hospitality.Common.DTO.Examination;
+using System.Text;
+using Hospitality.Common.DTO.Patient;
+using Newtonsoft.Json;
 
-namespace HostedService
+namespace EmailService.EmailHostedService
 {
-    public class ExaminationConsumer : BackgroundService
+    public class EmailHostedServiceConsumer : BackgroundService
     {
         private IConnection _connection;
         private IModel _channel;
-        private IExaminationPublisher _examinationPublisher;
         private string? _queueName;
-        private IExaminationExecution _examinationExecution;
 
-        public ExaminationConsumer(IExaminationPublisher examinationPublisher, IExaminationExecution examinationExecution)
+
+        public EmailHostedServiceConsumer()
         {
-            _examinationPublisher = examinationPublisher;
-            _examinationExecution = examinationExecution;
-
             var factory = new ConnectionFactory { HostName = "localhost" };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
             _channel.ExchangeDeclare(exchange: "ExaminationExchange", type: ExchangeType.Direct);
             _queueName = _channel.QueueDeclare().QueueName;
-            _channel.QueueBind(queue: _queueName, exchange: "ExaminationExchange", routingKey: "sentForExamination");
+            _channel.QueueBind(queue: _queueName, exchange: "ExaminationExchange", routingKey: "sentInfoForNotification");
         }
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             stoppingToken.ThrowIfCancellationRequested();
 
             var consumer = new EventingBasicConsumer(_channel);
-            consumer.Received += (ch, ea) =>
+            consumer.Received += async (ch, ea) =>
             {
                 var content = Encoding.UTF8.GetString(ea.Body.ToArray());
-                Debug.WriteLine($"HostedService: Received message from Examination.API: {content}");
-                ExaminationExecutionDto examinationExecutionDto = _examinationExecution.executeExamination(content);
-                _examinationPublisher.SendMessage(examinationExecutionDto);
-            };
+                Debug.WriteLine($"EmailHostedServiceConsumer: Received message from PatientHostedServicePublisher: {content}");
 
+            };
             _channel.BasicConsume(queue: _queueName, autoAck: true, consumer: consumer);
             return Task.CompletedTask;
         }
