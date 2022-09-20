@@ -1,11 +1,7 @@
-using Hospitality.Identity.Data.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Microsoft.Extensions.DependencyInjection;
 using AutoMapper;
-using Hospitality.Web.Models;
 using Hospitality.Web.Mapper;
 
 var builder = WebApplication.CreateBuilder(args);
