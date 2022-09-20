@@ -1,4 +1,5 @@
-﻿@model RegistrationPatientModel
+﻿@using Hospitality.Common.DTO.Patient
+@model Hospitality.Web.Models.PatientResultViewModel
 <head>
     <link rel="stylesheet" href="~/css/Registration.css" asp-append-version="true" />
 </head>
@@ -14,43 +15,39 @@
                     <div>                    
                         <p>
                             <label id="nameLabel" for="">Name</label><br>
-	                        @Html.TextBoxFor(x => x.name, new { Value =  TempData["Name"] })
+	                        @Html.TextBoxFor(x => x.PatientName, new { Value =  TempData["Name"] })
 
                         </p>
                         <p>
                             <label id="surnameLabel" for="">Surname</label><br>
-                             @Html.TextBoxFor(x => x.surname, new { style="width:100%;" })
+                             @Html.TextBoxFor(x => x.PatientSurname, new { style="width:100%;" })
                         </p>
                         <p>
                             <label id="peselLabel" for="">Pesel</label>
-                            @Html.TextBoxFor(x => x.pesel, new { style="width:100%;" })
+                            @Html.TextBoxFor(x => x.PatientPesel, new { style="width:100%;" })
                         </p>
                         <p>
                             <label id="dateOfBirthLabel" for="">Date of birth</label><br>
-                            @Html.EditorFor(x => x.date, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @min= "1900-01-01", @max= DateTime.Today.ToString("yyyy'-'MM'-'dd")}})
+                            @Html.EditorFor(x => x.BirthDate, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @min= "1900-01-01", @max= DateTime.Today.ToString("yyyy'-'MM'-'dd")}})
 
                         </p>
                         <p>
                             <label id="addressLabel" for="">Address</label><br>
-                             @Html.TextBoxFor(x => x.address, new { style="width:100%;" })
+                             @Html.TextBoxFor(x => x.Address, new { style="width:100%;" })
+                        </p>
+                        <p>
+                            <label id="email" for="">Email</label><br>
+                             @Html.TextBoxFor(x => x.Email, new { style="width:100%;" })
                         </p>
                         <p>
                             <label id="phoneNumberLabel" for="">Phone number</label><br>
-                             @Html.TextBoxFor(x => x.phoneNumber, new { style="width:100%;" })
+                             @Html.TextBoxFor(x => x.PhoneNumber, new { style="width:100%;" })
                             <br>
                         </p>
                         <p>
-                            @Html.DropDownListFor(m => m.specialist, new SelectList(Enum.GetValues(typeof(SpecialistEnum))), "--Select Specialist--", new { style="font-size:120%;"})
+                            @Html.DropDownListFor(m => m.Specialist, new SelectList(Enum.GetValues(typeof(SpecialistEnum))), "--Select Specialist--", new { style="font-size:120%;"})
                         </p>
-        
-
-                        <p>
-                             <label id="insuranceLabel" for="">Health Insurance</label><br>
-                             <label id="insuranceValue" for="">No check</label>
-                             <button id="insuranseButton" type="button" class="btn btn-primary"> Check </button>
-                            
-                              
-                        </p>
+                       
 
                      </div><br>
                         <p class="full-width">
@@ -90,7 +87,7 @@
 
 @section Scripts {
 
-     @if (ViewBag.Invalid == "invalid")
+     @if (Model.Result == "invalid")
     {
         <script>
         $(function(){
@@ -98,7 +95,7 @@
         });
         </script>
     }
-    @if (ViewBag.Invalid == "valid")
+    @if (Model.Result == "valid")
     {
         <script>
         $(function(){

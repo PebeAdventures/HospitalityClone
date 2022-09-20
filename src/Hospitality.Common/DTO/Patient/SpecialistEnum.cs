@@ -1,4 +1,4 @@
-﻿namespace Hospitality.Web.Models
+﻿namespace Hospitality.Common.DTO.Patient
 {
     public enum SpecialistEnum
     {

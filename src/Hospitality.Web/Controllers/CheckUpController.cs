@@ -1,12 +1,22 @@
-﻿namespace Hospitality.Web.Controllers
+﻿using Hospitality.Common.DTO.CheckUp;
+using Hospitality.Common.DTO.Patient;
+using Hospitality.Web.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Text;
+
+namespace Hospitality.Web.Controllers
 {
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
-
     public class CheckUpController : Controller
     {
         private HttpClient _httpClient;
+
         public CheckUpController(IHttpClientFactory httpClientFactory)
-             => _httpClient = httpClientFactory.CreateClient();
+            => _httpClient = httpClientFactory.CreateClient();
 
         [HttpGet]
         public async Task<IActionResult> CheckUp(PatientDataForStartVisit patientDataForStartVisit)
@@ -20,14 +30,14 @@
             return RedirectToAction("StartVisit", "StartVisit", patientDataForStartVisit);
         }
 
-
         [HttpPost]
         public async Task<IActionResult> CheckUp(NewCheckUpDTO newCheckUpDTO)
         {
-            newCheckUpDTO.IdDoctor = 1; // Napisać coś co na podstawie jwt bedzie zapisywać w sesji id doktora i w tym miejscu będzie można pobierać id doktora z sesji
+            newCheckUpDTO.IdDoctor = 1;
             await SaveNewCheckupAsync(newCheckUpDTO, "https://localhost:7236/api/CheckUp");
             return RedirectToAction("Index", "Home", null);
         }
+
         private async Task<int> GetIdOfPatient(string url)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
@@ -37,6 +47,7 @@
             if (patientDoctorViewDTO is null) return 0;
             return patientDoctorViewDTO.HospitalPatientId;
         }
+
         private async Task<IActionResult> SaveNewCheckupAsync(NewCheckUpDTO newCheckup, string url)
         {
             var json = JsonConvert.SerializeObject(newCheckup);

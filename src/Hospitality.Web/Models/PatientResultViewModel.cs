@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-namespace Hospitality.Common.DTO.Patient
+﻿using Hospitality.Common.DTO.Patient;
+using System.ComponentModel.DataAnnotations;
+
+namespace Hospitality.Web.Models
 {
-    public class PatientReceptionistViewDTO
+    public class PatientResultViewModel
     {
-        public int Id { get; set; }
+        public string? Result { get; set; }
 
         [Required]
         [MinLength(3), MaxLength(25)]
@@ -16,7 +18,7 @@ namespace Hospitality.Common.DTO.Patient
         [Required]
         [MinLength(11), MaxLength(11)]
         public string PatientPesel { get; set; }
-        
+
         [Required]
         [DataType(DataType.DateTime)]
         public DateTime BirthDate { get; set; }
@@ -38,7 +40,5 @@ namespace Hospitality.Common.DTO.Patient
         public bool IsInsured { get; set; }
         [Required]
         public SpecialistEnum Specialist { get; set; }
-
-
     }
 }
