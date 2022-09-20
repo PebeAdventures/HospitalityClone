@@ -24,9 +24,31 @@
                                <div class="checkUp">
                           @Html.TextAreaFor(x => x.Description, new { @class = "checkUp",  @rows = 15} )         
                                 </div>
-                                <div class="buttons">
-                                      <button id="orderButton" type="submit" class="btn btn-primary">  Order an examination </button><br>
-                                    <a asp-controller="Result" asp-action="Result">
+                                <div class="buttons"> 
+
+
+                                    <form asp-controller="CheckUp" asp-action="GoToExaminations" method="post">
+                                     <div class="form-group">
+                <label asp-for="PeselOfPatient" class="control-label"></label>
+                <input asp-for="PeselOfPatient" class="form-control" />
+                <span asp-validation-for="PeselOfPatient" class="text-danger"></span>
+            </div>
+             <input type="submit" value="Send" class="mt-2 btn bg-dark fs-5 text-decoration-none text-white" />
+             </form>
+
+                                      @using (Html.BeginForm("Examination", "Examination", FormMethod.Post)){
+                                         @Html.TextBox("patientPesel",@Model.PeselOfPatient)                                      
+                                      <input id="orderButton" type="submit" class="btn btn-primary" value="Order an examination"></input><br>
+                                      }
+
+                                    @*  <form action="GoToExaminations" method="post">
+                                          <input type="textarea" value=@Model.PeselOfPatient>
+                                      <input id="orderButton" type="submit" class="btn btn-primary" value="Order an examination"></input><br>
+
+                                      </form>
+                                      *@
+                                     
+                                   <a asp-controller="Result" asp-action="Result">
                                       <button id="resultButton" type="button" class="btn btn-primary">  Test results  </button>
                                     </a>
                                  </div>

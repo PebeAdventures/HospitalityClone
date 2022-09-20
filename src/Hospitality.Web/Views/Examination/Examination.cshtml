@@ -1,0 +1,42 @@
+﻿@model List<ExaminationClass>
+
+
+<head>
+    <link rel="stylesheet" href="~/css/Result.css" asp-append-version="true" />
+</head>
+
+<body>
+    <div id="resultForm">
+     
+                    <table class="table table-hover table-striped">  
+                        <tr>  
+                            <th>name </th>  
+                            <th>description </th>  
+                            <th>duation </th>  
+                            <th>cost </th>  
+                        </tr>  
+                        @foreach (var d in Model)  
+                        {  
+                            <tr>  
+                                <td>@d.Name</td>  
+                                <td>@d.Description</td>  
+                                <td>@d.Duration</td>  
+                                <td>@d.Cost</td>
+                            </tr>  
+                        }  
+                    </table> 
+
+    </div>                    <br> <br> <br>  <br>
+
+
+          
+
+                     <p class="buttons">
+                             <a asp-controller="Examination" asp-action="BackToCheckUp" method="get">
+                             <button id="backButton" type="submit" class="btn btn-primary" data-toggle="modal" >  record the patient's examination  </button>
+                        </a>
+                     </p>
+                 
+
+</body>
+ 

@@ -1,7 +1,16 @@
-﻿namespace Hospitality.Web.Controllers
+﻿using Hospitality.Common.DTO.CheckUp;
+using Hospitality.Common.DTO.Patient;
+using Hospitality.Web.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Text;
+
+namespace Hospitality.Web.Controllers
 {
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
-
     public class CheckUpController : Controller
     {
         private HttpClient _httpClient;
@@ -11,6 +20,7 @@
         [HttpGet]
         public async Task<IActionResult> CheckUp(PatientDataForStartVisit patientDataForStartVisit)
         {
+
             var idOfPatient = await GetIdOfPatient($"https://localhost:7236/api/Patient?pesel={patientDataForStartVisit.PatientPesel}");
             if (idOfPatient != 0)
             {
@@ -20,7 +30,6 @@
             return RedirectToAction("StartVisit", "StartVisit", patientDataForStartVisit);
         }
 
-
         [HttpPost]
         public async Task<IActionResult> CheckUp(NewCheckUpDTO newCheckUpDTO)
         {
@@ -28,6 +37,10 @@
             await SaveNewCheckupAsync(newCheckUpDTO, "https://localhost:7236/api/CheckUp");
             return RedirectToAction("Index", "Home", null);
         }
+
+
+
+
         private async Task<int> GetIdOfPatient(string url)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
@@ -37,6 +50,7 @@
             if (patientDoctorViewDTO is null) return 0;
             return patientDoctorViewDTO.HospitalPatientId;
         }
+
         private async Task<IActionResult> SaveNewCheckupAsync(NewCheckUpDTO newCheckup, string url)
         {
             var json = JsonConvert.SerializeObject(newCheckup);
@@ -46,5 +60,7 @@
             if (!response.IsSuccessStatusCode || response is null) return StatusCode(404);
             return StatusCode(201);
         }
+
+
     }
 }
