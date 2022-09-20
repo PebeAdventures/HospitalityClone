@@ -3,6 +3,7 @@ using RabbitMQ.Client.Events;
 using System.Diagnostics;
 using System.Text;
 using Microsoft.Extensions.Hosting;
+using Hospitality.Examination.Application.Services;
 
 namespace Hospitality.Examination.RabbitMQ
 {
@@ -11,9 +12,12 @@ namespace Hospitality.Examination.RabbitMQ
         private IConnection _connection;
         private IModel _channel;
         private string? _queueName;
+        private IUpdateExamination _updateExamination;
 
-        public RabbitMQConsumer()
+        public RabbitMQConsumer(IUpdateExamination updateExamination)
         {
+            _updateExamination = updateExamination;
+
             var factory = new ConnectionFactory { HostName = "localhost" };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
@@ -26,12 +30,12 @@ namespace Hospitality.Examination.RabbitMQ
             stoppingToken.ThrowIfCancellationRequested();
 
             var consumer = new EventingBasicConsumer(_channel);
-            consumer.Received += (ch, ea) =>
+            consumer.Received += async (ch, ea) =>
             {
                 var content = Encoding.UTF8.GetString(ea.Body.ToArray());
                 Debug.WriteLine($"Examination.API: Received message from HostedService: {content}");
+                await _updateExamination.updateExaminationData(content);
             };
-
             _channel.BasicConsume(queue: _queueName, autoAck: true, consumer: consumer);
             return Task.CompletedTask;
         }

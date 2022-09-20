@@ -1,15 +1,24 @@
 ﻿using Newtonsoft.Json;
-
+using Hospitality.Common.DTO.Examination;
+using System.Diagnostics;
 
 namespace HostedService
 {
-    public class ExaminationExecution
+    public interface IExaminationExecution
     {
-        public void executeExamination(string jsonData)
+        ExaminationExecutionDto executeExamination(string jsonData);
+    }
+
+    public class ExaminationExecution : IExaminationExecution
+    {
+        public ExaminationExecutionDto executeExamination(string jsonData)
         {
-            //var jsonString = JsonConvert.DeserializeObject;
-
-
+            ExaminationExecutionDto examinationExecutionDto = JsonConvert.DeserializeObject<ExaminationExecutionDto>(jsonData);
+            examinationExecutionDto.Status = 1;
+            Thread.Sleep(examinationExecutionDto.Duration);
+            Debug.WriteLine(" Thread.Sleep is finished.");
+           // string modifiedJSON = JsonConvert.SerializeObject(examinationExecutionDto);
+            return examinationExecutionDto;
         }
     }
 }

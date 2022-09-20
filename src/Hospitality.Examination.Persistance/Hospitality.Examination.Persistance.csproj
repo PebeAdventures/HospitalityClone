@@ -18,8 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Hospitality.Examination.Application\Hospitality.Examination.Application.csproj" />
     <ProjectReference Include="..\Hospitality.Examination.Domain\Hospitality.Examination.Domain.csproj" />
+    <ProjectReference Include="..\Hospitality.Examination.Application\Hospitality.Examination.Application.csproj" />
+
   </ItemGroup>
 
 </Project>

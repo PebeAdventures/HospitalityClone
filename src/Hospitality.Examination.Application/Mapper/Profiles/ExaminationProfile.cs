@@ -15,6 +15,9 @@ namespace Hospitality.Examination.Application.Mapper.Profiles
             CreateMap<ExaminationType, ExaminationTypeDto>();
             CreateMap<AddNewExaminationCommand, ExaminationInfo>()
                 .ForMember(x => x.Status, e => e.MapFrom(m => m.Status));
+            CreateMap<ExaminationInfo, ExaminationExecutionDto>()
+                .ForMember(x => x.Status, e => e.MapFrom(m => m.Status))
+                .ForMember(x => x.Duration, e => e.MapFrom(m => m.Type.Duration));
         }
     }
 }

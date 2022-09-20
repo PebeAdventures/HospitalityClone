@@ -9,7 +9,6 @@ namespace HostedService
     {
         public void SendMessage<T>(T message)
         {
-            Thread.Sleep(5000);
             var factory = new ConnectionFactory() { HostName = "localhost" };
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())

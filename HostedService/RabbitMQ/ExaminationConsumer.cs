@@ -3,6 +3,7 @@ using RabbitMQ.Client;
 using System.Text;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using Hospitality.Common.DTO.Examination;
 
 namespace HostedService
 {
@@ -12,10 +13,12 @@ namespace HostedService
         private IModel _channel;
         private IExaminationPublisher _examinationPublisher;
         private string? _queueName;
+        private IExaminationExecution _examinationExecution;
 
-        public ExaminationConsumer(IExaminationPublisher examinationPublisher)
+        public ExaminationConsumer(IExaminationPublisher examinationPublisher, IExaminationExecution examinationExecution)
         {
             _examinationPublisher = examinationPublisher;
+            _examinationExecution = examinationExecution;
             var factory = new ConnectionFactory { HostName = "localhost" };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
@@ -31,9 +34,9 @@ namespace HostedService
             consumer.Received += (ch, ea) =>
             {
                 var content = Encoding.UTF8.GetString(ea.Body.ToArray());
-                //var jsonString = JsonConvert.DeserializeObject<>;
                 Debug.WriteLine($"HostedService: Received message from Examination.API: {content}");
-                _examinationPublisher.SendMessage(content);
+                ExaminationExecutionDto examinationExecutionDto = _examinationExecution.executeExamination(content);
+                _examinationPublisher.SendMessage(examinationExecutionDto);
             };
 
             _channel.BasicConsume(queue: _queueName, autoAck: true, consumer: consumer);

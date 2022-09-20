@@ -4,6 +4,7 @@ using Hospitality.Examination.Application.Contracts.Persistence;
 using Hospitality.Examination.Application.Mapper.Profiles;
 using Hospitality.Examination.Persistance.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Hospitality.Examination.Application.Services;
 using Hospitality.Examination.RabbitMQ;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,14 +14,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationServices();
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ExaminationContext>(options => options
-    .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Examination_Dev;Trusted_Connection=True;MultipleActiveResultSets=true"));
+    .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Examination_Dev;Trusted_Connection=True;MultipleActiveResultSets=true"), ServiceLifetime.Transient, ServiceLifetime.Transient);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IExaminationRepository, ExaminationRepository>();
-builder.Services.AddScoped<IExaminationTypesRepository, ExaminationTypesRepository>();
-builder.Services.AddScoped<IRabbitMqService, RabbitMQPublisher>();
+builder.Services.AddTransient<IExaminationRepository, ExaminationRepository>();
+builder.Services.AddTransient<IExaminationTypesRepository, ExaminationTypesRepository>();
+builder.Services.AddTransient<IUpdateExamination, UpdateExamination>();
+builder.Services.AddTransient<IRabbitMqService, RabbitMQPublisher>();
 builder.Services.AddHostedService<RabbitMQConsumer>();
-
 
 
 builder.Services.AddAutoMapper(typeof(ExaminationProfile));
