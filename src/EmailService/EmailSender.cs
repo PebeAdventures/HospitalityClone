@@ -3,11 +3,11 @@ using MailKit.Net.Smtp;
 
 namespace EmailService
 {
-    public class EmailService : IEmailService
+    public class EmailSender : IEmailSender
     {
         private readonly EmailConfiguration _emailConfig;
 
-        public EmailService(EmailConfiguration emailConfig)
+        public EmailSender(EmailConfiguration emailConfig)
         {
             _emailConfig = emailConfig;
         }
@@ -36,11 +36,11 @@ namespace EmailService
             {
                 try
                 {
-                    // client.Connect(_emailConfig.SmtpServer, _emailConfig.Port, true);
-                    //client.AuthenticationMechanisms.Remove("XOAUTH2");
-                    // client.Authenticate(_emailConfig.UserName, _emailConfig.Password);
+                    client.Connect(_emailConfig.SmtpServer, _emailConfig.Port, true);
+                    client.AuthenticationMechanisms.Remove("XOAUTH2");
+                    client.Authenticate(_emailConfig.UserName, _emailConfig.Password);
 
-                    // client.Send(mailMessage);
+                    client.Send(mailMessage);
                 }
                 catch
                 {
@@ -49,8 +49,8 @@ namespace EmailService
                 }
                 finally
                 {
-                    //client.Disconnect(true);
-                    // client.Dispose();
+                    client.Disconnect(true);
+                    client.Dispose();
                 }
             }
 

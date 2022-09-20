@@ -1,6 +1,6 @@
 ﻿namespace EmailService
 {
-    public interface IEmailService
+    public interface IEmailSender
     {
         void SendEmail(Message message);
     }

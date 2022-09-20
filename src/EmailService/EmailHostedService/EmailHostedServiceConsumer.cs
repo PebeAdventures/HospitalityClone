@@ -12,10 +12,13 @@ namespace EmailService.EmailHostedService
         private IConnection _connection;
         private IModel _channel;
         private string? _queueName;
+        private IEmailSender _emailSender;
 
 
-        public EmailHostedServiceConsumer()
+        public EmailHostedServiceConsumer(IEmailSender emailSender)
         {
+            _emailSender = emailSender;
+
             var factory = new ConnectionFactory { HostName = "localhost" };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
@@ -32,7 +35,9 @@ namespace EmailService.EmailHostedService
             {
                 var content = Encoding.UTF8.GetString(ea.Body.ToArray());
                 Debug.WriteLine($"EmailHostedServiceConsumer: Received message from PatientHostedServicePublisher: {content}");
+                var message = new Message(new string[] { "hospitality.codecool.2022@proton.me" }, "Client message", content);
 
+                _emailSender.SendEmail(message);
             };
             _channel.BasicConsume(queue: _queueName, autoAck: true, consumer: consumer);
             return Task.CompletedTask;
