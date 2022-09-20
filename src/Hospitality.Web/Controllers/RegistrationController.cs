@@ -1,63 +1,65 @@
-﻿using Hospitality.Web.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using Hospitality.Web.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Hospitality.Common.DTO.CheckUp;
-using Hospitality.Web.Models;
-using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
+using Hospitality.Common.DTO.Patient;
+using Hospitality.Common.DTO.NewFolder;
+using System;
+using Hospitality.Web.Models;
+using AutoMapper;
 
 namespace Hospitality.Web.Controllers
 {
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Receptionist")]
     public class RegistrationController : Controller
     {
+        private HttpClient _httpClient;
+        private IMapper _mapper;
+        public RegistrationController(IHttpClientFactory httpClientFactory, IMapper mapper)
+        {
+            _httpClient = httpClientFactory.CreateClient();
+            _mapper = mapper;
+        }
         [HttpGet]
-        public IActionResult Registration(bool? result)
+        public async Task<IActionResult> Registration(PatientResultViewModel? Model)
         {
-            if (result == false) ViewBag.Invalid = "invalid";
-            if (result == true) ViewBag.Invalid = "valid";
-
-            return View();
+            if (Model is null)
+                return View();
+            else 
+                ViewBag.Invalid = Model.Result;
+                return View(Model);
         }
 
         [HttpPost]
-        public IActionResult RegistrationPost(RegistrationPatientModel model)
+        public async Task<IActionResult> RegistrationPostAsync(PatientResultViewModel model)
         {
-            if ((model.name == null) || model.surname == null || model.pesel == null || model.address == null || model.phoneNumber == null || model.date == null || model.specialist == null)
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction("Registration", "Registration", new { result = false });
+                model.Result = "invalid";
+                return RedirectToAction("Registration", "Registration", model);
             }
-            string isHealthInsurance = "true";
-
-            return RedirectToAction("Registration", "Registration", new { result = true });
-
+            model.Result = "valid";
+            await RegisterNewPatient(model, "https://localhost:7236/api/Patient");
+            return RedirectToAction("Registration", "Registration", model);
         }
 
-        [HttpPost]
-        public IActionResult checkHealthInsurance(RegistrationPatientModel model)
+        private async Task RegisterNewPatient(PatientResultViewModel model, string url)
         {
-            Random rnd = new Random();
-            ViewData["isHealthInsurance"] = Convert.ToBoolean(rnd.Next(0, 1));
-            model.isHealthInsurance = Convert.ToBoolean(rnd.Next(0, 1)).ToString();
-            return RedirectToAction("Registration", "Registration",
-                new RegistrationPatientModel
-                {
-                    name = model.name,
-                    surname = model.surname,
-                    pesel = model.pesel,
-                    date = model.date,
-                    address = model.address,
-                    phoneNumber = model.phoneNumber,
-                    isHealthInsurance = model.isHealthInsurance,
-                    specialist = model.specialist
-                });
+            PatientReceptionistViewDTO mapedPatient = _mapper.Map<PatientReceptionistViewDTO>(model);
+            model.IsInsured = await CheckHealthInsurance(mapedPatient.Id);
+            var json = JsonConvert.SerializeObject(mapedPatient);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            await _httpClient.PostAsync(url, content);
+        }
+
+        private async Task<bool> CheckHealthInsurance(int idOfPerson)
+        {
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            var response = await _httpClient.GetAsync($"https://localhost:7236/api/Insurance?idOfPerson={idOfPerson}");
+            return JsonConvert.DeserializeObject<InsuredDTO>(await response.Content.ReadAsStringAsync()).IsInsured;
         }
     }
 }
