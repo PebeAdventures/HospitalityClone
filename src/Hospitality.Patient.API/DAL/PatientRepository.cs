@@ -17,6 +17,12 @@ namespace Hospitality.Patient.API.DAL
                 .Where(p => pesel == p.PatientPesel)
                 .FirstOrDefaultAsync();
         }
+        public async Task<HospitalPatient> GetPatientByID(int patientID)
+        {
+            return await _context.Patients
+                .Where(p => p.HospitalPatientId == patientID)
+                .FirstOrDefaultAsync();
+        }
 
         public async Task<HospitalPatient> AddNewPatientAsync(HospitalPatient patient)
         {
