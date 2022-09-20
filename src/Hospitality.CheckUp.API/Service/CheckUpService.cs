@@ -2,6 +2,7 @@
 using Hospitality.CheckUp.API.DataBase.Entity;
 using Hospitality.CheckUp.API.Service.Interface;
 using Hospitality.Common.DTO.CheckUp;
+using Hospitality.Common.Models.Exceptions;
 
 namespace Hospitality.CheckUp.API.Service
 {
@@ -16,7 +17,9 @@ namespace Hospitality.CheckUp.API.Service
 
         public async Task AddNewCheckUp(NewCheckUpDTO newCheckUpDTO)
         {
-
+            if (newCheckUpDTO == null)
+                throw new ResourceNotFoundException($"There is no check up to create");
+            
             await CheckUpContext.CheckUps.AddAsync(new CheckUpModel
             {
                 Description = newCheckUpDTO.Description,
