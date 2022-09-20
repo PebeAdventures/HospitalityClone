@@ -14,13 +14,20 @@ namespace Hospitality.Gateway.API.Controllers
     public class CheckUpController : ControllerBase
     {
         private HttpClient _httpClient;
-        public CheckUpController(IHttpClientFactory httpClientFactory)
-             => _httpClient = httpClientFactory.CreateClient();
+        private readonly IConfiguration _configuration;
+
+        public CheckUpController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
+        {
+            _httpClient = httpClientFactory.CreateClient();
+
+            _configuration = configuration;
+        }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
         [HttpPost]
         public async Task<IActionResult> CreateNewCheckupAsync(NewCheckUpDTO newCheckup)
-            => Ok(await GetContentAsync(newCheckup, "https://localhost:7280/api/CheckUp")); // LINK DO UZUPEŁNIENIA !!! 
+            => Ok(await GetContentAsync(newCheckup, _configuration["Paths:Checkup"])); // LINK DO UZUPEŁNIENIA !!!
+
         private async Task<HttpResponseMessage> GetContentAsync(NewCheckUpDTO newCheckup, string url)
         {
             var json = JsonConvert.SerializeObject(newCheckup);

@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationServices();
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ExaminationContext>(options => options
-    .UseSqlServer("Server=examinationdb;Database=ExaminationDb;User=sa;Password=1Secure*Password1;TrustServerCertificate=true"));
+    .UseSqlServer(builder.Configuration["examinationDb"]));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IExaminationRepository, ExaminationRepository>();
@@ -20,14 +20,17 @@ builder.Services.AddScoped<IExaminationTypesRepository, ExaminationTypesReposito
 builder.Services.AddAutoMapper(typeof(ExaminationProfile));
 
 var app = builder.Build();
-using (var scope = app.Services.CreateScope())
+if (app.Environment.EnvironmentName != "Local")
 {
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<ExaminationContext>();
-    context.Database.Migrate();
+    using (var scope = app.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        var context = services.GetRequiredService<ExaminationContext>();
+        context.Database.Migrate();
+    }
 }
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+//Configure the HTTP request pipeline.
+if (!app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();

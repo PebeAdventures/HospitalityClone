@@ -1,4 +1,5 @@
-﻿using Hospitality.Examination.Application.Functions.Examinations.Commands;
+﻿using Hospitality.Common.DTO.Examination;
+using Hospitality.Examination.Application.Functions.Examinations.Commands;
 using Hospitality.Examination.Application.Functions.Examinations.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -25,9 +26,15 @@ namespace Hospitality.Examination.API.Controllers
         => Ok(await _mediator.Send(new GetPatientExaminationsQuery() { PatientId = patientId }));
 
         [HttpPost]
-        public async Task<IActionResult> AddNewExamination(AddNewExaminationCommand addPostCommand)
+        public async Task<IActionResult> AddNewExamination(CreateExaminationDto examinationDto)
         {
-            var examination = await _mediator.Send(addPostCommand);
+            var examination = await _mediator.Send(new AddNewExaminationCommand()
+            {
+                Description = examinationDto.Description,
+                Status = examinationDto.Status,
+                ExaminationTypeId = examinationDto.ExaminationTypeId,
+                PatientId = examinationDto.PatientId
+            });
             return CreatedAtAction("GetExaminationById", new { id = examination.Id }, examination);
         }
     }

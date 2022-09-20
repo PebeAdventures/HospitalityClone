@@ -3,10 +3,8 @@ using Hospitality.Patient.API.Mapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<PatientContext>(builder =>
-{
-    builder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=PatientDB;Integrated Security=True");
-});
+builder.Services.AddDbContext<PatientContext>(options => options
+    .UseSqlServer(builder.Configuration["ConnectionStrings:PatientDbDocker"]));
 
 builder.Services.AddCustomServices();
 
@@ -24,7 +22,12 @@ var mapper = mapConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
-
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<PatientContext>();
+    context.Database.Migrate();
+}
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
