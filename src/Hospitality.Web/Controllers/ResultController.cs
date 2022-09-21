@@ -1,4 +1,5 @@
-﻿using Hospitality.Web.Models;
+﻿using Hospitality.Common.DTO.CheckUp;
+using Hospitality.Web.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,9 +21,10 @@ namespace Hospitality.Web.Controllers
             };
         }
 
-        public IActionResult Result()
+        public IActionResult Result(string patientPesel, string checkUpDescription)
         {
-            string reservationDate = Request.Form["patientPesel"].First();
+
+            //NewCheckUpDTO checkUpDto = Request.Form["patient"].First();
             return View(results);
         }
     }
