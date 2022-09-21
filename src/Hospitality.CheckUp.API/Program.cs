@@ -1,10 +1,7 @@
 using Hospitality.CheckUp.API.DataBase.Context;
 using Hospitality.CheckUp.API.Service;
 using Hospitality.CheckUp.API.Service.Interface;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,18 +11,26 @@ builder.Services.AddScoped<ICheckUpService, CheckUpService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<CheckUpContext>(builder =>
+
+builder.Services.AddDbContext<CheckUpContext>(options => options
+    .UseSqlServer(builder.Configuration.GetConnectionString("checkupDB")));
+builder.Services.AddCors(o => o.AddDefaultPolicy(builder =>
 {
-    builder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=CheckUp;Integrated Security=True");
-});
-builder.Services.AddCors(o => o.AddDefaultPolicy(builder => {
     builder.AllowAnyOrigin()
            .AllowAnyMethod()
            .AllowAnyHeader();
 }));
 var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
+if (app.Environment.EnvironmentName != "Local")
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        var context = services.GetRequiredService<CheckUpContext>();
+        context.Database.Migrate();
+    }
+}
+if (!app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();

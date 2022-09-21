@@ -154,6 +154,34 @@ namespace Hospitality.Identity.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "6db8d427-4aca-43c2-a59c-c7fe5ffbb46c", "535d7a33-4c91-4302-827f-313e4e28ea08", "Receptionist", "RECEPTIONIST" },
+                    { "86453362-8157-4e9b-8f52-c0d0055d44ba", "0c4295dc-8368-4d91-b5b0-d171dc7b7036", "Doctor", "DOCTOR" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "631889f6-4585-48f9-91bc-33395bb6636a", 0, "1f51b83b-12e0-45d8-922b-9e42368ff9c8", "doctor", false, false, null, "DOCTOR", null, "AQAAAAEAACcQAAAAEAcA5D/fgAparFncZRmVKkpjIyaGvriW6OY93avg2tFfqKMO4hFrki0KxxBEjqbBMQ==", null, false, "6a9619cd-3472-49d2-880f-1fd07300955d", false, null },
+                    { "c9fc4534-a691-47ef-a8af-7e34d651b90a", 0, "e7a09c31-5e94-4515-8c5a-1d9638c3eed6", "receptionist", false, false, null, "RECEPTIONIST", null, "AQAAAAEAACcQAAAAEN4gIagHwwCscrI9hBQQLKm4iFBngboH6KKxJTrusVmQo22KUQVmlkCW0MhCrJW+IA==", null, false, "6345d04d-a422-4fc2-9b8a-6ac5612f4f42", false, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "86453362-8157-4e9b-8f52-c0d0055d44ba", "631889f6-4585-48f9-91bc-33395bb6636a" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "6db8d427-4aca-43c2-a59c-c7fe5ffbb46c", "c9fc4534-a691-47ef-a8af-7e34d651b90a" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
