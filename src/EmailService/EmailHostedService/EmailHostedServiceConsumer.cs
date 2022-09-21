@@ -37,8 +37,8 @@ namespace EmailService.EmailHostedService
                 Debug.WriteLine($"EmailHostedServiceConsumer: Received message from PatientHostedServicePublisher: {content}");
 
                 PatientNotificationDTO examinationExecutionDto = JsonConvert.DeserializeObject<PatientNotificationDTO>(content);
-                string messageText = $" Hello, {examinationExecutionDto.PatientName} {examinationExecutionDto.PatientSurname}! \n" +
-                                     $"Your examination \"{examinationExecutionDto.ExaminationDescription}\" finished. You could check result in your account. \n" +
+                string messageText = $"Hello, {examinationExecutionDto.PatientName} {examinationExecutionDto.PatientSurname}! \n" +
+                                     $"Your examination \n \"{examinationExecutionDto.ExaminationDescription}\" \n finished. You could check result in your account. \n" +
                                      $"Kind regards,\nHospitality";
                 var message = new Message(new string[] { examinationExecutionDto.Email }, "Client message", messageText);
 
