@@ -21,10 +21,10 @@ namespace Hospitality.Web.Controllers
             };
         }
 
-        public IActionResult Result(string patientPesel, string checkUpDescription)
+        [HttpPost]
+        public IActionResult Result(string PatientPesel)
         {
 
-            //NewCheckUpDTO checkUpDto = Request.Form["patient"].First();
             return View(results);
         }
     }

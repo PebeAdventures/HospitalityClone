@@ -8,81 +8,55 @@
 </head>
 
 <body>
+    <content>
+        <div id="checkUpForm">
+            <h3>Symptoms and recommendations </h3>
+            <br></br>
+            <div>
+                @if (Model.IsInsured)
+                {
+                    <p class="insured"> Patient is Insured</p>
+                }
+                else
+                {
+                    <p class="notInsured"> Patient is not Insured</p>
+                }
 
-<content>
-        @using (Html.BeginForm("CheckUp", "CheckUp"))
-
-        {
-        <div style="display:none">
-                @Html.TextBoxFor(model=>model.PeselOfPatient)
-                @Html.TextBoxFor(model=>model.IdPatient)
-
-            </div>
-                <div id="checkUpForm">
-                            <h3>Symptoms and recommendations </h3><br>
-                          <div>
-                    @if (Model.IsInsured)
-                    {
-                                     <p class="insured"> Patient is Insured</p>
-                    }
-                    else
-                    {
-                                      <p class="notInsured"> Patient is not Insured</p>
-                    }                                    
-                                        </div>
-                        <div class="wrapper">
-
-                                   <div class="checkUp">
-                                       
-                        @Html.TextAreaFor(x => x.Description, new { @class = "checkUp",  @rows = 15} ) 
-
-                                    </div>
-                                    <div class="buttons">
-                                          <button id="orderButton" type="submit" class="btn btn-primary">  Order an examination </button><br>
-                                        <section>
-                            @using (Html.BeginForm("Result", "Result"))
-                            {      
-                                                 <div style="display:none">
-                                    @Html.TextBox("patientPesel",@Model.PeselOfPatient)  
-                                    @Html.TextBox("checkUpDescription",@Model.Description)  
-
-                                               </div>
-                                                     <input id="resultButton" type="submit" class="btn btn-primary" value="check examinations">                                  
-                            }
-                                       </section>  
-@using(Html.BeginForm("Result","Result"))
-{
-   <input type="text" name="patientPesel" value=@Model.PeselOfPatient />
-      <input type="text" name="checkUpDescription" value="Tutaj powinien byc text z Description"/>
-   <input type="submit" />
-}
-                                     </div>
-                                    </div>
-                                      <br>
-                                        <button id="finishButton" typeof="submit" class="btn btn-primary"  data-bs-toggle="modal"  data-bs-target="#exampleModal" >  Finish visit  </button>
-                                    </div>
-                                     <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header  text-black">
-                                <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body justify-content-center" id="modalContactBody">
-                                <p class="errorMessage">Would you like to save patient visit</p>
-                            </div>
-                            <div class="modal-footer">
-                                <div class="modal-footer " id="modalForm">                    
-                                    <button id="saveButton" type="submit" class="btn btn-secondary" data-save="modal">Save</button>
-                                     <button id="cancelButton" type="reset" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-
-                                </div>
-                            </div>
-                        </div>
+                @using (Html.BeginForm("Result", "Result", FormMethod.Post, new { target = "_blank" }))
+                {
+                    <div style="display:none">
+                        <input type="text" name="PatientPesel" value=@Model.PeselOfPatient />
                     </div>
-        }
+
+                    <input type="submit" class="btn btn-primary" value="examination results" />
+                }
+            </div>
 
 
-</content>
+
+            @using (Html.BeginForm("CheckUp", "CheckUp"))
+            {
+                <div style="display:none">
+                    @Html.TextBoxFor(model=>model.PeselOfPatient)
+                    @Html.TextBoxFor(model=>model.IdPatient)
+                </div>
+
+                <br>
+
+                <div class="wrapper">
+                    <div class="checkUp">
+                        @Html.TextAreaFor(x => x.Description, new { @class = "checkUp",  @rows = 15, @value = @Model.Description})
+                    </div>
+
+                </div>
+                <br>
+
+                <button id="finishButton" typeof="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">  Finish visit  </button>
+            }
+
+
+        </div>
+    </content>
 
 
 
