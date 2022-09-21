@@ -6,13 +6,11 @@
 <head>
     <link rel="stylesheet" href="~/css/CheckUp.css" asp-append-version="true" />
 </head>
-
 <body>
 
 <content>
     @using (Html.BeginForm("CheckUp", "CheckUp"))
     {
-
         <div style="display:none">
 				@Html.TextBoxFor(model=>model.PatientPesel)
 				@Html.TextBoxFor(model=>model.PatientId)
@@ -25,13 +23,12 @@
                           @Html.TextAreaFor(x => x.Description, new { @class = "checkUp",  @rows = 15} )         
                                 </div>
                                 <div>
-                                    @Html.DropDownListFor(m => m.ChosenExamination, new SelectList(Model.AvailableExaminations), "--Select Specialist--", new { style="font-size:120%;"})
                                 </div>
 
                                 <div class="buttons">
-                                    <a asp-controller="CheckUp" asp-action="OrderAnExamination">
-                                        <button id="orderButton" type="submit" class="btn btn-primary">  Order an examination </button><br>
-                                    </a>
+                                    @*<a asp-controller="Examination" asp-action="OrderAnExamination">
+                                        <button id="orderButton" type="button" class="btn btn-primary">  Order an examination </button><br>
+                                    </a>*@
                                     <a asp-controller="Result" asp-action="Result">
                                       <button id="resultButton" type="button" class="btn btn-primary">  Test results  </button>
                                     </a>
@@ -44,6 +41,13 @@
                 </div>
     }
 
+    @using (Html.BeginForm("OrderAnExamination", "Examination"))
+    {
+        @Html.HiddenFor(m => m.PatientPesel, Model.PatientPesel)
+        @Html.DropDownListFor(m => m.ChosenExamination, new SelectList(Model.AvailableExaminations), "--Select Specialist--", new { style="font-size:120%;"})
+        <br>
+                <button id="finishButton" typeof="submit" class="btn btn-primary"  data-bs-toggle="modal"  data-bs-target="#exampleModal" >  Order an examination  </button>
+    }
 
 </content>
 

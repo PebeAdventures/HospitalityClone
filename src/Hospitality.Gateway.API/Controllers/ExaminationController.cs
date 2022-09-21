@@ -37,7 +37,7 @@ namespace Hospitality.Gateway.API.Controllers
         public async Task<IActionResult> AddNewExaminationAsync(CreateExaminationDto newExamination)
             => await GetContent(newExamination, _configuration["Paths:AddNewExamination"]);
 
-        private async Task<IActionResult> GetContent(object newExamination, string url)
+        private async Task<IActionResult> GetContent(CreateExaminationDto newExamination, string url)
         {
             var json = JsonConvert.SerializeObject(newExamination);
             var content = new StringContent(json, Encoding.UTF8, "application/json");

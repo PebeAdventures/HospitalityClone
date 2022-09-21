@@ -9,24 +9,30 @@ using Microsoft.AspNetCore.Authorization;
 using Hospitality.Common.DTO.Patient;
 using Hospitality.Common.DTO.Examination;
 using AutoMapper;
+using Microsoft.AspNetCore.Razor.TagHelpers;
+using Hospitality.Web.Services.Interfaces;
 
 namespace Hospitality.Web.Controllers
 {
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
     public class CheckUpController : Controller
     {
         private HttpClient _httpClient;
         private IMapper _mapper;
+        private IPatientService _patientService;
+        private IExaminationService _examinationService;
 
-        public CheckUpController(IHttpClientFactory httpClientFactory, IMapper mapper)
+        public CheckUpController(IHttpClientFactory httpClientFactory, IMapper mapper, IPatientService patientService, IExaminationService examinationService)
         {   
             _httpClient = httpClientFactory.CreateClient();
             _mapper = mapper;
+            _patientService = patientService;
+            _examinationService = examinationService;
         }
         [HttpGet]
-        public async Task<IActionResult> CheckUp(PatientDataCheckUpViewModel patientDataCheckUpViewModel)
+        public async Task<IActionResult> CheckUp(PatientDataCheckUpViewModel? patientDataCheckUpViewModel)
         {
-            var availableExaminatios = await GetAvailableExaminations();
+            var availableExaminatios = await _examinationService.GetAvailableExaminations(HttpContext.Session.GetString("token"));
             patientDataCheckUpViewModel.AvailableExaminations = availableExaminatios.Select(x => x.Name).ToList();
             if (patientDataCheckUpViewModel.PatientId != 0 || patientDataCheckUpViewModel.PatientId != null)
             {
@@ -34,7 +40,7 @@ namespace Hospitality.Web.Controllers
             }
             else
             {
-                var idOfPatient = await GetIdOfPatient($"https://localhost:7236/api/Patient?pesel={patientDataCheckUpViewModel.PatientPesel}");
+                var idOfPatient = await _patientService.GetIdOfPatient($"https://localhost:7236/api/Patient?pesel={patientDataCheckUpViewModel.PatientPesel}", HttpContext.Session.GetString("token"));
                 if (idOfPatient != 0)
                 {
                     patientDataCheckUpViewModel.PatientId = idOfPatient;
@@ -44,7 +50,7 @@ namespace Hospitality.Web.Controllers
             }
         }
 
-        [HttpPost()]
+        [HttpPost]
         public async Task<IActionResult> NewCheckUp(PatientDataCheckUpViewModel patientDataCheckUpViewModel)
         {
 
@@ -54,18 +60,6 @@ namespace Hospitality.Web.Controllers
             return RedirectToAction("Index", "Home", null);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> OrderAnExamination(PatientDataCheckUpViewModel patientDataCheckUpViewModel)
-        {
-            if (!string.IsNullOrEmpty(patientDataCheckUpViewModel.ChosenExamination))
-                await AssignIdOfChosenExamination(patientDataCheckUpViewModel);
-                await SendOrder(patientDataCheckUpViewModel, "URL");
-            return RedirectToAction("CheckUp", "CheckUp", patientDataCheckUpViewModel);
-        }
-
-        private async Task AssignIdOfChosenExamination(PatientDataCheckUpViewModel patientDataCheckUpViewModel)
-            => patientDataCheckUpViewModel.ChosenExaminationId = (await GetAvailableExaminations()).Where(ae => ae.Name == patientDataCheckUpViewModel.ChosenExamination).FirstOrDefault().Id;
-        
         private async Task<List<ExaminationTypeDto>> GetAvailableExaminations()
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
@@ -77,24 +71,8 @@ namespace Hospitality.Web.Controllers
                 throw new Exception("Null response exception");
             return availableExaminations;
         }
-        private async Task SendOrder(PatientDataCheckUpViewModel patientDataCheckUpViewModel, string url)
-        {
-            var examinationDto = _mapper.Map<CreateExaminationDto>(patientDataCheckUpViewModel);
-            var json = JsonConvert.SerializeObject(examinationDto);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
-            await _httpClient.PostAsync(url, content);
-        }
 
-        private async Task<int> GetIdOfPatient(string url)
-        {
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
-            var response = await _httpClient.GetAsync(url);
-            if (!response.IsSuccessStatusCode || response is null) return 0;
-            var patientDoctorViewDTO = JsonConvert.DeserializeObject<PatientDoctorViewDTO>(await response.Content.ReadAsStringAsync());
-            if (patientDoctorViewDTO is null) return 0;
-            return patientDoctorViewDTO.HospitalPatientId;
-        }
+        
 
         private async Task SaveNewCheckupAsync(NewCheckUpDTO newCheckup, string url)
         {
