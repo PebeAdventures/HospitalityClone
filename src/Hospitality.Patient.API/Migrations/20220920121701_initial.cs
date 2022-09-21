@@ -32,17 +32,14 @@ namespace Hospitality.Patient.API.Migrations
             migrationBuilder.InsertData(
                 table: "Patients",
                 columns: new[] { "HospitalPatientId", "Address", "BirthDate", "Email", "IsInsured", "PatientName", "PatientPesel", "PatientSurname", "PhoneNumber" },
-                values: new object[] { 5, "Wrzosowa", new DateTime(1999, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "aniela.nowak@gmail.com", true, "Aniela", "99112234543", "Nowak", "213769420" });
-
-            migrationBuilder.InsertData(
-                table: "Patients",
-                columns: new[] { "HospitalPatientId", "Address", "BirthDate", "Email", "IsInsured", "PatientName", "PatientPesel", "PatientSurname", "PhoneNumber" },
-                values: new object[] { 6, "Jaworowa", new DateTime(1998, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "ania.okrasa@gmail.com", true, "Ania", "98112234543", "Okrasa", "123456456" });
-
-            migrationBuilder.InsertData(
-                table: "Patients",
-                columns: new[] { "HospitalPatientId", "Address", "BirthDate", "Email", "IsInsured", "PatientName", "PatientPesel", "PatientSurname", "PhoneNumber" },
-                values: new object[] { 7, "Fiołkowa", new DateTime(1997, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "michal.jakos@gmail.com", true, "Michał", "97112234543", "Jakos", "456789123" });
+                values: new object[,]
+                {
+                    { 1, "Wrzosowa", new DateTime(1999, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "aniela.nowak@gmail.com", true, "Aniela", "99112234543", "Nowak", "213769420" },
+                    { 2, "Jaworowa", new DateTime(1998, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "ania.okrasa@gmail.com", true, "Ania", "98112234543", "Okrasa", "123456456" },
+                    { 3, "Fiołkowa", new DateTime(1997, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "michal.jakos@gmail.com", true, "Michał", "97112234543", "Jakos", "456789123" },
+                    { 4, "Jaworowa", new DateTime(1998, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "olaf.olal@gmail.com", false, "Olaf", "98122255543", "Olal", "999456456" },
+                    { 5, "Fiołkowa", new DateTime(1997, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "dawid.jac@gmail.com", true, "Dawid", "97102233343", "Jac", "458889123" }
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
