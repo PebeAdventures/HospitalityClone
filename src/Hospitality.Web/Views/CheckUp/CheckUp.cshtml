@@ -10,10 +10,10 @@
 <body>
 
 <content>
-                @using (Html.BeginForm("CheckUp", "CheckUp"))
-        
-{
-    <div style="display:none">
+    @using (Html.BeginForm("CheckUp", "CheckUp"))
+    {
+
+        <div style="display:none">
 				@Html.TextBoxFor(model=>model.PeselOfPatient)
 				@Html.TextBoxFor(model=>model.IdPatient)
 		</div>
@@ -25,7 +25,9 @@
                           @Html.TextAreaFor(x => x.Description, new { @class = "checkUp",  @rows = 15} )         
                                 </div>
                                 <div class="buttons">
-                                      <button id="orderButton" type="submit" class="btn btn-primary">  Order an examination </button><br>
+                                    <a asp-controller="CheckUp" asp-action="OrderAnExamination">
+                                        <button id="orderButton" type="submit" class="btn btn-primary">  Order an examination </button><br>
+                                    </a>
                                     <a asp-controller="Result" asp-action="Result">
                                       <button id="resultButton" type="button" class="btn btn-primary">  Test results  </button>
                                     </a>
@@ -52,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-        }
+    }
 
 
 </content>

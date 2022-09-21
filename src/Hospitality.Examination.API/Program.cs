@@ -21,7 +21,7 @@ builder.Services.AddTransient<IExaminationRepository, ExaminationRepository>();
 builder.Services.AddTransient<IExaminationTypesRepository, ExaminationTypesRepository>();
 builder.Services.AddTransient<IUpdateExamination, UpdateExamination>();
 builder.Services.AddTransient<IRabbitMqService, RabbitMQPublisher>();
-builder.Services.AddHostedService<RabbitMQConsumer>();
+//builder.Services.AddHostedService<RabbitMQConsumer>();
 
 
 builder.Services.AddAutoMapper(typeof(ExaminationProfile));

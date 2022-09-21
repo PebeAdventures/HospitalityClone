@@ -12,7 +12,7 @@ builder.Services.AddDbContext<PatientContext>(builder =>
 builder.Services.AddCustomServices();
 
 builder.Services.AddControllers();
-builder.Services.AddHostedService<PatientHostedServiceConsumer>();
+//builder.Services.AddHostedService<PatientHostedServiceConsumer>();
 builder.Services.AddTransient<IPatientHostedServicePublisher, PatientHostedServicePublisher>();
 builder.Services.AddTransient<IPatientRepository, PatientRepository>();
 builder.Services.AddTransient<IPatientService, PatientService>();

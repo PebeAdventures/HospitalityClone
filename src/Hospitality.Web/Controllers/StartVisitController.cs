@@ -14,7 +14,7 @@ namespace Hospitality.Web.Controllers
             => View();
 
         [HttpPost]
-        public IActionResult StartVisit(PatientDataForStartVisit model)
+        public IActionResult StartVisit(PatientDataCheckUpViewModel model)
             => RedirectToAction("CheckUp", "CheckUp", model);
     }
 }
