@@ -21,10 +21,18 @@ namespace Hospitality.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> CheckUp(PatientDataForStartVisit patientDataForStartVisit)
         {
-            var idOfPatient = await GetIdOfPatient($"https://localhost:7236/api/Patient?pesel={patientDataForStartVisit.PatientPesel}");
-            if (idOfPatient != 0)
+            var patient = await GetPatient($"https://localhost:7236/api/Patient?pesel={patientDataForStartVisit.PatientPesel}");
+            if (patient != null)
             {
-                var newCheckUpDTO = new NewCheckUpDTO { PeselOfPatient = patientDataForStartVisit.PatientPesel, IdPatient = idOfPatient };
+                if (patient.IsInsured)
+                {
+                    TempData["insured"] = "Patient is Insured";
+                }
+                else
+                {
+                    TempData["insured"] = "Patient is Not Insured";
+                }
+                var newCheckUpDTO = new NewCheckUpDTO { PeselOfPatient = patientDataForStartVisit.PatientPesel, IdPatient = patient.HospitalPatientId, IsInsured = patient.IsInsured };
                 return View(newCheckUpDTO);
             }
             return RedirectToAction("StartVisit", "StartVisit", patientDataForStartVisit);
@@ -38,14 +46,15 @@ namespace Hospitality.Web.Controllers
             return RedirectToAction("Index", "Home", null);
         }
 
-        private async Task<int> GetIdOfPatient(string url)
+        private async Task<PatientDoctorViewDTO> GetPatient(string url)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             var response = await _httpClient.GetAsync(url);
-            if (!response.IsSuccessStatusCode || response is null) return 0;
+            if (!response.IsSuccessStatusCode || response is null) return null;
             var patientDoctorViewDTO = JsonConvert.DeserializeObject<PatientDoctorViewDTO>(await response.Content.ReadAsStringAsync());
-            if (patientDoctorViewDTO is null) return 0;
-            return patientDoctorViewDTO.HospitalPatientId;
+            if (patientDoctorViewDTO is null) return null;
+
+            return patientDoctorViewDTO;
         }
 
         private async Task<IActionResult> SaveNewCheckupAsync(NewCheckUpDTO newCheckup, string url)

@@ -16,11 +16,15 @@
     <div style="display:none">
 				@Html.TextBoxFor(model=>model.PeselOfPatient)
 				@Html.TextBoxFor(model=>model.IdPatient)
+
 		</div>
             <div id="checkUpForm">
                         <h3>Symptoms and recommendations </h3><br>
-
+                      <div >
+                                          @Html.TempData["insured"]
+                                    </div>
                     <div class="wrapper">
+                       
                                <div class="checkUp">
                           @Html.TextAreaFor(x => x.Description, new { @class = "checkUp",  @rows = 15} )         
                                 </div>
@@ -29,6 +33,7 @@
                                     <a asp-controller="Result" asp-action="Result">
                                       <button id="resultButton" type="button" class="btn btn-primary">  Test results  </button>
                                     </a>
+
                                  </div>
                                 </div>
                                   <br>
