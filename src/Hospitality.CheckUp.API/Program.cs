@@ -31,7 +31,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthorization();
-app.UseMiddleware<ExceptionHandlerMiddleware>();
+app.UseCustomMiddlewares();
 app.UseCors();
 app.MapControllers();
 
