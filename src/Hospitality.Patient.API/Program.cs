@@ -1,16 +1,24 @@
 using Hospitality.Patient.API.Data.Context;
 using Hospitality.Patient.API.Mapper;
+using Hospitality.Patient.API.PatientHostedService;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<PatientContext>(builder =>
 {
     builder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=PatientDB;Integrated Security=True");
-});
+}, ServiceLifetime.Transient, ServiceLifetime.Transient);
 
 builder.Services.AddCustomServices();
 
 builder.Services.AddControllers();
+builder.Services.AddHostedService<PatientHostedServiceConsumer>();
+builder.Services.AddTransient<IPatientHostedServicePublisher, PatientHostedServicePublisher>();
+builder.Services.AddTransient<IPatientRepository, PatientRepository>();
+builder.Services.AddTransient<IPatientService, PatientService>();
+
+
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

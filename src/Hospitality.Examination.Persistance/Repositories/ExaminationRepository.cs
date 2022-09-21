@@ -26,7 +26,12 @@ namespace Hospitality.Examination.Persistance.Repositories
             var examinations = await _context.Examinations.Where(e => e.PatientId == patientId).Include(e => e.Type).ToListAsync();
             return examinations;
         }
-
         public async Task<ExaminationInfo> GetExaminationByIdAsync(int id) => await _context.Examinations.Include(e => e.Type).SingleOrDefaultAsync(e => e.Id == id);
+
+        public async Task UpdateExaminationByNameAsync(ExaminationInfo examination)
+        {
+            _context.Examinations.Update(examination);
+            await _context.SaveChangesAsync();
+        }
     }
 }
