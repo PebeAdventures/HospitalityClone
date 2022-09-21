@@ -20,8 +20,12 @@
 		</div>
             <div id="checkUpForm">
                         <h3>Symptoms and recommendations </h3><br>
-                      <div >
-                                          @Html.TempData["insured"]
+                      <div>
+                          @if(Model.IsInsured){
+                             <p class="insured"> Patient is Insured</p>
+                          } else{
+                              <p class="notInsured"> Patient is not Insured</p>
+                          }                                    
                                     </div>
                     <div class="wrapper">
                        

@@ -24,14 +24,6 @@ namespace Hospitality.Web.Controllers
             var patient = await GetPatient($"https://localhost:7236/api/Patient?pesel={patientDataForStartVisit.PatientPesel}");
             if (patient != null)
             {
-                if (patient.IsInsured)
-                {
-                    TempData["insured"] = "Patient is Insured";
-                }
-                else
-                {
-                    TempData["insured"] = "Patient is Not Insured";
-                }
                 var newCheckUpDTO = new NewCheckUpDTO { PeselOfPatient = patientDataForStartVisit.PatientPesel, IdPatient = patient.HospitalPatientId, IsInsured = patient.IsInsured };
                 return View(newCheckUpDTO);
             }
