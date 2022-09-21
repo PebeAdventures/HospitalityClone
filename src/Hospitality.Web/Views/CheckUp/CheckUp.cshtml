@@ -11,15 +11,15 @@
     <content>
         <div id="checkUpForm">
             <h3>Symptoms and recommendations </h3>
-            <br></br>
-            <div>
+            <br>
+            <div class="wrapper">
                 @if (Model.IsInsured)
                 {
-                    <p class="insured"> Patient is Insured</p>
+                    <p class="insured">    Patient is Insured</p>
                 }
                 else
                 {
-                    <p class="notInsured"> Patient is not Insured</p>
+                    <p class="notInsured">    Patient is not Insured</p>
                 }
 
                 @using (Html.BeginForm("Result", "Result", FormMethod.Post, new { target = "_blank" }))
@@ -27,8 +27,7 @@
                     <div style="display:none">
                         <input type="text" name="PatientPesel" value=@Model.PeselOfPatient />
                     </div>
-
-                    <input type="submit" class="btn btn-primary" value="examination results" />
+                      <input type="submit" id="resultInput" class="btn btn-primary btn-lg" value="Examination results"  font-size = "160px"/>
                 }
             </div>
 
@@ -41,14 +40,9 @@
                     @Html.TextBoxFor(model=>model.IdPatient)
                 </div>
 
-                <br>
-
-                <div class="wrapper">
                     <div class="checkUp">
-                        @Html.TextAreaFor(x => x.Description, new { @class = "checkUp",  @rows = 15, @value = @Model.Description})
+                        @Html.TextAreaFor(x => x.Description, new { @class = "checkUp",  @rows = 16, @value = @Model.Description})
                     </div>
-
-                </div>
                 <br>
 
                 <button id="finishButton" typeof="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">  Finish visit  </button>
