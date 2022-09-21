@@ -3,6 +3,8 @@ namespace Hospitality.Common.DTO.Patient
 {
     public class PatientReceptionistViewDTO
     {
+        public int Id { get; set; }
+
         [Required]
         [MinLength(3), MaxLength(25)]
         public string PatientName { get; set; }
@@ -32,8 +34,11 @@ namespace Hospitality.Common.DTO.Patient
         [MinLength(9), MaxLength(9)]
         public string PhoneNumber { get; set; }
 
-        [Required]
         [DataType(DataType.Text)]
         public bool IsInsured { get; set; }
+        [Required]
+        public SpecialistEnum Specialist { get; set; }
+
+
     }
 }

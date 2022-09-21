@@ -16,6 +16,7 @@ namespace Hospitality.CheckUp.API.Service
         }
 
         public async Task AddNewCheckUp(NewCheckUpDTO newCheckUpDTO)
+
         {
             if (newCheckUpDTO == null)
                 throw new ResourceNotFoundException($"There is no check up to create");

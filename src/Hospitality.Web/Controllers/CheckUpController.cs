@@ -16,7 +16,7 @@ namespace Hospitality.Web.Controllers
         private HttpClient _httpClient;
 
         public CheckUpController(IHttpClientFactory httpClientFactory)
-             => _httpClient = httpClientFactory.CreateClient();
+            => _httpClient = httpClientFactory.CreateClient();
 
         [HttpGet]
         public async Task<IActionResult> CheckUp(PatientDataForStartVisit patientDataForStartVisit)
@@ -33,7 +33,7 @@ namespace Hospitality.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> CheckUp(NewCheckUpDTO newCheckUpDTO)
         {
-            newCheckUpDTO.IdDoctor = 1; // Napisać coś co na podstawie jwt bedzie zapisywać w sesji id doktora i w tym miejscu będzie można pobierać id doktora z sesji
+            newCheckUpDTO.IdDoctor = 1;
             await SaveNewCheckupAsync(newCheckUpDTO, "https://localhost:7236/api/CheckUp");
             return RedirectToAction("Index", "Home", null);
         }

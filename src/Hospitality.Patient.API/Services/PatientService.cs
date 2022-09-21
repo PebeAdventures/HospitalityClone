@@ -33,5 +33,11 @@ namespace Hospitality.Patient.API.Services
             var patient = await _patientRepository.GetByPesel(pesel);
             return _mapper.Map<PatientDoctorViewDTO>(patient);
         }
+
+        public async Task<PatientNotificationDTO> GetPatientByIDAsync(int patientID)
+        {
+            var patient = await _patientRepository.GetPatientByID(patientID);
+            return _mapper.Map<PatientNotificationDTO>(patient);
+        }
     }
 }

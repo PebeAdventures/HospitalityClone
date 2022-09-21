@@ -15,7 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <Folder Include="Middlewares\" />
+=======
+    <ProjectReference Include="..\Hospitality.Common\Hospitality.Common.csproj" />
+>>>>>>> master
   </ItemGroup>
 
 </Project>
