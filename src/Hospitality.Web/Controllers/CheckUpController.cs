@@ -1,9 +1,11 @@
 ﻿using Hospitality.Common.DTO.CheckUp;
+using Hospitality.Common.DTO.Examination;
 using Hospitality.Common.DTO.Patient;
 using Hospitality.Web.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
@@ -24,11 +26,42 @@ namespace Hospitality.Web.Controllers
             var idOfPatient = await GetIdOfPatient($"https://localhost:7236/api/Patient?pesel={patientDataForStartVisit.PatientPesel}");
             if (idOfPatient != 0)
             {
-                var newCheckUpDTO = new NewCheckUpDTO { PeselOfPatient = patientDataForStartVisit.PatientPesel, IdPatient = idOfPatient };
+                ViewBag.Examinations = new SelectList(GetExamination(),
+
+                /*  nameof(ExaminationInfoDto.Description),
+                  nameof(ExaminationInfoDto.Id),
+                  nameof(ExaminationInfoDto.Status),
+                  nameof(ExaminationInfoDto.TypeName))*/
+                "Description", "Id", "Status", "TypeName")
+               ;
+                var newCheckUpDTO = new NewCheckUpDTO
+                {
+                    PeselOfPatient = patientDataForStartVisit.PatientPesel,
+                    IdPatient = idOfPatient,
+                    Examinations = new SelectList(GetExamination(),
+
+                   //   /*  nameof(ExaminationInfoDto.Description),
+                   //     nameof(ExaminationInfoDto.Id),
+                   //     nameof(ExaminationInfoDto.Status),
+                   //     nameof(ExaminationInfoDto.TypeName))*/
+                   "Description", "Id", "Status", "TypeName")
+                };
                 return View(newCheckUpDTO);
             }
             return RedirectToAction("StartVisit", "StartVisit", patientDataForStartVisit);
         }
+        public IEnumerable<ExaminationInfoDto> GetExamination()
+        {
+            return new List<ExaminationInfoDto>
+    {
+                    new ExaminationInfoDto { Description = "test 1", Id = 1, Status = "null", TypeName = "test" },
+                    new ExaminationInfoDto { Description = "test 2", Id = 2, Status = "null2", TypeName = "test2" }
+    };
+        }
+
+
+
+
 
         [HttpPost]
         public async Task<IActionResult> CheckUp(NewCheckUpDTO newCheckUpDTO)

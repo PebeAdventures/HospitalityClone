@@ -26,6 +26,13 @@
                                 </div>
                                 <div class="buttons">
                                       <button id="orderButton" type="submit" class="btn btn-primary">  Order an examination </button><br>
+                                       <p>
+
+                                         <select asp-for="Examinations" asp-items="ViewBag.Examinations"  >
+                             @* <select asp-for="Examinations" asp-items="@(new SelectList(Model.Examinations, "Description", "Id", "Status", "TypeName"))"  >*@  
+                                                    </select>
+                          @*  @Html.DropDownListFor(m => m.Examinations, new SelectList(Model.Examinations.ToString())), "--Select Specialist--", new { style="font-size:120%;"})
+                                        </p>*@
                                     <a asp-controller="Result" asp-action="Result">
                                       <button id="resultButton" type="button" class="btn btn-primary">  Test results  </button>
                                     </a>
