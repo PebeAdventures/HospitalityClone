@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hospitality.Patient.API.Migrations
 {
     [DbContext(typeof(PatientContext))]
-    [Migration("20220909081217_initial")]
+    [Migration("20220920121701_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,7 +69,7 @@ namespace Hospitality.Patient.API.Migrations
                     b.HasData(
                         new
                         {
-                            HospitalPatientId = 5,
+                            HospitalPatientId = 1,
                             Address = "Wrzosowa",
                             BirthDate = new DateTime(1999, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "aniela.nowak@gmail.com",
@@ -81,7 +81,7 @@ namespace Hospitality.Patient.API.Migrations
                         },
                         new
                         {
-                            HospitalPatientId = 6,
+                            HospitalPatientId = 2,
                             Address = "Jaworowa",
                             BirthDate = new DateTime(1998, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ania.okrasa@gmail.com",
@@ -93,7 +93,7 @@ namespace Hospitality.Patient.API.Migrations
                         },
                         new
                         {
-                            HospitalPatientId = 7,
+                            HospitalPatientId = 3,
                             Address = "Fiołkowa",
                             BirthDate = new DateTime(1997, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "michal.jakos@gmail.com",
@@ -102,6 +102,30 @@ namespace Hospitality.Patient.API.Migrations
                             PatientPesel = "97112234543",
                             PatientSurname = "Jakos",
                             PhoneNumber = "456789123"
+                        },
+                        new
+                        {
+                            HospitalPatientId = 4,
+                            Address = "Jaworowa",
+                            BirthDate = new DateTime(1998, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "olaf.olal@gmail.com",
+                            IsInsured = false,
+                            PatientName = "Olaf",
+                            PatientPesel = "98122255543",
+                            PatientSurname = "Olal",
+                            PhoneNumber = "999456456"
+                        },
+                        new
+                        {
+                            HospitalPatientId = 5,
+                            Address = "Fiołkowa",
+                            BirthDate = new DateTime(1997, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "dawid.jac@gmail.com",
+                            IsInsured = true,
+                            PatientName = "Dawid",
+                            PatientPesel = "97102233343",
+                            PatientSurname = "Jac",
+                            PhoneNumber = "458889123"
                         });
                 });
 #pragma warning restore 612, 618

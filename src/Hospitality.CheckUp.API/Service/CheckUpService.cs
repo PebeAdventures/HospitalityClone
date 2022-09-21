@@ -15,8 +15,7 @@ namespace Hospitality.CheckUp.API.Service
         }
 
         public async Task AddNewCheckUp(NewCheckUpDTO newCheckUpDTO)
-        {
-
+        {            
             await CheckUpContext.CheckUps.AddAsync(new CheckUpModel
             {
                 Description = newCheckUpDTO.Description,
