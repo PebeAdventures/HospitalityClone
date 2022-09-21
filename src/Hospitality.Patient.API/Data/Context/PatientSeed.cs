@@ -7,7 +7,7 @@
             List<HospitalPatient> patients = new();
             patients.Add(new HospitalPatient()
             {
-                HospitalPatientId = 5,
+                HospitalPatientId = 1,
                 PatientName = "Aniela",
                 PatientSurname = "Nowak",
                 PatientPesel = "99112234543",
@@ -20,7 +20,7 @@
             
             patients.Add(new HospitalPatient()
             {
-                HospitalPatientId = 6,
+                HospitalPatientId = 2,
                 PatientName = "Ania",
                 PatientSurname = "Okrasa",
                 PatientPesel = "98112234543",
@@ -33,7 +33,7 @@
 
             patients.Add(new HospitalPatient()
             {
-                HospitalPatientId = 7,
+                HospitalPatientId = 3,
                 PatientName = "Michał",
                 PatientSurname = "Jakos",
                 PatientPesel = "97112234543",
@@ -41,6 +41,32 @@
                 Address = "Fiołkowa",
                 Email = "michal.jakos@gmail.com",
                 PhoneNumber = "456789123",
+                IsInsured = true,
+            }); 
+            
+            patients.Add(new HospitalPatient()
+            {
+                HospitalPatientId = 4,
+                PatientName = "Olaf",
+                PatientSurname = "Olal",
+                PatientPesel = "98122255543",
+                BirthDate = new DateTime(1998, 12, 22),
+                Address = "Jaworowa",
+                Email = "olaf.olal@gmail.com",
+                PhoneNumber = "999456456",
+                IsInsured = false,
+            }); 
+
+            patients.Add(new HospitalPatient()
+            {
+                HospitalPatientId = 5,
+                PatientName = "Dawid",
+                PatientSurname = "Jac",
+                PatientPesel = "97102233343",
+                BirthDate = new DateTime(1997, 10, 22),
+                Address = "Fiołkowa",
+                Email = "dawid.jac@gmail.com",
+                PhoneNumber = "458889123",
                 IsInsured = true,
             }); 
 
