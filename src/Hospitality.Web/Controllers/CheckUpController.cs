@@ -12,7 +12,7 @@ using AutoMapper;
 
 namespace Hospitality.Web.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
     public class CheckUpController : Controller
     {
         private HttpClient _httpClient;
