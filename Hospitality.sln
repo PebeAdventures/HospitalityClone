@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Specialist.API", "src\Hospitality.Specialist.API\Hospitality.Specialist.API.csproj", "{39B6E93E-35F8-4C4C-B7C9-6FAC945ED1E9}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Identity.API", "src\Hospitality.Identity.API\Hospitality.Identity.API.csproj", "{0D58F988-8D04-4CBF-AF74-B2202598CC42}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Patient.API", "src\Hospitality.Patient.API\Hospitality.Patient.API.csproj", "{D8DF0A34-3098-4633-91D3-EEA1560E7358}"
@@ -33,8 +31,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{2D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Patient", "Patient", "{5A97550F-FE28-4C08-8EA1-8706C3EA8796}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Specialist", "Specialist", "{EAFAC99B-AE6A-4ED1-9375-ED69562B7090}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Identity.Data", "src\Hospitality.Identity.Data\Hospitality.Identity.Data.csproj", "{CCAEC609-B217-4C63-9C75-DBC767D5BE16}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Government.Insurance.API", "src\Hospitality.Government.Insurance.API\Hospitality.Government.Insurance.API.csproj", "{5FC4B60A-68F1-40B1-8A93-726B51CFB0B0}"
@@ -57,10 +53,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{39B6E93E-35F8-4C4C-B7C9-6FAC945ED1E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{39B6E93E-35F8-4C4C-B7C9-6FAC945ED1E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{39B6E93E-35F8-4C4C-B7C9-6FAC945ED1E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{39B6E93E-35F8-4C4C-B7C9-6FAC945ED1E9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0D58F988-8D04-4CBF-AF74-B2202598CC42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0D58F988-8D04-4CBF-AF74-B2202598CC42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D58F988-8D04-4CBF-AF74-B2202598CC42}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -126,7 +118,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{39B6E93E-35F8-4C4C-B7C9-6FAC945ED1E9} = {EAFAC99B-AE6A-4ED1-9375-ED69562B7090}
 		{0D58F988-8D04-4CBF-AF74-B2202598CC42} = {2D52CFF1-2152-4FD6-A0E4-72DBE6FC0FD3}
 		{D8DF0A34-3098-4633-91D3-EEA1560E7358} = {5A97550F-FE28-4C08-8EA1-8706C3EA8796}
 		{BCF355B6-6CFA-448B-85D9-CC7C2C3FD179} = {7B116F8C-AE06-4A51-AAFA-D8CCFABCE58A}

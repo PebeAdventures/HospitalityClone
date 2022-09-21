@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Hospitality.Common.DTO.CheckUp;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
-using Hospitality.Common.DTO.CheckUp;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using System.Net.Http.Headers;
 
 namespace Hospitality.Gateway.API.Controllers
 {
@@ -25,6 +23,7 @@ namespace Hospitality.Gateway.API.Controllers
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
         [HttpPost]
+
         public async Task<IActionResult> CreateNewCheckupAsync(NewCheckUpDTO newCheckup)
             => Ok(await GetContentAsync(newCheckup, _configuration["Paths:CreateCheckup"]));
 

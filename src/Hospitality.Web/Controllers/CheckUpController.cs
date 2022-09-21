@@ -1,5 +1,8 @@
 ﻿using Hospitality.Common.DTO.CheckUp;
+using Hospitality.Common.DTO.Patient;
 using Hospitality.Web.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
@@ -85,10 +88,11 @@ namespace Hospitality.Web.Controllers
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             var response = await _httpClient.GetAsync(url);
-            if (!response.IsSuccessStatusCode || response is null) return 0;
+            if (!response.IsSuccessStatusCode || response is null) return null;
             var patientDoctorViewDTO = JsonConvert.DeserializeObject<PatientDoctorViewDTO>(await response.Content.ReadAsStringAsync());
-            if (patientDoctorViewDTO is null) return 0;
-            return patientDoctorViewDTO.HospitalPatientId;
+            if (patientDoctorViewDTO is null) return null;
+
+            return patientDoctorViewDTO;
         }
 
         private async Task SaveNewCheckupAsync(NewCheckUpDTO newCheckup, string url)

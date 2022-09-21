@@ -1,6 +1,4 @@
-﻿
-
-namespace Hospitality.Patient.API.Extensions
+﻿namespace Hospitality.Government.Insurance.API.Extensions
 {
     public static class ServiceCollectionExtensions
     {
@@ -18,12 +16,5 @@ namespace Hospitality.Patient.API.Extensions
                     });
             });
         }
-
-        public static void AddCustomServices(this IServiceCollection services)
-        {
-            services.AddScoped<IPatientRepository, PatientRepository>();
-            services.AddScoped<IPatientService, PatientService>();
-        }
-
     }
 }

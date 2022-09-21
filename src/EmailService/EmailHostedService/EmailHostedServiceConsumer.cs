@@ -35,7 +35,12 @@ namespace EmailService.EmailHostedService
             {
                 var content = Encoding.UTF8.GetString(ea.Body.ToArray());
                 Debug.WriteLine($"EmailHostedServiceConsumer: Received message from PatientHostedServicePublisher: {content}");
-                var message = new Message(new string[] { "hospitality.codecool.2022@proton.me" }, "Client message", content);
+
+                PatientNotificationDTO examinationExecutionDto = JsonConvert.DeserializeObject<PatientNotificationDTO>(content);
+                string messageText = $"Hello, {examinationExecutionDto.PatientName} {examinationExecutionDto.PatientSurname}! \n" +
+                                     $"Your examination \n \"{examinationExecutionDto.ExaminationDescription}\" \n finished. You could check result in your account. \n" +
+                                     $"Kind regards,\nHospitality";
+                var message = new Message(new string[] { examinationExecutionDto.Email }, "Client message", messageText);
 
                 _emailSender.SendEmail(message);
             };

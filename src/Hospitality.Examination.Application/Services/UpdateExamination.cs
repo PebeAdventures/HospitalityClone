@@ -28,6 +28,7 @@ namespace Hospitality.Examination.Application.Services
             ExaminationInfo existingExamination = await _examinationRepository.GetExaminationByIdAsync(examinationID);
             ExaminationStatus statusResult = (ExaminationStatus)examinationExecutionDto.Status;
             existingExamination.Status = statusResult;
+            existingExamination.Description = examinationExecutionDto.Description;
             await _examinationRepository.UpdateExaminationByNameAsync(existingExamination);
         }
     }

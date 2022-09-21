@@ -1,4 +1,5 @@
 ﻿using Hospitality.Examination.Domain.Entities;
+using Hospitality.Examination.Persistance.Seeder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -18,6 +19,8 @@ namespace Hospitality.Examination.API.Model
             modelBuilder.Entity<ExaminationType>()
                 .Property(s => s.Duration)
                 .HasConversion(new TimeSpanToTicksConverter());
+
+            modelBuilder.SeedDatabase();
         }
     }
 }

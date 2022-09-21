@@ -6,5 +6,6 @@
         public int IdPatient { get; set; }
         public int IdDoctor { get; set; }
         public string PeselOfPatient { get; set; }
+        public bool IsInsured { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using Hospitality.Examination.API.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hospitality.Examination.Persistance.Migrations
 {
     [DbContext(typeof(ExaminationContext))]
-    partial class ExaminationContextModelSnapshot : ModelSnapshot
+    [Migration("20220921090449_update-examinations")]
+    partial class updateexaminations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,6 +49,40 @@ namespace Hospitality.Examination.Persistance.Migrations
                     b.HasIndex("ExaminationTypeId");
 
                     b.ToTable("Examinations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Checking if your hearing is good",
+                            ExaminationTypeId = 1,
+                            PatientId = 1,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Checking the teeth",
+                            ExaminationTypeId = 2,
+                            PatientId = 2,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Examination of the musculoskeletal system",
+                            ExaminationTypeId = 3,
+                            PatientId = 3,
+                            Status = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Renal function test",
+                            ExaminationTypeId = 4,
+                            PatientId = 4,
+                            Status = 2
+                        });
                 });
 
             modelBuilder.Entity("Hospitality.Examination.Domain.Entities.ExaminationType", b =>
@@ -73,61 +109,25 @@ namespace Hospitality.Examination.Persistance.Migrations
                         {
                             Id = 1,
                             Duration = 80000000L,
-                            Name = "USG kolana"
+                            Name = "laryngologist"
                         },
                         new
                         {
                             Id = 2,
                             Duration = 100000000L,
-                            Name = "USG jamy brzusznej"
+                            Name = "dentist"
                         },
                         new
                         {
                             Id = 3,
                             Duration = 70000000L,
-                            Name = "RTG głowy"
+                            Name = "orthopedist"
                         },
                         new
                         {
                             Id = 4,
                             Duration = 60000000L,
-                            Name = "RTG celowane na ząb obrotnika"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Duration = 60000000L,
-                            Name = "RTG styczne czaszki"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Duration = 60000000L,
-                            Name = "Leczenie kanałowe zębów"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Duration = 80000000L,
-                            Name = "Badanie kału na pasożyty"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Duration = 100000000L,
-                            Name = "Cytologia płynna"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Duration = 70000000L,
-                            Name = "Echo serca"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Duration = 60000000L,
-                            Name = "Gastroskopia"
+                            Name = "nephrologist"
                         });
                 });
 

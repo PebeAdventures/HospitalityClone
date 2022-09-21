@@ -15,7 +15,7 @@ builder.Services.AddTransient<IPatientHostedServicePublisher, PatientHostedServi
 builder.Services.AddTransient<IPatientRepository, PatientRepository>();
 builder.Services.AddTransient<IPatientService, PatientService>();
 
-
+builder.Services.AddCustomCors();
 
 
 builder.Services.AddEndpointsApiExplorer();
@@ -49,5 +49,7 @@ if (!app.Environment.IsProduction())
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors();
 
 app.Run();
