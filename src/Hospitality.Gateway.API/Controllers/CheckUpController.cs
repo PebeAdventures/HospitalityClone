@@ -26,7 +26,7 @@ namespace Hospitality.Gateway.API.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
         [HttpPost]
         public async Task<IActionResult> CreateNewCheckupAsync(NewCheckUpDTO newCheckup)
-            => Ok(await GetContentAsync(newCheckup, _configuration["Paths:Checkup"])); // LINK DO UZUPEŁNIENIA !!!
+            => Ok(await GetContentAsync(newCheckup, _configuration["Paths:CreateCheckup"]));
 
         private async Task<HttpResponseMessage> GetContentAsync(NewCheckUpDTO newCheckup, string url)
         {

@@ -22,14 +22,17 @@ var mapper = mapConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
-using (var scope = app.Services.CreateScope())
+if (app.Environment.EnvironmentName != "Local")
 {
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<PatientContext>();
-    context.Database.Migrate();
+    using (var scope = app.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        var context = services.GetRequiredService<PatientContext>();
+        context.Database.Migrate();
+    }
 }
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (!app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();

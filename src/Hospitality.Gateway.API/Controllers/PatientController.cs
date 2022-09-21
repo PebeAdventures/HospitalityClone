@@ -11,18 +11,24 @@ namespace Hospitality.Gateway.API.Controllers
     public class PatientController : ControllerBase
     {
         private HttpClient _httpClient;
-        public PatientController(IHttpClientFactory httpClientFactory)
-             => _httpClient = httpClientFactory.CreateClient();
+        private readonly IConfiguration _configuration;
+
+        public PatientController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
+        {
+            _httpClient = httpClientFactory.CreateClient();
+            _configuration = configuration;
+        }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
         [HttpGet]
         public async Task<IActionResult> GetPatientByPeselAsync(string pesel)
-            => Ok(await _httpClient.GetStringAsync($"/{pesel}"));// LINK DO UZUPEŁNIENIA !!! 
+            => Ok(await _httpClient.GetStringAsync(_configuration["Paths:GetPatientByPesel"] + pesel));
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Receptionist")]
         [HttpPost]
         public async Task<IActionResult> RegisterNewPatientAsync(object newPatient)
-            => await GetContentAsync(newPatient, ""); // LINK DO UZUPEŁNIENIA !!! 
+            => await GetContentAsync(newPatient, _configuration["Paths:RegisterPatient"]);
+
         private async Task<IActionResult> GetContentAsync(object newPatient, string url)
         {
             var json = JsonConvert.SerializeObject(newPatient);

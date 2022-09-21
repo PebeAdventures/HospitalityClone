@@ -46,7 +46,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-if (app.Environment.IsDevelopment())
+if (!app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -55,11 +55,13 @@ if (app.Environment.IsDevelopment())
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-Console.WriteLine(builder.Configuration.GetConnectionString("AuthDb"));
-using (var scope = app.Services.CreateScope())
+if (app.Environment.EnvironmentName != "Local")
 {
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<IdentityContext>();
-    context.Database.Migrate();
+    using (var scope = app.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        var context = services.GetRequiredService<IdentityContext>();
+        context.Database.Migrate();
+    }
 }
 app.Run();

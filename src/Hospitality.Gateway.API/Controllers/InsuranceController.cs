@@ -9,12 +9,18 @@ namespace Hospitality.Gateway.API.Controllers
     public class InsuranceController : ControllerBase
     {
         private HttpClient _httpClient;
-        public InsuranceController(IHttpClientFactory httpClientFactory)
-             => _httpClient = httpClientFactory.CreateClient();
+        private readonly IConfiguration _configuration;
+
+        public InsuranceController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
+        {
+            _httpClient = httpClientFactory.CreateClient();
+            _configuration = configuration;
+        }
 
         [HttpPost]
-        public async Task<IActionResult> CreateNewCheckupAsync(int id)
-            => Ok(await GetContentAsync(id, "https://localhost:7101/api/Insurance")); // LINK DO UZUPEŁNIENIA !!! 
+        public async Task<IActionResult> CheckInsurance(int id)
+            => Ok(await GetContentAsync(id, _configuration["Paths:CheckInsurance"]));
+
         private async Task<HttpResponseMessage> GetContentAsync(int id, string url)
         {
             var json = JsonConvert.SerializeObject(id);
