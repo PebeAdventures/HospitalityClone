@@ -6,6 +6,7 @@ using Hospitality.Examination.Persistance.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Hospitality.Examination.Application.Services;
 using Hospitality.Examination.RabbitMQ;
+using Hospitality.Examination.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +23,7 @@ builder.Services.AddTransient<IExaminationTypesRepository, ExaminationTypesRepos
 builder.Services.AddTransient<IUpdateExamination, UpdateExamination>();
 builder.Services.AddTransient<IRabbitMqService, RabbitMQPublisher>();
 builder.Services.AddHostedService<RabbitMQConsumer>();
-
+builder.Services.AddCustomCors();
 
 builder.Services.AddAutoMapper(typeof(ExaminationProfile));
 
@@ -36,6 +37,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthorization();
+
+app.UseCors();
 
 app.MapControllers();
 

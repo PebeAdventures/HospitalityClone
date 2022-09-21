@@ -49,21 +49,16 @@ namespace Hospitality.Examination.Persistance.Migrations
                 columns: new[] { "Id", "Duration", "Name" },
                 values: new object[,]
                 {
-                    { 1, 80000000L, "laryngologist" },
-                    { 2, 100000000L, "dentist" },
-                    { 3, 70000000L, "orthopedist" },
-                    { 4, 60000000L, "nephrologist" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Examinations",
-                columns: new[] { "Id", "Description", "ExaminationTypeId", "PatientId", "Status" },
-                values: new object[,]
-                {
-                    { 1, "Checking if your hearing is good", 1, 1, 1 },
-                    { 2, "Checking the teeth", 2, 2, 1 },
-                    { 3, "Examination of the musculoskeletal system", 3, 3, 2 },
-                    { 4, "Renal function test", 4, 4, 2 }
+                    { 1, 80000000L, "USG kolana" },
+                    { 2, 100000000L, "USG jamy brzusznej" },
+                    { 3, 70000000L, "RTG głowy" },
+                    { 4, 60000000L, "RTG celowane na ząb obrotnika" },
+                    { 5, 60000000L, "RTG styczne czaszki" },
+                    { 6, 60000000L, "Leczenie kanałowe zębów" },
+                    { 7, 80000000L, "Badanie kału na pasożyty" },
+                    { 8, 100000000L, "Cytologia płynna" },
+                    { 9, 70000000L, "Echo serca" },
+                    { 10, 60000000L, "Gastroskopia" }
                 });
 
             migrationBuilder.CreateIndex(

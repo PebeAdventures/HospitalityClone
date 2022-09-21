@@ -2,6 +2,7 @@
 using Hospitality.Examination.Domain.Entities.Enums;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 
 namespace Hospitality.Examination.Persistance.Seeder
 {
@@ -47,34 +48,73 @@ namespace Hospitality.Examination.Persistance.Seeder
             });
 
 
-
             examinationTypes.Add(new ExaminationType()
             {
                 Id = 1,
-                Name = "laryngologist",
-                Duration = new TimeSpan(0,0,8)
+                Name = "USG kolana",
+                Duration = new TimeSpan(0, 0, 8)
             });
+
             examinationTypes.Add(new ExaminationType()
             {
                 Id = 2,
-                Name = "dentist",
-                Duration = new TimeSpan(0,0,10)
+                Name = "USG jamy brzusznej",
+                Duration = new TimeSpan(0, 0, 10)
             });
             examinationTypes.Add(new ExaminationType()
             {
                 Id = 3,
-                Name = "orthopedist",
-                Duration = new TimeSpan(0,0,7)
+                Name = "RTG głowy",
+                Duration = new TimeSpan(0, 0, 7)
             });
             examinationTypes.Add(new ExaminationType()
             {
                 Id = 4,
-                Name = "nephrologist",
-                Duration = new TimeSpan(0,0,6)
+                Name = "RTG celowane na ząb obrotnika",
+                Duration = new TimeSpan(0, 0, 6)
+            });
+
+            examinationTypes.Add(new ExaminationType()
+            {
+                Id = 5,
+                Name = "RTG styczne czaszki",
+                Duration = new TimeSpan(0, 0, 6)
+            });
+
+            examinationTypes.Add(new ExaminationType()
+            {
+                Id = 6,
+                Name = "Leczenie kanałowe zębów",
+                Duration = new TimeSpan(0, 0, 6)
+            });
+
+            examinationTypes.Add(new ExaminationType()
+            {
+                Id = 7,
+                Name = "Badanie kału na pasożyty",
+                Duration = new TimeSpan(0, 0, 8)
+            });
+            examinationTypes.Add(new ExaminationType()
+            {
+                Id = 8,
+                Name = "Cytologia płynna",
+                Duration = new TimeSpan(0, 0, 10)
+            });
+            examinationTypes.Add(new ExaminationType()
+            {
+                Id = 9,
+                Name = "Echo serca",
+                Duration = new TimeSpan(0, 0, 7)
+            });
+            examinationTypes.Add(new ExaminationType()
+            {
+                Id = 10,
+                Name = "Gastroskopia",
+                Duration = new TimeSpan(0, 0, 6)
             });
 
 
-            builder.Entity<ExaminationInfo>().HasData(examinationInfos);
+            // builder.Entity<ExaminationInfo>().HasData(examinationInfos);
             builder.Entity<ExaminationType>().HasData(examinationTypes);
 
         }

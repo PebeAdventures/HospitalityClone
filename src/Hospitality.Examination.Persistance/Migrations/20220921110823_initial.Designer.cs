@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hospitality.Examination.Persistance.Migrations
 {
     [DbContext(typeof(ExaminationContext))]
-    [Migration("20220921073051_initial")]
+    [Migration("20220921110823_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,40 +49,6 @@ namespace Hospitality.Examination.Persistance.Migrations
                     b.HasIndex("ExaminationTypeId");
 
                     b.ToTable("Examinations");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Checking if your hearing is good",
-                            ExaminationTypeId = 1,
-                            PatientId = 1,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Checking the teeth",
-                            ExaminationTypeId = 2,
-                            PatientId = 2,
-                            Status = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Examination of the musculoskeletal system",
-                            ExaminationTypeId = 3,
-                            PatientId = 3,
-                            Status = 2
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Renal function test",
-                            ExaminationTypeId = 4,
-                            PatientId = 4,
-                            Status = 2
-                        });
                 });
 
             modelBuilder.Entity("Hospitality.Examination.Domain.Entities.ExaminationType", b =>
@@ -109,25 +75,61 @@ namespace Hospitality.Examination.Persistance.Migrations
                         {
                             Id = 1,
                             Duration = 80000000L,
-                            Name = "laryngologist"
+                            Name = "USG kolana"
                         },
                         new
                         {
                             Id = 2,
                             Duration = 100000000L,
-                            Name = "dentist"
+                            Name = "USG jamy brzusznej"
                         },
                         new
                         {
                             Id = 3,
                             Duration = 70000000L,
-                            Name = "orthopedist"
+                            Name = "RTG głowy"
                         },
                         new
                         {
                             Id = 4,
                             Duration = 60000000L,
-                            Name = "nephrologist"
+                            Name = "RTG celowane na ząb obrotnika"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Duration = 60000000L,
+                            Name = "RTG styczne czaszki"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Duration = 60000000L,
+                            Name = "Leczenie kanałowe zębów"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Duration = 80000000L,
+                            Name = "Badanie kału na pasożyty"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Duration = 100000000L,
+                            Name = "Cytologia płynna"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Duration = 70000000L,
+                            Name = "Echo serca"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Duration = 60000000L,
+                            Name = "Gastroskopia"
                         });
                 });
 

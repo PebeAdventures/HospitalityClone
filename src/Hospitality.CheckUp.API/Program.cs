@@ -1,4 +1,5 @@
 using Hospitality.CheckUp.API.DataBase.Context;
+using Hospitality.CheckUp.API.Extensions;
 using Hospitality.CheckUp.API.Service;
 using Hospitality.CheckUp.API.Service.Interface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -23,6 +24,7 @@ builder.Services.AddCors(o => o.AddDefaultPolicy(builder => {
            .AllowAnyMethod()
            .AllowAnyHeader();
 }));
+builder.Services.AddCustomCors();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -34,5 +36,7 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors();
 
 app.Run();

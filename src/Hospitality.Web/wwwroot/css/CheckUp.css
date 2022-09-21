@@ -20,6 +20,20 @@ label, input, #finishButton, textarea {
     padding: 4%;
     padding-bottom: 2%;
 }
+.insured {
+    background-color: lightgreen;
+    border: 1px solid black;
+    opacity: 0.9;
+    margin-right: 80%;    
+}
+
+.notInsured {
+    background-color: lightcoral;
+    border: 1px solid black;
+    opacity: 0.9;
+    margin-right: 80%;
+}
+
 
 #orderButton, #resultButton {
     height: 20%;
