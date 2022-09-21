@@ -1,4 +1,5 @@
 using Hospitality.CheckUp.API.DataBase.Context;
+using Hospitality.CheckUp.API.Extensions;
 using Hospitality.CheckUp.API.Service;
 using Hospitality.CheckUp.API.Service.Interface;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +36,7 @@ if (!app.Environment.IsProduction())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors();
 
 app.UseAuthorization();
 

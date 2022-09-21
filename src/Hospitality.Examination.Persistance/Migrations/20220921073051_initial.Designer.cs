@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Hospitality.Examination.API.Migrations
+namespace Hospitality.Examination.Persistance.Migrations
 {
     [DbContext(typeof(ExaminationContext))]
-    [Migration("20220907125310_second")]
-    partial class second
+    [Migration("20220921073051_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,6 +49,40 @@ namespace Hospitality.Examination.API.Migrations
                     b.HasIndex("ExaminationTypeId");
 
                     b.ToTable("Examinations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Checking if your hearing is good",
+                            ExaminationTypeId = 1,
+                            PatientId = 1,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Checking the teeth",
+                            ExaminationTypeId = 2,
+                            PatientId = 2,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Examination of the musculoskeletal system",
+                            ExaminationTypeId = 3,
+                            PatientId = 3,
+                            Status = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Renal function test",
+                            ExaminationTypeId = 4,
+                            PatientId = 4,
+                            Status = 2
+                        });
                 });
 
             modelBuilder.Entity("Hospitality.Examination.Domain.Entities.ExaminationType", b =>
@@ -69,6 +103,32 @@ namespace Hospitality.Examination.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ExaminationTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Duration = 80000000L,
+                            Name = "laryngologist"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Duration = 100000000L,
+                            Name = "dentist"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Duration = 70000000L,
+                            Name = "orthopedist"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Duration = 60000000L,
+                            Name = "nephrologist"
+                        });
                 });
 
             modelBuilder.Entity("Hospitality.Examination.Domain.Entities.ExaminationInfo", b =>

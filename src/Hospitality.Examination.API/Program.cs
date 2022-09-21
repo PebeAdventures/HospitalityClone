@@ -1,3 +1,4 @@
+using Hospitality.Examination.API.Extensions;
 using Hospitality.Examination.API.Model;
 using Hospitality.Examination.Application;
 using Hospitality.Examination.Application.Contracts.Persistence;
@@ -23,8 +24,11 @@ builder.Services.AddTransient<IUpdateExamination, UpdateExamination>();
 builder.Services.AddTransient<IRabbitMqService, RabbitMQPublisher>();
 //builder.Services.AddHostedService<RabbitMQConsumer>();
 
-
+builder.Services.AddScoped<IExaminationRepository, ExaminationRepository>();
+builder.Services.AddScoped<IExaminationTypesRepository, ExaminationTypesRepository>();
 builder.Services.AddAutoMapper(typeof(ExaminationProfile));
+
+builder.Services.AddCustomCors();
 
 var app = builder.Build();
 if (app.Environment.EnvironmentName != "Local")
@@ -44,6 +48,8 @@ if (!app.Environment.IsProduction())
 }
 
 app.UseAuthorization();
+
+app.UseCors();
 
 app.MapControllers();
 

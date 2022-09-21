@@ -1,10 +1,10 @@
-﻿#nullable disable
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-using Microsoft.EntityFrameworkCore.Migrations;
+#nullable disable
 
-namespace Hospitality.Examination.API.Migrations
+namespace Hospitality.Examination.Persistance.Migrations
 {
-    public partial class initaila : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,24 +30,46 @@ namespace Hospitality.Examination.API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PatientId = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TypeId = table.Column<int>(type: "int", nullable: false),
+                    ExaminationTypeId = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Examinations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Examinations_ExaminationTypes_TypeId",
-                        column: x => x.TypeId,
+                        name: "FK_Examinations_ExaminationTypes_ExaminationTypeId",
+                        column: x => x.ExaminationTypeId,
                         principalTable: "ExaminationTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Examinations_TypeId",
+            migrationBuilder.InsertData(
+                table: "ExaminationTypes",
+                columns: new[] { "Id", "Duration", "Name" },
+                values: new object[,]
+                {
+                    { 1, 80000000L, "laryngologist" },
+                    { 2, 100000000L, "dentist" },
+                    { 3, 70000000L, "orthopedist" },
+                    { 4, 60000000L, "nephrologist" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Examinations",
-                column: "TypeId");
+                columns: new[] { "Id", "Description", "ExaminationTypeId", "PatientId", "Status" },
+                values: new object[,]
+                {
+                    { 1, "Checking if your hearing is good", 1, 1, 1 },
+                    { 2, "Checking the teeth", 2, 2, 1 },
+                    { 3, "Examination of the musculoskeletal system", 3, 3, 2 },
+                    { 4, "Renal function test", 4, 4, 2 }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Examinations_ExaminationTypeId",
+                table: "Examinations",
+                column: "ExaminationTypeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
