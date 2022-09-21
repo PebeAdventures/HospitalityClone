@@ -31,6 +31,10 @@
                                 <div class="buttons">
                                       <button id="orderButton" type="submit" class="btn btn-primary">  Order an examination </button><br>
                                     <a asp-controller="Result" asp-action="Result">
+                                     @using (Html.BeginForm("Result", "Result", FormMethod.Post)){                                     
+                                       @Html.TextBox("patientPesel",@Model.PeselOfPatient)  
+                                             <input id="orderButton" type="submit" class="btn btn-primary" value="Order an examination"></input><br> 
+                }
                                       <button id="resultButton" type="button" class="btn btn-primary">  Test results  </button>
                                     </a>
 

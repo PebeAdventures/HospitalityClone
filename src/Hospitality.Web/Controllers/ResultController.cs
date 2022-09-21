@@ -1,7 +1,7 @@
 ﻿using Hospitality.Web.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace Hospitality.Web.Controllers
@@ -22,6 +22,7 @@ namespace Hospitality.Web.Controllers
 
         public IActionResult Result()
         {
+            string reservationDate = Request.Form["patientPesel"].First();
             return View(results);
         }
     }
