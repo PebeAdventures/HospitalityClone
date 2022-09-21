@@ -1,4 +1,5 @@
 using Hospitality.CheckUp.API.DataBase.Context;
+using Hospitality.CheckUp.API.Extensions;
 using Hospitality.CheckUp.API.Service;
 using Hospitality.CheckUp.API.Service.Interface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -30,6 +31,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors();
 
 app.UseAuthorization();
 

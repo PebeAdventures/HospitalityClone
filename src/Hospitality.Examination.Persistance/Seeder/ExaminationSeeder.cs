@@ -51,30 +51,117 @@ namespace Hospitality.Examination.Persistance.Seeder
             examinationTypes.Add(new ExaminationType()
             {
                 Id = 1,
-                Name = "laryngologist",
+                Name = "USG kolana",
                 Duration = new TimeSpan(0,0,8)
             });
             examinationTypes.Add(new ExaminationType()
             {
                 Id = 2,
-                Name = "dentist",
+                Name = "USG jamy brzusznej",
                 Duration = new TimeSpan(0,0,10)
             });
             examinationTypes.Add(new ExaminationType()
             {
                 Id = 3,
-                Name = "orthopedist",
+                Name = "RTG głowy",
                 Duration = new TimeSpan(0,0,7)
             });
             examinationTypes.Add(new ExaminationType()
             {
                 Id = 4,
-                Name = "nephrologist",
+                Name = "RTG zębów",
+                Duration = new TimeSpan(0,0,6)
+            });
+
+            examinationTypes.Add(new ExaminationType()
+            {
+                Id = 5,
+                Name = "RTG styczne czaszki",
+                Duration = new TimeSpan(0,0,6)
+            });
+
+            examinationTypes.Add(new ExaminationType()
+            {
+                Id = 6,
+                Name = "Leczenie kanałowe zębów",
+                Duration = new TimeSpan(0,0,6)
+            });
+
+            examinationTypes.Add(new ExaminationType()
+            {
+                Id = 7,
+                Name = "Badanie kału na pasożyty",
+                Duration = new TimeSpan(0,0,8)
+            });
+            examinationTypes.Add(new ExaminationType()
+            {
+                Id = 8,
+                Name = "Cytologia płynna",
+                Duration = new TimeSpan(0,0,10)
+            });
+            examinationTypes.Add(new ExaminationType()
+            {
+                Id = 9,
+                Name = "Echo serca",
+                Duration = new TimeSpan(0,0,7)
+            });
+            examinationTypes.Add(new ExaminationType()
+            {
+                Id = 10,
+                Name = "Gastroskopia",
+                Duration = new TimeSpan(0,0,6)
+            });
+
+            examinationTypes.Add(new ExaminationType()
+            {
+                Id = 11,
+                Name = "Hashimoto",
+                Duration = new TimeSpan(0,0,6)
+            });
+
+            examinationTypes.Add(new ExaminationType()
+            {
+                Id = 12,
+                Name = "HPV test",
+                Duration = new TimeSpan(0,0,6)
+            });
+
+            examinationTypes.Add(new ExaminationType()
+            {
+                Id = 13,
+                Name = "Żelazo (krew)",
+                Duration = new TimeSpan(0,0,6)
+            });
+            examinationTypes.Add(new ExaminationType()
+            {
+                Id = 14,
+                Name = "Witamina B12",
+                Duration = new TimeSpan(0,0,6)
+            });
+
+            examinationTypes.Add(new ExaminationType()
+            {
+                Id = 15,
+                Name = "Wzrok",
+                Duration = new TimeSpan(0,0,6)
+            });
+
+            examinationTypes.Add(new ExaminationType()
+            {
+                Id = 16,
+                Name = "Test na HIV",
+                Duration = new TimeSpan(0,0,6)
+            });
+
+            examinationTypes.Add(new ExaminationType()
+            {
+                Id = 17,
+                Name = "Spirometria podstawowa",
                 Duration = new TimeSpan(0,0,6)
             });
 
 
-            builder.Entity<ExaminationInfo>().HasData(examinationInfos);
+            //builder.Entity<ExaminationInfo>().HasData(examinationInfos);
             builder.Entity<ExaminationType>().HasData(examinationTypes);
 
         }

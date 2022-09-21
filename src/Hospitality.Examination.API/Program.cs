@@ -1,3 +1,4 @@
+using Hospitality.Examination.API.Extensions;
 using Hospitality.Examination.API.Model;
 using Hospitality.Examination.Application;
 using Hospitality.Examination.Application.Contracts.Persistence;
@@ -17,14 +18,11 @@ builder.Services.AddDbContext<ExaminationContext>(options => options
     .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Examination_Dev;Trusted_Connection=True;MultipleActiveResultSets=true"), ServiceLifetime.Transient, ServiceLifetime.Transient);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<IExaminationRepository, ExaminationRepository>();
-builder.Services.AddTransient<IExaminationTypesRepository, ExaminationTypesRepository>();
-builder.Services.AddTransient<IUpdateExamination, UpdateExamination>();
-builder.Services.AddTransient<IRabbitMqService, RabbitMQPublisher>();
-builder.Services.AddHostedService<RabbitMQConsumer>();
-
-
+builder.Services.AddScoped<IExaminationRepository, ExaminationRepository>();
+builder.Services.AddScoped<IExaminationTypesRepository, ExaminationTypesRepository>();
 builder.Services.AddAutoMapper(typeof(ExaminationProfile));
+
+builder.Services.AddCustomCors();
 
 var app = builder.Build();
 
@@ -36,6 +34,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthorization();
+
+app.UseCors();
 
 app.MapControllers();
 
