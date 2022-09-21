@@ -8,6 +8,7 @@ namespace Hospitality.Web.Controllers
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
     public class StartVisitController : Controller
     {
+
         [HttpGet]
         public IActionResult StartVisit()
             => View();
