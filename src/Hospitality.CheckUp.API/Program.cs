@@ -13,7 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<CheckUpContext>(options => options
-    .UseSqlServer(builder.Configuration.GetConnectionString("checkupDB")));
+    .UseSqlServer(builder.Configuration["checkupDB"]));
 builder.Services.AddCors(o => o.AddDefaultPolicy(builder =>
 {
     builder.AllowAnyOrigin()

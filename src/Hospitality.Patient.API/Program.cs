@@ -5,7 +5,7 @@ using Hospitality.Patient.API.PatientHostedService;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<PatientContext>(options => options
-    .UseSqlServer(builder.Configuration["ConnectionStrings:PatientDbDocker"]));
+    .UseSqlServer(builder.Configuration["PatientDb"]));
 
 builder.Services.AddCustomServices();
 

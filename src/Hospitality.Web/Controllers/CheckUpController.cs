@@ -7,9 +7,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Hospitality.Common.DTO.Patient;
-using System.Security.Policy;
 using Hospitality.Common.DTO.Examination;
-using System;
 using AutoMapper;
 
 namespace Hospitality.Web.Controllers
@@ -28,7 +26,8 @@ namespace Hospitality.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> CheckUp(PatientDataCheckUpViewModel patientDataCheckUpViewModel)
         {
-            patientDataCheckUpViewModel.AvailableExaminations = await FillAvailableExaminations("https://localhost:7236/api/Examination/TypesOfExaminations");
+            var availableExaminatios = await GetAvailableExaminations();
+            patientDataCheckUpViewModel.AvailableExaminations = availableExaminatios.Select(x => x.Name).ToList();
             if (patientDataCheckUpViewModel.PatientId != 0 || patientDataCheckUpViewModel.PatientId != null)
             {
                 return View(patientDataCheckUpViewModel);
@@ -45,10 +44,12 @@ namespace Hospitality.Web.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CheckUp(NewCheckUpDTO newCheckUpDTO)
+        [HttpPost()]
+        public async Task<IActionResult> NewCheckUp(PatientDataCheckUpViewModel patientDataCheckUpViewModel)
         {
-            newCheckUpDTO.IdDoctor = 1;
+
+            patientDataCheckUpViewModel.DoctorId = 1;
+            var newCheckUpDTO = _mapper.Map<NewCheckUpDTO>(patientDataCheckUpViewModel);
             await SaveNewCheckupAsync(newCheckUpDTO, "https://localhost:7236/api/CheckUp");
             return RedirectToAction("Index", "Home", null);
         }
@@ -57,25 +58,29 @@ namespace Hospitality.Web.Controllers
         public async Task<IActionResult> OrderAnExamination(PatientDataCheckUpViewModel patientDataCheckUpViewModel)
         {
             if (!string.IsNullOrEmpty(patientDataCheckUpViewModel.ChosenExamination))
+                await AssignIdOfChosenExamination(patientDataCheckUpViewModel);
                 await SendOrder(patientDataCheckUpViewModel, "URL");
             return RedirectToAction("CheckUp", "CheckUp", patientDataCheckUpViewModel);
         }
-        private async Task<List<string>> FillAvailableExaminations(string url)
+
+        private async Task AssignIdOfChosenExamination(PatientDataCheckUpViewModel patientDataCheckUpViewModel)
+            => patientDataCheckUpViewModel.ChosenExaminationId = (await GetAvailableExaminations()).Where(ae => ae.Name == patientDataCheckUpViewModel.ChosenExamination).FirstOrDefault().Id;
+        
+        private async Task<List<ExaminationTypeDto>> GetAvailableExaminations()
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
-            var response = await _httpClient.GetAsync(url);
+            var response = await _httpClient.GetAsync("https://localhost:7236/api/Examination/TypesOfExaminations");
             if (!response.IsSuccessStatusCode || response is null)
                 throw new Exception("Null response exception");
             var availableExaminations = JsonConvert.DeserializeObject<List<ExaminationTypeDto>>(await response.Content.ReadAsStringAsync());
             if (availableExaminations is null)
                 throw new Exception("Null response exception");
-            return availableExaminations.Select(x => x.Name).ToList();
+            return availableExaminations;
         }
         private async Task SendOrder(PatientDataCheckUpViewModel patientDataCheckUpViewModel, string url)
         {
-            var examinationDto = _mapper.Map<ExaminationTypeDto>(patientDataCheckUpViewModel);
-            //ExaminationInfoDto;
-            var json = JsonConvert.SerializeObject(patientDataCheckUpViewModel);
+            var examinationDto = _mapper.Map<CreateExaminationDto>(patientDataCheckUpViewModel);
+            var json = JsonConvert.SerializeObject(examinationDto);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             await _httpClient.PostAsync(url, content);

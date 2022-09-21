@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
 using Hospitality.Examination.RabbitMQ;
-
+using Hospitality.Examination.Domain.Entities.Enums;
 
 namespace Hospitality.Examination.API.Controllers
 {
@@ -36,11 +36,10 @@ namespace Hospitality.Examination.API.Controllers
         {
             var examination = await _mediator.Send(new AddNewExaminationCommand()
             {
-                Description = examinationDto.Description,
-                Status = examinationDto.Status,
+                Status = (int)ExaminationStatus.InProgress,
                 ExaminationTypeId = examinationDto.ExaminationTypeId,
                 PatientId = examinationDto.PatientId
-            });
+            });;
             return CreatedAtAction("GetExaminationById", new { id = examination.Id }, examination);
         }
     }

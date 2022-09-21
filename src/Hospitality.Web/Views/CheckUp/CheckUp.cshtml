@@ -1,5 +1,5 @@
 ﻿@using Hospitality.Common.DTO.CheckUp
-@model Hospitality.Common.DTO.CheckUp.NewCheckUpDTO
+@model Hospitality.Web.Models.PatientDataCheckUpViewModel
 @{
     ViewData["Title"] = "Check Up";
 }
@@ -14,8 +14,8 @@
     {
 
         <div style="display:none">
-				@Html.TextBoxFor(model=>model.PeselOfPatient)
-				@Html.TextBoxFor(model=>model.IdPatient)
+				@Html.TextBoxFor(model=>model.PatientPesel)
+				@Html.TextBoxFor(model=>model.PatientId)
 		</div>
             <div id="checkUpForm">
                         <h3>Symptoms and recommendations </h3><br>
@@ -24,6 +24,10 @@
                                <div class="checkUp">
                           @Html.TextAreaFor(x => x.Description, new { @class = "checkUp",  @rows = 15} )         
                                 </div>
+                                <div>
+                                    @Html.DropDownListFor(m => m.ChosenExamination, new SelectList(Model.AvailableExaminations), "--Select Specialist--", new { style="font-size:120%;"})
+                                </div>
+
                                 <div class="buttons">
                                     <a asp-controller="CheckUp" asp-action="OrderAnExamination">
                                         <button id="orderButton" type="submit" class="btn btn-primary">  Order an examination </button><br>
@@ -37,22 +41,6 @@
                                     <button id="finishButton" typeof="submit" class="btn btn-primary"  data-bs-toggle="modal"  data-bs-target="#exampleModal" >  Finish visit  </button>
                                 </div>
                                  <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header  text-black">
-                            <h5 class="modal-title" id="exampleModalLabel"></h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body justify-content-center" id="modalContactBody">
-                            <p class="errorMessage">Would you like to save patient visit</p>
-                        </div>
-                        <div class="modal-footer">
-                            <div class="modal-footer " id="modalForm">                    
-                                <button id="saveButton" type="submit" class="btn btn-secondary" data-save="modal">Save</button>
-                                 <button id="cancelButton" type="reset" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-
-                            </div>
-                        </div>
-                    </div>
                 </div>
     }
 
