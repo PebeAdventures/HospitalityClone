@@ -8,7 +8,7 @@ label, input, #finishButton, textarea {
     display: grid;
     grid-template-columns: 65% 25%;
     grid-gap: 4%;
-    grid-template-rows: 100px;
+    grid-template-rows: 150px;
 }
 #checkUpForm {
     background-color: #d4ebf3;
@@ -44,15 +44,15 @@ textarea {
 }
 
 input {
-    height: 70px;
+    height: 50px;
     width: 250px;
     font-size: 24px;
 }
 
 p {
     margin-top: 6%;
-    height: 32px;
-    width: 150px;
+    height: 55px;
+    width: 155px;
     font-size:larger;
     text-align:center;
 }
