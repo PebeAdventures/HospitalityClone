@@ -8,10 +8,14 @@ namespace Hospitality.Web.Models
         public string? Result { get; set; }
 
         [Required]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        //[RegularExpression(@"AaĄąBbCcĆćDdEeĘęFfGgHhIiJjKkLlŁłMmNnŃńOoÓóPpRrSsŚśTtUuWwYyZzŹźŻż", ErrorMessage = "Use letters only please")]
+        //[UserName=[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]* [A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]*\]
         [MinLength(3), MaxLength(25)]
         public string PatientName { get; set; }
 
         [Required]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
         [MinLength(3), MaxLength(25)]
         public string PatientSurname { get; set; }
 
@@ -28,12 +32,15 @@ namespace Hospitality.Web.Models
         public string Address { get; set; }
 
         [Required]
-        [MinLength(3), MaxLength(25)]
+        [MinLength(6), MaxLength(25)]
         [DataType(DataType.EmailAddress)]
+        [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", 
+            ErrorMessage = "Please enter a valid e-mail adress")]
         public string Email { get; set; }
 
         [Required]
         [MinLength(9), MaxLength(9)]
+        [RegularExpression(@"^([0-9]{3}[-\s]?){3}$", ErrorMessage = "Please enter a valid phone number")]
         public string PhoneNumber { get; set; }
 
         [DataType(DataType.Text)]

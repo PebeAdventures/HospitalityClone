@@ -1,84 +1,88 @@
 ﻿@using Hospitality.Common.DTO.Patient
 @model Hospitality.Web.Models.PatientResultViewModel
 <head>
-    <link rel="stylesheet" href="~/css/Registration.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/Registration.css" asp-append-version="true" />
+	<script src="@Url.Content("~/js/patientFormValidation.js")" defer)"></script>
 </head>
 
 <body>
-<content>
-                <div id="registrationForm">
-                @using(Html.BeginForm("RegistrationPost", "Registration", FormMethod.Post))
-                {
+	<content>
+		<div id="registrationForm">
+		@using(Html.BeginForm("RegistrationPost", "Registration", FormMethod.Post))
+		{
 
-                    <h2>Patient register form</h2>
+			<h2>Patient register form</h2>
 
-                    <div>                    
-                        <p>
-                            <label id="nameLabel" for="">Name</label><br>
-	                        @Html.TextBoxFor(x => x.PatientName, new { Value =  TempData["Name"] })
+			<div action="" id = "patientForm">                    
+				<p>
+					<label id="nameLabel" for="">Name</label><br>
+					@Html.TextBoxFor(x => x.PatientName, new { Value =  TempData["Name"] })
 
-                        </p>
-                        <p>
-                            <label id="surnameLabel" for="">Surname</label><br>
-                             @Html.TextBoxFor(x => x.PatientSurname, new { style="width:100%;" })
-                        </p>
-                        <p>
-                            <label id="peselLabel" for="">Pesel</label>
-                            @Html.TextBoxFor(x => x.PatientPesel, new { style="width:100%;" })
-                        </p>
-                        <p>
-                            <label id="dateOfBirthLabel" for="">Date of birth</label><br>
-                            @Html.EditorFor(x => x.BirthDate, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @min= "1900-01-01", @max= DateTime.Today.ToString("yyyy'-'MM'-'dd")}})
+				</p>
+				<p>
+					<label id="surnameLabel" for="">Surname</label><br>
+						@Html.TextBoxFor(x => x.PatientSurname, new { style="width:100%;" })
+				</p>
+				<p>
+					<label id="peselLabel" for="">Pesel</label>
+					@Html.TextBoxFor(x => x.PatientPesel, new { style="width:100%;" })
+				</p>
+				<p>
+					<label id="dateOfBirthLabel" for="">Date of birth</label><br>
+					@Html.EditorFor(x => x.BirthDate, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @min= "1900-01-01", @max= DateTime.Today.ToString("yyyy'-'MM'-'dd")}})
 
-                        </p>
-                        <p>
-                            <label id="addressLabel" for="">Address</label><br>
-                             @Html.TextBoxFor(x => x.Address, new { style="width:100%;" })
-                        </p>
-                        <p>
-                            <label id="email" for="">Email</label><br>
-                             @Html.TextBoxFor(x => x.Email, new { style="width:100%;" })
-                        </p>
-                        <p>
-                            <label id="phoneNumberLabel" for="">Phone number</label><br>
-                             @Html.TextBoxFor(x => x.PhoneNumber, new { style="width:100%;" })
-                            <br>
-                        </p>
-                        <p>
-                            @Html.DropDownListFor(m => m.Specialist, new SelectList(Enum.GetValues(typeof(SpecialistEnum))), "--Select Specialist--", new { style="font-size:120%;"})
-                        </p>
-                       
+				</p>
+				<p>
+					<label id="addressLabel" for="">Address</label><br>
+						@Html.TextBoxFor(x => x.Address, new { style="width:100%;" })
+				</p>
+				<p>
+					<label id="email" for="">Email</label><br>
+					@Html.TextBoxFor(x => x.Email, 
+						 new { style="width:100%;" })
+						
+				</p>
+				<p>
+					<label id="phoneNumberLabel" for="">Phone number</label><br>
+						@Html.TextBoxFor(x => x.PhoneNumber, new { style="width:100%;" })
+					<br>
+				</p>
+				<p>
+					@Html.DropDownListFor(m => m.Specialist, new SelectList(Enum.GetValues(typeof(SpecialistEnum))), "--Select Specialist--", new { style="font-size:120%;"})
+				</p>
+					   
 
-                     </div><br>
-                        <p class="full-width">
-                        <button id="sendButton" type="button" class="btn-link modal-action"   data-bs-toggle="modal"  data-bs-target="#exampleModal" data-bs-dismiss="modal">Enviar</button>
+				</div><br>
+				<p class="full-width">
+				<button id="sendButton" type="submit" class="btn-link modal-action"   data-bs-toggle="modal"  data-bs-target="#exampleModal" data-bs-dismiss="modal">Enviar</button>
 
-                     </p>
+				</p>
 
-                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header  text-black">
-                <h5 class="modal-title" id="exampleModalLabel"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body justify-content-center" id="modalContactBody">
-                <p class="errorMessage">Would you like to save patient visit</p>
-            </div>
-            <div class="modal-footer">
-                <div class="modal-footer " id="modalForm">                    
-                    <button id="saveButton" type="submit" class="btn btn-secondary" data-save="modal">Save</button>                       
 
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header  text-black">
+				<h5 class="modal-title" id="exampleModalLabel"></h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body justify-content-center" id="modalContactBody">
+				<p class="errorMessage">Would you like to save patient visit</p>
+			</div>
+			<div class="modal-footer">
+				<div class="modal-footer " id="modalForm">                    
+					<button id="saveButton" type="submit" class="btn btn-secondary" data-save="modal">Save</button>                       
+
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-        }
+		}
 
-         
+		 
 
-    </div>
+	</div>
 
 </content>
 
@@ -87,43 +91,43 @@
 
 @section Scripts {
 
-     @if (Model.Result == "invalid")
-    {
-        <script>
-        $(function(){
-                alert("Wrong personal data. \n Visit was't created. \n Fill in all fields.");
-        });
-        </script>
-    }
-    @if (Model.Result == "valid")
-    {
-        <script>
-        $(function(){
-                alert("New visit was created");
-        });
-        </script>
-    }
-        <script>
-             $("#insuranseButton").on('click',function(){
-             document.getElementById('insuranceValue').innerHTML = 'Yes';      });
-        </script>
-    }
+	 @if (Model.Result == "invalid")
+	{
+		<script>
+		$(function(){
+				alert("Wrong personal data. \n Visit was't created. \n Fill in all fields.");
+		});
+		</script>
+	}
+	@if (Model.Result == "valid")
+	{
+		<script>
+		$(function(){
+				alert("New visit was created");
+		});
+		</script>
+	}
+		<script>
+			 $("#insuranseButton").on('click',function(){
+			 document.getElementById('insuranceValue').innerHTML = 'Yes';      });
+		</script>
+	}
 
-        <script>
-        $(function(){
-            $("#exampleModal").modal("show");
-            $e.preventDefault();
-        });
-        </script>
-    }
-    
-    
-        <script>
-         $("#cancelButton").on('click',function(){
-            $("#exampleModal").modal('hide'));
-         }
-       </script>
-    
+		<script>
+		$(function(){
+			$("#exampleModal").modal("show");
+			$e.preventDefault();
+		});
+		</script>
+	}
+	
+	
+		<script>
+		 $("#cancelButton").on('click',function(){
+			$("#exampleModal").modal('hide'));
+		 }
+	   </script>
+	
 }
 
 
