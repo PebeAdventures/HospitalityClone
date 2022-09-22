@@ -1,7 +1,9 @@
 ﻿using Hospitality.Common.DTO.CheckUp;
 using Hospitality.Common.DTO.Examination;
+using Hospitality.Examination.Application.Functions.Examinations.Queries;
 using Hospitality.Examination.Domain.Entities;
 using Hospitality.Web.Models;
+using Hospitality.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,32 +20,36 @@ namespace Hospitality.Web.Controllers
 
         private HttpClient _httpClient;
         private List<ExaminationInfoDto> examinationInfoDto;
-        public ResultController(IHttpClientFactory httpClientFactory)
+        private IExaminationService _examinationService;
+        public ResultController(IHttpClientFactory httpClientFactory, IExaminationService examinationService)
         {
             _httpClient = httpClientFactory.CreateClient();
             examinationInfoDto = new List<ExaminationInfoDto>();
+            _examinationService = examinationService;
         }
 
         [HttpPost]
         public async Task<IActionResult> Result(string patientId)
         {
 
-            var patientExaminations = await CurrentPatientExaminations($"https://localhost:7236/api/Examination/PatientExaminationsResults?id={patientId}", HttpContext.Session.GetString("token"));
-
+            // var patientExaminations = await CurrentPatientExaminations($"https://localhost:7236/api/Examination/PatientExaminationsResults?id={patientId}", HttpContext.Session.GetString("token"));
+            //patientDataCheckUpViewModel.IsInsured = await _insuranceService.CheckHealthInsurance(patientDataCheckUpViewModel.PatientId, HttpContext.Session.GetString("token"));
+            GetPatientExaminationsQuery getPatientExaminationsQuery = new GetPatientExaminationsQuery() { PatientId = 1 };
+            var patientExaminations = await _examinationService.GetPatientExaminations(getPatientExaminationsQuery, HttpContext.Session.GetString("token"));
             if (patientExaminations != null)
             {
 
-                foreach (var examination in patientExaminations)
-                {
-                    examinationInfoDto.Add(new ExaminationInfoDto()
-                    {
-                        Id = examination.Id,
-                        Description = examination.Description,
-                        // TypeName = examination.Type.Name,
-                        Status = examination.Status.ToString()
-                    });
-                }
-                return View(examinationInfoDto);
+                //foreach (var examination in patientExaminations)
+                //{
+                //    examinationInfoDto.Add(new ExaminationInfoDto()
+                //    {
+                //        Id = examination.Id,
+                //        Description = examination.Description,
+                //        // TypeName = examination.Type.Name,
+                //        Status = examination.Status.ToString()
+                //    });
+                //}
+                return View(patientExaminations);
             }
             examinationInfoDto = new List<ExaminationInfoDto>() { new ExaminationInfoDto(){TypeName="no examinations",
                 Description="This patient dont have any examinations", Id=0 } };
