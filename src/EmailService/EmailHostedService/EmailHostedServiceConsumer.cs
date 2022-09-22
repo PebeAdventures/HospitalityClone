@@ -1,9 +1,9 @@
-﻿using RabbitMQ.Client;
+﻿using Hospitality.Common.DTO.Patient;
+using Newtonsoft.Json;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Diagnostics;
 using System.Text;
-using Hospitality.Common.DTO.Patient;
-using Newtonsoft.Json;
 
 namespace EmailService.EmailHostedService
 {
@@ -41,18 +41,19 @@ namespace EmailService.EmailHostedService
                 string messageText = "";
                 if (examinationExecutionDto.ExaminationDescription == "")
                 {
-                     messageText = $"Hello, {examinationExecutionDto.PatientName} {examinationExecutionDto.PatientSurname}! \n" +
-                                         $"Your examination \"{examinationExecutionDto.ExaminationTypeName}\" was finished. You could check result in your account. \n" +
-                                         $"Kind regards,\nHospitality";
-                } else
+                    messageText = $"Hello, {examinationExecutionDto.PatientName} {examinationExecutionDto.PatientSurname}! \n" +
+                                        $"Your examination \"{examinationExecutionDto.ExaminationTypeName}\" was finished. You could check result in your account. \n" +
+                                        $"Kind regards,\nHospitality";
+                }
+                else
                 {
-                     messageText = $"Hello, {examinationExecutionDto.PatientName} {examinationExecutionDto.PatientSurname}! \n" +
-                                         $"Your examination \"{examinationExecutionDto.ExaminationTypeName}\" was finished.\nResults\n{examinationExecutionDto.ExaminationDescription}\n" +
-                                         $"Kind regards,\nHospitality";
+                    messageText = $"Hello, {examinationExecutionDto.PatientName} {examinationExecutionDto.PatientSurname}! \n" +
+                                        $"Your examination \"{examinationExecutionDto.ExaminationTypeName}\" was finished.\nResults\n{examinationExecutionDto.ExaminationDescription}\n" +
+                                        $"Kind regards,\nHospitality";
                 }
                 var message = new Message(new string[] { examinationExecutionDto.Email }, "Client message", messageText);
 
-                _emailSender.SendEmail(message);
+                //  _emailSender.SendEmail(message);
             };
             _channel.BasicConsume(queue: _queueName, autoAck: true, consumer: consumer);
             return Task.CompletedTask;

@@ -1,5 +1,6 @@
 ﻿@using Hospitality.Common.DTO.CheckUp
 @model Hospitality.Web.Models.PatientDataCheckUpViewModel
+
 @{
     ViewData["Title"] = "Check Up";
 }
@@ -24,7 +25,7 @@
                 @using (Html.BeginForm("Result", "Result", FormMethod.Post, new { target = "_blank" }))
                 {
                     <div style="display:none">
-                        <input type="text" name="patientId" value=@Model.IdPatient />
+                        <input type="text" name="patientId" value=@Model.PatientId />
                     </div>
                       <input type="submit" id="resultInput" class="btn btn-primary btn-lg" value="Examination results"  font-size = "160px"/>
                 }
@@ -35,8 +36,8 @@
             @using (Html.BeginForm("CheckUp", "CheckUp"))
             {
                 <div style="display:none">
-                    @Html.TextBoxFor(model=>model.PeselOfPatient)
-                    @Html.TextBoxFor(model=>model.IdPatient)
+                    @Html.TextBoxFor(model=>model.PatientPesel)
+                    @Html.TextBoxFor(model=>model.PatientId)
                 </div>
 
                     <div class="checkUp">

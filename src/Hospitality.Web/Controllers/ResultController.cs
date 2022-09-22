@@ -28,7 +28,7 @@ namespace Hospitality.Web.Controllers
         public async Task<IActionResult> Result(string patientId)
         {
 
-            var patientExaminations = await CurrentPatientExaminations($"https://localhost:7236/api/Examination/PatientExaminationsResults?id={patientId}");
+            var patientExaminations = await CurrentPatientExaminations($"https://localhost:7236/api/Examination/PatientExaminationsResults?id={patientId}", HttpContext.Session.GetString("token"));
 
             if (patientExaminations != null)
             {
