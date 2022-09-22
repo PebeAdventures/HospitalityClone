@@ -27,10 +27,10 @@ namespace Hospitality.Gateway.API.Controllers
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Receptionist")]
         [HttpPost]
-        public async Task<IActionResult> RegisterNewPatientAsync(object newPatient)
+        public async Task<IActionResult> RegisterNewPatientAsync(PatientReceptionistViewDTO newPatient)
             => await GetContentAsync(newPatient, _configuration["Paths:RegisterPatient"]);
 
-        private async Task<IActionResult> GetContentAsync(object newPatient, string url)
+        private async Task<IActionResult> GetContentAsync(PatientReceptionistViewDTO newPatient, string url)
         {
             var json = JsonConvert.SerializeObject(newPatient);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
