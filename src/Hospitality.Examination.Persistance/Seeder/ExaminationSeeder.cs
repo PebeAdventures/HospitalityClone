@@ -51,7 +51,7 @@ namespace Hospitality.Examination.Persistance.Seeder
             examinationTypes.Add(new ExaminationType()
             {
                 Id = 1,
-                Name = "USG kolana",
+                Name = "Biohemia krwi",
                 Duration = new TimeSpan(0, 0, 8)
             });
 
@@ -113,6 +113,12 @@ namespace Hospitality.Examination.Persistance.Seeder
                 Duration = new TimeSpan(0, 0, 6)
             });
 
+            examinationTypes.Add(new ExaminationType()
+            {
+                Id = 11,
+                Name = "USG kolana",
+                Duration = new TimeSpan(0, 0, 8)
+            });
 
             // builder.Entity<ExaminationInfo>().HasData(examinationInfos);
             builder.Entity<ExaminationType>().HasData(examinationTypes);

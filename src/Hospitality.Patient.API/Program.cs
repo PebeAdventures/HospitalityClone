@@ -52,4 +52,6 @@ app.MapControllers();
 
 app.UseCors();
 
+app.UseCustomMiddlewares();
+
 app.Run();
