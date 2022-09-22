@@ -1,5 +1,5 @@
-﻿
-@model List<ResultClass>
+﻿@using Hospitality.Common.DTO.Examination
+@model List<ExaminationInfoDto>
 
 
 <head>
@@ -18,9 +18,9 @@
                         @foreach (var d in Model)  
                         {  
                             <tr>  
-                                <td>@d.name</td>  
-                                <td>@d.result</td>  
-                                <td>@d.price</td>    
+                                <td>@d.TypeName</td>  
+                                <td>@d.Description</td> 
+                                <td>@d.Id</td>
                             </tr>  
                         }  
                     </table> 

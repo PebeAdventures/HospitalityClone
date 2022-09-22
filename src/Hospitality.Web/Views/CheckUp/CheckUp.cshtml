@@ -25,7 +25,7 @@
                 @using (Html.BeginForm("Result", "Result", FormMethod.Post, new { target = "_blank" }))
                 {
                     <div style="display:none">
-                        <input type="text" name="PatientPesel" value=@Model.PeselOfPatient />
+                        <input type="text" name="patientId" value=@Model.IdPatient />
                     </div>
                       <input type="submit" id="resultInput" class="btn btn-primary btn-lg" value="Examination results"  font-size = "160px"/>
                 }

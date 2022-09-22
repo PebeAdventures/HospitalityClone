@@ -25,7 +25,7 @@ namespace Hospitality.Gateway.API.Controllers
 
         [HttpGet("PatientExaminationsResults")]
         public async Task<IActionResult> GetCurrentPatientExaminationsResultsAsync(int id)
-            => Ok(await _httpClient.GetStringAsync("https://localhost:7230/api/Examination/PatientId?patientId=/" + id)); // LINK DO UZUPEŁNIENIA !!! 
+            => Ok(await _httpClient.GetStringAsync("https://localhost:7230/api/Examination/PatientId?patientId=" + id)); // LINK DO UZUPEŁNIENIA !!! 
 
         [HttpPost]
         public async Task<IActionResult> AddNewExaminationAsync(object newExamination)
