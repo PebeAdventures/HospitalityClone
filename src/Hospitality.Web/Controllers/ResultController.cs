@@ -39,8 +39,8 @@ namespace Hospitality.Web.Controllers
                     {
                         Id = examination.Id,
                         Description = examination.Description,
-                        TypeName = "test",
-                        Status = "status"
+                        // TypeName = examination.Type.Name,
+                        Status = examination.Status.ToString()
                     });
                 }
                 return View(examinationInfoDto);
@@ -60,6 +60,8 @@ namespace Hospitality.Web.Controllers
             if (examinationInfo is null) return null;
             return examinationInfo;
         }
+
+
 
     }
 }
