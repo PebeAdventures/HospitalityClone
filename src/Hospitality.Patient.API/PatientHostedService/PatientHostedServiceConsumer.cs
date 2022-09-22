@@ -58,6 +58,7 @@ namespace Hospitality.Patient.API.PatientHostedService
             PatientNotificationDTO patientInfoForNotification = await _patientService.GetPatientByIDAsync(examinationExecution.PatientId);
             patientInfoForNotification.Status = examinationExecution.Status;
             patientInfoForNotification.ExaminationDescription = examinationExecution.Description;
+            patientInfoForNotification.ExaminationTypeName = examinationExecution.ExaminationTypeName;
             return patientInfoForNotification;
         }
     }
