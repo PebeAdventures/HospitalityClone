@@ -9,6 +9,7 @@ using Hospitality.Common.DTO.NewFolder;
 using System;
 using Hospitality.Web.Models;
 using AutoMapper;
+using Hospitality.Web.Services.Interfaces;
 
 namespace Hospitality.Web.Controllers
 {
@@ -17,15 +18,17 @@ namespace Hospitality.Web.Controllers
     {
         private HttpClient _httpClient;
         private IMapper _mapper;
-        public RegistrationController(IHttpClientFactory httpClientFactory, IMapper mapper)
+        private IInsuranceService _insuranceService;
+        public RegistrationController(IHttpClientFactory httpClientFactory, IMapper mapper, IInsuranceService insuranceService)
         {
             _httpClient = httpClientFactory.CreateClient();
             _mapper = mapper;
+            _insuranceService = insuranceService;
         }
         [HttpGet]
         public async Task<IActionResult> Registration(PatientResultViewModel? Model)
         {
-            if (Model is null)
+            if (Model.Result == "valid")
                 return View();
             else 
                 ViewBag.Invalid = Model.Result;
@@ -48,18 +51,11 @@ namespace Hospitality.Web.Controllers
         private async Task RegisterNewPatient(PatientResultViewModel model, string url)
         {
             PatientReceptionistViewDTO mapedPatient = _mapper.Map<PatientReceptionistViewDTO>(model);
-            model.IsInsured = await CheckHealthInsurance(mapedPatient.Id);
+            model.IsInsured = await _insuranceService.CheckHealthInsurance(mapedPatient.Id, HttpContext.Session.GetString("token"));
             var json = JsonConvert.SerializeObject(mapedPatient);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             await _httpClient.PostAsync(url, content);
-        }
-
-        private async Task<bool> CheckHealthInsurance(int idOfPerson)
-        {
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
-            var response = await _httpClient.GetAsync($"https://localhost:7236/api/Insurance?idOfPerson={idOfPerson}");
-            return JsonConvert.DeserializeObject<InsuredDTO>(await response.Content.ReadAsStringAsync()).IsInsured;
         }
     }
 }

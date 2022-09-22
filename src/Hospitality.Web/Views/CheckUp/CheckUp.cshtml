@@ -1,12 +1,11 @@
 ﻿@using Hospitality.Common.DTO.CheckUp
-@model Hospitality.Common.DTO.CheckUp.NewCheckUpDTO
+@model Hospitality.Web.Models.PatientDataCheckUpViewModel
 @{
     ViewData["Title"] = "Check Up";
 }
 <head>
     <link rel="stylesheet" href="~/css/CheckUp.css" asp-append-version="true" />
 </head>
-
 <body>
     <content>
         <div id="checkUpForm">
@@ -45,6 +44,11 @@
                     </div>
                 <br>
 
+    @using (Html.BeginForm("Examination", "Examination", FormMethod.Post, new { target = "_blank" }))
+    {
+        <br>
+            <button id="finishButton" typeof="submit" class="btn btn-primary"  data-bs-toggle="modal"  data-bs-target="#exampleModal" >  Order an examination  </button>
+    }
                 <button id="finishButton" typeof="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">  Finish visit  </button>
             }
 

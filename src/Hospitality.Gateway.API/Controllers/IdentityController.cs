@@ -10,12 +10,18 @@ namespace Hospitality.Gateway.API.Controllers
     public class IdentityController : ControllerBase
     {
         private HttpClient _httpClient;
-        public IdentityController(IHttpClientFactory httpClientFactory)
-             => _httpClient = httpClientFactory.CreateClient();
+        private readonly IConfiguration _configuration;
+
+        public IdentityController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
+        {
+            _httpClient = httpClientFactory.CreateClient();
+            _configuration = configuration;
+        }
 
         [HttpPost]
         public async Task<IActionResult> LogIn(Credentials credentials)
-            => await GetContentAsync(credentials, "https://localhost:7272/api/Identity"); // LINK DO UZUPEŁNIENIA !!! 
+            => await GetContentAsync(credentials, _configuration["Paths:LogIn"]);
+
         private async Task<IActionResult> GetContentAsync(Credentials credentials, string url)
         {
             var jsonEmail = JsonConvert.SerializeObject(credentials);

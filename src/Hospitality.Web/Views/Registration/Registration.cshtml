@@ -87,7 +87,7 @@
 
 @section Scripts {
 
-     @if (Model.Result == "invalid")
+     @if (Model is not null && Model.Result == "invalid")
     {
         <script>
         $(function(){
@@ -95,7 +95,7 @@
         });
         </script>
     }
-    @if (Model.Result == "valid")
+    @if (Model is not null && Model.Result == "valid")
     {
         <script>
         $(function(){

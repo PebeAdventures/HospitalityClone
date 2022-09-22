@@ -1,10 +1,11 @@
-﻿using Hospitality.Examination.Application.Functions.Examinations.Commands;
+﻿using Hospitality.Common.DTO.Examination;
+using Hospitality.Examination.Application.Functions.Examinations.Commands;
 using Hospitality.Examination.Application.Functions.Examinations.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RabbitMQ.Client;
 using Hospitality.Examination.RabbitMQ;
-
+using Hospitality.Examination.Domain.Entities.Enums;
 
 namespace Hospitality.Examination.API.Controllers
 {
@@ -31,10 +32,16 @@ namespace Hospitality.Examination.API.Controllers
         => Ok(await _mediator.Send(new GetPatientExaminationsQuery() { PatientId = patientId }));
 
         [HttpPost]
-        public async Task<IActionResult> AddNewExamination(AddNewExaminationCommand addPostCommand)
+        public async Task<IActionResult> AddNewExamination(CreateExaminationDto examinationDto)
         {
-            var examination = await _mediator.Send(addPostCommand);
-           // _mqService.SendMessage(addPostCommand.Description);
+            var examination = await _mediator.Send(new AddNewExaminationCommand()
+            {
+                Status = (int)ExaminationStatus.InProgress,
+                ExaminationTypeId = examinationDto.ExaminationTypeId,
+                PatientId = examinationDto.PatientId,
+                Description = ""
+               
+            });
             return CreatedAtAction("GetExaminationById", new { id = examination.Id }, examination);
         }
     }
