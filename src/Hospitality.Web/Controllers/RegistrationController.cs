@@ -25,7 +25,7 @@ namespace Hospitality.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Registration(PatientResultViewModel? Model)
         {
-            if (Model is null)
+            if (Model.Result == "valid")
                 return View();
             else 
                 ViewBag.Invalid = Model.Result;

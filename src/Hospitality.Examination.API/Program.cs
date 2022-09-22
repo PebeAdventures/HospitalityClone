@@ -1,3 +1,4 @@
+using Hospitality.Examination.API.Extensions;
 using Hospitality.Examination.API.Model;
 using Hospitality.Examination.Application;
 using Hospitality.Examination.Application.Contracts.Persistence;
@@ -15,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationServices();
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ExaminationContext>(options => options
-    .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Examination_Dev;Trusted_Connection=True;MultipleActiveResultSets=true"), ServiceLifetime.Transient, ServiceLifetime.Transient);
+    .UseSqlServer(builder.Configuration["examinationDb"]));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IExaminationRepository, ExaminationRepository>();
@@ -24,13 +25,24 @@ builder.Services.AddTransient<IUpdateExamination, UpdateExamination>();
 builder.Services.AddTransient<IRabbitMqService, RabbitMQPublisher>();
 builder.Services.AddHostedService<RabbitMQConsumer>();
 builder.Services.AddCustomCors();
-
+builder.Services.AddScoped<IExaminationRepository, ExaminationRepository>();
+builder.Services.AddScoped<IExaminationTypesRepository, ExaminationTypesRepository>();
 builder.Services.AddAutoMapper(typeof(ExaminationProfile));
 
-var app = builder.Build();
+builder.Services.AddCustomCors();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+var app = builder.Build();
+if (app.Environment.EnvironmentName != "Local")
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        var context = services.GetRequiredService<ExaminationContext>();
+        context.Database.Migrate();
+    }
+}
+//Configure the HTTP request pipeline.
+if (!app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();

@@ -1,5 +1,4 @@
-﻿using Hospitality.Common.DTO.Examination;
-using Hospitality.Examination.Application.Functions.ExaminationTypes.Queries.GetAllExaminationTypes;
+﻿using Hospitality.Examination.Application.Functions.ExaminationTypes.Queries.GetAllExaminationTypes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
