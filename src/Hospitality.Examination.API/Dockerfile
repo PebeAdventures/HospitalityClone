@@ -11,7 +11,7 @@ COPY ["src/Hospitality.Examination.API/Hospitality.Examination.API.csproj", "src
 COPY ["src/Hospitality.Common/Hospitality.Common.csproj", "src/Hospitality.Common/"]
 COPY ["src/Hospitality.Examination.Domain/Hospitality.Examination.Domain.csproj", "src/Hospitality.Examination.Domain/"]
 COPY ["src/Hospitality.Examination.Persistance/Hospitality.Examination.Persistance.csproj", "src/Hospitality.Examination.Persistance/"]
-COPY ["Hospitality.Examination.Application/Hospitality.Examination.Application.csproj", "Hospitality.Examination.Application/"]
+COPY ["src/Hospitality.Examination.Application/Hospitality.Examination.Application.csproj", "src/Hospitality.Examination.Application/"]
 RUN dotnet restore "src/Hospitality.Examination.API/Hospitality.Examination.API.csproj"
 COPY . .
 WORKDIR "/src/src/Hospitality.Examination.API"

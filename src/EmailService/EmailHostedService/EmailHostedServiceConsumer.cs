@@ -14,18 +14,18 @@ namespace EmailService.EmailHostedService
         private string? _queueName;
         private IEmailSender _emailSender;
 
-
         public EmailHostedServiceConsumer(IEmailSender emailSender)
         {
             _emailSender = emailSender;
 
-            var factory = new ConnectionFactory { HostName = "localhost" };
+            var factory = new ConnectionFactory { HostName = "rabbitmq" };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
             _channel.ExchangeDeclare(exchange: "ExaminationExchange", type: ExchangeType.Direct);
             _queueName = _channel.QueueDeclare().QueueName;
             _channel.QueueBind(queue: _queueName, exchange: "ExaminationExchange", routingKey: "sentInfoForNotification");
         }
+
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             stoppingToken.ThrowIfCancellationRequested();

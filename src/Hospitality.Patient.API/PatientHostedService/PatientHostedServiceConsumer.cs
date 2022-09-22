@@ -19,7 +19,7 @@ namespace Hospitality.Patient.API.PatientHostedService
         {
             _patientService = patientService;
             _publisherService = publisherService;
-            var factory = new ConnectionFactory { HostName = "localhost" };
+            var factory = new ConnectionFactory { HostName = "rabbitmq" };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
             _channel.ExchangeDeclare(exchange: "ExaminationExchange", type: ExchangeType.Direct);

@@ -6,14 +6,15 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["EmailService/EmailService.csproj", "EmailService/"]
-RUN dotnet restore "EmailService/EmailService.csproj"
+COPY ["src/EmailService/EmailService.csproj", "src/EmailService/"]
+COPY ["src/Hospitality.Common/Hospitality.Common.csproj", "src/Hospitality.Common/"]
+RUN dotnet restore "src/EmailService/EmailService.csproj"
 COPY . .
-WORKDIR "/src/EmailService"
+WORKDIR "/src/src/EmailService"
 RUN dotnet build "EmailService.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "EmailService.csproj" -c Release -o /app/publish
+RUN dotnet publish "EmailService.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

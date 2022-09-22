@@ -10,13 +10,11 @@ builder.Services.AddDbContext<PatientContext>(options => options
 builder.Services.AddCustomServices();
 
 builder.Services.AddControllers();
-//builder.Services.AddHostedService<PatientHostedServiceConsumer>();
 builder.Services.AddTransient<IPatientHostedServicePublisher, PatientHostedServicePublisher>();
 builder.Services.AddTransient<IPatientRepository, PatientRepository>();
 builder.Services.AddTransient<IPatientService, PatientService>();
 
 builder.Services.AddCustomCors();
-
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

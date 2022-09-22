@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationServices();
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ExaminationContext>(options => options
-    .UseSqlServer(builder.Configuration["examinationDb"]));
+    .UseSqlServer(builder.Configuration["examinationDb"]), ServiceLifetime.Transient, ServiceLifetime.Transient);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IExaminationRepository, ExaminationRepository>();

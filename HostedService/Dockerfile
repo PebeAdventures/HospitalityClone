@@ -7,13 +7,14 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["HostedService/HostedService.csproj", "HostedService/"]
+COPY ["src/Hospitality.Common/Hospitality.Common.csproj", "src/Hospitality.Common/"]
 RUN dotnet restore "HostedService/HostedService.csproj"
 COPY . .
 WORKDIR "/src/HostedService"
 RUN dotnet build "HostedService.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "HostedService.csproj" -c Release -o /app/publish
+RUN dotnet publish "HostedService.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
