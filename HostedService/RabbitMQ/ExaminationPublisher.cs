@@ -7,9 +7,18 @@ namespace HostedService
 {
     public class ExaminationPublisher : IExaminationPublisher
     {
+        private readonly IConfiguration _configuration;
+        private readonly string? _hostName;
+
+        public ExaminationPublisher(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            _hostName = _configuration["rabbitmq"];
+        }
+
         public void SendMessage<T>(T message)
         {
-            var factory = new ConnectionFactory() { HostName = "rabbitmq" };
+            var factory = new ConnectionFactory() { HostName = _hostName };
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {

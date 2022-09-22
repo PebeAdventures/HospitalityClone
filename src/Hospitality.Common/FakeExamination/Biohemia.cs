@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Hospitality.Common.FakeExamination
+﻿namespace Hospitality.Common.FakeExamination
 {
     public class Biohemia
     {
@@ -33,7 +27,7 @@ namespace Hospitality.Common.FakeExamination
             MPV = (4 + random.NextDouble() * (17 - 4)).ToString("0.0");
             NEU = (30 + random.NextDouble() * (85 - 30)).ToString("0.0");
             LYMPH = (15 + random.NextDouble() * (50 - 15)).ToString("0.0");
-            MON = (3 + random.NextDouble() * (15 - 3)).ToString("0.0");           
+            MON = (3 + random.NextDouble() * (15 - 3)).ToString("0.0");
         }
     }
 }

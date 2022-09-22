@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Text;
 using Microsoft.Extensions.Hosting;
 using Hospitality.Examination.Application.Services;
+using Microsoft.Extensions.Configuration;
 
 namespace Hospitality.Examination.RabbitMQ
 {
@@ -12,13 +13,16 @@ namespace Hospitality.Examination.RabbitMQ
         private IConnection _connection;
         private IModel _channel;
         private string? _queueName;
+        private string? _hostName;
         private IUpdateExamination _updateExamination;
+        private readonly IConfiguration _configuration;
 
-        public RabbitMQConsumer(IUpdateExamination updateExamination)
+        public RabbitMQConsumer(IUpdateExamination updateExamination, IConfiguration configuration)
         {
             _updateExamination = updateExamination;
-
-            var factory = new ConnectionFactory { HostName = "rabbitmq" };
+            _configuration = configuration;
+            _hostName = _configuration["rabbitmq"];
+            var factory = new ConnectionFactory { HostName = _hostName };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
             _channel.ExchangeDeclare(exchange: "ExaminationExchange", type: ExchangeType.Direct);

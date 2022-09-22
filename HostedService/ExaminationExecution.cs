@@ -5,7 +5,6 @@ using Hospitality.Common.FakeExamination;
 
 namespace HostedService
 {
-
     public interface IExaminationExecution
     {
         ExaminationExecutionDto executeExamination(string jsonData);
@@ -24,7 +23,7 @@ namespace HostedService
             {
                 examinationExecutionDto.Description = getFakeExaminationResult(examinationType);
             }
-           // string modifiedJSON = JsonConvert.SerializeObject(examinationExecutionDto);
+            // string modifiedJSON = JsonConvert.SerializeObject(examinationExecutionDto);
             return examinationExecutionDto;
         }
 
@@ -36,7 +35,6 @@ namespace HostedService
             }
 
             return "Not examination result";
-
         }
 
         private string setBiohemiaResult()

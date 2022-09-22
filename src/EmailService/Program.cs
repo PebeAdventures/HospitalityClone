@@ -12,11 +12,7 @@ var emailConfig = builder.Configuration
         .Get<EmailConfiguration>();
 builder.Services.AddSingleton(emailConfig);
 builder.Services.AddTransient<IEmailSender, EmailSender>();
-
 builder.Services.AddCustomCors();
 var app = builder.Build();
-
-app.MapGet("/", () => "Hello World!");
-
 app.UseCors();
 app.Run();

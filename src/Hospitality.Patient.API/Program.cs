@@ -5,11 +5,12 @@ using Hospitality.Patient.API.PatientHostedService;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<PatientContext>(options => options
-    .UseSqlServer(builder.Configuration["ConnectionStrings:PatientDbDocker"]));
+    .UseSqlServer(builder.Configuration.GetConnectionString("PatientDb")), ServiceLifetime.Transient, ServiceLifetime.Transient);
 
 builder.Services.AddCustomServices();
 
 builder.Services.AddControllers();
+builder.Services.AddHostedService<PatientHostedServiceConsumer>();
 builder.Services.AddTransient<IPatientHostedServicePublisher, PatientHostedServicePublisher>();
 builder.Services.AddTransient<IPatientRepository, PatientRepository>();
 builder.Services.AddTransient<IPatientService, PatientService>();

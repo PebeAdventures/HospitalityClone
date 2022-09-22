@@ -14,13 +14,17 @@ namespace HostedService
         private IExaminationPublisher _examinationPublisher;
         private string? _queueName;
         private IExaminationExecution _examinationExecution;
+        private readonly IConfiguration _configuration;
+        private readonly string? _hostName;
 
-        public ExaminationConsumer(IExaminationPublisher examinationPublisher, IExaminationExecution examinationExecution)
+        public ExaminationConsumer(IExaminationPublisher examinationPublisher, IExaminationExecution examinationExecution, IConfiguration configuration)
         {
             _examinationPublisher = examinationPublisher;
             _examinationExecution = examinationExecution;
+            _configuration = configuration;
+            _hostName = _configuration["rabbitmq"];
 
-            var factory = new ConnectionFactory { HostName = "rabbitmq" };
+            var factory = new ConnectionFactory { HostName = _hostName };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
             _channel.ExchangeDeclare(exchange: "ExaminationExchange", type: ExchangeType.Direct);

@@ -15,11 +15,10 @@ services:
     build:
       context: .
       dockerfile: src/Hospitality.Examination.API/Dockerfile
-    depends_on:
-      - db
     restart: on-failure
     depends_on:
       - rabbitmq
+      - db
     links: 
         - rabbitmq
 

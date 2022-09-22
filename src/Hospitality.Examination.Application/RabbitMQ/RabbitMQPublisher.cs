@@ -2,14 +2,24 @@
 using Newtonsoft.Json;
 using System.Text;
 using System.Diagnostics;
+using Microsoft.Extensions.Configuration;
 
 namespace Hospitality.Examination.RabbitMQ
 {
     public class RabbitMQPublisher : IRabbitMqService
     {
+        private readonly IConfiguration _configuration;
+        private readonly string _hostName;
+
+        public RabbitMQPublisher(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            _hostName = _configuration["rabbitmq"];
+        }
+
         public void SendMessage<T>(T message)
         {
-            var factory = new ConnectionFactory() { HostName = "rabbitmq" };
+            var factory = new ConnectionFactory() { HostName = _hostName };
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {

@@ -13,12 +13,16 @@ namespace EmailService.EmailHostedService
         private IModel _channel;
         private string? _queueName;
         private IEmailSender _emailSender;
+        private readonly IConfiguration _configuration;
+        private readonly string? _hostName;
 
-        public EmailHostedServiceConsumer(IEmailSender emailSender)
+        public EmailHostedServiceConsumer(IEmailSender emailSender, IConfiguration configuration)
         {
             _emailSender = emailSender;
+            _configuration = configuration;
+            _hostName = _configuration["rabbitmq"];
 
-            var factory = new ConnectionFactory { HostName = "rabbitmq" };
+            var factory = new ConnectionFactory { HostName = _hostName };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
             _channel.ExchangeDeclare(exchange: "ExaminationExchange", type: ExchangeType.Direct);
