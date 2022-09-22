@@ -52,6 +52,8 @@ app.UseAuthorization();
 
 app.UseCors();
 
+app.UseCustomMiddlewares();
+
 app.MapControllers();
 
 app.Run();
