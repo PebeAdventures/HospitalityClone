@@ -16,12 +16,15 @@ namespace Hospitality.Web.Controllers
         private IMapper _mapper;
         private IExaminationService _examinationService;
         private IPatientService _patientService;
-        public ExaminationController(IHttpClientFactory httpClientFactory, IMapper mapper, IExaminationService examinationService, IPatientService patientService)
+        private readonly IConfiguration _configuration;
+
+        public ExaminationController(IHttpClientFactory httpClientFactory, IMapper mapper, IExaminationService examinationService, IPatientService patientService, IConfiguration configuration)
         {
             _httpClient = httpClientFactory.CreateClient();
             _mapper = mapper;
             _examinationService = examinationService;
             _patientService = patientService;
+            _configuration = configuration;
         }
         [HttpPost]
         public async Task<IActionResult> Examination(PatientDataCheckUpViewModel patientDataCheckUpViewModel)
@@ -37,12 +40,12 @@ namespace Hospitality.Web.Controllers
                 await AssignIdOfChosenExamination(patientDataCheckUpViewModel);
             if (!string.IsNullOrEmpty(patientDataCheckUpViewModel.PatientPesel))
                 await AssignIdOfPatient(patientDataCheckUpViewModel);
-            await SendOrder(patientDataCheckUpViewModel, "https://localhost:7236/api/Examination");
+            await SendOrder(patientDataCheckUpViewModel, _configuration["Paths:CreateExamination"]);
             return Content(@"<script>window.close();</script>", "text/html");
         }
 
         private async Task AssignIdOfPatient(PatientDataCheckUpViewModel patientDataCheckUpViewModel)
-            => patientDataCheckUpViewModel.PatientId = await _patientService.GetIdOfPatient($"https://localhost:7236/api/Patient?pesel={patientDataCheckUpViewModel.PatientPesel}", HttpContext.Session.GetString("token"));
+            => patientDataCheckUpViewModel.PatientId = await _patientService.GetIdOfPatient(_configuration["Paths:GetPatientByPesel"] + patientDataCheckUpViewModel.PatientPesel, HttpContext.Session.GetString("token"));
         private async Task AssignIdOfChosenExamination(PatientDataCheckUpViewModel patientDataCheckUpViewModel)
             => patientDataCheckUpViewModel.ChosenExaminationId = (await _examinationService.GetAvailableExaminations(HttpContext.Session.GetString("token"))).Where(ae => ae.Name == patientDataCheckUpViewModel.ChosenExamination).FirstOrDefault().Id;
         private async Task SendOrder(PatientDataCheckUpViewModel patientDataCheckUpViewModel, string url)

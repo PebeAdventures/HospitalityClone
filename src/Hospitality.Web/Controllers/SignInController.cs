@@ -13,9 +13,12 @@ namespace Hospitality.Web.Controllers
     {
 
         private HttpClient _httpClient;
-        public SignInController(IHttpClientFactory httpClientFactory)
-             => _httpClient = httpClientFactory.CreateClient();
-
+        private readonly IConfiguration _configuration;
+        public SignInController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
+        {
+            _httpClient = httpClientFactory.CreateClient();
+            _configuration = configuration;
+        }
         private async Task<IActionResult> GetContentAsync(object newCheckup, string url)
         {
             var json = JsonConvert.SerializeObject(newCheckup);
@@ -44,7 +47,7 @@ namespace Hospitality.Web.Controllers
 
             var jsonCredentials = JsonConvert.SerializeObject(credentials);
             var content = new StringContent(jsonCredentials, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync("https://localhost:7236/api/Identity", content);
+            var response = await _httpClient.PostAsync(_configuration["Paths:SignIn"], content);
             if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
             {
                 return RedirectToAction("SignIn", "SignIn", new { result = false });

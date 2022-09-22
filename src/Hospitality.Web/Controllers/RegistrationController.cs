@@ -19,11 +19,14 @@ namespace Hospitality.Web.Controllers
         private HttpClient _httpClient;
         private IMapper _mapper;
         private IInsuranceService _insuranceService;
-        public RegistrationController(IHttpClientFactory httpClientFactory, IMapper mapper, IInsuranceService insuranceService)
+        private readonly IConfiguration _configuration;
+
+        public RegistrationController(IHttpClientFactory httpClientFactory, IMapper mapper, IInsuranceService insuranceService, IConfiguration configuration)
         {
             _httpClient = httpClientFactory.CreateClient();
             _mapper = mapper;
             _insuranceService = insuranceService;
+            _configuration = configuration;
         }
         [HttpGet]
         public async Task<IActionResult> Registration(PatientResultViewModel? Model)
@@ -44,7 +47,7 @@ namespace Hospitality.Web.Controllers
                 return RedirectToAction("Registration", "Registration", model);
             }
             model.Result = "valid";
-            await RegisterNewPatient(model, "https://localhost:7236/api/Patient");
+            await RegisterNewPatient(model, _configuration["Paths:CreatePatient"]);
             return RedirectToAction("Registration", "Registration", model);
         }
 
