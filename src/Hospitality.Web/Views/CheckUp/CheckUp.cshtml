@@ -26,9 +26,6 @@
                                 </div>
 
                                 <div class="buttons">
-                                    @*<a asp-controller="Examination" asp-action="OrderAnExamination">
-                                        <button id="orderButton" type="button" class="btn btn-primary">  Order an examination </button><br>
-                                    </a>*@
                                     <a asp-controller="Result" asp-action="Result">
                                       <button id="resultButton" type="button" class="btn btn-primary">  Test results  </button>
                                     </a>
@@ -41,12 +38,12 @@
                 </div>
     }
 
-    @using (Html.BeginForm("OrderAnExamination", "Examination"))
+    @using (Html.BeginForm("Examination", "Examination", FormMethod.Post, new { target = "_blank" }))
     {
-        @Html.HiddenFor(m => m.PatientPesel, Model.PatientPesel)
-        @Html.DropDownListFor(m => m.ChosenExamination, new SelectList(Model.AvailableExaminations), "--Select Specialist--", new { style="font-size:120%;"})
+        @*@Html.HiddenFor(m => m.PatientPesel, Model.PatientPesel)
+        @Html.DropDownListFor(m => m.ChosenExamination, new SelectList(Model.AvailableExaminations), "--Select Specialist--", new { style="font-size:120%;"})*@
         <br>
-                <button id="finishButton" typeof="submit" class="btn btn-primary"  data-bs-toggle="modal"  data-bs-target="#exampleModal" >  Order an examination  </button>
+            <button id="finishButton" typeof="submit" class="btn btn-primary"  data-bs-toggle="modal"  data-bs-target="#exampleModal" >  Order an examination  </button>
     }
 
 </content>

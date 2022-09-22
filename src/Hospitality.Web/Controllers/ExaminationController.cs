@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using AutoMapper;
 using Hospitality.Web.Services.Interfaces;
+using System.Security.Principal;
 
 namespace Hospitality.Web.Controllers
 {
@@ -22,6 +23,12 @@ namespace Hospitality.Web.Controllers
             _examinationService = examinationService;
             _patientService = patientService;
         }
+        [HttpPost]
+        public async Task<IActionResult> Examination(PatientDataCheckUpViewModel patientDataCheckUpViewModel)
+        {
+            patientDataCheckUpViewModel.AvailableExaminations = (await _examinationService.GetAvailableExaminations(HttpContext.Session.GetString("token"))).Select(x => x.Name).ToList();
+            return View(patientDataCheckUpViewModel);
+        }
 
         [HttpPost]
         public async Task<IActionResult> OrderAnExamination(PatientDataCheckUpViewModel patientDataCheckUpViewModel)
@@ -31,7 +38,7 @@ namespace Hospitality.Web.Controllers
             if (!string.IsNullOrEmpty(patientDataCheckUpViewModel.PatientPesel))
                 await AssignIdOfPatient(patientDataCheckUpViewModel);
             await SendOrder(patientDataCheckUpViewModel, "https://localhost:7236/api/Examination");
-            return RedirectToAction("CheckUp", "CheckUp", patientDataCheckUpViewModel);
+            return Content(@"<script>window.close();</script>", "text/html");
         }
 
         private async Task AssignIdOfPatient(PatientDataCheckUpViewModel patientDataCheckUpViewModel)

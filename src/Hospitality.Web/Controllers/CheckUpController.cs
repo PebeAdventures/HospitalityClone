@@ -20,20 +20,16 @@ namespace Hospitality.Web.Controllers
         private HttpClient _httpClient;
         private IMapper _mapper;
         private IPatientService _patientService;
-        private IExaminationService _examinationService;
 
-        public CheckUpController(IHttpClientFactory httpClientFactory, IMapper mapper, IPatientService patientService, IExaminationService examinationService)
+        public CheckUpController(IHttpClientFactory httpClientFactory, IMapper mapper, IPatientService patientService)
         {   
             _httpClient = httpClientFactory.CreateClient();
             _mapper = mapper;
             _patientService = patientService;
-            _examinationService = examinationService;
         }
         [HttpGet]
         public async Task<IActionResult> CheckUp(PatientDataCheckUpViewModel? patientDataCheckUpViewModel)
         {
-            var availableExaminatios = await _examinationService.GetAvailableExaminations(HttpContext.Session.GetString("token"));
-            patientDataCheckUpViewModel.AvailableExaminations = availableExaminatios.Select(x => x.Name).ToList();
             if (patientDataCheckUpViewModel.PatientId != 0 || patientDataCheckUpViewModel.PatientId != null)
             {
                 return View(patientDataCheckUpViewModel);
@@ -53,26 +49,11 @@ namespace Hospitality.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> NewCheckUp(PatientDataCheckUpViewModel patientDataCheckUpViewModel)
         {
-
             patientDataCheckUpViewModel.DoctorId = 1;
             var newCheckUpDTO = _mapper.Map<NewCheckUpDTO>(patientDataCheckUpViewModel);
             await SaveNewCheckupAsync(newCheckUpDTO, "https://localhost:7236/api/CheckUp");
             return RedirectToAction("Index", "Home", null);
         }
-
-        private async Task<List<ExaminationTypeDto>> GetAvailableExaminations()
-        {
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
-            var response = await _httpClient.GetAsync("https://localhost:7236/api/Examination/TypesOfExaminations");
-            if (!response.IsSuccessStatusCode || response is null)
-                throw new Exception("Null response exception");
-            var availableExaminations = JsonConvert.DeserializeObject<List<ExaminationTypeDto>>(await response.Content.ReadAsStringAsync());
-            if (availableExaminations is null)
-                throw new Exception("Null response exception");
-            return availableExaminations;
-        }
-
-        
 
         private async Task SaveNewCheckupAsync(NewCheckUpDTO newCheckup, string url)
         {
