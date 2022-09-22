@@ -38,8 +38,10 @@ namespace Hospitality.Examination.API.Controllers
             {
                 Status = (int)ExaminationStatus.InProgress,
                 ExaminationTypeId = examinationDto.ExaminationTypeId,
-                PatientId = examinationDto.PatientId
-            });;
+                PatientId = examinationDto.PatientId,
+                Description = ""
+               
+            });
             return CreatedAtAction("GetExaminationById", new { id = examination.Id }, examination);
         }
     }
