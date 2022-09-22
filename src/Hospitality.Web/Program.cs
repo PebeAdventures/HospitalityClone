@@ -10,12 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<IPatientService, PatientService>();
+builder.Services.AddScoped<IInsuranceService, InsuranceService>();
 builder.Services.AddScoped<IExaminationService, ExaminationService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddDistributedMemoryCache();
 var mapConfig = new MapperConfiguration(c =>
 {
     c.AddProfile(new PatientResultViewModelProfile());
+    c.AddProfile(new PatientDataCheckUpViewModelProfile());
 });
 
 var mapper = mapConfig.CreateMapper();

@@ -9,12 +9,12 @@
 <body>
 
 <content>
-                @using (Html.BeginForm("CheckUp", "CheckUp"))
+                @using (Html.BeginForm("NewCheckUp", "CheckUp", FormMethod.Post))
         
 {
     <div style="display:none">
-				@Html.TextBoxFor(model=>model.PeselOfPatient)
-				@Html.TextBoxFor(model=>model.IdPatient)
+				@Html.TextBoxFor(model=>model.PatientPesel)
+				@Html.TextBoxFor(model=>model.PatientId)
 
 		</div>
             <div id="checkUpForm">
@@ -50,8 +50,6 @@
 
     @using (Html.BeginForm("Examination", "Examination", FormMethod.Post, new { target = "_blank" }))
     {
-        @*@Html.HiddenFor(m => m.PatientPesel, Model.PatientPesel)
-        @Html.DropDownListFor(m => m.ChosenExamination, new SelectList(Model.AvailableExaminations), "--Select Specialist--", new { style="font-size:120%;"})*@
         <br>
             <button id="finishButton" typeof="submit" class="btn btn-primary"  data-bs-toggle="modal"  data-bs-target="#exampleModal" >  Order an examination  </button>
     }

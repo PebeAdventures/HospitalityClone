@@ -12,5 +12,6 @@ namespace Hospitality.Web.Models
         public string ChosenExamination { get; set; }
         public int ChosenExaminationId { get; set; }
         public List<string> AvailableExaminations { get; set; }
+        public bool IsInsured { get; set; }
     }
 }

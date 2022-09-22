@@ -23,35 +23,34 @@ namespace Hospitality.Web.Controllers
         private HttpClient _httpClient;
         private IMapper _mapper;
         private IPatientService _patientService;
+        private IInsuranceService _insuranceService;
 
-        public CheckUpController(IHttpClientFactory httpClientFactory, IMapper mapper, IPatientService patientService)
+        public CheckUpController(IHttpClientFactory httpClientFactory, IMapper mapper, IPatientService patientService, IInsuranceService insuranceService)
         {   
             _httpClient = httpClientFactory.CreateClient();
             _mapper = mapper;
             _patientService = patientService;
+            _insuranceService = insuranceService;
         }
         [HttpGet]
         public async Task<IActionResult> CheckUp(PatientDataCheckUpViewModel? patientDataCheckUpViewModel)
         {
-            if (patientDataCheckUpViewModel.PatientId != 0 || patientDataCheckUpViewModel.PatientId != null)
+            if (patientDataCheckUpViewModel.PatientId == 0)
             {
-                return View(patientDataCheckUpViewModel);
+                patientDataCheckUpViewModel.PatientId = await _patientService.GetIdOfPatient($"https://localhost:7236/api/Patient?pesel={patientDataCheckUpViewModel.PatientPesel}", HttpContext.Session.GetString("token"));
+                if (patientDataCheckUpViewModel.PatientId == 0)
+                    return RedirectToAction("StartVisit", "StartVisit", patientDataCheckUpViewModel);
             }
-            else
-            {
-                var idOfPatient = await _patientService.GetIdOfPatient($"https://localhost:7236/api/Patient?pesel={patientDataCheckUpViewModel.PatientPesel}", HttpContext.Session.GetString("token"));
-                if (idOfPatient != 0)
-                {
-                    patientDataCheckUpViewModel.PatientId = idOfPatient;
-                    return View(patientDataCheckUpViewModel);
-                }
-                else return RedirectToAction("StartVisit", "StartVisit", patientDataCheckUpViewModel);
-            }
+            if (patientDataCheckUpViewModel.IsInsured == null)
+                patientDataCheckUpViewModel.IsInsured = await _insuranceService.CheckHealthInsurance(patientDataCheckUpViewModel.PatientId, HttpContext.Session.GetString("token"));
+            return View(patientDataCheckUpViewModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> NewCheckUp(PatientDataCheckUpViewModel patientDataCheckUpViewModel)
         {
+            if (patientDataCheckUpViewModel.PatientId == 0 || patientDataCheckUpViewModel.PatientId == null)
+                patientDataCheckUpViewModel.PatientId = await _patientService.GetIdOfPatient($"https://localhost:7236/api/Patient?pesel={patientDataCheckUpViewModel.PatientPesel}", HttpContext.Session.GetString("token"));
             patientDataCheckUpViewModel.DoctorId = 1;
             var newCheckUpDTO = _mapper.Map<NewCheckUpDTO>(patientDataCheckUpViewModel);
             await SaveNewCheckupAsync(newCheckUpDTO, "https://localhost:7236/api/CheckUp");

@@ -16,7 +16,8 @@ namespace Hospitality.Web.Mapper
                 .ForMember(ncd => ncd.IdPatient, src => src.MapFrom(pdcvm => pdcvm.PatientId))
                 .ForMember(ncd => ncd.PeselOfPatient, src => src.MapFrom(pdcvm => pdcvm.PatientPesel))
                 .ForMember(ncd => ncd.IdDoctor, src => src.MapFrom(pdcvm => pdcvm.DoctorId))
-                .ForMember(ncd => ncd.Description, src => src.MapFrom(pdcvm => pdcvm.Description));
+                .ForMember(ncd => ncd.Description, src => src.MapFrom(pdcvm => pdcvm.Description))
+                .ForMember(ncd => ncd.IsInsured, src => src.MapFrom(pdcvm => pdcvm.IsInsured));
 
         }
     }
