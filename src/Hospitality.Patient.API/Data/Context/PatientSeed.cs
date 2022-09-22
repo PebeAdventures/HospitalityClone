@@ -13,7 +13,7 @@
                 PatientPesel = "99112234543",
                 BirthDate = new DateTime(1999, 11, 22),
                 Address = "Wrzosowa",
-                Email = "aniela.nowak@gmail.com",
+                Email = "aniela.nowak@proton.me",
                 PhoneNumber = "213769420",
                 IsInsured = true,
             }); 
@@ -26,7 +26,7 @@
                 PatientPesel = "98112234543",
                 BirthDate = new DateTime(1998, 11, 22),
                 Address = "Jaworowa",
-                Email = "ania.okrasa@gmail.com",
+                Email = "ania.okrasa@proton.me",
                 PhoneNumber = "123456456",
                 IsInsured = true,
             }); 
@@ -39,7 +39,7 @@
                 PatientPesel = "97112234543",
                 BirthDate = new DateTime(1997, 11, 22),
                 Address = "Fiołkowa",
-                Email = "michal.jakos@gmail.com",
+                Email = "michal.jakos@proton.me",
                 PhoneNumber = "456789123",
                 IsInsured = true,
             }); 
@@ -52,7 +52,7 @@
                 PatientPesel = "98122255543",
                 BirthDate = new DateTime(1998, 12, 22),
                 Address = "Jaworowa",
-                Email = "olaf.olal@gmail.com",
+                Email = "michal.jakos@proton.me",
                 PhoneNumber = "999456456",
                 IsInsured = false,
             }); 
@@ -65,7 +65,7 @@
                 PatientPesel = "97102233343",
                 BirthDate = new DateTime(1997, 10, 22),
                 Address = "Fiołkowa",
-                Email = "dawid.jac@gmail.com",
+                Email = "ania.okrasa@proton.me",
                 PhoneNumber = "458889123",
                 IsInsured = true,
             }); 

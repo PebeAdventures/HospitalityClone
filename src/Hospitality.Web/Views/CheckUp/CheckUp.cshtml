@@ -44,14 +44,18 @@
                         @Html.TextAreaFor(x => x.Description, new { @class = "checkUp",  @rows = 16, @value = @Model.Description})
                     </div>
                 <br>
+                <button id="finishButton" typeof="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">  Finish visit  </button>
+            }
 
-    @using (Html.BeginForm("Examination", "Examination", FormMethod.Post, new { target = "_blank" }))
+                @using (Html.BeginForm("Examination", "Examination", FormMethod.Post, new { target = "_blank" }))
     {
+                    <div style="display:none">
+                    @Html.TextBoxFor(model=>model.PatientPesel)
+                    @Html.TextBoxFor(model=>model.PatientId)
+                </div>
         <br>
             <button id="finishButton" typeof="submit" class="btn btn-primary"  data-bs-toggle="modal"  data-bs-target="#exampleModal" >  Order an examination  </button>
     }
-                <button id="finishButton" typeof="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">  Finish visit  </button>
-            }
 
 
         </div>

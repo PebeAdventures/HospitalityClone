@@ -91,7 +91,7 @@ namespace Hospitality.Examination.Persistance.Migrations
                         {
                             Id = 4,
                             Duration = 60000000L,
-                            Name = "RTG zębów"
+                            Name = "RTG celowane na ząb obrotnika"
                         },
                         new
                         {
@@ -128,48 +128,6 @@ namespace Hospitality.Examination.Persistance.Migrations
                             Id = 10,
                             Duration = 60000000L,
                             Name = "Gastroskopia"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Duration = 60000000L,
-                            Name = "Hashimoto"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Duration = 60000000L,
-                            Name = "HPV test"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Duration = 60000000L,
-                            Name = "Żelazo (krew)"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Duration = 60000000L,
-                            Name = "Witamina B12"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Duration = 60000000L,
-                            Name = "Wzrok"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Duration = 60000000L,
-                            Name = "Test na HIV"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Duration = 60000000L,
-                            Name = "Spirometria podstawowa"
                         });
                 });
 
