@@ -17,10 +17,10 @@ namespace Hospitality.Web.Controllers
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
     public class ResultController : Controller
     {
-
         private HttpClient _httpClient;
         private List<ExaminationInfoDto> examinationInfoDto;
         private IExaminationService _examinationService;
+
         public ResultController(IHttpClientFactory httpClientFactory, IExaminationService examinationService)
         {
             _httpClient = httpClientFactory.CreateClient();
@@ -31,30 +31,15 @@ namespace Hospitality.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Result(string patientId)
         {
-
-            // var patientExaminations = await CurrentPatientExaminations($"https://localhost:7236/api/Examination/PatientExaminationsResults?id={patientId}", HttpContext.Session.GetString("token"));
-            //patientDataCheckUpViewModel.IsInsured = await _insuranceService.CheckHealthInsurance(patientDataCheckUpViewModel.PatientId, HttpContext.Session.GetString("token"));
-            GetPatientExaminationsQuery getPatientExaminationsQuery = new GetPatientExaminationsQuery() { PatientId = 1 };
+            GetPatientExaminationsQuery getPatientExaminationsQuery = new GetPatientExaminationsQuery() { PatientId = int.Parse(patientId) };
             var patientExaminations = await _examinationService.GetPatientExaminations(getPatientExaminationsQuery, HttpContext.Session.GetString("token"));
             if (patientExaminations != null)
             {
-
-                //foreach (var examination in patientExaminations)
-                //{
-                //    examinationInfoDto.Add(new ExaminationInfoDto()
-                //    {
-                //        Id = examination.Id,
-                //        Description = examination.Description,
-                //        // TypeName = examination.Type.Name,
-                //        Status = examination.Status.ToString()
-                //    });
-                //}
                 return View(patientExaminations);
             }
             examinationInfoDto = new List<ExaminationInfoDto>() { new ExaminationInfoDto(){TypeName="no examinations",
                 Description="This patient dont have any examinations", Id=0 } };
             return View(examinationInfoDto);
-
         }
 
         private async Task<List<ExaminationInfo>> CurrentPatientExaminations(string url)
@@ -66,8 +51,5 @@ namespace Hospitality.Web.Controllers
             if (examinationInfo is null) return null;
             return examinationInfo;
         }
-
-
-
     }
 }

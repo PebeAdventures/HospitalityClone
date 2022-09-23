@@ -34,15 +34,13 @@ namespace Hospitality.Web.Services
 
         public async Task<List<ExaminationInfoDto>> GetPatientExaminations(GetPatientExaminationsQuery getPatientExaminationsQuery, string token)
         {
-
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             int patientId = getPatientExaminationsQuery.PatientId;
-            var response = await _httpClient.GetAsync($"https://localhost:7236/api/Examination/PatientExaminationsResults?id={patientId}");
+            var response = await _httpClient.GetAsync(_configuration["Paths:PatientExaminationResults"] + patientId);
             if (!response.IsSuccessStatusCode || response is null) return null;
             List<ExaminationInfoDto> examinationInfo = JsonConvert.DeserializeObject<List<ExaminationInfoDto>>(await response.Content.ReadAsStringAsync());
             if (examinationInfo is null) return null;
             return examinationInfo;
         }
-
     }
 }

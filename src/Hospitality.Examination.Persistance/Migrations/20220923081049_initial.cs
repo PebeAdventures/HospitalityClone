@@ -4,7 +4,7 @@
 
 namespace Hospitality.Examination.Persistance.Migrations
 {
-    public partial class First : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
