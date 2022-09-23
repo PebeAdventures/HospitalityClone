@@ -19,9 +19,12 @@ namespace HostedService
             Thread.Sleep(examinationExecutionDto.Duration);
             Debug.WriteLine(" Thread.Sleep is finished.");
             int examinationType = examinationExecutionDto.ExaminationTypeId;
-            if (examinationType == 1)
+            if (examinationType == 1 || examinationType == 2)
             {
                 examinationExecutionDto.Description = getFakeExaminationResult(examinationType);
+            } else
+            {
+                examinationExecutionDto.Description = ""; 
             }
             // string modifiedJSON = JsonConvert.SerializeObject(examinationExecutionDto);
             return examinationExecutionDto;
@@ -32,6 +35,7 @@ namespace HostedService
             switch (examinationType)
             {
                 case 1: return setBiohemiaResult();
+                case 2: return setCardiacUltrasound();
             }
 
             return "Not examination result";
@@ -43,6 +47,13 @@ namespace HostedService
             return ($"Leukocyty: {newResult.Leukocyty},\nErytrocyty: {newResult.Erytrocyty}\nHemoglobina: {newResult.Hemoglobina}," +
                 $"\nHematokryt: {newResult.Hematokryt},\nMCV: {newResult.MCV},\nMCHC:{newResult.MCHC},\nPDW:{newResult.PDW},\n" +
                 $"MPV: {newResult.MPV},\nNEU%: {newResult.NEU},\nLYMPH%:{newResult.LYMPH},\nMON%: {newResult.MON}");
+        }
+
+        private string setCardiacUltrasound()
+        {
+            CardiacUltrasound newResult = new CardiacUltrasound();
+            return ($"\nLewa komora: {newResult.LewaKomora},\nPrawa komora: {newResult.PrawaKomora}\nPrzegroda miedzykomorkowa: {newResult.PrzegrodaMiedzykomorkowa}," +
+                $"\nLewy przedsionek: {newResult.LewyPrzedsionek},\nPrawy przedsionek: {newResult.PrawyPrzedsionek},\nVSD:{newResult.VSD},\nTOF:{newResult.TOF}\nTGA:{newResult.TGA}\n");
         }
     }
 }

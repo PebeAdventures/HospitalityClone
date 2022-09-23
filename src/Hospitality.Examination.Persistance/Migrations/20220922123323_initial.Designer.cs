@@ -11,8 +11,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hospitality.Examination.Persistance.Migrations
 {
     [DbContext(typeof(ExaminationContext))]
+<<<<<<<< HEAD:src/Hospitality.Examination.Persistance/Migrations/20220922123323_initial.Designer.cs
     [Migration("20220922123323_initial")]
     partial class initial
+========
+    [Migration("20220922161741_First")]
+    partial class First
+>>>>>>>> examinationResults:src/Hospitality.Examination.Persistance/Migrations/20220922161741_First.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

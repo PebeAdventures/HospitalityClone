@@ -1,5 +1,5 @@
-﻿
-@model List<ResultClass>
+﻿@using Hospitality.Common.DTO.Examination
+@model List<ExaminationInfoDto>
 
 
 <head>
@@ -11,16 +11,16 @@
      
                     <table class="table table-hover table-striped">  
                         <tr>  
-                            <th>name </th>  
-                            <th>result </th>  
-                            <th>cena </th>  
+                            <th>Id </th>  
+                            <th>Description </th>  
+                            <th>Status </th>  
                         </tr>  
                         @foreach (var d in Model)  
                         {  
                             <tr>  
-                                <td>@d.name</td>  
-                                <td>@d.result</td>  
-                                <td>@d.price</td>    
+                                <td>@d.Id</td>  
+                                <td>@d.Description</td> 
+                                <td>@d.Status</td>
                             </tr>  
                         }  
                     </table> 
@@ -31,11 +31,13 @@
                
 
                      <p class="buttons">
-                             <a asp-controller="CheckUp" asp-action="CheckUp">
-                             <button id="backButton" type="button" class="btn btn-primary" data-toggle="modal">  Back to check up  </button>
+                           
+                             <button id="backButton" type="button" class="btn btn-primary" data-toggle="modal" OnClick= "window.close()" > Close window </button>
                         </a>
                      </p>
                  
+                    
+
 
 </body>
  
