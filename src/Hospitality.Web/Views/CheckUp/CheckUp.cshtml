@@ -48,7 +48,7 @@
 
 
 
-            @using (Html.BeginForm("CheckUp", "CheckUp"))
+            @using (Html.BeginForm("NewCheckUp", "CheckUp", FormMethod.Post))
             {
                 <div style="display:none">
                     @Html.TextBoxFor(model=>model.PatientPesel)
