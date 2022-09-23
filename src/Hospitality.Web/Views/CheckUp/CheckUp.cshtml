@@ -1,5 +1,6 @@
 ﻿@using Hospitality.Common.DTO.CheckUp
 @model Hospitality.Web.Models.PatientDataCheckUpViewModel
+
 @{
     ViewData["Title"] = "Check Up";
 }
@@ -7,54 +8,64 @@
     <link rel="stylesheet" href="~/css/CheckUp.css" asp-append-version="true" />
 </head>
 <body>
+    <content>
+        <div id="checkUpForm">
+            <h3>Symptoms and recommendations </h3>
+            <br>
+            <div class="wrapper">
+                @if (Model.IsInsured)
+                {
+                    <p class="insured">   Patient is Insured</p>
+                }
+                else
+                {
+                    <p class="notInsured">   Patient is not Insured</p>
+                }
 
-<content>
-                @using (Html.BeginForm("NewCheckUp", "CheckUp", FormMethod.Post))
-        
-{
-    <div style="display:none">
-				@Html.TextBoxFor(model=>model.PatientPesel)
-				@Html.TextBoxFor(model=>model.PatientId)
+                <div>
+                    @using (Html.BeginForm("Result", "Result", FormMethod.Post, new { target = "_blank" }))
+                    {
+                        <div style="display:none">
+                            <input type="text" name="patientId" value=@Model.PatientId />
+                        </div>
+                        <input type="submit" id="resultInput" class="btn btn-primary btn-lg" value="Examination results"/>
+                    }
 
-		</div>
-            <div id="checkUpForm">
-                        <h3>Symptoms and recommendations </h3><br>
-                      <div>
-                          @if(Model.IsInsured){
-                             <p class="insured"> Patient is Insured</p>
-                          } else{
-                              <p class="notInsured"> Patient is not Insured</p>
-                          }                                    
-                                    </div>
-                    <div class="wrapper">
-                       
-                               <div class="checkUp">
-                          @Html.TextAreaFor(x => x.Description, new { @class = "checkUp",  @rows = 15} )         
-                                </div>
-                                <div>
-                                </div>
+                    @using (Html.BeginForm("Examination", "Examination", FormMethod.Post, new { target = "_blank" }))
+                    {
+                        <div style="display:none">
+                            @Html.TextBoxFor(model=>model.PatientPesel)
+                            @Html.TextBoxFor(model=>model.PatientId)
+                        </div>
+                        <br>
 
-                                <div class="buttons">
-                                    <a asp-controller="Result" asp-action="Result">
-                                      <button id="resultButton" type="button" class="btn btn-primary">  Test results  </button>
-                                    </a>
-                                
-                                 </div>
-                                </div>
-                                  <br>
-                                    <button id="finishButton" typeof="submit" class="btn btn-primary"  data-bs-toggle="modal"  data-bs-target="#exampleModal" >  Finish visit  </button>
-                                </div>
-                                 <div class="modal-dialog">
+                        <input type="submit" id="orderInput" class="btn btn-primary btn-lg" value="Order an examination"/>
+                    }
+
                 </div>
-    }
 
-    @using (Html.BeginForm("Examination", "Examination", FormMethod.Post, new { target = "_blank" }))
-    {
-        <br>
-            <button id="finishButton" typeof="submit" class="btn btn-primary"  data-bs-toggle="modal"  data-bs-target="#exampleModal" >  Order an examination  </button>
-    }
+            </div>
 
-</content>
+
+
+            @using (Html.BeginForm("NewCheckUp", "CheckUp", FormMethod.Post))
+            {
+                <div style="display:none">
+                    @Html.TextBoxFor(model=>model.PatientPesel)
+                    @Html.TextBoxFor(model=>model.PatientId)
+                </div>
+
+                <div class="checkUp">
+                    @Html.TextAreaFor(x => x.Description, new { @class = "checkUp",  @rows = 14, @value = @Model.Description})
+                </div>
+                <br>
+                <button id="finishButton" typeof="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">  Finish visit  </button>
+            }
+
+
+
+        </div>
+    </content>
 
 
 

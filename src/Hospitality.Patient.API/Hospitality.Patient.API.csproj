@@ -27,7 +27,11 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+<<<<<<< HEAD
     <Folder Include="Migrations\" />
+=======
+    <Folder Include="Middlewares\" />
+>>>>>>> examinationResults
   </ItemGroup>
 
   <ItemGroup>
