@@ -22,10 +22,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IUpdateExamination, UpdateExamination>();
 builder.Services.AddTransient<IRabbitMqService, RabbitMQPublisher>();
-<<<<<<< HEAD
-=======
+
 builder.Services.AddHostedService<RabbitMQConsumer>();
->>>>>>> examinationResults
+
 builder.Services.AddCustomCors();
 builder.Services.AddTransient<IExaminationRepository, ExaminationRepository>();
 builder.Services.AddTransient<IExaminationTypesRepository, ExaminationTypesRepository>();
