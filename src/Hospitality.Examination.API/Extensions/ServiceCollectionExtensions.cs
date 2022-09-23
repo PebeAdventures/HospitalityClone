@@ -1,4 +1,5 @@
-﻿using Hospitality.Examination.Application.Contracts.Persistence;
+﻿using Hospitality.Examination.API.Middlewares;
+using Hospitality.Examination.Application.Contracts.Persistence;
 using Hospitality.Examination.Persistance.Repositories;
 
 namespace Hospitality.Examination.API.Extensions
@@ -24,7 +25,7 @@ namespace Hospitality.Examination.API.Extensions
         {
             services.AddScoped<IExaminationRepository, ExaminationRepository>();
             services.AddScoped<IExaminationTypesRepository, ExaminationTypesRepository>();
-
+            services.AddScoped<ExceptionHandlerMiddleware>();
         }
     }
 }
