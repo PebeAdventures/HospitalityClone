@@ -1,7 +1,7 @@
 ﻿@model Hospitality.Web.Models.PatientDataCheckUpViewModel
 
 <head>
-    <link rel="stylesheet" href="~/css/Result.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Examination.css" asp-append-version="true" />
 </head>
 
 <body>
@@ -10,7 +10,7 @@
             @using (Html.BeginForm("OrderAnExamination", "Examination", FormMethod.Post))
             {
                 @Html.HiddenFor(m => m.PatientPesel, Model.PatientPesel)
-                @Html.DropDownListFor(m => m.ChosenExamination, new SelectList(Model.AvailableExaminations), "--Select Examination--", new { style="font-size:120%;"})
+                @Html.DropDownListFor(m => m.ChosenExamination, new SelectList(Model.AvailableExaminations), "--Select Examination--", new { style="font-size:150%;"})
                 <br>
                     <button id="finishButton" typeof="submit" class="btn btn-primary"  data-bs-toggle="modal"  data-bs-target="#exampleModal" >  Order an examination  </button>
             }
