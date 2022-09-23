@@ -49,11 +49,11 @@ namespace EmailService.EmailHostedService
                 {
                     messageText = $"Hello, {examinationExecutionDto.PatientName} {examinationExecutionDto.PatientSurname}! \n" +
                                         $"Your examination \"{examinationExecutionDto.ExaminationTypeName}\" was finished.\nResults\n{examinationExecutionDto.ExaminationDescription}\n" +
-                                        $"Kind regards,\nHospitality";
+                                        $"\nKind regards,\nHospitality";
                 }
                 var message = new Message(new string[] { examinationExecutionDto.Email }, "Client message", messageText);
 
-                 _emailSender.SendEmail(message);
+                _emailSender.SendEmail(message);
             };
             _channel.BasicConsume(queue: _queueName, autoAck: true, consumer: consumer);
             return Task.CompletedTask;

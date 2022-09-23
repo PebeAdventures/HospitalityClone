@@ -31,10 +31,7 @@ namespace Hospitality.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Result(string patientId)
         {
-
-            // var patientExaminations = await CurrentPatientExaminations($"https://localhost:7236/api/Examination/PatientExaminationsResults?id={patientId}", HttpContext.Session.GetString("token"));
-            //patientDataCheckUpViewModel.IsInsured = await _insuranceService.CheckHealthInsurance(patientDataCheckUpViewModel.PatientId, HttpContext.Session.GetString("token"));
-            GetPatientExaminationsQuery getPatientExaminationsQuery = new GetPatientExaminationsQuery() { PatientId = 1 };
+            GetPatientExaminationsQuery getPatientExaminationsQuery = new GetPatientExaminationsQuery() { PatientId = int.Parse(patientId) };
             var patientExaminations = await _examinationService.GetPatientExaminations(getPatientExaminationsQuery, HttpContext.Session.GetString("token"));
             if (patientExaminations != null)
             {

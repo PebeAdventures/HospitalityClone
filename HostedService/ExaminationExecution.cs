@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using Hospitality.Common.DTO.Examination;
-using System.Diagnostics;
+﻿using Hospitality.Common.DTO.Examination;
 using Hospitality.Common.FakeExamination;
+using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace HostedService
 {
@@ -23,11 +23,12 @@ namespace HostedService
             if (examinationType == 1 || examinationType == 2)
             {
                 examinationExecutionDto.Description = getFakeExaminationResult(examinationType);
-            } else
-            {
-                examinationExecutionDto.Description = ""; 
             }
-           // string modifiedJSON = JsonConvert.SerializeObject(examinationExecutionDto);
+            else
+            {
+                examinationExecutionDto.Description = "Badania do odbioru u lekarza prowadzącego";
+            }
+            // string modifiedJSON = JsonConvert.SerializeObject(examinationExecutionDto);
             return examinationExecutionDto;
         }
 
@@ -37,9 +38,10 @@ namespace HostedService
             {
                 case 1: return setBiohemiaResult();
                 case 2: return setCardiacUltrasound();
+
             }
 
-            return "Not examination result";
+            return "default";
 
         }
 

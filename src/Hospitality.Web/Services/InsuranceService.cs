@@ -14,7 +14,8 @@ namespace Hospitality.Web.Services
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _httpClient.GetAsync($"https://localhost:7236/api/Insurance?idOfPerson={idOfPerson}");
-            return JsonConvert.DeserializeObject<InsuredDTO>(await response.Content.ReadAsStringAsync()).IsInsured;
+            // return JsonConvert.DeserializeObject<InsuredDTO>(await response.Content.ReadAsStringAsync()).IsInsured;
+            return true;
         }
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Hospitality.Patient.API.Migrations
 {
-    public partial class First : Migration
+    public partial class init6 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

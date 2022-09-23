@@ -51,15 +51,15 @@ namespace Hospitality.Identity.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "86453362-8157-4e9b-8f52-c0d0055d44ba",
-                            ConcurrencyStamp = "0c4295dc-8368-4d91-b5b0-d171dc7b7036",
+                            Id = "c64b1c4d-4a3a-4c2c-b1fc-5d4253db742d",
+                            ConcurrencyStamp = "cb9e61ef-c9e7-4bb8-8d06-a0f4c0b2ea49",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         },
                         new
                         {
-                            Id = "6db8d427-4aca-43c2-a59c-c7fe5ffbb46c",
-                            ConcurrencyStamp = "535d7a33-4c91-4302-827f-313e4e28ea08",
+                            Id = "749ad7c1-e632-4872-a0ae-0df8b0d679e4",
+                            ConcurrencyStamp = "843799e3-048d-4133-bc03-a3917d9cfe06",
                             Name = "Receptionist",
                             NormalizedName = "RECEPTIONIST"
                         });
@@ -157,30 +157,30 @@ namespace Hospitality.Identity.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "631889f6-4585-48f9-91bc-33395bb6636a",
+                            Id = "f2a0fbc7-ff00-4615-8b00-40929d6e3c85",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1f51b83b-12e0-45d8-922b-9e42368ff9c8",
+                            ConcurrencyStamp = "abca844e-1aee-43bf-b930-3ee3a2a6ffee",
                             Email = "doctor",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "DOCTOR",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAcA5D/fgAparFncZRmVKkpjIyaGvriW6OY93avg2tFfqKMO4hFrki0KxxBEjqbBMQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIex68kNqCaWHCwzj0QKbBtn9mt7x8WC/uTE9Ew6bOOtP8pwQEEivpjzByOxicDiWQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6a9619cd-3472-49d2-880f-1fd07300955d",
+                            SecurityStamp = "22f5cfca-b82f-4ee3-a466-7788fc773608",
                             TwoFactorEnabled = false
                         },
                         new
                         {
-                            Id = "c9fc4534-a691-47ef-a8af-7e34d651b90a",
+                            Id = "cd3f4f9d-03e0-4db6-a10d-37ef3f9f04a3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e7a09c31-5e94-4515-8c5a-1d9638c3eed6",
+                            ConcurrencyStamp = "5a936521-044f-4ffb-afd2-c8dafd12f621",
                             Email = "receptionist",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "RECEPTIONIST",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN4gIagHwwCscrI9hBQQLKm4iFBngboH6KKxJTrusVmQo22KUQVmlkCW0MhCrJW+IA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFwxMh5pyMiT1p+u0pcQHLbX+OC2CYZKGWirBB/tNxJ5bPuSgRDahyN3fcCXCxvzMA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6345d04d-a422-4fc2-9b8a-6ac5612f4f42",
+                            SecurityStamp = "d14289e8-0258-4f54-8970-0acd47360ebc",
                             TwoFactorEnabled = false
                         });
                 });
@@ -249,13 +249,13 @@ namespace Hospitality.Identity.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "631889f6-4585-48f9-91bc-33395bb6636a",
-                            RoleId = "86453362-8157-4e9b-8f52-c0d0055d44ba"
+                            UserId = "f2a0fbc7-ff00-4615-8b00-40929d6e3c85",
+                            RoleId = "c64b1c4d-4a3a-4c2c-b1fc-5d4253db742d"
                         },
                         new
                         {
-                            UserId = "c9fc4534-a691-47ef-a8af-7e34d651b90a",
-                            RoleId = "6db8d427-4aca-43c2-a59c-c7fe5ffbb46c"
+                            UserId = "cd3f4f9d-03e0-4db6-a10d-37ef3f9f04a3",
+                            RoleId = "749ad7c1-e632-4872-a0ae-0df8b0d679e4"
                         });
                 });
 

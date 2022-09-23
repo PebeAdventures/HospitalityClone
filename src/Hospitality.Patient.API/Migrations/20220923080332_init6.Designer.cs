@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hospitality.Patient.API.Migrations
 {
     [DbContext(typeof(PatientContext))]
-    [Migration("20220922172404_First")]
-    partial class First
+    [Migration("20220923080332_init6")]
+    partial class init6
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
