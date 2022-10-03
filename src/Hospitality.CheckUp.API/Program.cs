@@ -17,6 +17,8 @@ builder.Services.AddDbContext<CheckUpContext>(options => options
     .UseSqlServer(builder.Configuration["checkupDB"]));
 
 builder.Services.AddCustomCors();
+
+
 var app = builder.Build();
 if (app.Environment.EnvironmentName != "Local")
 {

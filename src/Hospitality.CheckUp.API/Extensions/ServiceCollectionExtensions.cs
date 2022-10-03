@@ -6,9 +6,10 @@ namespace Hospitality.CheckUp.API.Extensions
     {
         public static void AddCustomCors(this IServiceCollection services)
         {
+            services.AddScoped<ExceptionHandlerMiddleware>();
             services.AddCors(options =>
             {
-                services.AddScoped<ExceptionHandlerMiddleware>();
+                
                 options.AddDefaultPolicy(
                     builder =>
                     {
