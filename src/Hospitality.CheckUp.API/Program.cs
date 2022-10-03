@@ -15,12 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CheckUpContext>(options => options
     .UseSqlServer(builder.Configuration["checkupDB"]));
-builder.Services.AddCors(o => o.AddDefaultPolicy(builder =>
-{
-    builder.AllowAnyOrigin()
-           .AllowAnyMethod()
-           .AllowAnyHeader();
-}));
+
 builder.Services.AddCustomCors();
 var app = builder.Build();
 if (app.Environment.EnvironmentName != "Local")
@@ -38,6 +33,8 @@ if (!app.Environment.IsProduction())
     app.UseSwaggerUI();
 }
 app.UseCors();
+
+app.UseCustomMiddlewares();
 
 app.UseAuthorization();
 

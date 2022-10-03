@@ -1,4 +1,5 @@
-﻿using Hospitality.Examination.Application.Contracts.Persistence;
+﻿using Hospitality.Common.Middlewares;
+using Hospitality.Examination.Application.Contracts.Persistence;
 using Hospitality.Examination.Persistance.Repositories;
 
 namespace Hospitality.Examination.API.Extensions
@@ -7,6 +8,7 @@ namespace Hospitality.Examination.API.Extensions
     {
         public static void AddCustomCors(this IServiceCollection services)
         {
+            services.AddScoped<ExceptionHandlerMiddleware>();
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
@@ -22,8 +24,9 @@ namespace Hospitality.Examination.API.Extensions
 
         public static void AddCustomServices(this IServiceCollection services)
         {
-            services.AddScoped<IExaminationRepository, ExaminationRepository>();
-            services.AddScoped<IExaminationTypesRepository, ExaminationTypesRepository>();
+            services.AddTransient<IExaminationRepository, ExaminationRepository>();
+            services.AddTransient<IExaminationTypesRepository, ExaminationTypesRepository>();
+
 
         }
     }

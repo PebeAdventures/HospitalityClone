@@ -1,4 +1,6 @@
-﻿namespace Hospitality.CheckUp.API.Extensions
+﻿using Hospitality.Common.Middlewares;
+
+namespace Hospitality.CheckUp.API.Extensions
 {
     public static class ServiceCollectionExtensions
     {
@@ -6,6 +8,7 @@
         {
             services.AddCors(options =>
             {
+                services.AddScoped<ExceptionHandlerMiddleware>();
                 options.AddDefaultPolicy(
                     builder =>
                     {

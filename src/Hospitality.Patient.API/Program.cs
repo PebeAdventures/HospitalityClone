@@ -8,12 +8,8 @@ builder.Services.AddDbContext<PatientContext>(options => options
     .UseSqlServer(builder.Configuration.GetConnectionString("PatientDb")), ServiceLifetime.Transient, ServiceLifetime.Transient);
 
 builder.Services.AddCustomServices();
-
 builder.Services.AddControllers();
 builder.Services.AddHostedService<PatientHostedServiceConsumer>();
-builder.Services.AddTransient<IPatientHostedServicePublisher, PatientHostedServicePublisher>();
-builder.Services.AddTransient<IPatientRepository, PatientRepository>();
-builder.Services.AddTransient<IPatientService, PatientService>();
 
 builder.Services.AddCustomCors();
 
@@ -48,6 +44,8 @@ if (!app.Environment.IsProduction())
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCustomMiddlewares();
 
 app.UseCors();
 
