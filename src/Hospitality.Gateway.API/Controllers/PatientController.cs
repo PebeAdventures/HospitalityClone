@@ -23,8 +23,11 @@ namespace Hospitality.Gateway.API.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
         [HttpGet]
         public async Task<IActionResult> GetPatientByPeselAsync(string pesel)
-            => Ok(await _httpClient.GetStringAsync(_configuration["Paths:GetPatientByPesel"] + pesel));
-
+        {
+            var link = _configuration["Paths:GetPatientByPesel"] + pesel;
+            var kupa = await _httpClient.GetStringAsync(link);
+            return Ok(kupa);
+        }
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Receptionist")]
         [HttpPost]
         public async Task<IActionResult> RegisterNewPatientAsync(PatientReceptionistViewDTO newPatient)

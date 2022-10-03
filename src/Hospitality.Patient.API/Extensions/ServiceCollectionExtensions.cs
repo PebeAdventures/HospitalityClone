@@ -1,5 +1,7 @@
 ﻿
 
+using Hospitality.Patient.API.Middlewares;
+
 namespace Hospitality.Patient.API.Extensions
 {
     public static class ServiceCollectionExtensions
@@ -23,6 +25,7 @@ namespace Hospitality.Patient.API.Extensions
         {
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<IPatientService, PatientService>();
+            services.AddScoped<ExceptionHandlerMiddleware>();
         }
 
     }
