@@ -13,22 +13,16 @@ let sendButton = document.querySelector('#sendButton');
 let saveButton = document.querySelector('#saveButton');
 let cancelButton = document.querySelector('#cancelButton');
 
-
-
-let regEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,3}$/g;
-let regName = /^[a-zA-Z]{2,50}$/g;
-let regSurname = /^[a-zA-Z]{2,50}$/g;
-let regAddress = /^[a-zA-Z\s-/0-9,]{4,150}$/g;
-let regPesel = /^[1-9][0-9]{10}$/g;
-let regPhone = /^[1-9][0-9]{8}$/g;
-
-
-
-
-
-
 sendButton.addEventListener("click", e => {
     console.log("Inside");
+    saveButton.style.visibility = "hidden";
+
+    let regEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,3}$/g;
+    let regName = /^[a-zA-Z\s]{2,50}$/g;
+    let regSurname = /^[a-zA-Z\s]{2,50}$/g;
+    let regAddress = /^[a-zA-Z\s-/0-9,]{4,150}$/g;
+    let regPesel = /^[1-9][0-9]{10}$/g;
+    let regPhone = /^[1-9][0-9]{8}$/g;
     console.log(nameTextBoxFor.value);
     console.log(surnameTextBoxFor.value);
     console.log(peselTextBoxFor.value);
@@ -49,7 +43,6 @@ sendButton.addEventListener("click", e => {
         errorMessage.innerHTML = "Name is too short";
     } else if (!isCorrectName) {
         errorMessage.innerHTML = "Name has wrong symbol";
-        console.log(isCorrectName);
     } else if (surnameTextBoxFor.value.length < 2) {
         errorMessage.innerHTML = "Surname is too short";
     } else if (!isCorrectSurname) {
@@ -66,9 +59,10 @@ sendButton.addEventListener("click", e => {
         errorMessage.innerHTML = "Wrong email format";
     } else if (!isCorrectPhone) {
         errorMessage.innerHTML = "Phone number shoud has 9 numbers";
-    } else if (specialistTextBoxFor.value == "none") {
+    } else if (specialistTextBoxFor.text == "none") {
         errorMessage.innerHTML = "Select specialist";
     } else {
+        errorMessage.innerHTML = "Would you like to save patient visit?";
         saveButton.style.visibility = "visible";
     }
 });
