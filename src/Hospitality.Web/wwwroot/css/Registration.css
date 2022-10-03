@@ -27,9 +27,9 @@ input {
 #insuranseInput {
     width: 25%
 }
-#resetButton, #insuranseButton, #dateOfBirthLabel, #dateOfBirthInput {
+/*#resetButton, #insuranseButton, #dateOfBirthLabel, #dateOfBirthInput {
     margin-left: 5%;
-}
+}*/
 
 #insuranseButton {
     width: 16%;

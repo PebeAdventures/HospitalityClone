@@ -8,11 +8,11 @@ namespace Hospitality.Web.Models
         public string? Result { get; set; }
 
         [Required]
-        [MinLength(3), MaxLength(25)]
+        [MinLength(3), MaxLength(40)]
         public string PatientName { get; set; }
 
         [Required]
-        [MinLength(3), MaxLength(25)]
+        [MinLength(3), MaxLength(40)]
         public string PatientSurname { get; set; }
 
         [Required]
@@ -20,11 +20,12 @@ namespace Hospitality.Web.Models
         public string PatientPesel { get; set; }
 
         [Required]
-        [DataType(DataType.DateTime)]
-        public DateTime BirthDate { get; set; }
+        [DataType(DataType.Date, ErrorMessage = "Date only")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime BirthDate { get; set; } = DateTime.Now;
 
         [Required]
-        [MinLength(3), MaxLength(25)]
+        [MinLength(3), MaxLength(100)]
         public string Address { get; set; }
 
         [Required]
