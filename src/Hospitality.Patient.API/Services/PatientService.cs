@@ -1,5 +1,7 @@
 ﻿using Hospitality.Common.DTO.CheckUp;
 using Hospitality.Common.DTO.Patient;
+using Hospitality.Common.Models.Exceptions;
+
 namespace Hospitality.Patient.API.Services
 {
     public class PatientService : IPatientService
@@ -15,6 +17,8 @@ namespace Hospitality.Patient.API.Services
 
         public async Task AddPatientAsync(PatientReceptionistViewDTO patientDTO)
         {
+            if (patientDTO is null)
+                throw new ResourceNotFoundException($"Patient cannot be empty");
             await _patientRepository.AddNewPatientAsync(new HospitalPatient
             {
                 PatientName = patientDTO.PatientName,
@@ -30,12 +34,16 @@ namespace Hospitality.Patient.API.Services
 
         public async Task<PatientDoctorViewDTO> GetPatientByPeselAsync(string pesel)
         {
+            if (pesel is null)
+                throw new ResourceNotFoundException($"Pesel cannot be empty");
             var patient = await _patientRepository.GetByPesel(pesel);
             return _mapper.Map<PatientDoctorViewDTO>(patient);
         }
 
         public async Task<PatientNotificationDTO> GetPatientByIDAsync(int patientID)
         {
+            if (patientID == 0)
+                throw new ResourceNotFoundException($"Pesel cannot be empty");
             var patient = await _patientRepository.GetPatientByID(patientID);
             return _mapper.Map<PatientNotificationDTO>(patient);
         }
