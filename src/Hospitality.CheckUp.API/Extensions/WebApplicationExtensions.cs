@@ -1,4 +1,4 @@
-﻿using Hospitality.CheckUp.API.Middlewares;
+﻿using Hospitality.Common.Middlewares;
 
 namespace Hospitality.CheckUp.API.Extensions
 {
