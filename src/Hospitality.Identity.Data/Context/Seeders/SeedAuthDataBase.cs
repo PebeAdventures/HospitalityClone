@@ -15,15 +15,19 @@ namespace SecondExam.AuthContext.Context.Seeders
             List<IdentityUser> identityUsers = new List<IdentityUser>()
             {
                 new IdentityUser {Id = Guid.NewGuid().ToString(), UserName = "Dr. House", Email = "doctor", NormalizedEmail = "DOCTOR"},
-                new IdentityUser {Id = Guid.NewGuid().ToString(), UserName = "Danuta Nowak", Email = "receptionist", NormalizedEmail = "RECEPTIONIST"}
+                new IdentityUser {Id = Guid.NewGuid().ToString(), UserName = "Dr. Dolittle", Email = "dolittle", NormalizedEmail = "DOLITTLE"},
+                new IdentityUser {Id = Guid.NewGuid().ToString(), UserName = "Dr. oetker", Email = "oetker", NormalizedEmail = "OETKER"},
+                new IdentityUser {Id = Guid.NewGuid().ToString(), UserName = "Danuta Nowak", Email = "receptionist", NormalizedEmail = "RECEPTIONIST"},
+                new IdentityUser {Id = Guid.NewGuid().ToString(), UserName = "Rafał Wyrwikoński", Email = "rafik", NormalizedEmail = "RAFIK"}
 
             };
-            var user = identityUsers[0];
-            var admin = identityUsers[1];
 
             PasswordHasher<IdentityUser> ph = new PasswordHasher<IdentityUser>();
-            user.PasswordHash = ph.HashPassword(user, "doctor");
-            admin.PasswordHash = ph.HashPassword(admin, "receptionist");
+            identityUsers[0].PasswordHash = ph.HashPassword(identityUsers[0], "doctor");
+            identityUsers[0].PasswordHash = ph.HashPassword(identityUsers[1], "dolittle");
+            identityUsers[0].PasswordHash = ph.HashPassword(identityUsers[2], "oetker");
+            identityUsers[3].PasswordHash = ph.HashPassword(identityUsers[3], "receptionist");
+            identityUsers[3].PasswordHash = ph.HashPassword(identityUsers[4], "rafik");
 
             List<IdentityUserRole<string>> identityUserRoles = new List<IdentityUserRole<string>>()
             {
@@ -34,8 +38,23 @@ namespace SecondExam.AuthContext.Context.Seeders
                 },
                 new IdentityUserRole<string>
                 {
-                    RoleId = identityRoles[1].Id,
+                    RoleId = identityRoles[0].Id,
                     UserId = identityUsers[1].Id,
+                },
+                new IdentityUserRole<string>
+                {
+                    RoleId = identityRoles[0].Id,
+                    UserId = identityUsers[2].Id,
+                },
+                new IdentityUserRole<string>
+                {
+                    RoleId = identityRoles[1].Id,
+                    UserId = identityUsers[3].Id,
+                },
+                new IdentityUserRole<string>
+                {
+                    RoleId = identityRoles[1].Id,
+                    UserId = identityUsers[4].Id,
                 }
             };
 

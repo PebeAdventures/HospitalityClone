@@ -18,22 +18,32 @@ namespace Hospitality.Web.Controllers
         private IMapper _mapper;
         private IInsuranceService _insuranceService;
         private readonly IConfiguration _configuration;
+        private IIdentityService _identityService;
 
-        public RegistrationController(IHttpClientFactory httpClientFactory, IMapper mapper, IInsuranceService insuranceService, IConfiguration configuration)
+        public RegistrationController(IHttpClientFactory httpClientFactory, IMapper mapper, IInsuranceService insuranceService, 
+            IConfiguration configuration, IIdentityService identityService)
         {
             _httpClient = httpClientFactory.CreateClient();
             _mapper = mapper;
             _insuranceService = insuranceService;
             _configuration = configuration;
+            _identityService = identityService;
         }
+
         [HttpGet]
         public async Task<IActionResult> Registration(PatientResultViewModel? Model)
         {
+
             if (Model.Result == "valid")
-                return View();
-            else 
+            {
+                return View(new PatientResultViewModel() { Doctors = await _identityService.GetAllDoctorsNamesAndIds(HttpContext.Session.GetString("token")) });
+            }
+            else
+            {
                 ViewBag.Invalid = Model.Result;
+                Model.Doctors = await _identityService.GetAllDoctorsNamesAndIds(HttpContext.Session.GetString("token"));
                 return View(Model);
+            }
         }
 
         [HttpPost]

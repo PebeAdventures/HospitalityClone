@@ -5,7 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace SecondExam.Services.Services.Auth
+namespace Hospitality.Identity.API.Services
 {
     public class LogInServicert : ILogInService
     {

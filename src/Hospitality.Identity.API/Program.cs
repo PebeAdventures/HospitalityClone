@@ -3,14 +3,24 @@ using Hospitality.Identity.Data.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using SecondExam.Services.Services.Auth;
+using Hospitality.Identity.API.Services;
 using System.Text;
+using AutoMapper;
+using Hospitality.Identity.API.Profiles;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<IdentityContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AuthDb")));
 builder.Services.AddScoped<ILogInService, LogInServicert>();
+builder.Services.AddTransient<IDoctorService, DoctorService>();
+var mapConfig = new MapperConfiguration(c =>
+{
+    c.AddProfile(new UserModelProfile());
+});
+
+var mapper = mapConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.RequireHttpsMetadata = false;

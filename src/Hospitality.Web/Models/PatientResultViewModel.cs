@@ -1,4 +1,5 @@
 ﻿using Hospitality.Common.DTO.Patient;
+using Hospitality.Common.DTO.Registration;
 using System.ComponentModel.DataAnnotations;
 
 namespace Hospitality.Web.Models
@@ -40,6 +41,9 @@ namespace Hospitality.Web.Models
         [DataType(DataType.Text)]
         public bool IsInsured { get; set; }
         [Required]
-        public SpecialistEnum Specialist { get; set; }
+        public List<DoctorDTO> Doctors { get; set; }
+        public DoctorDTO SelectedDoctor { get; set; }
+
+
     }
 }
