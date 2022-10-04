@@ -14,7 +14,7 @@ namespace Hospitality.Examination.RabbitMQ
         public RabbitMQPublisher(IConfiguration configuration)
         {
             _configuration = configuration;
-            _hostName = _configuration.GetValue<string>("EXAMINATION_RABBITMQ_URL"); ;
+            _hostName = _configuration.GetValue<string>("EXAMINATION_RABBITMQ_URL");
         }
 
         public void SendMessage<T>(T message)

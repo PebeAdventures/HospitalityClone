@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: examination 
-        image: 
+        image: tomakovv/hospitality_examinations:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
