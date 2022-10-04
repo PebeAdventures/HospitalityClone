@@ -49,6 +49,7 @@ namespace SecondExam.Services.Services.Auth
                 new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                new Claim("Name", user.UserName),
                 new Claim("UserId", user.Id.ToString()),
             };
 

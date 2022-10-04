@@ -46,9 +46,9 @@ namespace Hospitality.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> NewCheckUp(PatientDataCheckUpViewModel patientDataCheckUpViewModel)
         {
+            patientDataCheckUpViewModel.DoctorId = Guid.Parse(User.Claims.Where(x => x.Type == "Id").First().Value);
             if (patientDataCheckUpViewModel.PatientId == 0 || patientDataCheckUpViewModel.PatientId == null)
                 patientDataCheckUpViewModel.PatientId = await _patientService.GetIdOfPatient(_configuration["Paths:GetPatientByPesel"] + patientDataCheckUpViewModel.PatientPesel, HttpContext.Session.GetString("token"));
-            patientDataCheckUpViewModel.DoctorId = 1;
             var newCheckUpDTO = _mapper.Map<NewCheckUpDTO>(patientDataCheckUpViewModel);
             await SaveNewCheckupAsync(newCheckUpDTO, _configuration["Paths:CreateCheckup"]);
             return RedirectToAction("Index", "Home", null);

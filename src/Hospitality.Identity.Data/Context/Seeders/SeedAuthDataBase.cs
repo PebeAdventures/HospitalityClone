@@ -14,8 +14,8 @@ namespace SecondExam.AuthContext.Context.Seeders
             };
             List<IdentityUser> identityUsers = new List<IdentityUser>()
             {
-                new IdentityUser {Id = Guid.NewGuid().ToString(), Email = "doctor", NormalizedEmail = "DOCTOR"},
-                new IdentityUser {Id = Guid.NewGuid().ToString(), Email = "receptionist", NormalizedEmail = "RECEPTIONIST"}
+                new IdentityUser {Id = Guid.NewGuid().ToString(), UserName = "Dr. House", Email = "doctor", NormalizedEmail = "DOCTOR"},
+                new IdentityUser {Id = Guid.NewGuid().ToString(), UserName = "Danuta Nowak", Email = "receptionist", NormalizedEmail = "RECEPTIONIST"}
 
             };
             var user = identityUsers[0];
