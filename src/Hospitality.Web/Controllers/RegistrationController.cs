@@ -20,14 +20,17 @@ namespace Hospitality.Web.Controllers
         private IMapper _mapper;
         private IInsuranceService _insuranceService;
         private readonly IConfiguration _configuration;
+        private IPatientService _patientService;
 
-        public RegistrationController(IHttpClientFactory httpClientFactory, IMapper mapper, IInsuranceService insuranceService, IConfiguration configuration)
+        public RegistrationController(IHttpClientFactory httpClientFactory, IMapper mapper, IInsuranceService insuranceService, IConfiguration configuration, IPatientService patientService)
         {
             _httpClient = httpClientFactory.CreateClient();
             _mapper = mapper;
             _insuranceService = insuranceService;
             _configuration = configuration;
+            _patientService = patientService;
         }
+
         [HttpGet]
         public async Task<IActionResult> Registration(PatientResultViewModel? Model)
         {

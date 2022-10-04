@@ -1,0 +1,77 @@
+﻿@using Hospitality.Common.DTO.Patient;
+@model Hospitality.Web.Models.AppointDoctorToPatientModel;
+
+<head>
+    <link rel="stylesheet" href="~/css/SignIn.css" asp-append-version="true" />
+
+</head>
+
+<body>
+
+    <div id="signInForm">
+        @using (Html.BeginForm("AppointDoctorToPatient", "AppointDoctor", FormMethod.Post))
+        {
+            <h2>Appoint Doctor to Patient</h2>
+
+            <br>
+            <div>
+                <p>
+                    <label id="emailLabel" for="">Patient Pesel</label><br>
+                    @Html.TextBoxFor(x => x.PatientPesel, new { style="width:100%;" })
+
+                </p>
+                <label id="doctorLabelLabel" for="">Select Doctor</label><br>
+
+
+                <p>
+                    @Html.DropDownListFor(m => m.Specialist, new SelectList(Enum.GetValues(typeof(SpecialistEnum))), "---", new { style="font-size:120%;", id="specialist"})
+                </p>
+            </div>
+
+            <br>
+            <p class="buttons">
+
+                <button id="sendButton" type="submit" class="btn btn-primary" data-toggle="modal">  Appoint  </button>
+                <button id="resetButton" class="btn btn-primary" type="reset">  Reset  </button>
+
+            </p>
+        }
+
+    </div>
+
+   <!-- Add validation PESEL -->
+
+    @if (ViewBag.Show == "show")
+    {
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="errorModalLabel"></h5>
+                        <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Wrong PESEL</h5>
+                    </div>
+                    <div class="modal-footer" id="modalForm">
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</body>
+
+
+@section Scripts {
+    @if (ViewBag.Show == "show")
+    {
+<script>
+    $(function(){
+        $("#exampleModal").modal("show");
+    });
+</script>
+    }
+}

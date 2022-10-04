@@ -20,7 +20,7 @@ namespace Hospitality.Gateway.API.Controllers
             _configuration = configuration;
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor, Receptionist")]
         [HttpGet]
         public async Task<IActionResult> GetPatientByPeselAsync(string pesel)
             => Ok(await _httpClient.GetStringAsync(_configuration["Paths:GetPatientByPesel"] + pesel));
