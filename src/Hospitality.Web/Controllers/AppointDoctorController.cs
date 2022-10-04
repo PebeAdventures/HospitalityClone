@@ -32,8 +32,12 @@ namespace Hospitality.Web.Controllers
             _configuration = configuration;
             _patientService = patientService;
         }
-        public IActionResult AppointDoctor()
+        public IActionResult AppointDoctor(bool? result)
         {
+            if (result == false)
+            {
+                ViewBag.Show = "show";
+            }
             return View();
         }
 
@@ -42,6 +46,10 @@ namespace Hospitality.Web.Controllers
         {
             var patientModel = model;
             var patient = await _patientService.GetIdOfPatient(_configuration["Paths:GetPatientByPesel"] + model.PatientPesel, HttpContext.Session.GetString("token"));
+            if (patient == 0)
+            {
+                return RedirectToAction("AppointDoctor", "AppointDoctor", new { result = false });
+            }
             return RedirectToAction("AppointDoctor", "AppointDoctor");
         }
 
