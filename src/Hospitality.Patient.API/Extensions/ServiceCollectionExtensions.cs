@@ -1,4 +1,6 @@
 ﻿
+using Hospitality.Common.Middlewares;
+using Hospitality.Patient.API.PatientHostedService;
 
 namespace Hospitality.Patient.API.Extensions
 {
@@ -6,6 +8,8 @@ namespace Hospitality.Patient.API.Extensions
     {
         public static void AddCustomCors(this IServiceCollection services)
         {
+            services.AddScoped<ExceptionHandlerMiddleware>();
+
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
@@ -21,8 +25,10 @@ namespace Hospitality.Patient.API.Extensions
 
         public static void AddCustomServices(this IServiceCollection services)
         {
-            services.AddScoped<IPatientRepository, PatientRepository>();
-            services.AddScoped<IPatientService, PatientService>();
+            services.AddTransient<IPatientHostedServicePublisher, PatientHostedServicePublisher>();
+            services.AddTransient<IPatientRepository, PatientRepository>();
+            services.AddTransient<IPatientService, PatientService>();
+
         }
 
     }

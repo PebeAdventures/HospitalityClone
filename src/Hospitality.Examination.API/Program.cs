@@ -24,8 +24,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IUpdateExamination, UpdateExamination>();
 builder.Services.AddTransient<IRabbitMqService, RabbitMQPublisher>();
 builder.Services.AddCustomCors();
-builder.Services.AddTransient<IExaminationRepository, ExaminationRepository>();
-builder.Services.AddTransient<IExaminationTypesRepository, ExaminationTypesRepository>();
+
+builder.Services.AddCustomServices();
 builder.Services.AddAutoMapper(typeof(ExaminationProfile));
 
 builder.Services.AddHostedService<RabbitMQConsumer>();
@@ -51,6 +51,8 @@ if (!app.Environment.IsProduction())
 }
 
 app.UseAuthorization();
+
+app.UseCustomMiddlewares();
 
 app.UseCors();
 
