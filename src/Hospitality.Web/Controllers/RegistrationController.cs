@@ -48,7 +48,7 @@ namespace Hospitality.Web.Controllers
             }
             model.Result = "valid";
             await RegisterNewPatient(model, _configuration["Paths:CreatePatient"]);
-            return RedirectToAction("Registration", "Registration", model);
+            return RedirectToAction("Registration", "Registration");
         }
 
         private async Task RegisterNewPatient(PatientResultViewModel model, string url)

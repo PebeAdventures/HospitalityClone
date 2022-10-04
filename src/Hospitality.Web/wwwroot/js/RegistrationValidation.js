@@ -59,7 +59,7 @@ sendButton.addEventListener("click", e => {
         errorMessage.innerHTML = "Wrong email format";
     } else if (!isCorrectPhone) {
         errorMessage.innerHTML = "Phone number shoud has 9 numbers";
-    } else if (specialistTextBoxFor.text == "none") {
+    } else if (specialistTextBoxFor.value == "none") {
         errorMessage.innerHTML = "Select specialist";
     } else {
         errorMessage.innerHTML = "Would you like to save patient visit?";
@@ -69,11 +69,18 @@ sendButton.addEventListener("click", e => {
 
 
 saveButton.addEventListener("click", e => {
-    form.reset();
+   // clearTextBoxFor()
 });
 
-cancelButton.addEventListener("click", e => {
-});
+function clearTextBoxFor() {
+    nameTextBoxFor.value = "";
+    surnameTextBoxFor.value = "";
+    addressTextBoxFor.value = "";
+    peselTextBoxFor.value = "";
+    emailTextBoxFor.value = "";
+    phoneTextBoxFor.value = "";
+    specialistTextBoxFor.value = "none";
+}
 
 
 
