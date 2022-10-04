@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: examination-deployment
+  labels:
+    app: examination
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: examination
+  template:
+    metadata:
+      labels:
+        app: examination
+    spec:
+      containers:
+      - name: examination 
+        image: 
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        - name: EXAMINATION_SQL_CONNECTONSTRING
+          valueFrom:
+            secretKeyRef:
+              name: secrets
+              key: examinationConnectionString
+        - name: EXAMINATION_RABBITMQ_URL
+          valueFrom:
+            configMapKeyRef:
+              name: configuration
+              key: rabbitmq-url
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: learningdiary-service
+spec:
+  type: ClusterIP  
+  selector:
+    app: learningdiary
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

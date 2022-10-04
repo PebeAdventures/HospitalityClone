@@ -19,7 +19,7 @@ spec:
         fsGroup: 1000
       containers:
       - name: mssql
-        image: mcr.microsoft.com/mssql/rhel/server:2019-latest
+        image: mcr.microsoft.com/mssql/server:2022-latest
         env:
         - name: MSSQL_PID
           value: "Developer"

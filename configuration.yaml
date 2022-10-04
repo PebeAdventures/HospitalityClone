@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configuration
+data:
+  mssql-url: mssql-service
+  rabbitmq-url: rabbitmq-hospitality

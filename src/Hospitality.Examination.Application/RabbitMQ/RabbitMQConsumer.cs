@@ -21,7 +21,7 @@ namespace Hospitality.Examination.RabbitMQ
         {
             _updateExamination = updateExamination;
             _configuration = configuration;
-            _hostName = _configuration["rabbitmq"];
+            _hostName = _configuration.GetValue<string>("EXAMINATION_RABBITMQ_URL");
             var factory = new ConnectionFactory { HostName = _hostName };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();

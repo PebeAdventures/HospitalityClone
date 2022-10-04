@@ -13,11 +13,12 @@ using Hospitality.Examination.API.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Configuration.
+    AddEnvironmentVariables(prefix: "EXAMINATION_");
 builder.Services.AddApplicationServices();
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ExaminationContext>(options => options
-    .UseSqlServer(builder.Configuration["examinationDb"]), ServiceLifetime.Transient, ServiceLifetime.Transient);
+    .UseSqlServer(builder.Configuration.GetValue<string>("EXAMINATION_SQL_CONNECTONSTRING")), ServiceLifetime.Transient, ServiceLifetime.Transient);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IUpdateExamination, UpdateExamination>();
