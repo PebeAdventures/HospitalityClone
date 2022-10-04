@@ -6,17 +6,12 @@
     {
         private readonly IPatientService _service;
         public PatientController(IPatientService service)
-        {
-            _service = service;
-        }
+            => _service = service;
 
         [HttpGet]
         [Route("Pesel")]
         public async Task<IActionResult> GetPatientByPeselAsync(string pesel)
-        {
-            var operationResult = await _service.GetPatientByPeselAsync(pesel);
-            return Ok(operationResult);
-        }
+            => Ok(await _service.GetPatientByPeselAsync(pesel));
 
         [HttpPost]
         public async Task<ActionResult<PatientDoctorViewDTO>> AddPatientAsync(PatientReceptionistViewDTO patientAddDTO)

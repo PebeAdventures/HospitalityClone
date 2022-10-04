@@ -1,17 +1,13 @@
-﻿using Hospitality.Web.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Hospitality.Common.DTO.Identity;
 using Newtonsoft.Json;
 using System.Text;
 using System.Net.Http.Headers;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Hospitality.Web.Controllers
 {
-
     public class SignInController : Controller
     {
-
         private HttpClient _httpClient;
         private readonly IConfiguration _configuration;
         public SignInController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
@@ -34,9 +30,7 @@ namespace Hospitality.Web.Controllers
         public IActionResult SignIn(bool? result)
         {
             if (result == false)
-            {
                 ViewBag.Show = "show";
-            }
             return View();
         }
 

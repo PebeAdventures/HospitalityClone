@@ -3,7 +3,6 @@ using Hospitality.Examination.Application.Functions.Examinations.Commands;
 using Hospitality.Examination.Application.Functions.Examinations.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using RabbitMQ.Client;
 using Hospitality.Examination.RabbitMQ;
 using Hospitality.Examination.Domain.Entities.Enums;
 
@@ -15,7 +14,6 @@ namespace Hospitality.Examination.API.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IRabbitMqService _mqService;
-
 
         public ExaminationController(IMediator mediator, IRabbitMqService mqService)
         {

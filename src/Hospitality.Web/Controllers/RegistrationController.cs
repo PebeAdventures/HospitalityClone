@@ -5,8 +5,6 @@ using System.Net.Http.Headers;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Hospitality.Common.DTO.Patient;
-using Hospitality.Common.DTO.NewFolder;
-using System;
 using Hospitality.Web.Models;
 using AutoMapper;
 using Hospitality.Web.Services.Interfaces;
@@ -54,7 +52,7 @@ namespace Hospitality.Web.Controllers
         private async Task RegisterNewPatient(PatientResultViewModel model, string url)
         {
             PatientReceptionistViewDTO mapedPatient = _mapper.Map<PatientReceptionistViewDTO>(model);
-            model.IsInsured = await _insuranceService.CheckHealthInsurance(mapedPatient.Id, HttpContext.Session.GetString("token"));
+            mapedPatient.IsInsured = await _insuranceService.CheckHealthInsurance(mapedPatient.Id, HttpContext.Session.GetString("token"));
             var json = JsonConvert.SerializeObject(mapedPatient);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
