@@ -17,7 +17,7 @@ namespace Hospitality.CheckUp.API.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.8")
+                .HasAnnotation("ProductVersion", "6.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -34,8 +34,8 @@ namespace Hospitality.CheckUp.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdDoctor")
-                        .HasColumnType("int");
+                    b.Property<Guid>("IdDoctor")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("IdPatient")
                         .HasColumnType("int");

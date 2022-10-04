@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="~/css/CheckUp.css" asp-append-version="true" />
 </head>
 <body>
+    @{
+        Model.DoctorId = Guid.Parse(User.Claims.Where(x=>x.Type == "Id").First().Value);
+    }
     <content>
         <div id="checkUpForm">
             <h3>Symptoms and recommendations </h3>
