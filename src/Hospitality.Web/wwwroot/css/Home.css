@@ -40,3 +40,8 @@ content {
 button{
     margin-top: 10px;
 }
+#submitButton {
+    margin-left: 80%;
+    margin-top: 16%;
+    border: 1px solid black;
+}
