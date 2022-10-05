@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hospitality.CheckUp.API.Migrations
 {
     [DbContext(typeof(CheckUpContext))]
-    [Migration("20220929204911_initial")]
+    [Migration("20221005092951_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

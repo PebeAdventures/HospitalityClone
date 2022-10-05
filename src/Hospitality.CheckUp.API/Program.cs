@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddEnvironmentVariables(prefix: "CHECKUP_");
 
 builder.Services.AddHttpClient();
 builder.Services.AddControllers();
@@ -13,14 +14,11 @@ builder.Services.AddScoped<ICheckUpService, CheckUpService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddDbContext<CheckUpContext>(options => options
-    .UseSqlServer(builder.Configuration["checkupDB"]));
-builder.Services.AddCors(o => o.AddDefaultPolicy(builder =>
-{
-    builder.AllowAnyOrigin()
-           .AllowAnyMethod()
-           .AllowAnyHeader();
-}));
+    .UseSqlServer(builder.Configuration.GetValue<string>("CHECKUP_SQL_CONNECTONSTRING")), ServiceLifetime.Transient, ServiceLifetime.Transient);
+
+
 builder.Services.AddCustomCors();
 var app = builder.Build();
 if (app.Environment.EnvironmentName != "Local")
