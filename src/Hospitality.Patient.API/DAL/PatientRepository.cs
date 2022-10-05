@@ -30,6 +30,11 @@ namespace Hospitality.Patient.API.DAL
             await _context.SaveChangesAsync();
             return patient;
         }
+        public async Task UpdatePatient(HospitalPatient patient)
+        {
+            _context.Patients.Update(patient);
+            await _context.SaveChangesAsync();
+        }
 
     }
 }

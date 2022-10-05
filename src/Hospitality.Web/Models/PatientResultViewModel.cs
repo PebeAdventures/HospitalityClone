@@ -43,8 +43,6 @@ namespace Hospitality.Web.Models
         public List<DoctorDTO>? Doctors { get; set; } = new();
         [Required]
         public string NameOfSelectedDoctor { get; set; }
-        public Guid? IdOfSelectedDoctor { get; set; }
-
-
+        public Guid IdOfSelectedDoctor { get; set; }
     }
 }

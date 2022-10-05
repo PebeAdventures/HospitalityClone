@@ -20,7 +20,7 @@ namespace Hospitality.Web.Controllers
         private readonly IConfiguration _configuration;
         private IIdentityService _identityService;
 
-        public RegistrationController(IHttpClientFactory httpClientFactory, IMapper mapper, IInsuranceService insuranceService, 
+        public RegistrationController(IHttpClientFactory httpClientFactory, IMapper mapper, IInsuranceService insuranceService,
             IConfiguration configuration, IIdentityService identityService)
         {
             _httpClient = httpClientFactory.CreateClient();
@@ -34,15 +34,11 @@ namespace Hospitality.Web.Controllers
         public async Task<IActionResult> Registration(PatientResultViewModel? Model)
         {
             if (Model.Result == "valid")
-            {
                 return View(new PatientResultViewModel() { Doctors = await _identityService.GetAllDoctorsNamesAndIds(HttpContext.Session.GetString("token")) });
-            }
             else
-            {
                 ViewBag.Invalid = Model.Result;
-                Model.Doctors = await _identityService.GetAllDoctorsNamesAndIds(HttpContext.Session.GetString("token"));
-                return View(Model);
-            }
+            Model.Doctors = await _identityService.GetAllDoctorsNamesAndIds(HttpContext.Session.GetString("token"));
+            return View(Model);
         }
 
         [HttpPost]
@@ -62,6 +58,7 @@ namespace Hospitality.Web.Controllers
         private async Task RegisterNewPatient(PatientResultViewModel model, string url)
         {
             PatientReceptionistViewDTO mapedPatient = _mapper.Map<PatientReceptionistViewDTO>(model);
+            mapedPatient.IdOfSelectedSpecialist = model.IdOfSelectedDoctor;
             mapedPatient.IsInsured = await _insuranceService.CheckHealthInsurance(mapedPatient.Id, HttpContext.Session.GetString("token"));
             var json = JsonConvert.SerializeObject(mapedPatient);
             var content = new StringContent(json, Encoding.UTF8, "application/json");

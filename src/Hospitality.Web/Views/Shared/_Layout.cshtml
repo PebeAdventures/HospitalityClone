@@ -36,6 +36,12 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="Registration">Registration</a>
                             </li>
                         }
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Receptionist"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="AppointDoctor" asp-action="AppointDoctor">Appoint doctor</a>
+                            </li>
+                        }
                         @if( User.Identity.IsAuthenticated && User.IsInRole("Doctor"))
                         {
 

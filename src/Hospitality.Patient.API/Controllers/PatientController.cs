@@ -19,5 +19,12 @@
             await _service.AddPatientAsync(patientAddDTO);
             return Ok();
         }
+
+        [HttpPut("UpdateAssignedDoctor")]
+        public async Task<IActionResult> UpdateAssignedDoctor(UpdateAssinedDoctorOfPatientDTO patientDTO)
+        {
+            await _service.UpdatePatient(patientDTO);
+            return NoContent();
+        }
     }
 }

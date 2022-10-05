@@ -5,5 +5,6 @@
         Task<PatientDoctorViewDTO> GetPatientByPeselAsync(string pesel);
         Task AddPatientAsync(PatientReceptionistViewDTO patientDTO);
         Task<PatientNotificationDTO> GetPatientByIDAsync(int patientID);
+        Task UpdatePatient(UpdateAssinedDoctorOfPatientDTO patientDTO);
     }
 }

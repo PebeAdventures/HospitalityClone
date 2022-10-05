@@ -48,5 +48,12 @@ namespace Hospitality.Patient.API.Services
             var patient = await _patientRepository.GetPatientByID(patientID);
             return _mapper.Map<PatientNotificationDTO>(patient);
         }
+
+        public async Task UpdatePatient(UpdateAssinedDoctorOfPatientDTO patientDTO)
+        {
+            var patientToUpdate = await _patientRepository.GetByPesel(patientDTO.PatientPesel);
+            patientToUpdate.IdOfSelectedDoctor = patientDTO.DoctorId;
+            _patientRepository.UpdatePatient(patientToUpdate);
+        }
     }
 }

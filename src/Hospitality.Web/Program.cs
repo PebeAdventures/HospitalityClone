@@ -19,6 +19,7 @@ var mapConfig = new MapperConfiguration(c =>
 {
     c.AddProfile(new PatientResultViewModelProfile());
     c.AddProfile(new PatientDataCheckUpViewModelProfile());
+    c.AddProfile(new UpdatePatientDTOProfile());
 });
 
 var mapper = mapConfig.CreateMapper();
