@@ -1,32 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: examination-deployment
+  name: hostedservice-deployment
   labels:
-    app: examination
+    app: hostedservice
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: examination
+      app: hostedservice
   template:
     metadata:
       labels:
-        app: examination
+        app: hostedservice
     spec:
       containers:
-      - name: examination 
-        image: tomakovv/hospitality_examinations:latest
+      - name: hostedservice
+        image: tomakovv/hospitality_hostedservice:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
         env:
-        - name: EXAMINATION_SQL_CONNECTONSTRING
-          valueFrom:
-            secretKeyRef:
-              name: secrets
-              key: examinationConnectionString
-        - name: EXAMINATION_RABBITMQ_URL
+        - name: HOSTED_RABBITMQ_URL
           valueFrom:
             configMapKeyRef:
               name: configuration
@@ -37,11 +32,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: examination-service
+  name: hostedservice-service
 spec:
   type: ClusterIP  
   selector:
-    app: examination
+    app: hostedservice
   ports:
     - protocol: TCP
       port: 80

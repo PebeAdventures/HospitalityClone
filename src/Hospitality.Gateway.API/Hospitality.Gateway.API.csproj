@@ -26,4 +26,12 @@
     <ProjectReference Include="..\Hospitality.Common\Hospitality.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="appsettings.K8s.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

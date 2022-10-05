@@ -13,7 +13,7 @@ namespace HostedService
         public ExaminationPublisher(IConfiguration configuration)
         {
             _configuration = configuration;
-            _hostName = _configuration["rabbitmq"];
+            _hostName = _configuration.GetValue<string>("HOSTED_RABBITMQ_URL");
         }
 
         public void SendMessage<T>(T message)

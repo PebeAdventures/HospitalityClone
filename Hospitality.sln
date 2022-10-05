@@ -53,10 +53,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", 
 		dash-acc.yaml = dash-acc.yaml
 		dash-roles.yaml = dash-roles.yaml
 		examination.yaml = examination.yaml
+		Gateway.yaml = Gateway.yaml
+		hosted-service.yaml = hosted-service.yaml
 		mssql-pvc.yaml = mssql-pvc.yaml
 		mssql.yaml = mssql.yaml
-		rabbitmq.yaml = rabbitmq.yaml
 		patient.yaml = patient.yaml
+		rabbitmq.yaml = rabbitmq.yaml
 		secrets.yaml = secrets.yaml
 	EndProjectSection
 EndProject

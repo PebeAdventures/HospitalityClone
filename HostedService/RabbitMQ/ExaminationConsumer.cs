@@ -22,7 +22,7 @@ namespace HostedService
             _examinationPublisher = examinationPublisher;
             _examinationExecution = examinationExecution;
             _configuration = configuration;
-            _hostName = _configuration["rabbitmq"];
+            _hostName = _configuration.GetValue<string>("HOSTED_RABBITMQ_URL"); ;
 
             var factory = new ConnectionFactory { HostName = _hostName };
             _connection = factory.CreateConnection();

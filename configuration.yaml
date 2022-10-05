@@ -5,3 +5,4 @@ metadata:
 data:
   mssql-url: mssql-service
   rabbitmq-url: rabbitmq-hospitality
+  examination-url: examination-service
