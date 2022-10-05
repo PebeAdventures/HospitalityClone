@@ -3,10 +3,22 @@ label, input, #finishButton, textarea {
     font-size: 20px;
     width: 100%
 }
+div.relative {
+    position: relative;
+    width: 745px;
+    height: 150px;
+}
 
+div.absolute {
+    
+    display: inline-block;
+}
+div.textField {
+    border: 1px solid blue;
+}
 .wrapper {
     display: grid;
-    grid-template-columns: 65% 25%;
+    grid-template-columns: 15% 25%;
     grid-gap: 4%;
     grid-template-rows: 150px;
 }
@@ -45,7 +57,7 @@ textarea {
 
 input {
     height: 50px;
-    width: 250px;
+    width: 230px;
     font-size: 24px;
 }
 

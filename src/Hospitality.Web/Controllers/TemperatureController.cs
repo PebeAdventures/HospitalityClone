@@ -1,10 +1,15 @@
-﻿using Hospitality.Common.DTO.Examination;
+﻿using Hospitality.Common.DTO.CheckUp;
+using Hospitality.Common.DTO.Examination;
 using Hospitality.Common.DTO.Temperature;
 using Hospitality.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Data;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Xml.Linq;
 
 namespace Hospitality.Web.Controllers
 {
@@ -14,25 +19,49 @@ namespace Hospitality.Web.Controllers
         private HttpClient _httpClient;
         private List<PatientTemperaturesViewDTO> patientTemperaturesViewDTO;
         private ITemperatureService _temperatureService;
+        private readonly IConfiguration _configuration;
 
-        public TemperatureController(IHttpClientFactory httpClientFactory, ITemperatureService temperatureService)
+        public TemperatureController(IHttpClientFactory httpClientFactory, ITemperatureService temperatureService, IConfiguration configuration)
         {
             _httpClient = httpClientFactory.CreateClient();
             patientTemperaturesViewDTO = new List<PatientTemperaturesViewDTO>();
             _temperatureService = temperatureService;
+            _configuration = configuration;
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> Temperature(string patientId)
+        public async Task<IActionResult> TemperatureControl(string patientPesel)
         {
-            var patientTemperatures = await _temperatureService.GetPatientTemperatures(patientId, HttpContext.Session.GetString("token"));
+
+            var patientTemperatures = await _temperatureService.GetPatientTemperatures(patientPesel, HttpContext.Session.GetString("token"));
             if (patientTemperatures != null)
             {
                 return View(patientTemperatures);
             }
-            patientTemperatures = new List<PatientTemperaturesViewDTO>() { new PatientTemperaturesViewDTO() { PatientId = patientId, Temperature = 0, MeasurementDate = DateTime.Now } };
+            patientTemperatures = new List<PatientTemperaturesViewDTO>() { new PatientTemperaturesViewDTO() { PatientId = patientPesel, Temperature = 0, MeasurementDate = DateTime.Now } };
             return View(patientTemperatures);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddNewTemperatureToPatient(string actualPatientTemperature, string patientPesel)
+        {
+            ViewData["actualPatientTemperature"] = actualPatientTemperature;
+            decimal decimalValue;
+            if (!Decimal.TryParse(actualPatientTemperature, out decimalValue)) actualPatientTemperature = "0";
+
+            NewPatientTemperatureDTO newPatientTemperatureDTO = new NewPatientTemperatureDTO() { PatientId = patientPesel, Temperature = Decimal.Parse(actualPatientTemperature) };
+            await SaveNewTemperature(newPatientTemperatureDTO, _configuration["Paths:AddPatientTemperature"]);
+            return Content(@"<script>window.close();</script>", "text/html");
+
+        }
+        private async Task SaveNewTemperature(NewPatientTemperatureDTO newPatientTemperatureDTO, string url)
+        {
+            var json = JsonConvert.SerializeObject(newPatientTemperatureDTO);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            var test = await _httpClient.PostAsync(url, content);
+            var tt = test;
         }
     }
 }

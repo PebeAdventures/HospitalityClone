@@ -1,12 +1,17 @@
 ﻿using Hospitality.Common.DTO.Examination;
 using Hospitality.Common.DTO.Temperature;
 using Hospitality.Web.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Data;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
 namespace Hospitality.Web.Services
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
     public class TemperatureService : ITemperatureService
     {
 
@@ -14,22 +19,23 @@ namespace Hospitality.Web.Services
         private HttpClient _httpClient;
         private readonly IConfiguration _configuration;
 
-        public TemperatureService(IConfiguration configuration, IHttpClientFactory httpClientFactory)
+        public TemperatureService(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             _configuration = configuration;
             _httpClient = httpClientFactory.CreateClient();
 
         }
-
-        public async Task<List<PatientTemperaturesViewDTO>> GetPatientTemperatures(string patientId, string token)
+        public async Task<List<PatientTemperaturesViewDTO>> GetPatientTemperatures(string id, string token)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var response = await _httpClient.GetAsync(_configuration["Paths:PatientTemperaturesList"] + patientId);
+            var response = await _httpClient.GetAsync(_configuration["Paths:PatientTemperaturesList"] + id);
             if (!response.IsSuccessStatusCode || response is null) return null;
             List<PatientTemperaturesViewDTO> temperatureInfo = JsonConvert.DeserializeObject<List<PatientTemperaturesViewDTO>>(await response.Content.ReadAsStringAsync());
             if (temperatureInfo is null) return null;
             return temperatureInfo;
         }
+
+
 
     }
 }

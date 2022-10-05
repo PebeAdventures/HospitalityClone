@@ -8,7 +8,7 @@ namespace Hospitality.Common.DTO.Temperature
 {
     public class NewPatientTemperatureDTO
     {
-        public int PatientId { get; set; }
+        public string PatientId { get; set; }
         public decimal Temperature { get; set; }
     }
 }

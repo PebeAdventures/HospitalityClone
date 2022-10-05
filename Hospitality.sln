@@ -49,7 +49,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Patient.API", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TemperatureControl", "TemperatureControl", "{A874E2A4-E8B4-4C3A-8DF5-90272B6D5041}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatientTemperatureControl", "..\PatientTemperatureControl\PatientTemperatureControl.csproj", "{D713EF88-5308-4317-BF65-736A9547D4F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientTemperatureControl", "..\PatientTemperatureControl\PatientTemperatureControl.csproj", "{D713EF88-5308-4317-BF65-736A9547D4F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
