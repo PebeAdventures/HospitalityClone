@@ -21,13 +21,18 @@ namespace SecondExam.AuthContext.Context.Seeders
                 new IdentityUser {Id = Guid.NewGuid().ToString(), UserName = "Rafał Wyrwikoński", Email = "rafik", NormalizedEmail = "RAFIK"}
 
             };
+            var drHouse = identityUsers[0];
+            var drDolittle = identityUsers[1];
+            var drOetker = identityUsers[2];
+            var danutaNowak = identityUsers[3];
+            var rafałWyrwikoński = identityUsers[4];
 
             PasswordHasher<IdentityUser> ph = new PasswordHasher<IdentityUser>();
-            identityUsers[0].PasswordHash = ph.HashPassword(identityUsers[0], "doctor");
-            identityUsers[0].PasswordHash = ph.HashPassword(identityUsers[1], "dolittle");
-            identityUsers[0].PasswordHash = ph.HashPassword(identityUsers[2], "oetker");
-            identityUsers[3].PasswordHash = ph.HashPassword(identityUsers[3], "receptionist");
-            identityUsers[3].PasswordHash = ph.HashPassword(identityUsers[4], "rafik");
+            drHouse.PasswordHash = ph.HashPassword(identityUsers[0], "doctor");
+            drDolittle.PasswordHash = ph.HashPassword(identityUsers[1], "dolittle");
+            drOetker.PasswordHash = ph.HashPassword(identityUsers[2], "oetker");
+            danutaNowak.PasswordHash = ph.HashPassword(identityUsers[3], "receptionist");
+            rafałWyrwikoński.PasswordHash = ph.HashPassword(identityUsers[4], "rafik");
 
             List<IdentityUserRole<string>> identityUserRoles = new List<IdentityUserRole<string>>()
             {

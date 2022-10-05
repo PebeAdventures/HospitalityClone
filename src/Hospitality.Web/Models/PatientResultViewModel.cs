@@ -40,9 +40,10 @@ namespace Hospitality.Web.Models
 
         [DataType(DataType.Text)]
         public bool IsInsured { get; set; }
+        public List<DoctorDTO>? Doctors { get; set; } = new();
         [Required]
-        public List<DoctorDTO> Doctors { get; set; }
-        public DoctorDTO SelectedDoctor { get; set; }
+        public string NameOfSelectedDoctor { get; set; }
+        public Guid? IdOfSelectedDoctor { get; set; }
 
 
     }

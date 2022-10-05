@@ -48,7 +48,7 @@
                         <br>
                     </p>
                     <p>
-                        @Html.DropDownListFor(m => m.SelectedDoctor, new SelectList(Model.Doctors.Select(d=>d.Name)), "--Select Doctor--", new { style="font-size:120%;", id="specialist"})
+                        @Html.DropDownListFor(m => m.NameOfSelectedDoctor, new SelectList(Model.Doctors.Select(d=>d.Name)), "--Select Doctor--", new { style="font-size:120%;", id="specialist"})
                     </p>
                 </div>
 

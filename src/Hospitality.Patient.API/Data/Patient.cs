@@ -11,5 +11,6 @@
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public bool IsInsured { get; set; }
+        public Guid IdOfSelectedDoctor { get; set; }
     }
 }

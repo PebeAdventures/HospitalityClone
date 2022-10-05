@@ -33,7 +33,6 @@ namespace Hospitality.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Registration(PatientResultViewModel? Model)
         {
-
             if (Model.Result == "valid")
             {
                 return View(new PatientResultViewModel() { Doctors = await _identityService.GetAllDoctorsNamesAndIds(HttpContext.Session.GetString("token")) });
@@ -54,6 +53,7 @@ namespace Hospitality.Web.Controllers
                 model.Result = "invalid";
                 return RedirectToAction("Registration", "Registration", model);
             }
+            model.IdOfSelectedDoctor = await _identityService.GetIdOfSelectedDoctor(model.NameOfSelectedDoctor, HttpContext.Session.GetString("token"));
             model.Result = "valid";
             await RegisterNewPatient(model, _configuration["Paths:CreatePatient"]);
             return RedirectToAction("Registration", "Registration");

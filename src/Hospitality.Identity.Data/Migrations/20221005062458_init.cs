@@ -159,8 +159,8 @@ namespace Hospitality.Identity.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "da063050-01bb-4643-9cfe-63395fb43d9c", "e7d798e2-c248-4e12-8791-74d4ff39d393", "Receptionist", "RECEPTIONIST" },
-                    { "ed9eed33-c203-48ab-bc62-c2cc179ebc19", "ec9055f2-9afc-47fd-af4f-6f7413b73a8c", "Doctor", "DOCTOR" }
+                    { "88824469-45e2-4f82-b226-445c8dbdcc0c", "258247cd-a795-4d5b-adfc-926ed36a4354", "Receptionist", "RECEPTIONIST" },
+                    { "d0972bc6-60cd-4562-a85d-6a13a1c462bf", "1b0ca002-34d7-4fd1-931d-52892caf14a4", "Doctor", "DOCTOR" }
                 });
 
             migrationBuilder.InsertData(
@@ -168,11 +168,11 @@ namespace Hospitality.Identity.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "3f2c6575-5dac-4234-89f1-2ad8cff0b5c9", 0, "c10c7c21-1bae-4a70-86e2-1c568ff98229", "rafik", false, false, null, "RAFIK", null, null, null, false, "4b687759-0bad-44dc-936b-e2692d31d036", false, "Rafał Wyrwikoński" },
-                    { "ac73cca8-651b-4f04-8a13-fa49ed3dbdfb", 0, "52204548-169e-49a8-b56f-e168fc9e9752", "doctor", false, false, null, "DOCTOR", null, "AQAAAAEAACcQAAAAEF3LBkcWowdYx53GkV0r6OTvCPjMggTIsdnukVFeiAx4E733IjxSkCq3zaTaov1Q6w==", null, false, "25251b24-c619-480c-8cb8-f32a85c75c9b", false, "Dr. House" },
-                    { "b2be0d80-20c4-4c96-b779-321328cc5bbb", 0, "4eae479f-812b-435d-8bd2-ea6685e1208a", "oetker", false, false, null, "OETKER", null, null, null, false, "3923c36a-fd91-448e-964a-7cbb652ee719", false, "Dr. oetker" },
-                    { "c4afda1a-4443-4b63-9dda-4493f18ca342", 0, "c35aade9-0235-40ad-b65e-420db0f1b829", "dolittle", false, false, null, "DOLITTLE", null, null, null, false, "cad55573-0a07-4bfe-9598-486fbfc6cbd2", false, "Dr. Dolittle" },
-                    { "d7a2a3eb-5b64-4073-bdb8-b26617e3d97b", 0, "ed3b10fb-6b1c-496c-a815-a272025201fa", "receptionist", false, false, null, "RECEPTIONIST", null, "AQAAAAEAACcQAAAAECanongNINz6CdyBqquHDgTo5VOf7NdqBCIUn/1oi1/Z5W/p6BesacjIC2BIrJp86Q==", null, false, "398cf517-8768-4027-98d5-eb6859a48092", false, "Danuta Nowak" }
+                    { "033c4e30-4d0f-4570-a420-b6883df5cb61", 0, "7a41f9d6-833d-4b21-9624-0c131dffd648", "dolittle", false, false, null, "DOLITTLE", null, "AQAAAAEAACcQAAAAEDigsrS1t28dmH5NKtc6er8TDT97zYSGA5j6HyAQ+QhNiwMgsYejGuvdn/d0IxdG3g==", null, false, "6dc068c8-d289-41b5-ac09-1eb3700f2839", false, "Dr. Dolittle" },
+                    { "0f77eff7-4769-4dcf-95b0-ce5dc3196386", 0, "91c45501-a3e9-4963-b2b9-4ced85b891c8", "oetker", false, false, null, "OETKER", null, "AQAAAAEAACcQAAAAEJRyByrTpXJEARcdfOvIQ5Ae5fjAF3I3XyWbSy1fMaUlUrw7J2X8Jyiexy/prySFrA==", null, false, "46a1f23d-6dc5-46fb-82f1-f46c2ff0adf1", false, "Dr. oetker" },
+                    { "28f73cb2-571c-4d56-a2a9-7b3065c47c93", 0, "89fc1aa6-6514-4ddf-98ff-b0eb2b514450", "doctor", false, false, null, "DOCTOR", null, "AQAAAAEAACcQAAAAEPv/DFCBJNm3MMjYrdj9KaYOkwjtrzK3YmdkyRNrNYxmWAOia1fDWDKVJ73fu2pphw==", null, false, "4d32091d-12f0-404b-a737-d95d34b4d76d", false, "Dr. House" },
+                    { "2ed5da07-9f48-4e60-b2b4-802c599ba0ce", 0, "f941f460-e002-410d-a0c2-be0cfbd9b6c3", "receptionist", false, false, null, "RECEPTIONIST", null, "AQAAAAEAACcQAAAAEEAjtv+1SxbMck4769FGnqAxysFyMitZe7DhsHvBNalvKhORt8Vnusrj8fxWuiaa1w==", null, false, "0af4861c-cc46-45f6-b525-c2798c7d831d", false, "Danuta Nowak" },
+                    { "4e9d961e-fbee-41a6-b7f0-565a69901571", 0, "e696eca3-e169-43a7-93fc-2c9c922a839e", "rafik", false, false, null, "RAFIK", null, "AQAAAAEAACcQAAAAEAWQg0KBhPZmhURGJZ98ZgP9NzzQojt0uV4WVwQhYjeyTbrg/7gmKDHaBRwyvQdH0w==", null, false, "39ca1da2-3cf5-4f1a-bb05-fd6062bbb531", false, "Rafał Wyrwikoński" }
                 });
 
             migrationBuilder.InsertData(
@@ -180,11 +180,11 @@ namespace Hospitality.Identity.Data.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "da063050-01bb-4643-9cfe-63395fb43d9c", "3f2c6575-5dac-4234-89f1-2ad8cff0b5c9" },
-                    { "ed9eed33-c203-48ab-bc62-c2cc179ebc19", "ac73cca8-651b-4f04-8a13-fa49ed3dbdfb" },
-                    { "ed9eed33-c203-48ab-bc62-c2cc179ebc19", "b2be0d80-20c4-4c96-b779-321328cc5bbb" },
-                    { "ed9eed33-c203-48ab-bc62-c2cc179ebc19", "c4afda1a-4443-4b63-9dda-4493f18ca342" },
-                    { "da063050-01bb-4643-9cfe-63395fb43d9c", "d7a2a3eb-5b64-4073-bdb8-b26617e3d97b" }
+                    { "d0972bc6-60cd-4562-a85d-6a13a1c462bf", "033c4e30-4d0f-4570-a420-b6883df5cb61" },
+                    { "d0972bc6-60cd-4562-a85d-6a13a1c462bf", "0f77eff7-4769-4dcf-95b0-ce5dc3196386" },
+                    { "d0972bc6-60cd-4562-a85d-6a13a1c462bf", "28f73cb2-571c-4d56-a2a9-7b3065c47c93" },
+                    { "88824469-45e2-4f82-b226-445c8dbdcc0c", "2ed5da07-9f48-4e60-b2b4-802c599ba0ce" },
+                    { "88824469-45e2-4f82-b226-445c8dbdcc0c", "4e9d961e-fbee-41a6-b7f0-565a69901571" }
                 });
 
             migrationBuilder.CreateIndex(

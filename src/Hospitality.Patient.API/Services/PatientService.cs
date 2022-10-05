@@ -28,7 +28,8 @@ namespace Hospitality.Patient.API.Services
                 Address = patientDTO.Address,
                 Email = patientDTO.Email,
                 PhoneNumber = patientDTO.PhoneNumber,
-                IsInsured = patientDTO.IsInsured
+                IsInsured = patientDTO.IsInsured,
+                IdOfSelectedDoctor = patientDTO.IdOfSelectedSpecialist
             });
         }
 
