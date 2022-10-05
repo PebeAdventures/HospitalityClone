@@ -22,7 +22,7 @@ namespace Hospitality.Patient.API.PatientHostedService
             _patientService = patientService;
             _publisherService = publisherService;
             _configuration = configuration;
-            _hostName = _configuration["rabbitmq"];
+            _hostName = _configuration.GetValue<string>("PATIENT_RABBITMQ_URL");
 
             var factory = new ConnectionFactory { HostName = _hostName };
             _connection = factory.CreateConnection();

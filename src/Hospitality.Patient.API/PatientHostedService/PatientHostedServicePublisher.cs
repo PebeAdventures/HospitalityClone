@@ -13,7 +13,7 @@ namespace Hospitality.Patient.API.PatientHostedService
         public PatientHostedServicePublisher(IConfiguration configuration)
         {
             _configuration = configuration;
-            _hostName = _configuration["rabbitmq"];
+            _hostName = _configuration.GetValue<string>("PATIENT_RABBITMQ_URL");
         }
 
         public void SendMessage<T>(T message)

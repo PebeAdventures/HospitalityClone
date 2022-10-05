@@ -1,1 +1,48 @@
-  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: patient-deployment
+  labels:
+    app: patient
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: patient
+  template:
+    metadata:
+      labels:
+        app: patient
+    spec:
+      containers:
+      - name: patient 
+        image: artgelka/hospitality_patient:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        - name: PATIENT_SQL_CONNECTONSTRING
+          valueFrom:
+            secretKeyRef:
+              name: secrets
+              key: patientConnectionString
+        - name: PATIENT_RABBITMQ_URL
+          valueFrom:
+            configMapKeyRef:
+              name: configuration
+              key: rabbitmq-url
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: patient-service
+spec:
+  type: ClusterIP  
+  selector:
+    app: patient
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
