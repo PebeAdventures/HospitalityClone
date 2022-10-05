@@ -52,6 +52,7 @@ namespace Hospitality.Examination.Persistance.Seeder
             {
                 Id = 1,
                 Name = "USG kolana",
+                Price = 1234.99,
                 Duration = new TimeSpan(0, 0, 8)
             });
 
@@ -59,18 +60,21 @@ namespace Hospitality.Examination.Persistance.Seeder
             {
                 Id = 2,
                 Name = "USG jamy brzusznej",
+                Price = 1001.99,
                 Duration = new TimeSpan(0, 0, 10)
             });
             examinationTypes.Add(new ExaminationType()
             {
                 Id = 3,
                 Name = "RTG głowy",
+                Price = 900.99,
                 Duration = new TimeSpan(0, 0, 7)
             });
             examinationTypes.Add(new ExaminationType()
             {
                 Id = 4,
                 Name = "RTG celowane na ząb obrotnika",
+                Price = 1234.99,
                 Duration = new TimeSpan(0, 0, 6)
             });
 
@@ -78,6 +82,7 @@ namespace Hospitality.Examination.Persistance.Seeder
             {
                 Id = 5,
                 Name = "RTG styczne czaszki",
+                Price = 500.00,
                 Duration = new TimeSpan(0, 0, 6)
             });
 
@@ -85,6 +90,7 @@ namespace Hospitality.Examination.Persistance.Seeder
             {
                 Id = 6,
                 Name = "Leczenie kanałowe zębów",
+                Price = 550.00,
                 Duration = new TimeSpan(0, 0, 6)
             });
 
@@ -92,24 +98,28 @@ namespace Hospitality.Examination.Persistance.Seeder
             {
                 Id = 7,
                 Name = "Badanie kału na pasożyty",
+                Price = 900.00,
                 Duration = new TimeSpan(0, 0, 8)
             });
             examinationTypes.Add(new ExaminationType()
             {
                 Id = 8,
                 Name = "Cytologia płynna",
+                Price = 700.00,
                 Duration = new TimeSpan(0, 0, 10)
             });
             examinationTypes.Add(new ExaminationType()
             {
                 Id = 9,
                 Name = "Echo serca",
+                Price = 2500.00,
                 Duration = new TimeSpan(0, 0, 7)
             });
             examinationTypes.Add(new ExaminationType()
             {
                 Id = 10,
                 Name = "Gastroskopia",
+                Price = 1500.00,
                 Duration = new TimeSpan(0, 0, 6)
             });
 

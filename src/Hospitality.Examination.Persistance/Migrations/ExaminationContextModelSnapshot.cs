@@ -64,6 +64,9 @@ namespace Hospitality.Examination.Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
 
                     b.ToTable("ExaminationTypes");
@@ -73,61 +76,71 @@ namespace Hospitality.Examination.Persistance.Migrations
                         {
                             Id = 1,
                             Duration = 80000000L,
-                            Name = "USG kolana"
+                            Name = "USG kolana",
+                            Price = 1234.99
                         },
                         new
                         {
                             Id = 2,
                             Duration = 100000000L,
-                            Name = "USG jamy brzusznej"
+                            Name = "USG jamy brzusznej",
+                            Price = 1001.99
                         },
                         new
                         {
                             Id = 3,
                             Duration = 70000000L,
-                            Name = "RTG głowy"
+                            Name = "RTG głowy",
+                            Price = 900.99000000000001
                         },
                         new
                         {
                             Id = 4,
                             Duration = 60000000L,
-                            Name = "RTG celowane na ząb obrotnika"
+                            Name = "RTG celowane na ząb obrotnika",
+                            Price = 1234.99
                         },
                         new
                         {
                             Id = 5,
                             Duration = 60000000L,
-                            Name = "RTG styczne czaszki"
+                            Name = "RTG styczne czaszki",
+                            Price = 500.0
                         },
                         new
                         {
                             Id = 6,
                             Duration = 60000000L,
-                            Name = "Leczenie kanałowe zębów"
+                            Name = "Leczenie kanałowe zębów",
+                            Price = 550.0
                         },
                         new
                         {
                             Id = 7,
                             Duration = 80000000L,
-                            Name = "Badanie kału na pasożyty"
+                            Name = "Badanie kału na pasożyty",
+                            Price = 900.0
                         },
                         new
                         {
                             Id = 8,
                             Duration = 100000000L,
-                            Name = "Cytologia płynna"
+                            Name = "Cytologia płynna",
+                            Price = 700.0
                         },
                         new
                         {
                             Id = 9,
                             Duration = 70000000L,
-                            Name = "Echo serca"
+                            Name = "Echo serca",
+                            Price = 2500.0
                         },
                         new
                         {
                             Id = 10,
                             Duration = 60000000L,
-                            Name = "Gastroskopia"
+                            Name = "Gastroskopia",
+                            Price = 1500.0
                         });
                 });
 
