@@ -29,17 +29,10 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Receptionist"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="Registration">Registration</a>
-                            </li>
-                        }
-                        @if (User.Identity.IsAuthenticated && User.IsInRole("Receptionist"))
-                        {
-                            <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="CheckPatient" asp-action="CheckPatient">Check patient PESEl</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="CheckPatient" asp-action="CheckPatient">Check patient PESEL</a>
                                 </li>
                         }
                         @if( User.Identity.IsAuthenticated && User.IsInRole("Doctor"))
