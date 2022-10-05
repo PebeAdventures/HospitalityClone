@@ -10,3 +10,4 @@ data:
   identity-url: identity-service
   checkup-url: checkup-service
   insurance-url: insurance-service
+  gateway-url: gateway-service

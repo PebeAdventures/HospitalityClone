@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gateway-deployment
+  name: webapp-deployment
   labels:
-    app: gateway
+    app: webapp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gateway
+      app: webapp
   template:
     metadata:
       labels:
-        app: gateway
+        app: webapp
     spec:
       containers:
-      - name: gateway 
-        image: tomakovv/hospitality_gateway:latest
+      - name: webapp 
+        image: tomakovv/hospitality_webapp:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -29,12 +29,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: gateway-service
+  name: webapp-service
 spec:
-  type: ClusterIP
+  type: NodePort  
   selector:
-    app: gateway
+    app: webapp
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
+      nodePort: 30900
