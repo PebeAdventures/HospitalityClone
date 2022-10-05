@@ -49,14 +49,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hospitality.Patient.API", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", "{2DF3648A-76FE-4EAC-A909-5A17E51A0218}"
 	ProjectSection(SolutionItems) = preProject
+		checkup.yaml = checkup.yaml
 		configuration.yaml = configuration.yaml
 		dash-acc.yaml = dash-acc.yaml
 		dash-roles.yaml = dash-roles.yaml
 		examination.yaml = examination.yaml
 		mssql-pvc.yaml = mssql-pvc.yaml
 		mssql.yaml = mssql.yaml
-		rabbitmq.yaml = rabbitmq.yaml
 		patient.yaml = patient.yaml
+		rabbitmq.yaml = rabbitmq.yaml
 		secrets.yaml = secrets.yaml
 	EndProjectSection
 EndProject
