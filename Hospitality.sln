@@ -56,6 +56,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", 
 		email-service.yaml = email-service.yaml
 		examination.yaml = examination.yaml
 		Gateway.yaml = Gateway.yaml
+		healthcheck.yaml = healthcheck.yaml
 		hosted-service.yaml = hosted-service.yaml
 		identity.yaml = identity.yaml
 		insurance.yaml = insurance.yaml
@@ -66,6 +67,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", 
 		secrets.yaml = secrets.yaml
 		web-app.yaml = web-app.yaml
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HealthChecks", "HealthChecks", "{D1D16061-5734-4D7A-BF08-849E5DB21BED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospitality.HealthChecks", "src\Hospitality.HealthChecks\Hospitality.HealthChecks.csproj", "{9ED9A7DC-7535-485D-BE36-0F4C6F8D101C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -133,6 +138,10 @@ Global
 		{5EF3E905-DD4B-42B8-AAA6-6AFA5A859211}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5EF3E905-DD4B-42B8-AAA6-6AFA5A859211}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EF3E905-DD4B-42B8-AAA6-6AFA5A859211}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ED9A7DC-7535-485D-BE36-0F4C6F8D101C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ED9A7DC-7535-485D-BE36-0F4C6F8D101C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ED9A7DC-7535-485D-BE36-0F4C6F8D101C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ED9A7DC-7535-485D-BE36-0F4C6F8D101C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -149,6 +158,7 @@ Global
 		{A16C820F-4E7E-4086-BD5F-18AAB3FDFE69} = {7B116F8C-AE06-4A51-AAFA-D8CCFABCE58A}
 		{77AB4C1E-A6A1-41F8-A179-DF5281BC78CD} = {7B116F8C-AE06-4A51-AAFA-D8CCFABCE58A}
 		{5EF3E905-DD4B-42B8-AAA6-6AFA5A859211} = {5A97550F-FE28-4C08-8EA1-8706C3EA8796}
+		{9ED9A7DC-7535-485D-BE36-0F4C6F8D101C} = {D1D16061-5734-4D7A-BF08-849E5DB21BED}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {21E21703-2D81-423F-877B-43FE7B22F2C8}

@@ -1,14 +1,9 @@
+using HealthChecks.UI.Client;
 using Hospitality.Examination.API.Extensions;
 using Hospitality.Examination.API.Model;
 using Hospitality.Examination.Application;
-using Hospitality.Examination.Application.Contracts.Persistence;
-using Hospitality.Examination.Application.Mapper.Profiles;
-using Hospitality.Examination.Persistance.Repositories;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.EntityFrameworkCore;
-using Hospitality.Examination.Application.Services;
-using Hospitality.Examination.RabbitMQ;
-
-using Hospitality.Examination.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,17 +16,7 @@ builder.Services.AddDbContext<ExaminationContext>(options => options
     .UseSqlServer(builder.Configuration.GetValue<string>("EXAMINATION_SQL_CONNECTONSTRING")), ServiceLifetime.Transient, ServiceLifetime.Transient);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<IUpdateExamination, UpdateExamination>();
-builder.Services.AddTransient<IRabbitMqService, RabbitMQPublisher>();
-builder.Services.AddCustomCors();
-
-builder.Services.AddCustomServices();
-builder.Services.AddAutoMapper(typeof(ExaminationProfile));
-
-builder.Services.AddHostedService<RabbitMQConsumer>();
-builder.Services.AddCustomCors();
-
-builder.Services.AddAutoMapper(typeof(ExaminationProfile));
+builder.Services.AddCustomServices(builder.Configuration);
 
 var app = builder.Build();
 if (app.Environment.EnvironmentName != "Local")
@@ -49,7 +34,10 @@ if (!app.Environment.IsProduction())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.MapHealthChecks("/health", new HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 app.UseAuthorization();
 
 app.UseCustomMiddlewares();
