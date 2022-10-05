@@ -20,7 +20,7 @@ namespace EmailService.EmailHostedService
         {
             _emailSender = emailSender;
             _configuration = configuration;
-            _hostName = _configuration["rabbitmq"];
+            _hostName = _configuration.GetValue<string>("EMAIL_RABBITMQ_URL");
 
             var factory = new ConnectionFactory { HostName = _hostName };
             _connection = factory.CreateConnection();
@@ -57,7 +57,7 @@ namespace EmailService.EmailHostedService
                 }
                 var message = new Message(new string[] { examinationExecutionDto.Email }, "Client message", messageText);
 
-                 _emailSender.SendEmail(message);
+                _emailSender.SendEmail(message);
             };
             _channel.BasicConsume(queue: _queueName, autoAck: true, consumer: consumer);
             return Task.CompletedTask;

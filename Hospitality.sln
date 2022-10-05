@@ -53,6 +53,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", 
 		configuration.yaml = configuration.yaml
 		dash-acc.yaml = dash-acc.yaml
 		dash-roles.yaml = dash-roles.yaml
+		email-service.yaml = email-service.yaml
 		examination.yaml = examination.yaml
 		Gateway.yaml = Gateway.yaml
 		hosted-service.yaml = hosted-service.yaml
