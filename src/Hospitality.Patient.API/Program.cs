@@ -3,9 +3,10 @@ using Hospitality.Patient.API.Mapper;
 using Hospitality.Patient.API.PatientHostedService;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddEnvironmentVariables(prefix: "PATIENT_");
 
 builder.Services.AddDbContext<PatientContext>(options => options
-    .UseSqlServer(builder.Configuration.GetConnectionString("PatientDb")), ServiceLifetime.Transient, ServiceLifetime.Transient);
+    .UseSqlServer(builder.Configuration.GetValue<string>("PATIENT_SQL_CONNECTONSTRING")), ServiceLifetime.Transient, ServiceLifetime.Transient);
 
 builder.Services.AddCustomServices();
 builder.Services.AddControllers();
