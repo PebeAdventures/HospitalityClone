@@ -30,26 +30,25 @@ namespace Hospitality.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Registration(PatientResultViewModel? Model)
+        public async Task<IActionResult> Registration(PatientResultViewModel? Model, string? pesel)
         {
+            ViewBag.PeselP = pesel;
             if (Model.Result == "valid")
+            {
                 return View();
+            }
             else 
                 ViewBag.Invalid = Model.Result;
                 return View(Model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegistrationPostAsync(PatientResultViewModel model)
+        public async Task<IActionResult> RegistrationPostAsync(PatientResultViewModel model, string peselInput)
         {
-            if (!ModelState.IsValid)
-            {
-                model.Result = "invalid";
-                return RedirectToAction("Registration", "Registration", model);
-            }
+            model.PatientPesel = peselInput;
             model.Result = "valid";
             await RegisterNewPatient(model, _configuration["Paths:CreatePatient"]);
-            return RedirectToAction("Registration", "Registration");
+            return RedirectToAction("CheckPatient", "CheckPatient");
         }
 
         private async Task RegisterNewPatient(PatientResultViewModel model, string url)

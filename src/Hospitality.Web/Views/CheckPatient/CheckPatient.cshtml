@@ -1,4 +1,4 @@
-﻿@model PatientDataCheckUpViewModel
+﻿@model Hospitality.Web.Models.AppointDoctorToPatientModel;
 
 <head>
     <link rel="stylesheet" href="~/css/StartVisit.css" asp-append-version="true" />
@@ -9,7 +9,7 @@
 <content>
 
     <div id="startVisitForm">
-        @using(Html.BeginForm("StartVisit", "StartVisit", FormMethod.Post))
+        @using(Html.BeginForm("CheckPatient", "CheckPatient", FormMethod.Post))
         {
                     <div>                    
                         <p>

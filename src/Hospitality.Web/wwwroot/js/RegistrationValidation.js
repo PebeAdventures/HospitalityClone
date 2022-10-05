@@ -68,20 +68,5 @@ sendButton.addEventListener("click", e => {
 });
 
 
-saveButton.addEventListener("click", e => {
-   // clearTextBoxFor()
-});
-
-function clearTextBoxFor() {
-    nameTextBoxFor.value = "";
-    surnameTextBoxFor.value = "";
-    addressTextBoxFor.value = "";
-    peselTextBoxFor.value = "";
-    emailTextBoxFor.value = "";
-    phoneTextBoxFor.value = "";
-    specialistTextBoxFor.value = "none";
-}
-
-
 
 
