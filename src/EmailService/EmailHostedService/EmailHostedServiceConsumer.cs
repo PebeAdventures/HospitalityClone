@@ -47,12 +47,14 @@ namespace EmailService.EmailHostedService
                 {
                     messageText = $"Hello, {examinationExecutionDto.PatientName} {examinationExecutionDto.PatientSurname}! \n" +
                                         $"Your examination \"{examinationExecutionDto.ExaminationTypeName}\" was finished. You could check result in your account. \n" +
+                                        $"You need to pay: \"{examinationExecutionDto.Price}\" zł" +
                                         $"Kind regards,\nHospitality";
                 }
                 else
                 {
                     messageText = $"Hello, {examinationExecutionDto.PatientName} {examinationExecutionDto.PatientSurname}! \n" +
                                         $"Your examination \"{examinationExecutionDto.ExaminationTypeName}\" was finished.\nResults\n{examinationExecutionDto.ExaminationDescription}\n" +
+                                        $"You need to pay: \"{examinationExecutionDto.Price}\" zł" +
                                         $"Kind regards,\nHospitality";
                 }
                 var message = new Message(new string[] { examinationExecutionDto.Email }, "Client message", messageText);

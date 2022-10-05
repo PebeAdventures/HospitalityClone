@@ -59,11 +59,14 @@ namespace Hospitality.Patient.API.PatientHostedService
         private async Task<PatientNotificationDTO> preparePatientInfoForNotification(string context)
         {
             ExaminationExecutionDto examinationExecution = JsonConvert.DeserializeObject<ExaminationExecutionDto>(context);
+            // examinationtype - tak jak powyzej
+            // następnie przypisać pacjentowi cene (patient examination type) na podstawie nazwy ExaminationTypeName 
 
             PatientNotificationDTO patientInfoForNotification = await _patientService.GetPatientByIDAsync(examinationExecution.PatientId);
             patientInfoForNotification.Status = examinationExecution.Status;
             patientInfoForNotification.ExaminationDescription = examinationExecution.Description;
             patientInfoForNotification.ExaminationTypeName = examinationExecution.ExaminationTypeName;
+            //patientInfoForNotification.Price = examinationExecution.pr
             return patientInfoForNotification;
         }
     }
