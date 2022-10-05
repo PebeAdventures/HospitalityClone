@@ -39,7 +39,7 @@
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Receptionist"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="AppointDoctor" asp-action="AppointDoctor">Appoint doctor</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="AssignDoctorToPatient" asp-action="AssignDoctorToPatient">Assign doctor</a>
                             </li>
                         }
                         @if( User.Identity.IsAuthenticated && User.IsInRole("Doctor"))

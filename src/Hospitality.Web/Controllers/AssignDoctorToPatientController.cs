@@ -14,7 +14,7 @@ namespace Hospitality.Web.Controllers
 {
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Receptionist")]
 
-    public class AppointDoctorController : Controller
+    public class AssignDoctorToPatientController : Controller
     {
         private HttpClient _httpClient;
         private IMapper _mapper;
@@ -23,7 +23,7 @@ namespace Hospitality.Web.Controllers
         private IPatientService _patientService;
         private IIdentityService _identityService;
 
-        public AppointDoctorController(IHttpClientFactory httpClientFactory, IMapper mapper, IInsuranceService insuranceService, 
+        public AssignDoctorToPatientController(IHttpClientFactory httpClientFactory, IMapper mapper, IInsuranceService insuranceService, 
             IConfiguration configuration, IPatientService patientService, IIdentityService identityService)
         {
             _httpClient = httpClientFactory.CreateClient();
@@ -34,14 +34,14 @@ namespace Hospitality.Web.Controllers
             _identityService = identityService;
         }
         [HttpGet]
-        public async Task<IActionResult> AppointDoctor(bool? result)
+        public async Task<IActionResult> AssignDoctorToPatient(bool? result)
         {
             if (result == false) ViewBag.Show = "show";
             return View(new AppointDoctorToPatientModel() { Doctors = await _identityService.GetAllDoctorsNamesAndIds(HttpContext.Session.GetString("token")) });
         }
 
         [HttpPost]
-        public async Task<IActionResult> AppointDoctorToPatient(AppointDoctorToPatientModel model)
+        public async Task<IActionResult> Assign(AppointDoctorToPatientModel model)
         {
             if (!string.IsNullOrEmpty(model.SelectedDoctorName)) model.DoctorId = await _identityService.GetIdOfSelectedDoctor(model.SelectedDoctorName, HttpContext.Session.GetString("token"));
             var patient = await _patientService.GetIdOfPatient(_configuration["Paths:GetPatientByPesel"] + model.PatientPesel, HttpContext.Session.GetString("token"));
@@ -51,7 +51,7 @@ namespace Hospitality.Web.Controllers
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             var response = await _httpClient.PutAsync(_configuration["Paths:UpdateAssinedDoctor"], content);
             if (!response.IsSuccessStatusCode) return RedirectToAction("AppointDoctor", "AppointDoctor", new { result = false });
-            return RedirectToAction("AppointDoctor", "AppointDoctor");
+            return RedirectToAction("AssignDoctorToPatient", "AssignDoctorToPatient");
         }
     }
 }

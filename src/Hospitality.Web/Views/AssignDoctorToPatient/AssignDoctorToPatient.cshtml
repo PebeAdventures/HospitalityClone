@@ -10,9 +10,9 @@
 <body>
 
     <div id="appointForm">
-        @using (Html.BeginForm("AppointDoctorToPatient", "AppointDoctor", FormMethod.Post))
+        @using (Html.BeginForm("Assign", "AssignDoctorToPatient"))
         {
-            <h2>Appoint Doctor to Patient</h2>
+            <h2>Assign Doctor to Patient</h2>
 
             <br>
             <div>
@@ -30,7 +30,7 @@
             <br>
             <p class="buttons">
 
-                <button id="sendButton" type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-dismiss="modal">  Appoint  </button>
+                <button id="sendButton" type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-dismiss="modal">  Assign  </button>
                 <button id="resetButton" class="btn btn-primary" type="reset">  Reset  </button>
 
             </p>
