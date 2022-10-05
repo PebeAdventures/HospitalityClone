@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: identity-deployment
+  labels:
+    app: identity
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: identity
+  template:
+    metadata:
+      labels:
+        app: identity
+    spec:
+      containers:
+      - name: identity
+        image: tomakovv/hospitality_identity:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        - name: IDENTITY_SQL_CONNECTONSTRING
+          valueFrom:
+            secretKeyRef:
+              name: secrets
+              key: identityConnectionString
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: identity-service
+spec:
+  type: ClusterIP  
+  selector:
+    app: identity
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

@@ -3,13 +3,14 @@ using Hospitality.Identity.Data.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SecondExam.Services.Services.Auth;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<IdentityContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AuthDb")));
+builder.Configuration.
+    AddEnvironmentVariables(prefix: "IDENTITY_");
+builder.Services.AddDbContext<IdentityContext>(options => options.UseSqlServer(builder.Configuration.GetValue<string>("IDENTITY_SQL_CONNECTONSTRING")));
 builder.Services.AddScoped<ILogInService, LogInServicert>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {

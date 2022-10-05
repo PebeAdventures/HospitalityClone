@@ -6,3 +6,5 @@ data:
   mssql-url: mssql-service
   rabbitmq-url: rabbitmq-hospitality
   examination-url: examination-service
+  patient-url: patient-service
+  identity-url: identity-service
