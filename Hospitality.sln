@@ -57,6 +57,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", 
 		Gateway.yaml = Gateway.yaml
 		hosted-service.yaml = hosted-service.yaml
 		identity.yaml = identity.yaml
+		insurance.yaml = insurance.yaml
 		mssql-pvc.yaml = mssql-pvc.yaml
 		mssql.yaml = mssql.yaml
 		patient.yaml = patient.yaml

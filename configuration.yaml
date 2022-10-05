@@ -8,3 +8,5 @@ data:
   examination-url: examination-service
   patient-url: patient-service
   identity-url: identity-service
+  checkup-url: checkup-service
+  insurance-url: insurance-service

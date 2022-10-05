@@ -1,41 +1,36 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gateway-deployment
+  name: insurance-deployment
   labels:
-    app: gateway
+    app: insurance
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gateway
+      app: insurance
   template:
     metadata:
       labels:
-        app: gateway
+        app: insurance
     spec:
       containers:
-      - name: gateway 
-        image: tomakovv/hospitality_gateway:latest
+      - name: insurance 
+        image: tomakovv/hospitality_insurance:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
-        env:
-        - name: "ASPNETCORE_ENVIRONMENT"
-          value: "K8s"
-
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: gateway-service
+  name: insurance-service
 spec:
-  type: NodePort
+  type: ClusterIP  
   selector:
-    app: gateway
+    app: insurance
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
-      nodePort: 30700
