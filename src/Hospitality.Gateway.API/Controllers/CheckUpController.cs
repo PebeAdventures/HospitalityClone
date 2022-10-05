@@ -17,7 +17,6 @@ namespace Hospitality.Gateway.API.Controllers
         public CheckUpController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             _httpClient = httpClientFactory.CreateClient();
-
             _configuration = configuration;
         }
 

@@ -1,5 +1,4 @@
 ﻿using Hospitality.Common.DTO.NewFolder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hospitality.Government.Insurance.API.Controllers
@@ -15,7 +14,7 @@ namespace Hospitality.Government.Insurance.API.Controllers
         [HttpGet]
         public async Task<IActionResult> CheckIfIsured(int idOfPerson)
         {
-            var randomized = random.Next(0,2);
+            var randomized = random.Next(0,3);
             if (randomized == 0) return Ok(new InsuredDTO() { IsInsured = false });
             return Ok(new InsuredDTO() { IsInsured = true });
         }

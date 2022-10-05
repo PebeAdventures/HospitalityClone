@@ -1,11 +1,8 @@
-﻿using AutoMapper;
-using Hospitality.Common.DTO.Examination;
+﻿using Hospitality.Common.DTO.Examination;
 using Hospitality.Examination.Application.Functions.Examinations.Queries;
-using Hospitality.Examination.Domain.Entities;
 using Hospitality.Web.Services.Interfaces;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
-using System.Security.Policy;
 
 namespace Hospitality.Web.Services
 {

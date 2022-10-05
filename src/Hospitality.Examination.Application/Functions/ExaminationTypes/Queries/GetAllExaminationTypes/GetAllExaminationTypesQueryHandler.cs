@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Hospitality.Common.DTO.Examination;
 using Hospitality.Examination.Application.Contracts.Persistence;
-using Hospitality.Examination.Domain.Entities;
 using MediatR;
 
 namespace Hospitality.Examination.Application.Functions.ExaminationTypes.Queries.GetAllExaminationTypes
