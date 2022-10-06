@@ -56,7 +56,6 @@ namespace Hospitality.Web.Controllers
             PatientReceptionistViewDTO mapedPatient = _mapper.Map<PatientReceptionistViewDTO>(model);
             mapedPatient.IdOfSelectedSpecialist = await _identityService.GetIdOfSelectedDoctor(model.NameOfSelectedDoctor, HttpContext.Session.GetString("token"));
             mapedPatient.IsInsured = await _insuranceService.CheckHealthInsurance(mapedPatient.Id, HttpContext.Session.GetString("token"));
-            mapedPatient.IsInsured = await _insuranceService.CheckHealthInsurance(mapedPatient.Id, HttpContext.Session.GetString("token"));
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             await _httpClient.PostAsync(url, (new StringContent(JsonConvert.SerializeObject(mapedPatient), Encoding.UTF8, "application/json")));
         }
