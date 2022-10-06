@@ -4,7 +4,7 @@ namespace Hospitality.Web.Models
 {
     public class PatientDataCheckUpViewModel
     {
-        [StringLength(15)]
+        [MinLength(11), MaxLength(11)]
         public string PatientPesel { get; set; }
         public int PatientId { get; set; }
         public string Description { get; set; }

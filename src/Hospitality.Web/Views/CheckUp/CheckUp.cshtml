@@ -3,8 +3,10 @@
 
 @{
     ViewData["Title"] = "Check Up";
+
 }
 <head>
+
     <link rel="stylesheet" href="~/css/CheckUp.css" asp-append-version="true" />
 </head>
 <body>
@@ -24,8 +26,33 @@
                 {
                     <p class="notInsured">   Patient is not Insured</p>
                 }
+                       
+                <div class="relative">
+                    <div class="absolute">    
+                        <form action="/Temperature/AddNewTemperatureToPatient" method="POST" target="_blank">
 
-                <div>
+                        <input type="text" name="actualPatientTemperature" class="btn "  placeholder="Enter patient's temperature" onclick="closeWindow()"/>
+
+                         <div style="display:none">
+                        <input type="text" name="patientPesel" value=@Model.PatientPesel />
+                         </div>
+                         <input type="submit" id="newTemperatureInput" class="btn btn-primary btn-lg" value="Record patient temperature" />
+                        </form>
+                        </div>
+                     <div class="absolute"> 
+                      @using (Html.BeginForm("TemperatureControl", "Temperature", FormMethod.Post, new { target = "_blank" }))
+                    {
+                        <div style="display:none">
+                            @Html.TextBoxFor(model=>model.PatientPesel)
+                        
+                        </div>
+                        <br>
+
+                        <input type="submit" id="temperatureInput" class="btn btn-primary btn-lg" value="Check Temperatures"/>
+                    }
+                 
+                    </div>
+                    <div class="absolute"> 
                     @using (Html.BeginForm("Result", "Result", FormMethod.Post, new { target = "_blank" }))
                     {
                         <div style="display:none">
@@ -33,7 +60,8 @@
                         </div>
                         <input type="submit" id="resultInput" class="btn btn-primary btn-lg" value="Examination results"/>
                     }
-
+                    </div>
+                    <div class="absolute"> 
                     @using (Html.BeginForm("Examination", "Examination", FormMethod.Post, new { target = "_blank" }))
                     {
                         <div style="display:none">
@@ -45,6 +73,7 @@
                         <input type="submit" id="orderInput" class="btn btn-primary btn-lg" value="Order an examination"/>
                     }
 
+                   </div>
                 </div>
 
             </div>
@@ -71,5 +100,9 @@
     </content>
 
 
-
+            <script>
+function closeWindow() {
+window.close();
+}
+</script>
 </body>
