@@ -11,3 +11,4 @@ data:
   checkup-url: checkup-service
   insurance-url: insurance-service
   gateway-url: gateway-service
+  mongo-url: mongo-service

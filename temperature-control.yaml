@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: temperature-control-deployment
+  labels:
+    app: temperature-control
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: temperature-control
+  template:
+    metadata:
+      labels:
+        app: temperature-control
+    spec:
+      containers:
+      - name: temperature-control 
+        image: tomakovv/
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        - name: MONGO_CONNECTION_STRING
+          valueFrom:
+            secretKeyRef:
+              name: secrets
+              key: mongo-connectionstring
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: temperature-control-service
+spec:
+  type: ClusterIP  
+  selector:
+    app: temperature-control
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

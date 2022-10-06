@@ -57,11 +57,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", 
 		hosted-service.yaml = hosted-service.yaml
 		identity.yaml = identity.yaml
 		insurance.yaml = insurance.yaml
+		mongo.yaml = mongo.yaml
+		mongo-pvc.yaml = mongo-pvc.yaml
 		mssql-pvc.yaml = mssql-pvc.yaml
 		mssql.yaml = mssql.yaml
 		patient.yaml = patient.yaml
 		rabbitmq.yaml = rabbitmq.yaml
 		secrets.yaml = secrets.yaml
+		temperature-control.yaml = temperature-control.yaml
 		web-app.yaml = web-app.yaml
 	EndProjectSection
 EndProject

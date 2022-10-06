@@ -8,11 +8,12 @@ namespace PatientTemperatureControl.Services
     public class TemperaturesService : ITemperaturesService
     {
         private readonly IMongoCollection<PatientTemperature> _temperaturesCollection;
+        private readonly IConfiguration _configuration;
 
-        public TemperaturesService(IOptions<PatientTemperaturesDatabaseSettings> temperaturesDatabaseSettings)
+        public TemperaturesService(IOptions<PatientTemperaturesDatabaseSettings> temperaturesDatabaseSettings, IConfiguration configuration)
         {
-
-            var mongoClient = new MongoClient(temperaturesDatabaseSettings.Value.ConnectionString);
+            _configuration = configuration;
+            var mongoClient = new MongoClient(_configuration.GetValue<string>("MONGO_CONNECTION_STRING"));
 
             var mongoDatabase = mongoClient.GetDatabase(temperaturesDatabaseSettings.Value.DatabaseName);
 
@@ -31,11 +32,8 @@ namespace PatientTemperatureControl.Services
             return patientTemperaturesViewDTO;
         }
 
-
         public async Task AddNewPatientTemperature(NewPatientTemperatureDTO newPatientTemperatureDTO)
         {
-
-
             await _temperaturesCollection.InsertOneAsync(new PatientTemperature()
             {
                 PatientId = newPatientTemperatureDTO.PatientId,
@@ -43,9 +41,5 @@ namespace PatientTemperatureControl.Services
                 MeasurementDate = DateTime.Now
             });
         }
-
-
-
-
     }
 }

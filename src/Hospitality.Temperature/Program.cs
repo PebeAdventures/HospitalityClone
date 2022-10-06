@@ -4,7 +4,8 @@ using PatientTemperatureControl.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Configuration.
+    AddEnvironmentVariables(prefix: "MONGO_");
 builder.Services.Configure<PatientTemperaturesDatabaseSettings>(
     builder.Configuration.GetSection("TemperatureDatabase"));
 
