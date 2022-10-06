@@ -159,8 +159,8 @@ namespace Hospitality.Identity.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "5dda6473-4e0e-4aa0-8fc5-12a14d6fb8c6", "d3e79d9d-cad5-417f-bf5a-584a35203611", "Doctor", "DOCTOR" },
-                    { "fb37470a-e9ba-4db6-ac77-36068236fcdd", "4b18777b-d294-4a45-8889-5f0e807596de", "Receptionist", "RECEPTIONIST" }
+                    { "a82f5d70-f0d3-466a-8285-af497c01dcf5", "6db9cf29-3f80-431b-8758-c8c25209220f", "Receptionist", "RECEPTIONIST" },
+                    { "ee0d1776-fb7e-4224-93d3-d68ddb712b0b", "3b293ffd-4552-4a03-98a3-6e0729f5a0a0", "Doctor", "DOCTOR" }
                 });
 
             migrationBuilder.InsertData(
@@ -168,19 +168,24 @@ namespace Hospitality.Identity.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "a39c518b-2174-4a12-8ba6-9212b21a800d", 0, "faedb380-d6bc-44ad-9271-a0df6c67e420", "receptionist", false, false, null, "RECEPTIONIST", null, "AQAAAAEAACcQAAAAEFCaG77SFb3WEhKEE/uBYxl/fj5lnDi2kiv1CaDUo/Cggf7wjUUJK+v/wQDv+Aw+6w==", null, false, "4780b93f-11d3-493b-8dda-fc166a6196c6", false, "Danuta Nowak" },
-                    { "bfa6e69c-054b-4c13-a38a-cda77dd8d713", 0, "d0862d16-fe7a-44d5-96c4-cec929a013e7", "doctor", false, false, null, "DOCTOR", null, "AQAAAAEAACcQAAAAEHVOqYsH8aGrFpZMWcfpZ4NankrP83IbNLW4SWL3AAJfOIqgGjEq7gMSDpXlEwQNmQ==", null, false, "9dd3aa4f-047d-4b4a-9aeb-7ad29ddf04d6", false, "Dr. House" }
+                    { "1bf30ecc-7fd1-40a4-b0c6-5e2fecafcf75", 0, "f6ee52b2-813f-4bf5-a3c9-149ec323dcb8", "oetker", false, false, null, "OETKER", null, "AQAAAAEAACcQAAAAECC2eF75mV21Sg0/PHSiE3tEZMK+HaovuugwCz+MVzD1Ri8licc1c5Xaz35kMLuBfA==", null, false, "445dc832-300a-48e8-a323-3e956fbb66da", false, "Dr. oetker" },
+                    { "1e41c5ef-8c6d-4459-95a6-fa1215c5afb1", 0, "86968b2e-737b-4414-ba57-e8b1a753b94b", "receptionist", false, false, null, "RECEPTIONIST", null, "AQAAAAEAACcQAAAAEBFxcudmQBOMM3Ssk1Gvfm2viLul1skmH0qDjOGn5vnlWINM0xEjgkOTrw8ciKk1jA==", null, false, "0620b714-deae-4350-adf6-ceaf426f5d57", false, "Danuta Nowak" },
+                    { "ba9297ed-c110-4f4b-90ae-652f801ec27e", 0, "f72a1782-d88e-4bcb-bd94-4f737b36011b", "dolittle", false, false, null, "DOLITTLE", null, "AQAAAAEAACcQAAAAEIPB2nUnNfntQ5gWMegnLysZAKeFJIWlYQHlbRX/gYfoq00hAE5KJMMvK9odo8bCWg==", null, false, "6a585cd9-62b8-43d7-8ffd-17f10d2cac76", false, "Dr. Dolittle" },
+                    { "d648a57a-1943-40cd-a3c3-17c8c591d328", 0, "0ebb456b-984e-4f32-bf1a-2b7140b3ea55", "rafik", false, false, null, "RAFIK", null, "AQAAAAEAACcQAAAAEMK2osEQrBrDXC8acxbI14C0bxTvSsmVuE4oOQ2jav1lYCMyh9zBaeBTW1puB1rixw==", null, false, "a07e8f92-c45e-48a4-8131-74e38e6db969", false, "Rafał Wyrwikoński" },
+                    { "faa3c27b-43ff-403b-aedd-13c2575cadf4", 0, "a9660f07-db0b-45f7-b92d-823ed1fb80ea", "doctor", false, false, null, "DOCTOR", null, "AQAAAAEAACcQAAAAELIfHfahLHrPmaZHQWs8Msf5ZXvyOnAfLtll3MzZjLcg0ziZk/l0Nk7ooaK9hcOhMA==", null, false, "6b8363c1-dbe3-42fe-904f-f1f7da2d414f", false, "Dr. House" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "fb37470a-e9ba-4db6-ac77-36068236fcdd", "a39c518b-2174-4a12-8ba6-9212b21a800d" });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUserRoles",
-                columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "5dda6473-4e0e-4aa0-8fc5-12a14d6fb8c6", "bfa6e69c-054b-4c13-a38a-cda77dd8d713" });
+                values: new object[,]
+                {
+                    { "ee0d1776-fb7e-4224-93d3-d68ddb712b0b", "1bf30ecc-7fd1-40a4-b0c6-5e2fecafcf75" },
+                    { "a82f5d70-f0d3-466a-8285-af497c01dcf5", "1e41c5ef-8c6d-4459-95a6-fa1215c5afb1" },
+                    { "ee0d1776-fb7e-4224-93d3-d68ddb712b0b", "ba9297ed-c110-4f4b-90ae-652f801ec27e" },
+                    { "a82f5d70-f0d3-466a-8285-af497c01dcf5", "d648a57a-1943-40cd-a3c3-17c8c591d328" },
+                    { "ee0d1776-fb7e-4224-93d3-d68ddb712b0b", "faa3c27b-43ff-403b-aedd-13c2575cadf4" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
