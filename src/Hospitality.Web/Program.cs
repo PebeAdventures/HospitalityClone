@@ -1,10 +1,10 @@
+using AutoMapper;
+using Hospitality.Web.Mapper;
+using Hospitality.Web.Services;
+using Hospitality.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using AutoMapper;
-using Hospitality.Web.Mapper;
-using Hospitality.Web.Services.Interfaces;
-using Hospitality.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IPatientService, PatientService>();
 builder.Services.AddScoped<IInsuranceService, InsuranceService>();
 builder.Services.AddScoped<IExaminationService, ExaminationService>();
+builder.Services.AddScoped<ITemperatureService, TemperatureService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddDistributedMemoryCache();
 var mapConfig = new MapperConfiguration(c =>
@@ -31,7 +32,7 @@ builder.Services.AddSession(options =>
 });
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
-    
+
     options.RequireHttpsMetadata = false;
     options.SaveToken = true;
     options.TokenValidationParameters = new TokenValidationParameters()
