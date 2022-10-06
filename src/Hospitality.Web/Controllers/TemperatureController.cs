@@ -46,22 +46,38 @@ namespace Hospitality.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewTemperatureToPatient(string actualPatientTemperature, string patientPesel)
         {
-            ViewData["actualPatientTemperature"] = actualPatientTemperature;
-            decimal decimalValue;
-            if (!Decimal.TryParse(actualPatientTemperature, out decimalValue)) actualPatientTemperature = "0";
 
-            NewPatientTemperatureDTO newPatientTemperatureDTO = new NewPatientTemperatureDTO() { PatientId = patientPesel, Temperature = Decimal.Parse(actualPatientTemperature) };
+            string patientTemperatureWithDots = actualPatientTemperature.Replace(",", ".");
+            decimal decimalValue;
+            if (!Decimal.TryParse(patientTemperatureWithDots, out decimalValue))
+            {
+
+                return Content(@"<script>alert(""Wrong property"");window.close();</script>", "text/html");
+
+            }
+
+            NewPatientTemperatureDTO newPatientTemperatureDTO = new NewPatientTemperatureDTO()
+            {
+                PatientId = patientPesel,
+                Temperature = Decimal.Parse(patientTemperatureWithDots)
+            };
             await SaveNewTemperature(newPatientTemperatureDTO, _configuration["Paths:AddPatientTemperature"]);
             return Content(@"<script>window.close();</script>", "text/html");
 
         }
+
+
+
+
+
         private async Task SaveNewTemperature(NewPatientTemperatureDTO newPatientTemperatureDTO, string url)
         {
+
             var json = JsonConvert.SerializeObject(newPatientTemperatureDTO);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
-            var test = await _httpClient.PostAsync(url, content);
-            var tt = test;
+            await _httpClient.PostAsync(url, content);
+
         }
     }
 }
