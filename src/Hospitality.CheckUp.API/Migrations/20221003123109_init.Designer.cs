@@ -12,8 +12,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hospitality.CheckUp.API.Migrations
 {
     [DbContext(typeof(CheckUpContext))]
+<<<<<<<< HEAD:src/Hospitality.CheckUp.API/Migrations/20221005092951_initial.Designer.cs
     [Migration("20221005092951_initial")]
     partial class initial
+========
+    [Migration("20221003123109_init")]
+    partial class init
+>>>>>>>> master:src/Hospitality.CheckUp.API/Migrations/20221003123109_init.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,8 +41,8 @@ namespace Hospitality.CheckUp.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdDoctor")
-                        .HasColumnType("int");
+                    b.Property<Guid>("IdDoctor")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("IdPatient")
                         .HasColumnType("int");

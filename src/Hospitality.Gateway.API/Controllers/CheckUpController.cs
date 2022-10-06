@@ -17,22 +17,16 @@ namespace Hospitality.Gateway.API.Controllers
         public CheckUpController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             _httpClient = httpClientFactory.CreateClient();
-
             _configuration = configuration;
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
         [HttpPost]
-
         public async Task<IActionResult> CreateNewCheckupAsync(NewCheckUpDTO newCheckup)
             => Ok(await GetContentAsync(newCheckup, _configuration["Paths:CreateCheckup"]));
 
         private async Task<HttpResponseMessage> GetContentAsync(NewCheckUpDTO newCheckup, string url)
-        {
-            var json = JsonConvert.SerializeObject(newCheckup);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync(url, content);
-            return response;
-        }
+            => await _httpClient.PostAsync(url, new StringContent(
+                JsonConvert.SerializeObject(newCheckup), Encoding.UTF8, "application/json"));
     }
 }

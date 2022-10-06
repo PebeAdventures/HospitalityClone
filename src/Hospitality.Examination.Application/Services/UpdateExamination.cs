@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Hospitality.Common.DTO.Examination;
 using Hospitality.Examination.Domain.Entities;
 using Hospitality.Examination.Application.Contracts.Persistence;
@@ -17,9 +16,8 @@ namespace Hospitality.Examination.Application.Services
         private readonly IExaminationRepository _examinationRepository;
 
         public UpdateExamination(IExaminationRepository examinationRepository)
-        {
-            _examinationRepository = examinationRepository;
-        }
+            => _examinationRepository = examinationRepository;
+        
         public async Task updateExaminationData(string jsonData)
         {
             ExaminationExecutionDto examinationExecutionDto = JsonConvert.DeserializeObject<ExaminationExecutionDto>(jsonData);

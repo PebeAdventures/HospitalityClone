@@ -10,7 +10,7 @@
             CreateMap<PatientReceptionistViewDTO, HospitalPatient>();
             CreateMap<PatientDoctorViewDTO, HospitalPatient>();
             CreateMap<HospitalPatient, PatientNotificationDTO>();
-
+            CreateMap<HospitalPatient, UpdateAssinedDoctorOfPatientDTO>().ReverseMap();
         }
     }
 }

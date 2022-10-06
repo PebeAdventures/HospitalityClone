@@ -18,7 +18,6 @@ namespace Hospitality.Web.Mapper
                 .ForMember(ncd => ncd.IdDoctor, src => src.MapFrom(pdcvm => pdcvm.DoctorId))
                 .ForMember(ncd => ncd.Description, src => src.MapFrom(pdcvm => pdcvm.Description))
                 .ForMember(ncd => ncd.IsInsured, src => src.MapFrom(pdcvm => pdcvm.IsInsured));
-
         }
     }
 }

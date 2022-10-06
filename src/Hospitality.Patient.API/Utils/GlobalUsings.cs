@@ -9,3 +9,4 @@ global using Hospitality.Patient.API.Services;
 global using Hospitality.Patient.API.Services;
 global using AutoMapper;
 global using Hospitality.Common.DTO.Patient;
+global using Hospitality.Patient.API.Data.Context;

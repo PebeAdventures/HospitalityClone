@@ -28,7 +28,8 @@ namespace Hospitality.Patient.API.Services
                 Address = patientDTO.Address,
                 Email = patientDTO.Email,
                 PhoneNumber = patientDTO.PhoneNumber,
-                IsInsured = patientDTO.IsInsured
+                IsInsured = patientDTO.IsInsured,
+                IdOfSelectedDoctor = patientDTO.IdOfSelectedSpecialist
             });
         }
 
@@ -46,6 +47,13 @@ namespace Hospitality.Patient.API.Services
                 throw new ResourceNotFoundException($"Pesel cannot be empty");
             var patient = await _patientRepository.GetPatientByID(patientID);
             return _mapper.Map<PatientNotificationDTO>(patient);
+        }
+
+        public async Task UpdatePatient(UpdateAssinedDoctorOfPatientDTO patientDTO)
+        {
+            var patientToUpdate = await _patientRepository.GetByPesel(patientDTO.PatientPesel);
+            patientToUpdate.IdOfSelectedDoctor = patientDTO.DoctorId;
+            _patientRepository.UpdatePatient(patientToUpdate);
         }
     }
 }

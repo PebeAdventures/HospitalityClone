@@ -11,9 +11,7 @@ namespace Hospitality.CheckUp.API.Service
         private CheckUpContext CheckUpContext { get; set; }
 
         public CheckUpService(CheckUpContext checkUpContext)
-        {
-            CheckUpContext = checkUpContext;
-        }
+            => CheckUpContext = checkUpContext;
 
         public async Task AddNewCheckUp(NewCheckUpDTO newCheckUpDTO)
         {

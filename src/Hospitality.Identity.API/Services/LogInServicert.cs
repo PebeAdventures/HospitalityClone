@@ -5,7 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace SecondExam.Services.Services.Auth
+namespace Hospitality.Identity.API.Services
 {
     public class LogInServicert : ILogInService
     {
@@ -49,6 +49,7 @@ namespace SecondExam.Services.Services.Auth
                 new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                new Claim("Name", user.UserName),
                 new Claim("UserId", user.Id.ToString()),
             };
 

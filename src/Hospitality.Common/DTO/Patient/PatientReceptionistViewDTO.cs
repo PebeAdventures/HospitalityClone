@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Hospitality.Common.DTO.Registration;
+using System.ComponentModel.DataAnnotations;
 namespace Hospitality.Common.DTO.Patient
 {
     public class PatientReceptionistViewDTO
@@ -37,8 +38,6 @@ namespace Hospitality.Common.DTO.Patient
         [DataType(DataType.Text)]
         public bool IsInsured { get; set; }
         [Required]
-        public SpecialistEnum Specialist { get; set; }
-
-
+        public Guid IdOfSelectedSpecialist { get; set; }
     }
 }

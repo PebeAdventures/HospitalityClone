@@ -3,8 +3,6 @@ using Hospitality.Examination.Application.Functions.Examinations.Commands;
 using Hospitality.Examination.Application.Functions.Examinations.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using RabbitMQ.Client;
-using Hospitality.Examination.RabbitMQ;
 using Hospitality.Examination.Domain.Entities.Enums;
 
 namespace Hospitality.Examination.API.Controllers
@@ -14,22 +12,17 @@ namespace Hospitality.Examination.API.Controllers
     public class ExaminationController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IRabbitMqService _mqService;
 
-
-        public ExaminationController(IMediator mediator, IRabbitMqService mqService)
-        {
-            _mediator = mediator;
-            _mqService = mqService;
-        }
+        public ExaminationController(IMediator mediator)
+            => _mediator = mediator;
 
         [HttpGet("Id")]
         public async Task<IActionResult> GetExaminationById(int id)
-        => Ok(await _mediator.Send(new GetExaminationByIdQuery() { ExaminationId = id }));
+            => Ok(await _mediator.Send(new GetExaminationByIdQuery() { ExaminationId = id }));
 
         [HttpGet("PatientId")]
         public async Task<IActionResult> GetPatientExaminations(int patientId)
-        => Ok(await _mediator.Send(new GetPatientExaminationsQuery() { PatientId = patientId }));
+            => Ok(await _mediator.Send(new GetPatientExaminationsQuery() { PatientId = patientId }));
 
         [HttpPost]
         public async Task<IActionResult> AddNewExamination(CreateExaminationDto examinationDto)

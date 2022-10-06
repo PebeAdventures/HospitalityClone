@@ -19,7 +19,6 @@ namespace Hospitality.Examination.Application.Mapper.Profiles
                 .ForMember(x => x.Status, e => e.MapFrom(m => m.Status))
                 .ForMember(x => x.Duration, e => e.MapFrom(m => m.Type.Duration))
                 .ForMember(x => x.ExaminationTypeName, e => e.MapFrom(m => m.Type.Name));
-
         }
     }
 }

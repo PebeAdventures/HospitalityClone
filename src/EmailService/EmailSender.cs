@@ -8,16 +8,10 @@ namespace EmailService
         private readonly EmailConfiguration _emailConfig;
 
         public EmailSender(EmailConfiguration emailConfig)
-        {
-            _emailConfig = emailConfig;
-        }
+            => _emailConfig = emailConfig;
 
         public void SendEmail(Message message)
-        {
-            var emailMessage = CreateEmailMessage(message);
-
-            Send(emailMessage);
-        }
+            => Send(CreateEmailMessage(message));
 
         private MimeMessage CreateEmailMessage(Message message)
         {
@@ -53,7 +47,6 @@ namespace EmailService
                     client.Dispose();
                 }
             }
-
         }
     }
 }

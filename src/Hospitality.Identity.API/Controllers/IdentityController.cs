@@ -1,7 +1,6 @@
 ﻿using Hospitality.Common.DTO.Identity;
 using Hospitality.Identity.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 
 namespace Hospitality.Identity.API.Controllers
 {
@@ -9,16 +8,24 @@ namespace Hospitality.Identity.API.Controllers
     [ApiController]
     public class IdentityController : ControllerBase
     {
-        private ILogInService LogInService;
-        public IdentityController(ILogInService logInService)
-            => LogInService = logInService;
+        private ILogInService _logInService;
+        private IDoctorService _doctorService;
+        public IdentityController(ILogInService logInService, IDoctorService doctorService)
+        {
+            _logInService = logInService;
+            _doctorService = doctorService;
+        }
 
-        [HttpPost]
+        [HttpPost("Login")]
         public async Task<IActionResult> Login(Credentials credentials)
         {
-            var jwt = await LogInService.Login(credentials.email, credentials.password);
+            var jwt = await _logInService.Login(credentials.email, credentials.password);
             if (jwt == null) return NoContent();
             return Ok(jwt);
         }
+
+        [HttpGet("GetAllDoctorsNames")]
+        public async Task<IActionResult> GetAllDoctorsNamesAndIds()
+            => Ok(await _doctorService.GetAllDoctorsNamesAndIds());
     }
 }

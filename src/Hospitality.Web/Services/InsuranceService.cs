@@ -19,9 +19,8 @@ namespace Hospitality.Web.Services
         public async Task<bool> CheckHealthInsurance(int idOfPerson, string token)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var response = await _httpClient.GetAsync(_configuration["Paths:CheckInsurance"] + idOfPerson);
-            return true;
-            //return JsonConvert.DeserializeObject<InsuredDTO>(await response.Content.ReadAsStringAsync()).IsInsured;
+            return JsonConvert.DeserializeObject<InsuredDTO>(await (await _httpClient.GetAsync(
+                _configuration["Paths:CheckInsurance"] + idOfPerson)).Content.ReadAsStringAsync()).IsInsured;
         }
     }
 }

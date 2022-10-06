@@ -20,7 +20,7 @@ namespace Hospitality.Gateway.API.Controllers
             _configuration = configuration;
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor, Receptionist")]
         [HttpGet]
         public async Task<IActionResult> GetPatientByPeselAsync(string pesel)
             => Ok(await _httpClient.GetStringAsync(_configuration["Paths:GetPatientByPesel"] + pesel));
@@ -30,12 +30,21 @@ namespace Hospitality.Gateway.API.Controllers
         public async Task<IActionResult> RegisterNewPatientAsync(PatientReceptionistViewDTO newPatient)
             => await GetContentAsync(newPatient, _configuration["Paths:RegisterPatient"]);
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Receptionist")]
+        [HttpPut("UpdateAssinedDoctor")]
+        public async Task<IActionResult> UpdateAssignedDoctor(UpdateAssinedDoctorOfPatientDTO patientDTO)
+        {
+            var response = await _httpClient.PutAsync(_configuration["Paths:UpdateAssinedDoctorOfPatient"], 
+                new StringContent(JsonConvert.SerializeObject(patientDTO), Encoding.UTF8, "application/json"));
+            if (!response.IsSuccessStatusCode || response is null) return NotFound();
+            return NoContent();
+        }
+    
         private async Task<IActionResult> GetContentAsync(PatientReceptionistViewDTO newPatient, string url)
         {
-            var json = JsonConvert.SerializeObject(newPatient);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync(url, content);
-            if (!response.IsSuccessStatusCode || response is null) return StatusCode(404);
+            var response = await _httpClient.PostAsync(url, new StringContent(
+                JsonConvert.SerializeObject(newPatient), Encoding.UTF8, "application/json"));
+            if (!response.IsSuccessStatusCode || response is null) return NotFound(); ;
             return StatusCode(201);
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Hospitality.Common.DTO.Patient;
+using Hospitality.Common.DTO.Registration;
 using System.ComponentModel.DataAnnotations;
 
 namespace Hospitality.Web.Models
@@ -8,11 +9,11 @@ namespace Hospitality.Web.Models
         public string? Result { get; set; }
 
         [Required]
-        [MinLength(3), MaxLength(25)]
+        [MinLength(3), MaxLength(40)]
         public string PatientName { get; set; }
 
         [Required]
-        [MinLength(3), MaxLength(25)]
+        [MinLength(3), MaxLength(40)]
         public string PatientSurname { get; set; }
 
         [Required]
@@ -20,11 +21,12 @@ namespace Hospitality.Web.Models
         public string PatientPesel { get; set; }
 
         [Required]
-        [DataType(DataType.DateTime)]
-        public DateTime BirthDate { get; set; }
+        [DataType(DataType.Date, ErrorMessage = "Date only")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime BirthDate { get; set; } = DateTime.Now;
 
         [Required]
-        [MinLength(3), MaxLength(25)]
+        [MinLength(3), MaxLength(100)]
         public string Address { get; set; }
 
         [Required]
@@ -38,7 +40,9 @@ namespace Hospitality.Web.Models
 
         [DataType(DataType.Text)]
         public bool IsInsured { get; set; }
+        public List<DoctorDTO>? Doctors { get; set; } = new();
         [Required]
-        public SpecialistEnum Specialist { get; set; }
+        public string NameOfSelectedDoctor { get; set; }
+        public Guid IdOfSelectedDoctor { get; set; }
     }
 }

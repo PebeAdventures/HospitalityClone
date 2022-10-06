@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.Text;
 
 namespace Hospitality.Gateway.API.Controllers
 {
@@ -19,8 +17,6 @@ namespace Hospitality.Gateway.API.Controllers
 
         [HttpGet]
         public async Task<IActionResult> CheckInsurance(int id)
-            => Ok(await GetContentAsync($"https://localhost:7101/api/Insurance?idOfPerson={id}")); // LINK DO UZUPEŁNIENIA !!! 
-        private async Task<HttpResponseMessage> GetContentAsync(string url)
-            => await _httpClient.GetAsync(url);
+            => Ok(await _httpClient.GetStringAsync($"{_configuration["Paths:CheckInsurance"]}+{id}"));
     }
 }

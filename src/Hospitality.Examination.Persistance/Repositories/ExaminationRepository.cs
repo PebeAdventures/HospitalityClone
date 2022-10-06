@@ -10,9 +10,7 @@ namespace Hospitality.Examination.Persistance.Repositories
         private readonly ExaminationContext _context;
 
         public ExaminationRepository(ExaminationContext context)
-        {
-            _context = context;
-        }
+            => _context = context;
 
         public async Task<ExaminationInfo> AddNewExaminationAsync(ExaminationInfo examination)
         {
@@ -22,11 +20,9 @@ namespace Hospitality.Examination.Persistance.Repositories
         }
 
         public async Task<IEnumerable<ExaminationInfo>> GetPatientExaminationsAsync(int patientId)
-        {
-            var examinations = await _context.Examinations.Where(e => e.PatientId == patientId).Include(e => e.Type).ToListAsync();
-            return examinations;
-        }
-        public async Task<ExaminationInfo> GetExaminationByIdAsync(int id) => await _context.Examinations.Include(e => e.Type).SingleOrDefaultAsync(e => e.Id == id);
+            => await _context.Examinations.Where(e => e.PatientId == patientId).Include(e => e.Type).ToListAsync();
+        public async Task<ExaminationInfo> GetExaminationByIdAsync(int id) 
+            => await _context.Examinations.Include(e => e.Type).SingleOrDefaultAsync(e => e.Id == id);
 
         public async Task UpdateExaminationByNameAsync(ExaminationInfo examination)
         {

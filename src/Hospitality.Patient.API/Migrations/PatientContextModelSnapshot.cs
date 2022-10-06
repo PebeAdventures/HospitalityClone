@@ -41,6 +41,9 @@ namespace Hospitality.Patient.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("IdOfSelectedDoctor")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("IsInsured")
                         .HasColumnType("bit");
 
@@ -71,6 +74,7 @@ namespace Hospitality.Patient.API.Migrations
                             Address = "Wrzosowa",
                             BirthDate = new DateTime(1999, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "aniela.nowak@proton.me",
+                            IdOfSelectedDoctor = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsInsured = true,
                             PatientName = "Aniela",
                             PatientPesel = "99112234543",
@@ -83,6 +87,7 @@ namespace Hospitality.Patient.API.Migrations
                             Address = "Jaworowa",
                             BirthDate = new DateTime(1998, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ania.okrasa@proton.me",
+                            IdOfSelectedDoctor = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsInsured = true,
                             PatientName = "Ania",
                             PatientPesel = "98112234543",
@@ -95,6 +100,7 @@ namespace Hospitality.Patient.API.Migrations
                             Address = "Fiołkowa",
                             BirthDate = new DateTime(1997, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "michal.jakos@proton.me",
+                            IdOfSelectedDoctor = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsInsured = true,
                             PatientName = "Michał",
                             PatientPesel = "97112234543",
@@ -107,6 +113,7 @@ namespace Hospitality.Patient.API.Migrations
                             Address = "Jaworowa",
                             BirthDate = new DateTime(1998, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "michal.jakos@proton.me",
+                            IdOfSelectedDoctor = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsInsured = false,
                             PatientName = "Olaf",
                             PatientPesel = "98122255543",
@@ -119,6 +126,7 @@ namespace Hospitality.Patient.API.Migrations
                             Address = "Fiołkowa",
                             BirthDate = new DateTime(1997, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ania.okrasa@proton.me",
+                            IdOfSelectedDoctor = new Guid("00000000-0000-0000-0000-000000000000"),
                             IsInsured = true,
                             PatientName = "Dawid",
                             PatientPesel = "97102233343",

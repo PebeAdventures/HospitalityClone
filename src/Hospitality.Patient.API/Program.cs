@@ -35,7 +35,6 @@ if (app.Environment.EnvironmentName != "Local")
         context.Database.Migrate();
     }
 }
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsProduction())
 {
     app.UseSwagger();

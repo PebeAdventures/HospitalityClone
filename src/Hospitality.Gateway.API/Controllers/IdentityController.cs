@@ -1,4 +1,6 @@
 ﻿using Hospitality.Common.DTO.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
@@ -18,15 +20,19 @@ namespace Hospitality.Gateway.API.Controllers
             _configuration = configuration;
         }
 
-        [HttpPost]
+        [HttpPost("LogIn")]
         public async Task<IActionResult> LogIn(Credentials credentials)
             => await GetContentAsync(credentials, _configuration["Paths:LogIn"]);
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Receptionist")]
+        [HttpGet("GetAllDoctorsNamesAndIds")]
+        public async Task<IActionResult> GetAllDoctorsNames()
+            => Ok(await _httpClient.GetStringAsync(_configuration["Paths:GetAllDoctorsNamesAndIds"]));
+
         private async Task<IActionResult> GetContentAsync(Credentials credentials, string url)
         {
-            var jsonEmail = JsonConvert.SerializeObject(credentials);
-            var content = new StringContent(jsonEmail, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync(url, content);
+            var response = await _httpClient.PostAsync(url, new StringContent(
+                JsonConvert.SerializeObject(credentials), Encoding.UTF8, "application/json"));
             if (!response.IsSuccessStatusCode || response is null || response.StatusCode == System.Net.HttpStatusCode.NoContent) return NoContent();
             return Ok(await response.Content.ReadAsStringAsync());
         }

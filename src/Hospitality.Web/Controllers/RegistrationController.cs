@@ -5,8 +5,6 @@ using System.Net.Http.Headers;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Hospitality.Common.DTO.Patient;
-using Hospitality.Common.DTO.NewFolder;
-using System;
 using Hospitality.Web.Models;
 using AutoMapper;
 using Hospitality.Web.Services.Interfaces;
@@ -20,22 +18,28 @@ namespace Hospitality.Web.Controllers
         private IMapper _mapper;
         private IInsuranceService _insuranceService;
         private readonly IConfiguration _configuration;
+        private IIdentityService _identityService;
 
-        public RegistrationController(IHttpClientFactory httpClientFactory, IMapper mapper, IInsuranceService insuranceService, IConfiguration configuration)
+        public RegistrationController(IHttpClientFactory httpClientFactory, IMapper mapper, IInsuranceService insuranceService,
+            IConfiguration configuration, IIdentityService identityService)
         {
             _httpClient = httpClientFactory.CreateClient();
             _mapper = mapper;
             _insuranceService = insuranceService;
             _configuration = configuration;
+            _identityService = identityService;
         }
+
         [HttpGet]
         public async Task<IActionResult> Registration(PatientResultViewModel? Model)
         {
             if (Model.Result == "valid")
-                return View();
-            else 
+                return View(new PatientResultViewModel() { Doctors = await _identityService.GetAllDoctorsNamesAndIds(
+                    HttpContext.Session.GetString("token")) });
+            else
                 ViewBag.Invalid = Model.Result;
-                return View(Model);
+            Model.Doctors = await _identityService.GetAllDoctorsNamesAndIds(HttpContext.Session.GetString("token"));
+            return View(Model);
         }
 
         [HttpPost]
@@ -46,19 +50,21 @@ namespace Hospitality.Web.Controllers
                 model.Result = "invalid";
                 return RedirectToAction("Registration", "Registration", model);
             }
+            model.IdOfSelectedDoctor = await _identityService.GetIdOfSelectedDoctor(
+                model.NameOfSelectedDoctor, HttpContext.Session.GetString("token"));
+
             model.Result = "valid";
             await RegisterNewPatient(model, _configuration["Paths:CreatePatient"]);
-            return RedirectToAction("Registration", "Registration", model);
+            return RedirectToAction("Registration", "Registration");
         }
 
         private async Task RegisterNewPatient(PatientResultViewModel model, string url)
         {
             PatientReceptionistViewDTO mapedPatient = _mapper.Map<PatientReceptionistViewDTO>(model);
-            model.IsInsured = await _insuranceService.CheckHealthInsurance(mapedPatient.Id, HttpContext.Session.GetString("token"));
-            var json = JsonConvert.SerializeObject(mapedPatient);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            mapedPatient.IdOfSelectedSpecialist = model.IdOfSelectedDoctor;
+            mapedPatient.IsInsured = await _insuranceService.CheckHealthInsurance(mapedPatient.Id, HttpContext.Session.GetString("token"));
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
-            await _httpClient.PostAsync(url, content);
+            await _httpClient.PostAsync(url, new StringContent(JsonConvert.SerializeObject(mapedPatient), Encoding.UTF8, "application/json"));
         }
     }
 }

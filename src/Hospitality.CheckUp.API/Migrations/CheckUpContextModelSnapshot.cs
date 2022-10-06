@@ -34,8 +34,8 @@ namespace Hospitality.CheckUp.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdDoctor")
-                        .HasColumnType("int");
+                    b.Property<Guid>("IdDoctor")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("IdPatient")
                         .HasColumnType("int");
