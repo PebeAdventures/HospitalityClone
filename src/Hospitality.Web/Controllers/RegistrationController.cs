@@ -45,6 +45,7 @@ namespace Hospitality.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> RegistrationPostAsync(PatientResultViewModel model, string peselInput)
         {
+            model.PatientPesel = peselInput;
             model.Result = "valid";
             await RegisterNewPatient(model, _configuration["Paths:CreatePatient"]);
             return RedirectToAction("CheckPatient", "CheckPatient");
@@ -55,12 +56,9 @@ namespace Hospitality.Web.Controllers
             PatientReceptionistViewDTO mapedPatient = _mapper.Map<PatientReceptionistViewDTO>(model);
             mapedPatient.IdOfSelectedSpecialist = await _identityService.GetIdOfSelectedDoctor(model.NameOfSelectedDoctor, HttpContext.Session.GetString("token"));
             mapedPatient.IsInsured = await _insuranceService.CheckHealthInsurance(mapedPatient.Id, HttpContext.Session.GetString("token"));
+            mapedPatient.IsInsured = await _insuranceService.CheckHealthInsurance(mapedPatient.Id, HttpContext.Session.GetString("token"));
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
-
-            var json = JsonConvert.SerializeObject(mapedPatient);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var kupa = await _httpClient.PostAsync(url, content);
-            var dupa = kupa;
+            await _httpClient.PostAsync(url, (new StringContent(JsonConvert.SerializeObject(mapedPatient), Encoding.UTF8, "application/json")));
         }
     }
 }
