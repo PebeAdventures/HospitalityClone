@@ -69,40 +69,32 @@ namespace Hospitality.Patient.API.PatientHostedService
             return patientInfoForNotification;
         }
 
-        private double GetExaminationPrice(string examinationTypeName)
+        private static double GetExaminationPrice(string examinationTypeName)
         {
             switch(examinationTypeName)
             {
                 case "USG kolana":
                     return 1234.99;
-                    break;
                 case "USG jamy brzusznej":
                     return 1001.99;
-                    break;
                 case "RTG głowy":
                     return 900.99;
-                    break;
+
                 case "RTG celowane na ząb obrotnika":
                     return 1234.99;
-                    break;
                 case "RTG styczne czaszki":
                     return 500;
-                    break;
                 case "Leczenie kanałowe zębów":
                     return 550.58;
-                    break;
                 case "Badanie kału na pasożyty":
                     return 900;
-                    break;
+
                 case "Cytologia płynna":
                     return 700.70;
-                    break;
                 case "Echo serca":
                     return 2500;
-                    break;
                 case "Gastroskopia":
                     return 1500.99;
-                    break;
                 default:
                     return 0;
             }
