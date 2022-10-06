@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: checkup 
-        image: artgelka/hospitality_checkup:latest
+        image: tomakovv/hospitality_checkups:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80

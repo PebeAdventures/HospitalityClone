@@ -17,7 +17,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CheckUpContext>(options => options
     .UseSqlServer(builder.Configuration.GetValue<string>("CHECKUP_SQL_CONNECTONSTRING")), ServiceLifetime.Transient, ServiceLifetime.Transient);
 
-
 builder.Services.AddCustomCors();
 var app = builder.Build();
 if (app.Environment.EnvironmentName != "Local")

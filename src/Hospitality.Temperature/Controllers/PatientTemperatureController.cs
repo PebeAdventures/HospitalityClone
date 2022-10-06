@@ -5,20 +5,19 @@ using PatientTemperatureControl.Services;
 namespace PatientTemperatureControl.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PatientTemperatureController : ControllerBase
     {
         private readonly ITemperaturesService _temperaturesService;
+
         public PatientTemperatureController(ITemperaturesService temperaturesService)
         {
             _temperaturesService = temperaturesService;
         }
 
-
         [HttpGet("AllPatientTemperatures")]
         public async Task<ActionResult<List<PatientTemperaturesViewDTO>>> AllPatientTemperatures(string id)
         {
-
             var patientTemperatureViewDTO = await _temperaturesService.GetAllPatientTemperatures(id);
 
             if (patientTemperatureViewDTO is null)
@@ -28,6 +27,7 @@ namespace PatientTemperatureControl.Controllers
 
             return patientTemperatureViewDTO;
         }
+
         [HttpPost("AddNewCurrentPatientTemperature")]
         public async Task<IActionResult> AddNewPatientTemperature(NewPatientTemperatureDTO newPatientTemperatureDTO)
         {

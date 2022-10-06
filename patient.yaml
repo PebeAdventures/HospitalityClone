@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: patient 
-        image: artgelka/hospitality_patient:latest
+        image: tomakovv/hospitality_patient:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: temperature-control 
-        image: tomakovv/
+        image: tomakovv/hospitality_temperature-control:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80

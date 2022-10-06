@@ -1,4 +1,3 @@
-using Hospitality.Patient.API.Data.Context;
 using Hospitality.Patient.API.Mapper;
 using Hospitality.Patient.API.PatientHostedService;
 

@@ -23,12 +23,12 @@ spec:
         - name: MONGO_INITDB_ROOT_USERNAME
           valueFrom:
             secretKeyRef:
-              name: mongo-secrets
+              name: secrets
               key: mongo-user
         - name: MONGO_INITDB_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mongo-secrets
+              name: secrets
               key: mongo-pass
         volumeMounts:
         - name: "mongo-data-dir"
@@ -36,7 +36,7 @@ spec:
       volumes:
       - name: "mongo-data-dir"
         persistentVolumeClaim:
-          claimName: "mongo-pvc"
+          claimName: "mongo-data"
 
 
 ---
