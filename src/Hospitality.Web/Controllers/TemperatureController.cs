@@ -39,7 +39,10 @@ namespace Hospitality.Web.Controllers
             {
                 return View(patientTemperatures);
             }
-            patientTemperatures = new List<PatientTemperaturesViewDTO>() { new PatientTemperaturesViewDTO() { PatientId = patientPesel, Temperature = 0, MeasurementDate = DateTime.Now } };
+            patientTemperatures = new List<PatientTemperaturesViewDTO>() { new PatientTemperaturesViewDTO() {
+                PatientId = patientPesel,
+                Temperature = 0,
+                MeasurementDate = TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.Local) } };
             return View(patientTemperatures);
         }
 

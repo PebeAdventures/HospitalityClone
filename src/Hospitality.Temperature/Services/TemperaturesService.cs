@@ -35,12 +35,13 @@ namespace PatientTemperatureControl.Services
         public async Task AddNewPatientTemperature(NewPatientTemperatureDTO newPatientTemperatureDTO)
         {
 
+            var date = DateTime.UtcNow;
 
             await _temperaturesCollection.InsertOneAsync(new PatientTemperature()
             {
                 PatientId = newPatientTemperatureDTO.PatientId,
                 Temperature = newPatientTemperatureDTO.Temperature,
-                MeasurementDate = DateTime.Now
+                MeasurementDate = date
             });
         }
 
