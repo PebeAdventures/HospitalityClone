@@ -29,10 +29,11 @@ namespace Hospitality.Web.Controllers
 
             if (model.PatientId == 0)
                 return RedirectToAction("StartVisit", "StartVisit", model);
+            
             model.DoctorId = Guid.Parse(User.Claims.Where(x => x.Type == "Id").First().Value);
             if (!(await IfPatientIsAssignToLoggedDoctor(model)))
                 return RedirectToAction("StartVisit", "StartVisit", model);
-
+            model.PatientPesel = "";
             return RedirectToAction("CheckUp", "CheckUp", model);
         }
 
