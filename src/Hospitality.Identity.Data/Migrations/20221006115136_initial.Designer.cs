@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hospitality.Identity.Data.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20221004100534_Initial")]
-    partial class Initial
+    [Migration("20221006115136_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,15 +53,15 @@ namespace Hospitality.Identity.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2ee1a05b-6d25-4139-94fb-3ad19efd952e",
-                            ConcurrencyStamp = "d17da1a0-524f-4664-9db0-06b943fc5446",
+                            Id = "466a21fd-72e1-48df-9596-c5d29a857391",
+                            ConcurrencyStamp = "79ceeccd-438e-4c49-a458-2dee59e263f9",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         },
                         new
                         {
-                            Id = "5578640b-3e9c-4a6b-b6de-1456d90f6772",
-                            ConcurrencyStamp = "952c08f1-806f-4cc1-aae9-7230e8cfda9f",
+                            Id = "14744a2e-94bb-4810-886f-a6b2c94e431b",
+                            ConcurrencyStamp = "bc73cf08-c01f-4c70-8583-a80f25e797a7",
                             Name = "Receptionist",
                             NormalizedName = "RECEPTIONIST"
                         });
@@ -159,31 +159,31 @@ namespace Hospitality.Identity.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e2331a37-dda1-4696-b9ef-915622238ee2",
+                            Id = "bab7096a-2eaa-42e7-8733-70908f272c41",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "11a50952-81ff-4ad6-b9c4-462e47f29855",
+                            ConcurrencyStamp = "325be775-8e4f-4ef1-9c23-95246ef900ff",
                             Email = "doctor",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "DOCTOR",
-                            PasswordHash = "AQAAAAEAACcQAAAAELBBzIxS2mV5xtmpbm6KLUdZfBLvSF+DEUel2OyVydmehT0k8zwGZWh3RYkoQFJGnA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFWFlujeGkMhSN6IhqXgyVJ65hiurpUeI42aNZqAXJDY2Ax+6fL2/q85+HoPVrCdnQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9255d592-864e-4e10-ade7-95517b6dab57",
+                            SecurityStamp = "d97d67e5-83d6-4019-a715-636c27614ac6",
                             TwoFactorEnabled = false,
                             UserName = "Dr. House"
                         },
                         new
                         {
-                            Id = "1a29bbb9-91a1-4b1b-80c2-e8dfcda758d1",
+                            Id = "1e4fcfcc-2095-4de9-a254-ff810ea082be",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bee94b2b-7798-4094-89ef-f8f48ae5fb55",
+                            ConcurrencyStamp = "d39bf3f5-7b05-4288-a174-3191fae2ed20",
                             Email = "receptionist",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "RECEPTIONIST",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPaXdp8X1T66+1qvJRaTIZuvU3RnUlRGRw6bfWQIfCquM9R4t8R8eXjP8u+AJFkjUQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAN1HqzyvTO77LRifcMzRvr45UStX8eZkb4BHAjFY/Qkdbpo7wczin5uvFbmp6HJeQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5cc79cd8-fe08-49fc-9243-007d8182f854",
+                            SecurityStamp = "50ee14ce-75be-4ca1-a2b3-4684107f1899",
                             TwoFactorEnabled = false,
                             UserName = "Danuta Nowak"
                         });
@@ -253,13 +253,13 @@ namespace Hospitality.Identity.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "e2331a37-dda1-4696-b9ef-915622238ee2",
-                            RoleId = "2ee1a05b-6d25-4139-94fb-3ad19efd952e"
+                            UserId = "bab7096a-2eaa-42e7-8733-70908f272c41",
+                            RoleId = "466a21fd-72e1-48df-9596-c5d29a857391"
                         },
                         new
                         {
-                            UserId = "1a29bbb9-91a1-4b1b-80c2-e8dfcda758d1",
-                            RoleId = "5578640b-3e9c-4a6b-b6de-1456d90f6772"
+                            UserId = "1e4fcfcc-2095-4de9-a254-ff810ea082be",
+                            RoleId = "14744a2e-94bb-4810-886f-a6b2c94e431b"
                         });
                 });
 
