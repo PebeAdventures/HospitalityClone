@@ -23,6 +23,7 @@ namespace Hospitality.Identity.API.Controllers
             if (jwt == null) return NoContent();
             return Ok(jwt);
         }
+
         [HttpGet("GetAllDoctorsNames")]
         public async Task<IActionResult> GetAllDoctorsNamesAndIds()
             => Ok(await _doctorService.GetAllDoctorsNamesAndIds());

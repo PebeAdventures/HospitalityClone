@@ -1,5 +1,4 @@
-﻿using Hospitality.Common.DTO.Patient;
-using Hospitality.Common.DTO.Registration;
+﻿using Hospitality.Common.DTO.Registration;
 using System.ComponentModel.DataAnnotations;
 
 namespace Hospitality.Web.Models
@@ -11,6 +10,5 @@ namespace Hospitality.Web.Models
         public List<DoctorDTO>? Doctors { get; set; } = new();
         public string SelectedDoctorName { get; set; }
         public Guid DoctorId { get; set; }
-
     }
 }

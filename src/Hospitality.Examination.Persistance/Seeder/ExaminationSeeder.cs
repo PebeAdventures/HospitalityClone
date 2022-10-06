@@ -112,11 +112,8 @@ namespace Hospitality.Examination.Persistance.Seeder
                 Name = "Gastroskopia",
                 Duration = new TimeSpan(0, 0, 6)
             });
-
-
             // builder.Entity<ExaminationInfo>().HasData(examinationInfos);
             builder.Entity<ExaminationType>().HasData(examinationTypes);
-
         }
     }
 }

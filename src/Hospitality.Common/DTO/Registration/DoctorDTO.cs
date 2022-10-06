@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Hospitality.Common.DTO.Registration
+﻿namespace Hospitality.Common.DTO.Registration
 {
     public class DoctorDTO
     {

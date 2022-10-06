@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Hospitality.Common.FakeExamination
+﻿namespace Hospitality.Common.FakeExamination
 {
     public class CardiacUltrasound
     {
@@ -32,8 +26,5 @@ namespace Hospitality.Common.FakeExamination
             TGA = random.Next(1, 10).ToString("0.0");
             TOF = random.Next(2, 14).ToString("0.0");
         }
-
-
-
     }
 }

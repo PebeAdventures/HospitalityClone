@@ -14,7 +14,7 @@
             => Ok(await _service.GetPatientByPeselAsync(pesel));
 
         [HttpPost]
-        public async Task<ActionResult<PatientDoctorViewDTO>> AddPatientAsync(PatientReceptionistViewDTO patientAddDTO)
+        public async Task<IActionResult> AddPatientAsync(PatientReceptionistViewDTO patientAddDTO)
         {
             await _service.AddPatientAsync(patientAddDTO);
             return Ok();

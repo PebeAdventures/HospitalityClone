@@ -31,9 +31,8 @@ namespace Hospitality.Gateway.API.Controllers
 
         private async Task<IActionResult> GetContentAsync(Credentials credentials, string url)
         {
-            var jsonEmail = JsonConvert.SerializeObject(credentials);
-            var content = new StringContent(jsonEmail, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync(url, content);
+            var response = await _httpClient.PostAsync(url, new StringContent(
+                JsonConvert.SerializeObject(credentials), Encoding.UTF8, "application/json"));
             if (!response.IsSuccessStatusCode || response is null || response.StatusCode == System.Net.HttpStatusCode.NoContent) return NoContent();
             return Ok(await response.Content.ReadAsStringAsync());
         }

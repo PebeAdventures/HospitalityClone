@@ -7,12 +7,10 @@ namespace Hospitality.Examination.API.Model
 {
     public class ExaminationContext : DbContext
     {
-        public ExaminationContext(DbContextOptions options) : base(options)
-        {
-        }
-
         public DbSet<ExaminationInfo> Examinations { get; set; }
         public DbSet<ExaminationType> ExaminationTypes { get; set; }
+
+        public ExaminationContext(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

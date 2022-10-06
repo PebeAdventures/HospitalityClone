@@ -20,7 +20,8 @@ namespace Hospitality.Web.Controllers
         private IInsuranceService _insuranceService;
         private readonly IConfiguration _configuration;
 
-        public CheckUpController(IHttpClientFactory httpClientFactory, IMapper mapper, IPatientService patientService, IInsuranceService insuranceService, IConfiguration configuration)
+        public CheckUpController(IHttpClientFactory httpClientFactory, IMapper mapper, IPatientService patientService, 
+            IInsuranceService insuranceService, IConfiguration configuration)
         {
             _httpClient = httpClientFactory.CreateClient();
             _mapper = mapper;
@@ -34,12 +35,17 @@ namespace Hospitality.Web.Controllers
         {
             if (patientDataCheckUpViewModel.PatientId == 0)
             {
-                patientDataCheckUpViewModel.PatientId = await _patientService.GetIdOfPatient(_configuration["Paths:GetPatientByPesel"] + patientDataCheckUpViewModel.PatientPesel, HttpContext.Session.GetString("token"));
+                patientDataCheckUpViewModel.PatientId = await _patientService.GetIdOfPatient(_configuration["Paths:GetPatientByPesel"] 
+                    + patientDataCheckUpViewModel.PatientPesel, HttpContext.Session.GetString("token"));
+
                 if (patientDataCheckUpViewModel.PatientId == 0)
                     return RedirectToAction("StartVisit", "StartVisit", patientDataCheckUpViewModel);
             }
+
             if (patientDataCheckUpViewModel.IsInsured == null)
-                patientDataCheckUpViewModel.IsInsured = await _insuranceService.CheckHealthInsurance(patientDataCheckUpViewModel.PatientId, HttpContext.Session.GetString("token"));
+                patientDataCheckUpViewModel.IsInsured = await _insuranceService.CheckHealthInsurance(
+                    patientDataCheckUpViewModel.PatientId, HttpContext.Session.GetString("token"));
+
             return View(patientDataCheckUpViewModel);
         }
 
@@ -47,19 +53,19 @@ namespace Hospitality.Web.Controllers
         public async Task<IActionResult> NewCheckUp(PatientDataCheckUpViewModel patientDataCheckUpViewModel)
         {
             patientDataCheckUpViewModel.DoctorId = Guid.Parse(User.Claims.Where(x => x.Type == "Id").First().Value);
+
             if (patientDataCheckUpViewModel.PatientId == 0 || patientDataCheckUpViewModel.PatientId == null)
-                patientDataCheckUpViewModel.PatientId = await _patientService.GetIdOfPatient(_configuration["Paths:GetPatientByPesel"] + patientDataCheckUpViewModel.PatientPesel, HttpContext.Session.GetString("token"));
-            var newCheckUpDTO = _mapper.Map<NewCheckUpDTO>(patientDataCheckUpViewModel);
-            await SaveNewCheckupAsync(newCheckUpDTO, _configuration["Paths:CreateCheckup"]);
+                patientDataCheckUpViewModel.PatientId = await _patientService.GetIdOfPatient(_configuration["Paths:GetPatientByPesel"] 
+                    + patientDataCheckUpViewModel.PatientPesel, HttpContext.Session.GetString("token"));
+
+            await SaveNewCheckupAsync(_mapper.Map<NewCheckUpDTO>(patientDataCheckUpViewModel), _configuration["Paths:CreateCheckup"]);
             return RedirectToAction("Index", "Home", null);
         }
 
         private async Task SaveNewCheckupAsync(NewCheckUpDTO newCheckup, string url)
         {
-            var json = JsonConvert.SerializeObject(newCheckup);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
-            await _httpClient.PostAsync(url, content);
+            await _httpClient.PostAsync(url, new StringContent(JsonConvert.SerializeObject(newCheckup), Encoding.UTF8, "application/json"));
         }
     }
 }

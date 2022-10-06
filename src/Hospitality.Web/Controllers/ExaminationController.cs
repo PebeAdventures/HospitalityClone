@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
-using AutoMapper;
 using Hospitality.Web.Services.Interfaces;
 
 namespace Hospitality.Web.Controllers
@@ -16,7 +15,8 @@ namespace Hospitality.Web.Controllers
         private IPatientService _patientService;
         private readonly IConfiguration _configuration;
 
-        public ExaminationController(IHttpClientFactory httpClientFactory, IMapper mapper, IExaminationService examinationService, IPatientService patientService, IConfiguration configuration)
+        public ExaminationController(IHttpClientFactory httpClientFactory, IExaminationService examinationService, 
+            IPatientService patientService, IConfiguration configuration)
         {
             _httpClient = httpClientFactory.CreateClient();
             _examinationService = examinationService;
@@ -26,7 +26,8 @@ namespace Hospitality.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Examination(PatientDataCheckUpViewModel patientDataCheckUpViewModel)
         {
-            patientDataCheckUpViewModel.AvailableExaminations = (await _examinationService.GetAvailableExaminations(HttpContext.Session.GetString("token"))).Select(x => x.Name).ToList();
+            patientDataCheckUpViewModel.AvailableExaminations = (await _examinationService.GetAvailableExaminations(
+                HttpContext.Session.GetString("token"))).Select(x => x.Name).ToList();
             return View(patientDataCheckUpViewModel);
         }
 
@@ -42,16 +43,17 @@ namespace Hospitality.Web.Controllers
         }
 
         private async Task AssignIdOfPatient(PatientDataCheckUpViewModel patientDataCheckUpViewModel)
-            => patientDataCheckUpViewModel.PatientId = await _patientService.GetIdOfPatient(_configuration["Paths:GetPatientByPesel"] + patientDataCheckUpViewModel.PatientPesel, HttpContext.Session.GetString("token"));
+            => patientDataCheckUpViewModel.PatientId = await _patientService.GetIdOfPatient(_configuration["Paths:GetPatientByPesel"] 
+                + patientDataCheckUpViewModel.PatientPesel, HttpContext.Session.GetString("token"));
         private async Task AssignIdOfChosenExamination(PatientDataCheckUpViewModel patientDataCheckUpViewModel)
-            => patientDataCheckUpViewModel.ChosenExaminationId = (await _examinationService.GetAvailableExaminations(HttpContext.Session.GetString("token"))).Where(ae => ae.Name == patientDataCheckUpViewModel.ChosenExamination).FirstOrDefault().Id;
+            => patientDataCheckUpViewModel.ChosenExaminationId = (await _examinationService.GetAvailableExaminations(HttpContext.
+                Session.GetString("token"))).Where(ae => ae.Name == patientDataCheckUpViewModel.ChosenExamination).FirstOrDefault().Id;
         private async Task SendOrder(PatientDataCheckUpViewModel patientDataCheckUpViewModel, string url)
         {
-            var examinationDto = new CreateExaminationDto() { ExaminationTypeId = patientDataCheckUpViewModel.ChosenExaminationId, PatientId = patientDataCheckUpViewModel.PatientId };
-            var json = JsonConvert.SerializeObject(examinationDto);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
-            await _httpClient.PostAsync(url, content);
+            await _httpClient.PostAsync(url, new StringContent(JsonConvert.SerializeObject(new CreateExaminationDto() 
+            { ExaminationTypeId = patientDataCheckUpViewModel.ChosenExaminationId, PatientId = patientDataCheckUpViewModel.PatientId }), 
+            Encoding.UTF8, "application/json"));
         }
     }
 }

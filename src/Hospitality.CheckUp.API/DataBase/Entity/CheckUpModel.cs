@@ -10,6 +10,5 @@ namespace Hospitality.CheckUp.API.DataBase.Entity
         public int IdPatient { get; set; }
         public Guid IdDoctor { get; set; }
         public DateTime Time { get; set; }
-
     }
 }

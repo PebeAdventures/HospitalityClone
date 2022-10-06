@@ -11,10 +11,7 @@ namespace EmailService
             => _emailConfig = emailConfig;
 
         public void SendEmail(Message message)
-        {
-            var emailMessage = CreateEmailMessage(message);
-            Send(emailMessage);
-        }
+            => Send(CreateEmailMessage(message));
 
         private MimeMessage CreateEmailMessage(Message message)
         {

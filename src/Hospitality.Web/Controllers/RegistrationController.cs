@@ -34,7 +34,8 @@ namespace Hospitality.Web.Controllers
         public async Task<IActionResult> Registration(PatientResultViewModel? Model)
         {
             if (Model.Result == "valid")
-                return View(new PatientResultViewModel() { Doctors = await _identityService.GetAllDoctorsNamesAndIds(HttpContext.Session.GetString("token")) });
+                return View(new PatientResultViewModel() { Doctors = await _identityService.GetAllDoctorsNamesAndIds(
+                    HttpContext.Session.GetString("token")) });
             else
                 ViewBag.Invalid = Model.Result;
             Model.Doctors = await _identityService.GetAllDoctorsNamesAndIds(HttpContext.Session.GetString("token"));
@@ -49,7 +50,9 @@ namespace Hospitality.Web.Controllers
                 model.Result = "invalid";
                 return RedirectToAction("Registration", "Registration", model);
             }
-            model.IdOfSelectedDoctor = await _identityService.GetIdOfSelectedDoctor(model.NameOfSelectedDoctor, HttpContext.Session.GetString("token"));
+            model.IdOfSelectedDoctor = await _identityService.GetIdOfSelectedDoctor(
+                model.NameOfSelectedDoctor, HttpContext.Session.GetString("token"));
+
             model.Result = "valid";
             await RegisterNewPatient(model, _configuration["Paths:CreatePatient"]);
             return RedirectToAction("Registration", "Registration");
@@ -60,10 +63,8 @@ namespace Hospitality.Web.Controllers
             PatientReceptionistViewDTO mapedPatient = _mapper.Map<PatientReceptionistViewDTO>(model);
             mapedPatient.IdOfSelectedSpecialist = model.IdOfSelectedDoctor;
             mapedPatient.IsInsured = await _insuranceService.CheckHealthInsurance(mapedPatient.Id, HttpContext.Session.GetString("token"));
-            var json = JsonConvert.SerializeObject(mapedPatient);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
-            await _httpClient.PostAsync(url, content);
+            await _httpClient.PostAsync(url, new StringContent(JsonConvert.SerializeObject(mapedPatient), Encoding.UTF8, "application/json"));
         }
     }
 }

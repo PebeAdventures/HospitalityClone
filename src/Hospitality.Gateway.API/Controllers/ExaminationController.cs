@@ -39,11 +39,10 @@ namespace Hospitality.Gateway.API.Controllers
 
         private async Task<IActionResult> GetContent(CreateExaminationDto newExamination, string url)
         {
-            var json = JsonConvert.SerializeObject(newExamination);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync(url, content);
-            if (!response.IsSuccessStatusCode || response is null) return StatusCode(404);
-            return StatusCode(201);
+            var response = await _httpClient.PostAsync(url, new StringContent(
+                JsonConvert.SerializeObject(newExamination), Encoding.UTF8, "application/json"));
+            if (!response.IsSuccessStatusCode || response is null) return NotFound();
+            return NoContent(); ;
         }
     }
 }

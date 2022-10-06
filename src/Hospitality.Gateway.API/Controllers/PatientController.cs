@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
-using System;
 using System.Text;
 
 namespace Hospitality.Gateway.API.Controllers
@@ -36,18 +34,16 @@ namespace Hospitality.Gateway.API.Controllers
         [HttpPut("UpdateAssinedDoctor")]
         public async Task<IActionResult> UpdateAssignedDoctor(UpdateAssinedDoctorOfPatientDTO patientDTO)
         {
-            var json = JsonConvert.SerializeObject(patientDTO);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PutAsync(_configuration["Paths:UpdateAssinedDoctorOfPatient"], content);
+            var response = await _httpClient.PutAsync(_configuration["Paths:UpdateAssinedDoctorOfPatient"], 
+                new StringContent(JsonConvert.SerializeObject(patientDTO), Encoding.UTF8, "application/json"));
             if (!response.IsSuccessStatusCode || response is null) return NotFound();
             return NoContent();
         }
     
         private async Task<IActionResult> GetContentAsync(PatientReceptionistViewDTO newPatient, string url)
         {
-            var json = JsonConvert.SerializeObject(newPatient);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync(url, content);
+            var response = await _httpClient.PostAsync(url, new StringContent(
+                JsonConvert.SerializeObject(newPatient), Encoding.UTF8, "application/json"));
             if (!response.IsSuccessStatusCode || response is null) return NotFound(); ;
             return StatusCode(201);
         }

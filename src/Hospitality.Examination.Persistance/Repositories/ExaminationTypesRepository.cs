@@ -10,10 +10,9 @@ namespace Hospitality.Examination.Persistance.Repositories
         private readonly ExaminationContext _context;
 
         public ExaminationTypesRepository(ExaminationContext context)
-        {
-            _context = context;
-        }
+            =>_context = context;
 
-        public async Task<IEnumerable<ExaminationType>> GetAllExaminationTypesAsync() => await _context.ExaminationTypes.ToListAsync();
+        public async Task<IEnumerable<ExaminationType>> GetAllExaminationTypesAsync() 
+            => await _context.ExaminationTypes.ToListAsync();
     }
 }

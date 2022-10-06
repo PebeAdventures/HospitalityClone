@@ -1,6 +1,5 @@
 ﻿using MimeKit;
 
-
 namespace EmailService
 {
     public class Message
