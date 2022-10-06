@@ -4,7 +4,7 @@
 
 namespace Hospitality.Examination.Persistance.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,15 +50,15 @@ namespace Hospitality.Examination.Persistance.Migrations
                 columns: new[] { "Id", "Duration", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 1, 80000000L, "USG kolana", 1234.99 },
-                    { 2, 100000000L, "USG jamy brzusznej", 1001.99 },
+                    { 1, 80000000L, "Biochemia krwi", 1234.99 },
+                    { 2, 100000000L, "USG serca", 1001.99 },
                     { 3, 70000000L, "RTG głowy", 900.99000000000001 },
                     { 4, 60000000L, "RTG celowane na ząb obrotnika", 1234.99 },
                     { 5, 60000000L, "RTG styczne czaszki", 500.0 },
                     { 6, 60000000L, "Leczenie kanałowe zębów", 550.0 },
                     { 7, 80000000L, "Badanie kału na pasożyty", 900.0 },
                     { 8, 100000000L, "Cytologia płynna", 700.0 },
-                    { 9, 70000000L, "Echo serca", 2500.0 },
+                    { 9, 70000000L, "Kolonoskopia", 2500.0 },
                     { 10, 60000000L, "Gastroskopia", 1500.0 }
                 });
 

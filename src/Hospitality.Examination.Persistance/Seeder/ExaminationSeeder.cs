@@ -51,7 +51,7 @@ namespace Hospitality.Examination.Persistance.Seeder
             examinationTypes.Add(new ExaminationType()
             {
                 Id = 1,
-                Name = "USG kolana",
+                Name = "Biochemia krwi",
                 Price = 1234.99,
                 Duration = new TimeSpan(0, 0, 8)
             });
@@ -59,7 +59,7 @@ namespace Hospitality.Examination.Persistance.Seeder
             examinationTypes.Add(new ExaminationType()
             {
                 Id = 2,
-                Name = "USG jamy brzusznej",
+                Name = "USG serca",
                 Price = 1001.99,
                 Duration = new TimeSpan(0, 0, 10)
             });
@@ -111,7 +111,7 @@ namespace Hospitality.Examination.Persistance.Seeder
             examinationTypes.Add(new ExaminationType()
             {
                 Id = 9,
-                Name = "Echo serca",
+                Name = "Kolonoskopia",
                 Price = 2500.00,
                 Duration = new TimeSpan(0, 0, 7)
             });

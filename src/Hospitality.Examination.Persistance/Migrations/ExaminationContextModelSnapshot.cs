@@ -76,14 +76,14 @@ namespace Hospitality.Examination.Persistance.Migrations
                         {
                             Id = 1,
                             Duration = 80000000L,
-                            Name = "USG kolana",
+                            Name = "Biochemia krwi",
                             Price = 1234.99
                         },
                         new
                         {
                             Id = 2,
                             Duration = 100000000L,
-                            Name = "USG jamy brzusznej",
+                            Name = "USG serca",
                             Price = 1001.99
                         },
                         new
@@ -132,7 +132,7 @@ namespace Hospitality.Examination.Persistance.Migrations
                         {
                             Id = 9,
                             Duration = 70000000L,
-                            Name = "Echo serca",
+                            Name = "Kolonoskopia",
                             Price = 2500.0
                         },
                         new

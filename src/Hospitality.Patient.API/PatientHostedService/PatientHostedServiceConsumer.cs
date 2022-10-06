@@ -79,7 +79,6 @@ namespace Hospitality.Patient.API.PatientHostedService
                     return 1001.99;
                 case "RTG głowy":
                     return 900.99;
-
                 case "RTG celowane na ząb obrotnika":
                     return 1234.99;
                 case "RTG styczne czaszki":
@@ -88,7 +87,6 @@ namespace Hospitality.Patient.API.PatientHostedService
                     return 550.58;
                 case "Badanie kału na pasożyty":
                     return 900;
-
                 case "Cytologia płynna":
                     return 700.70;
                 case "Echo serca":

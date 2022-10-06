@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hospitality.Examination.Persistance.Migrations
 {
     [DbContext(typeof(ExaminationContext))]
-    [Migration("20221006114747_initial")]
-    partial class initial
+    [Migration("20221006183521_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -78,14 +78,14 @@ namespace Hospitality.Examination.Persistance.Migrations
                         {
                             Id = 1,
                             Duration = 80000000L,
-                            Name = "USG kolana",
+                            Name = "Biochemia krwi",
                             Price = 1234.99
                         },
                         new
                         {
                             Id = 2,
                             Duration = 100000000L,
-                            Name = "USG jamy brzusznej",
+                            Name = "USG serca",
                             Price = 1001.99
                         },
                         new
@@ -134,7 +134,7 @@ namespace Hospitality.Examination.Persistance.Migrations
                         {
                             Id = 9,
                             Duration = 70000000L,
-                            Name = "Echo serca",
+                            Name = "Kolonoskopia",
                             Price = 2500.0
                         },
                         new
