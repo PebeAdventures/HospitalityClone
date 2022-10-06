@@ -1,12 +1,15 @@
+using HealthChecks.UI.Client;
 using Hospitality.Patient.API.Data.Context;
 using Hospitality.Patient.API.Mapper;
 using Hospitality.Patient.API.PatientHostedService;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddEnvironmentVariables(prefix: "PATIENT_");
 
 builder.Services.AddDbContext<PatientContext>(options => options
     .UseSqlServer(builder.Configuration.GetValue<string>("PATIENT_SQL_CONNECTONSTRING")), ServiceLifetime.Transient, ServiceLifetime.Transient);
+builder.Services.AddHealthChecks().AddSqlServer(builder.Configuration.GetValue<string>("PATIENT_SQL_CONNECTONSTRING"));
 
 builder.Services.AddCustomServices();
 builder.Services.AddControllers();
@@ -35,6 +38,10 @@ if (app.Environment.EnvironmentName != "Local")
         context.Database.Migrate();
     }
 }
+app.MapHealthChecks("/dbhealth", new HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsProduction())
 {

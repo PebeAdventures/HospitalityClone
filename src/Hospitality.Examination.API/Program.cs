@@ -34,7 +34,7 @@ if (!app.Environment.IsProduction())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.MapHealthChecks("/health", new HealthCheckOptions
+app.MapHealthChecks("/dbhealth", new HealthCheckOptions
 {
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
