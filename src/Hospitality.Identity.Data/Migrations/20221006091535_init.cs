@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Hospitality.Identity.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -159,8 +159,8 @@ namespace Hospitality.Identity.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "2ee1a05b-6d25-4139-94fb-3ad19efd952e", "d17da1a0-524f-4664-9db0-06b943fc5446", "Doctor", "DOCTOR" },
-                    { "5578640b-3e9c-4a6b-b6de-1456d90f6772", "952c08f1-806f-4cc1-aae9-7230e8cfda9f", "Receptionist", "RECEPTIONIST" }
+                    { "5dda6473-4e0e-4aa0-8fc5-12a14d6fb8c6", "d3e79d9d-cad5-417f-bf5a-584a35203611", "Doctor", "DOCTOR" },
+                    { "fb37470a-e9ba-4db6-ac77-36068236fcdd", "4b18777b-d294-4a45-8889-5f0e807596de", "Receptionist", "RECEPTIONIST" }
                 });
 
             migrationBuilder.InsertData(
@@ -168,19 +168,19 @@ namespace Hospitality.Identity.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "1a29bbb9-91a1-4b1b-80c2-e8dfcda758d1", 0, "bee94b2b-7798-4094-89ef-f8f48ae5fb55", "receptionist", false, false, null, "RECEPTIONIST", null, "AQAAAAEAACcQAAAAEPaXdp8X1T66+1qvJRaTIZuvU3RnUlRGRw6bfWQIfCquM9R4t8R8eXjP8u+AJFkjUQ==", null, false, "5cc79cd8-fe08-49fc-9243-007d8182f854", false, "Danuta Nowak" },
-                    { "e2331a37-dda1-4696-b9ef-915622238ee2", 0, "11a50952-81ff-4ad6-b9c4-462e47f29855", "doctor", false, false, null, "DOCTOR", null, "AQAAAAEAACcQAAAAELBBzIxS2mV5xtmpbm6KLUdZfBLvSF+DEUel2OyVydmehT0k8zwGZWh3RYkoQFJGnA==", null, false, "9255d592-864e-4e10-ade7-95517b6dab57", false, "Dr. House" }
+                    { "a39c518b-2174-4a12-8ba6-9212b21a800d", 0, "faedb380-d6bc-44ad-9271-a0df6c67e420", "receptionist", false, false, null, "RECEPTIONIST", null, "AQAAAAEAACcQAAAAEFCaG77SFb3WEhKEE/uBYxl/fj5lnDi2kiv1CaDUo/Cggf7wjUUJK+v/wQDv+Aw+6w==", null, false, "4780b93f-11d3-493b-8dda-fc166a6196c6", false, "Danuta Nowak" },
+                    { "bfa6e69c-054b-4c13-a38a-cda77dd8d713", 0, "d0862d16-fe7a-44d5-96c4-cec929a013e7", "doctor", false, false, null, "DOCTOR", null, "AQAAAAEAACcQAAAAEHVOqYsH8aGrFpZMWcfpZ4NankrP83IbNLW4SWL3AAJfOIqgGjEq7gMSDpXlEwQNmQ==", null, false, "9dd3aa4f-047d-4b4a-9aeb-7ad29ddf04d6", false, "Dr. House" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "5578640b-3e9c-4a6b-b6de-1456d90f6772", "1a29bbb9-91a1-4b1b-80c2-e8dfcda758d1" });
+                values: new object[] { "fb37470a-e9ba-4db6-ac77-36068236fcdd", "a39c518b-2174-4a12-8ba6-9212b21a800d" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "2ee1a05b-6d25-4139-94fb-3ad19efd952e", "e2331a37-dda1-4696-b9ef-915622238ee2" });
+                values: new object[] { "5dda6473-4e0e-4aa0-8fc5-12a14d6fb8c6", "bfa6e69c-054b-4c13-a38a-cda77dd8d713" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

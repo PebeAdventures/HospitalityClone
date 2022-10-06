@@ -47,15 +47,15 @@ namespace Hospitality.Web.Controllers
         public async Task<IActionResult> AddNewTemperatureToPatient(string actualPatientTemperature, string patientPesel)
         {
 
-            string patientTemperatureWithDots = actualPatientTemperature.Replace(",", ".");
+
             decimal decimalValue;
-            if (!Decimal.TryParse(patientTemperatureWithDots, out decimalValue))
+            if (!Decimal.TryParse(actualPatientTemperature, out decimalValue))
             {
 
                 return Content(@"<script>alert(""Wrong property"");window.close();</script>", "text/html");
 
             }
-
+            string patientTemperatureWithDots = actualPatientTemperature.Replace(",", ".");
             NewPatientTemperatureDTO newPatientTemperatureDTO = new NewPatientTemperatureDTO()
             {
                 PatientId = patientPesel,
