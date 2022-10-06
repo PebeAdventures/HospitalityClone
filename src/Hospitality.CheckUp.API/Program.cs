@@ -39,7 +39,7 @@ if (!app.Environment.IsProduction())
     app.UseSwaggerUI();
 }
 app.UseCors();
-app.MapHealthChecks("/dbhealth", new HealthCheckOptions
+app.MapHealthChecks("/health", new HealthCheckOptions
 {
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });

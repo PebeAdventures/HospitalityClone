@@ -38,7 +38,7 @@ if (app.Environment.EnvironmentName != "Local")
         context.Database.Migrate();
     }
 }
-app.MapHealthChecks("/dbhealth", new HealthCheckOptions
+app.MapHealthChecks("/health", new HealthCheckOptions
 {
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });

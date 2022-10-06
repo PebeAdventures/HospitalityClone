@@ -4,6 +4,7 @@ using Hospitality.Examination.Application.Mapper.Profiles;
 using Hospitality.Examination.Application.Services;
 using Hospitality.Examination.Persistance.Repositories;
 using Hospitality.Examination.RabbitMQ;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Hospitality.Examination.API.Extensions
 {
@@ -33,7 +34,15 @@ namespace Hospitality.Examination.API.Extensions
             services.AddTransient<IRabbitMqService, RabbitMQPublisher>();
             services.AddCustomCors();
             services.AddHostedService<RabbitMQConsumer>();
-            services.AddHealthChecks().AddSqlServer(configuration.GetValue<string>("EXAMINATION_SQL_CONNECTONSTRING"));
+            services.AddHealthChecks()
+                .AddSqlServer(configuration.GetValue<string>("EXAMINATION_SQL_CONNECTONSTRING"))
+                .AddRabbitMQ(
+                 "amqp://guest:guest@rabbitmq-hospitality",
+                 name: "RabbitMQ",
+                 failureStatus: HealthStatus.Degraded,
+                 timeout: TimeSpan.FromSeconds(1),
+                 tags: new string[] { "services" }
+                );
         }
     }
 }
