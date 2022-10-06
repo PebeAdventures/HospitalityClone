@@ -21,7 +21,7 @@ sendButton.addEventListener("click", e => {
     let regName = /^[a-zA-Z\s]{2,50}$/g;
     let regSurname = /^[a-zA-Z\s]{2,50}$/g;
     let regAddress = /^[a-zA-Z\s-/0-9,]{4,150}$/g;
-    let regPesel = /^[1-9][0-9]{10}$/g;
+    let regPesel = /^[0-9]{11}$/g;
     let regPhone = /^[1-9][0-9]{8}$/g;
     console.log(nameTextBoxFor.value);
     console.log(surnameTextBoxFor.value);
@@ -66,21 +66,6 @@ sendButton.addEventListener("click", e => {
         saveButton.style.visibility = "visible";
     }
 });
-
-
-saveButton.addEventListener("click", e => {
-   // clearTextBoxFor()
-});
-
-function clearTextBoxFor() {
-    nameTextBoxFor.value = "";
-    surnameTextBoxFor.value = "";
-    addressTextBoxFor.value = "";
-    peselTextBoxFor.value = "";
-    emailTextBoxFor.value = "";
-    phoneTextBoxFor.value = "";
-    specialistTextBoxFor.value = "none";
-}
 
 
 
