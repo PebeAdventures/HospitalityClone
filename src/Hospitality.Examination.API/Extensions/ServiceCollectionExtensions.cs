@@ -1,6 +1,10 @@
 ﻿using Hospitality.Common.Middlewares;
 using Hospitality.Examination.Application.Contracts.Persistence;
+using Hospitality.Examination.Application.Mapper.Profiles;
+using Hospitality.Examination.Application.Services;
 using Hospitality.Examination.Persistance.Repositories;
+using Hospitality.Examination.RabbitMQ;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Hospitality.Examination.API.Extensions
 {
@@ -22,12 +26,23 @@ namespace Hospitality.Examination.API.Extensions
             });
         }
 
-        public static void AddCustomServices(this IServiceCollection services)
+        public static void AddCustomServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<IExaminationRepository, ExaminationRepository>();
             services.AddTransient<IExaminationTypesRepository, ExaminationTypesRepository>();
-
-
+            services.AddTransient<IUpdateExamination, UpdateExamination>();
+            services.AddTransient<IRabbitMqService, RabbitMQPublisher>();
+            services.AddCustomCors();
+            services.AddHostedService<RabbitMQConsumer>();
+            services.AddHealthChecks()
+                .AddSqlServer(configuration.GetValue<string>("EXAMINATION_SQL_CONNECTONSTRING"))
+                .AddRabbitMQ(
+                 "amqp://guest:guest@rabbitmq-hospitality",
+                 name: "RabbitMQ",
+                 failureStatus: HealthStatus.Degraded,
+                 timeout: TimeSpan.FromSeconds(1),
+                 tags: new string[] { "services" }
+                );
         }
     }
 }

@@ -1,8 +1,12 @@
+using HealthChecks.UI.Client;
 using Hospitality.CheckUp.API.DataBase.Context;
 using Hospitality.CheckUp.API.Extensions;
 using Hospitality.CheckUp.API.Service;
 using Hospitality.CheckUp.API.Service.Interface;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddEnvironmentVariables(prefix: "CHECKUP_");
@@ -13,6 +17,7 @@ builder.Services.AddScoped<ICheckUpService, CheckUpService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHealthChecks().AddSqlServer(builder.Configuration.GetValue<string>("CHECKUP_SQL_CONNECTONSTRING"));
 
 builder.Services.AddDbContext<CheckUpContext>(options => options
     .UseSqlServer(builder.Configuration.GetValue<string>("CHECKUP_SQL_CONNECTONSTRING")), ServiceLifetime.Transient, ServiceLifetime.Transient);
@@ -34,7 +39,10 @@ if (!app.Environment.IsProduction())
     app.UseSwaggerUI();
 }
 app.UseCors();
-
+app.MapHealthChecks("/health", new HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 app.UseAuthorization();
 
 app.MapControllers();
