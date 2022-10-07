@@ -9,6 +9,7 @@
         public double Price { get; set; }
         public string ExaminationTypeName { get; set; } = "";
         public string ExaminationDescription { get; set; } = "";
+        public bool IsInsured { get; set; }
         public int Status { get; set; } = 2;
 
     }
