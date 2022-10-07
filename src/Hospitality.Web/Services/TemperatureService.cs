@@ -23,7 +23,6 @@ namespace Hospitality.Web.Services
         {
             _configuration = configuration;
             _httpClient = httpClientFactory.CreateClient();
-
         }
         public async Task<List<PatientTemperaturesViewDTO>> GetPatientTemperatures(string id, string token)
         {

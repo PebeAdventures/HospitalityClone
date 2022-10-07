@@ -23,10 +23,14 @@ namespace Hospitality.Gateway.API.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Doctor")]
         [HttpPost]
         public async Task<IActionResult> CreateNewCheckupAsync(NewCheckUpDTO newCheckup)
-            => Ok(await GetContentAsync(newCheckup, _configuration["Paths:CreateCheckup"]));
+        {
+            var kupa = _configuration["Paths:CreateCheckup"];
+            var dupa = await GetContentAsync(newCheckup, kupa);
+            return Ok(dupa);
+        }
 
         private async Task<HttpResponseMessage> GetContentAsync(NewCheckUpDTO newCheckup, string url)
-            => await _httpClient.PostAsync(url, new StringContent(
-                JsonConvert.SerializeObject(newCheckup), Encoding.UTF8, "application/json"));
+        => await _httpClient.PostAsync(url, new StringContent(
+            JsonConvert.SerializeObject(newCheckup), Encoding.UTF8, "application/json"));
     }
 }

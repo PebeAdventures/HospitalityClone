@@ -24,5 +24,7 @@ namespace Hospitality.Common.DTO.Patient
 
         [DataType(DataType.Text)]
         public bool IsInsured { get; set; }
+
+        public Guid IdOfSelectedDoctor { get; set; }
     }
 }

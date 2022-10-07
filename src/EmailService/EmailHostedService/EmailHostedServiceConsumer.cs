@@ -60,7 +60,8 @@ namespace EmailService.EmailHostedService
                                         $"Kind regards,\nHospitality";
                 }
                 var message = new Message(new string[] { examinationExecutionDto.Email }, "Client message", messageText);
-                _emailSender.SendEmail(message);
+
+                 _emailSender.SendEmail(message);
             };
             _channel.BasicConsume(queue: _queueName, autoAck: true, consumer: consumer);
             return Task.CompletedTask;

@@ -16,36 +16,27 @@ namespace Hospitality.Web.Controllers
     {
         private HttpClient _httpClient;
         private IMapper _mapper;
-        private IPatientService _patientService;
         private IInsuranceService _insuranceService;
         private readonly IConfiguration _configuration;
+        private IPatientService _patientService;
 
-        public CheckUpController(IHttpClientFactory httpClientFactory, IMapper mapper, IPatientService patientService, 
-            IInsuranceService insuranceService, IConfiguration configuration)
+        public CheckUpController(IHttpClientFactory httpClientFactory, IMapper mapper, IInsuranceService insuranceService, IConfiguration configuration, IPatientService petientService)
         {
             _httpClient = httpClientFactory.CreateClient();
             _mapper = mapper;
-            _patientService = patientService;
             _insuranceService = insuranceService;
             _configuration = configuration;
+            _patientService = petientService;
         }
 
         [HttpGet]
         public async Task<IActionResult> CheckUp(PatientDataCheckUpViewModel? patientDataCheckUpViewModel)
         {
             if (patientDataCheckUpViewModel.PatientId == 0)
-            {
-                patientDataCheckUpViewModel.PatientId = await _patientService.GetIdOfPatient(_configuration["Paths:GetPatientByPesel"] 
-                    + patientDataCheckUpViewModel.PatientPesel, HttpContext.Session.GetString("token"));
-
-                if (patientDataCheckUpViewModel.PatientId == 0)
-                    return RedirectToAction("StartVisit", "StartVisit", patientDataCheckUpViewModel);
-            }
-
+                throw new Exception("Wrong order of quests");
             if (patientDataCheckUpViewModel.IsInsured == null)
                 patientDataCheckUpViewModel.IsInsured = await _insuranceService.CheckHealthInsurance(
                     patientDataCheckUpViewModel.PatientId, HttpContext.Session.GetString("token"));
-
             return View(patientDataCheckUpViewModel);
         }
 
@@ -54,10 +45,8 @@ namespace Hospitality.Web.Controllers
         {
             patientDataCheckUpViewModel.DoctorId = Guid.Parse(User.Claims.Where(x => x.Type == "Id").First().Value);
 
-            if (patientDataCheckUpViewModel.PatientId == 0 || patientDataCheckUpViewModel.PatientId == null)
-                patientDataCheckUpViewModel.PatientId = await _patientService.GetIdOfPatient(_configuration["Paths:GetPatientByPesel"] 
-                    + patientDataCheckUpViewModel.PatientPesel, HttpContext.Session.GetString("token"));
-
+            if (patientDataCheckUpViewModel.PatientId == 0)
+                throw new Exception("Wrong order of quests");
             await SaveNewCheckupAsync(_mapper.Map<NewCheckUpDTO>(patientDataCheckUpViewModel), _configuration["Paths:CreateCheckup"]);
             return RedirectToAction("Index", "Home", null);
         }
@@ -65,7 +54,7 @@ namespace Hospitality.Web.Controllers
         private async Task SaveNewCheckupAsync(NewCheckUpDTO newCheckup, string url)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
-            await _httpClient.PostAsync(url, new StringContent(JsonConvert.SerializeObject(newCheckup), Encoding.UTF8, "application/json"));
+            var dupa = await _httpClient.PostAsync(url, new StringContent(JsonConvert.SerializeObject(newCheckup), Encoding.UTF8, "application/json"));
         }
     }
 }

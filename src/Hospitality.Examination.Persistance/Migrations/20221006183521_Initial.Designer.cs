@@ -11,14 +11,19 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hospitality.Examination.Persistance.Migrations
 {
     [DbContext(typeof(ExaminationContext))]
+<<<<<<<< HEAD:src/Hospitality.Examination.Persistance/Migrations/20221006183521_Initial.Designer.cs
     [Migration("20221006183521_Initial")]
     partial class Initial
+========
+    [Migration("20221006122933_init")]
+    partial class init
+>>>>>>>> master:src/Hospitality.Examination.Persistance/Migrations/20221006122933_init.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.8")
+                .HasAnnotation("ProductVersion", "6.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
