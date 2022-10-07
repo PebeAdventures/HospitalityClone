@@ -21,7 +21,7 @@
                         </p>
                      </div><br>
                      <p class="buttons">
-                             <button id="startButton" type="submit" class="btn btn-primary" data-toggle="modal">  Start visit  </button>
+                             <button id="startButton" type="submit">  Start visit  </button>
                      </p>
          }
 
@@ -29,20 +29,37 @@
 </content>
 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-         <h5>Wrong PESEL</h5>
-      </div>
-    </div>
-  </div>
-</div>
+
+ @if (ViewBag.Show == "show")
+    {
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="errorModalLabel"></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="informationMessage fs-5">Patient not found</p>
+                            </div>
+                            <div class="modal-footer" id="modalForm">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+    }
 </body>
+
+@section Scripts {
+    @if (ViewBag.Show == "show")
+    {
+                <script>
+                    $(function(){
+                        $("#exampleModal").modal("show");
+                    });
+                </script>
+    }
+}

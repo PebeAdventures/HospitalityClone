@@ -9,7 +9,7 @@
     padding-bottom: 2%;
 }
 
-label, input, #startButton {
+label, input, #startButton, #sendButton {
     font-size: 18px;
     width: 100%;
 }

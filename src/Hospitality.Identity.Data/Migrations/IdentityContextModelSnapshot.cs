@@ -17,7 +17,7 @@ namespace Hospitality.Identity.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.8")
+                .HasAnnotation("ProductVersion", "6.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -51,15 +51,15 @@ namespace Hospitality.Identity.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5dda6473-4e0e-4aa0-8fc5-12a14d6fb8c6",
-                            ConcurrencyStamp = "d3e79d9d-cad5-417f-bf5a-584a35203611",
+                            Id = "08a8ce47-7b87-4f85-ba22-7e252ac312cc",
+                            ConcurrencyStamp = "88e74f81-2d4c-4b1a-8999-3be219894183",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         },
                         new
                         {
-                            Id = "fb37470a-e9ba-4db6-ac77-36068236fcdd",
-                            ConcurrencyStamp = "4b18777b-d294-4a45-8889-5f0e807596de",
+                            Id = "95837b29-263f-4b6c-bc47-386b8309323f",
+                            ConcurrencyStamp = "ec6f4c7d-b14a-48e3-a811-de0e74e77c85",
                             Name = "Receptionist",
                             NormalizedName = "RECEPTIONIST"
                         });
@@ -157,33 +157,78 @@ namespace Hospitality.Identity.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bfa6e69c-054b-4c13-a38a-cda77dd8d713",
+                            Id = "317ca4dc-25ef-4adf-afe0-157513998f40",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d0862d16-fe7a-44d5-96c4-cec929a013e7",
+                            ConcurrencyStamp = "ecfa33bf-a4b2-46c8-9ec7-e884826f9184",
                             Email = "doctor",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "DOCTOR",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHVOqYsH8aGrFpZMWcfpZ4NankrP83IbNLW4SWL3AAJfOIqgGjEq7gMSDpXlEwQNmQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIb92idSE8bFraRZ2Y8iUFyXn3Eoam1HQc+9qTw0SffQiWYToh5wBzXFKOo3Pt5hmw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9dd3aa4f-047d-4b4a-9aeb-7ad29ddf04d6",
+                            SecurityStamp = "dd83d325-b705-4dc6-bbac-ac55fc783bb2",
                             TwoFactorEnabled = false,
                             UserName = "Dr. House"
                         },
                         new
                         {
-                            Id = "a39c518b-2174-4a12-8ba6-9212b21a800d",
+                            Id = "73de4edc-aaeb-4c86-a1f5-ef588754719f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "faedb380-d6bc-44ad-9271-a0df6c67e420",
+                            ConcurrencyStamp = "b9555ccc-db21-4be7-9444-b251553b7f79",
+                            Email = "dolittle",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "DOLITTLE",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBOoywYq/waC9jtmyavfDEJ3O1uDnhxPQk82of0D5LJ3B8C1YSkmMP0p72VdFqR+Qw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "decb6d66-c0b5-497e-bba6-c5533cd6cfa0",
+                            TwoFactorEnabled = false,
+                            UserName = "Dr. Dolittle"
+                        },
+                        new
+                        {
+                            Id = "c13f25b9-f8c0-40fb-a9ba-48c90193ae9e",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "56395553-f1d1-408b-8c83-f7bc16061902",
+                            Email = "oetker",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "OETKER",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHZCYKlp3PRrhtn4iQTe01K4REHBW5Ram9IYAOvmn7L/gE2G2sx3O7KX7TjuHdQ3Rw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "ad970207-0655-4b15-a961-5470907218d4",
+                            TwoFactorEnabled = false,
+                            UserName = "Dr. oetker"
+                        },
+                        new
+                        {
+                            Id = "1b1d7525-9c0b-4d32-a79f-74c4b18d330a",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "13373afd-af09-4141-8049-977de3ae867e",
                             Email = "receptionist",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "RECEPTIONIST",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFCaG77SFb3WEhKEE/uBYxl/fj5lnDi2kiv1CaDUo/Cggf7wjUUJK+v/wQDv+Aw+6w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBGv0jIOZivZhsyM5XxeK5TkcSE0ptFYitvsK9EwDWtqp4MfyGiIpQeaDLTiU8Bhyw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4780b93f-11d3-493b-8dda-fc166a6196c6",
+                            SecurityStamp = "5009b837-65d7-4c10-9088-6f1ae95389df",
                             TwoFactorEnabled = false,
                             UserName = "Danuta Nowak"
+                        },
+                        new
+                        {
+                            Id = "b19a3010-9fdc-4a51-bbc8-78f402881dbe",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "1a98c345-776e-4b98-9e51-3623b227b77c",
+                            Email = "rafik",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "RAFIK",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOmqF2FfF1PoyW69jPZuzPAr+tt2mmZ2OD8cUdKThahf+egf1zFQDf913T8KZdqdnw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "dc67145b-4942-4710-b397-f992f6834640",
+                            TwoFactorEnabled = false,
+                            UserName = "Rafał Wyrwikoński"
                         });
                 });
 
@@ -251,13 +296,28 @@ namespace Hospitality.Identity.Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "bfa6e69c-054b-4c13-a38a-cda77dd8d713",
-                            RoleId = "5dda6473-4e0e-4aa0-8fc5-12a14d6fb8c6"
+                            UserId = "317ca4dc-25ef-4adf-afe0-157513998f40",
+                            RoleId = "08a8ce47-7b87-4f85-ba22-7e252ac312cc"
                         },
                         new
                         {
-                            UserId = "a39c518b-2174-4a12-8ba6-9212b21a800d",
-                            RoleId = "fb37470a-e9ba-4db6-ac77-36068236fcdd"
+                            UserId = "73de4edc-aaeb-4c86-a1f5-ef588754719f",
+                            RoleId = "08a8ce47-7b87-4f85-ba22-7e252ac312cc"
+                        },
+                        new
+                        {
+                            UserId = "c13f25b9-f8c0-40fb-a9ba-48c90193ae9e",
+                            RoleId = "08a8ce47-7b87-4f85-ba22-7e252ac312cc"
+                        },
+                        new
+                        {
+                            UserId = "1b1d7525-9c0b-4d32-a79f-74c4b18d330a",
+                            RoleId = "95837b29-263f-4b6c-bc47-386b8309323f"
+                        },
+                        new
+                        {
+                            UserId = "b19a3010-9fdc-4a51-bbc8-78f402881dbe",
+                            RoleId = "95837b29-263f-4b6c-bc47-386b8309323f"
                         });
                 });
 
