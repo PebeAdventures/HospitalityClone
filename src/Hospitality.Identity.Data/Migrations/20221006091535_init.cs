@@ -5,7 +5,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Hospitality.Identity.Data.Migrations
 {
+<<<<<<<< HEAD:src/Hospitality.Identity.Data/Migrations/20221006091535_init.cs
     public partial class init : Migration
+========
+    public partial class initial : Migration
+>>>>>>>> ExaminationTypeChange:src/Hospitality.Identity.Data/Migrations/20221006115136_initial.cs
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -159,8 +163,13 @@ namespace Hospitality.Identity.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
+<<<<<<<< HEAD:src/Hospitality.Identity.Data/Migrations/20221006091535_init.cs
                     { "5dda6473-4e0e-4aa0-8fc5-12a14d6fb8c6", "d3e79d9d-cad5-417f-bf5a-584a35203611", "Doctor", "DOCTOR" },
                     { "fb37470a-e9ba-4db6-ac77-36068236fcdd", "4b18777b-d294-4a45-8889-5f0e807596de", "Receptionist", "RECEPTIONIST" }
+========
+                    { "14744a2e-94bb-4810-886f-a6b2c94e431b", "bc73cf08-c01f-4c70-8583-a80f25e797a7", "Receptionist", "RECEPTIONIST" },
+                    { "466a21fd-72e1-48df-9596-c5d29a857391", "79ceeccd-438e-4c49-a458-2dee59e263f9", "Doctor", "DOCTOR" }
+>>>>>>>> ExaminationTypeChange:src/Hospitality.Identity.Data/Migrations/20221006115136_initial.cs
                 });
 
             migrationBuilder.InsertData(
@@ -168,19 +177,32 @@ namespace Hospitality.Identity.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
+<<<<<<<< HEAD:src/Hospitality.Identity.Data/Migrations/20221006091535_init.cs
                     { "a39c518b-2174-4a12-8ba6-9212b21a800d", 0, "faedb380-d6bc-44ad-9271-a0df6c67e420", "receptionist", false, false, null, "RECEPTIONIST", null, "AQAAAAEAACcQAAAAEFCaG77SFb3WEhKEE/uBYxl/fj5lnDi2kiv1CaDUo/Cggf7wjUUJK+v/wQDv+Aw+6w==", null, false, "4780b93f-11d3-493b-8dda-fc166a6196c6", false, "Danuta Nowak" },
                     { "bfa6e69c-054b-4c13-a38a-cda77dd8d713", 0, "d0862d16-fe7a-44d5-96c4-cec929a013e7", "doctor", false, false, null, "DOCTOR", null, "AQAAAAEAACcQAAAAEHVOqYsH8aGrFpZMWcfpZ4NankrP83IbNLW4SWL3AAJfOIqgGjEq7gMSDpXlEwQNmQ==", null, false, "9dd3aa4f-047d-4b4a-9aeb-7ad29ddf04d6", false, "Dr. House" }
+========
+                    { "1e4fcfcc-2095-4de9-a254-ff810ea082be", 0, "d39bf3f5-7b05-4288-a174-3191fae2ed20", "receptionist", false, false, null, "RECEPTIONIST", null, "AQAAAAEAACcQAAAAEAN1HqzyvTO77LRifcMzRvr45UStX8eZkb4BHAjFY/Qkdbpo7wczin5uvFbmp6HJeQ==", null, false, "50ee14ce-75be-4ca1-a2b3-4684107f1899", false, "Danuta Nowak" },
+                    { "bab7096a-2eaa-42e7-8733-70908f272c41", 0, "325be775-8e4f-4ef1-9c23-95246ef900ff", "doctor", false, false, null, "DOCTOR", null, "AQAAAAEAACcQAAAAEFWFlujeGkMhSN6IhqXgyVJ65hiurpUeI42aNZqAXJDY2Ax+6fL2/q85+HoPVrCdnQ==", null, false, "d97d67e5-83d6-4019-a715-636c27614ac6", false, "Dr. House" }
+>>>>>>>> ExaminationTypeChange:src/Hospitality.Identity.Data/Migrations/20221006115136_initial.cs
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
+<<<<<<<< HEAD:src/Hospitality.Identity.Data/Migrations/20221006091535_init.cs
                 values: new object[] { "fb37470a-e9ba-4db6-ac77-36068236fcdd", "a39c518b-2174-4a12-8ba6-9212b21a800d" });
+========
+                values: new object[] { "14744a2e-94bb-4810-886f-a6b2c94e431b", "1e4fcfcc-2095-4de9-a254-ff810ea082be" });
+>>>>>>>> ExaminationTypeChange:src/Hospitality.Identity.Data/Migrations/20221006115136_initial.cs
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
+<<<<<<<< HEAD:src/Hospitality.Identity.Data/Migrations/20221006091535_init.cs
                 values: new object[] { "5dda6473-4e0e-4aa0-8fc5-12a14d6fb8c6", "bfa6e69c-054b-4c13-a38a-cda77dd8d713" });
+========
+                values: new object[] { "466a21fd-72e1-48df-9596-c5d29a857391", "bab7096a-2eaa-42e7-8733-70908f272c41" });
+>>>>>>>> ExaminationTypeChange:src/Hospitality.Identity.Data/Migrations/20221006115136_initial.cs
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

@@ -1,4 +1,5 @@
-﻿using Hospitality.Common.DTO.Patient;
+﻿using Hospitality.Common.DTO.Examination;
+using Hospitality.Common.DTO.Patient;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -41,27 +42,32 @@ namespace EmailService.EmailHostedService
                 Debug.WriteLine($"EmailHostedServiceConsumer: Received message from PatientHostedServicePublisher: {content}");
 
                 PatientNotificationDTO examinationExecutionDto = JsonConvert.DeserializeObject<PatientNotificationDTO>(content);
+                double costOfExamination = CheckIfIsInsured(examinationExecutionDto);
 
                 string messageText = "";
                 if (examinationExecutionDto.ExaminationDescription == "")
                 {
                     messageText = $"Hello, {examinationExecutionDto.PatientName} {examinationExecutionDto.PatientSurname}! \n" +
                                         $"Your examination \"{examinationExecutionDto.ExaminationTypeName}\" was finished. You could check result in your account. \n" +
+                                        $"You need to pay: \"{costOfExamination}\" zł \n" +
                                         $"Kind regards,\nHospitality";
                 }
                 else
                 {
                     messageText = $"Hello, {examinationExecutionDto.PatientName} {examinationExecutionDto.PatientSurname}! \n" +
                                         $"Your examination \"{examinationExecutionDto.ExaminationTypeName}\" was finished.\nResults\n{examinationExecutionDto.ExaminationDescription}\n" +
+                                        $"You need to pay: \"{costOfExamination}\" zł \n" +
                                         $"Kind regards,\nHospitality";
                 }
                 var message = new Message(new string[] { examinationExecutionDto.Email }, "Client message", messageText);
-
                 _emailSender.SendEmail(message);
             };
             _channel.BasicConsume(queue: _queueName, autoAck: true, consumer: consumer);
             return Task.CompletedTask;
         }
+
+        private double CheckIfIsInsured(PatientNotificationDTO patient)
+            => patient.IsInsured ? patient.Price : 0;
 
         public override void Dispose()
         {

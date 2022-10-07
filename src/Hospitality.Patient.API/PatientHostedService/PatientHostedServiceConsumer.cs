@@ -59,12 +59,43 @@ namespace Hospitality.Patient.API.PatientHostedService
         private async Task<PatientNotificationDTO> preparePatientInfoForNotification(string context)
         {
             ExaminationExecutionDto examinationExecution = JsonConvert.DeserializeObject<ExaminationExecutionDto>(context);
+            double examinationPrice = GetExaminationPrice(examinationExecution.ExaminationTypeName);
 
             PatientNotificationDTO patientInfoForNotification = await _patientService.GetPatientByIDAsync(examinationExecution.PatientId);
             patientInfoForNotification.Status = examinationExecution.Status;
             patientInfoForNotification.ExaminationDescription = examinationExecution.Description;
             patientInfoForNotification.ExaminationTypeName = examinationExecution.ExaminationTypeName;
+            patientInfoForNotification.Price = examinationPrice;
             return patientInfoForNotification;
+        }
+
+        private static double GetExaminationPrice(string examinationTypeName)
+        {
+            switch(examinationTypeName)
+            {
+                case "USG kolana":
+                    return 1234.99;
+                case "USG jamy brzusznej":
+                    return 1001.99;
+                case "RTG głowy":
+                    return 900.99;
+                case "RTG celowane na ząb obrotnika":
+                    return 1234.99;
+                case "RTG styczne czaszki":
+                    return 500;
+                case "Leczenie kanałowe zębów":
+                    return 550.58;
+                case "Badanie kału na pasożyty":
+                    return 900;
+                case "Cytologia płynna":
+                    return 700.70;
+                case "Echo serca":
+                    return 2500;
+                case "Gastroskopia":
+                    return 1500.99;
+                default:
+                    return 0;
+            }
         }
     }
 }
