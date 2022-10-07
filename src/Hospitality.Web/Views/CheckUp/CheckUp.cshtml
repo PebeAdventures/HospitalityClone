@@ -8,72 +8,47 @@
 <head>
 
     <link rel="stylesheet" href="~/css/CheckUp.css" asp-append-version="true" />
+   <script src="@Url.Content("~/js/CheckUp.js")" defer></script>
 </head>
 <body>
     @{
-        Model.DoctorId = Guid.Parse(User.Claims.Where(x=>x.Type == "Id").First().Value);
+        Model.DoctorId = Guid.Parse(User.Claims.Where(x => x.Type == "Id").First().Value);
     }
-    <content>
+  <content>
+      <div id="newForm">
         <div id="checkUpForm">
             <h3>Symptoms and recommendations </h3>
             <br>
             <div class="wrapper">
                 @if (Model.IsInsured)
                 {
-                    <p class="insured">   Patient is Insured</p>
+                        <p class="insured">   Patient is Insured</p>
                 }
                 else
                 {
-                    <p class="notInsured">   Patient is not Insured</p>
+                        <p class="notInsured">   Patient is not Insured</p>
                 }
-                       
-                <div class="relative">
-                    <div class="absolute">    
-                        <form action="/Temperature/AddNewTemperatureToPatient" method="POST" target="_blank">
 
-                        <input type="text" name="actualPatientTemperature" class="btn "  placeholder="Enter patient's temperature" onclick="closeWindow()"/>
-
-                         <div style="display:none">
-                        <input type="text" name="patientPesel" value=@Model.PatientPesel />
-                         </div>
-                         <input type="submit" id="newTemperatureInput" class="btn btn-primary btn-lg" value="Record patient temperature" />
-                        </form>
-                        </div>
-                     <div class="absolute"> 
-                      @using (Html.BeginForm("TemperatureControl", "Temperature", FormMethod.Post, new { target = "_blank" }))
-                    {
-                        <div style="display:none">
-                            @Html.TextBoxFor(model=>model.PatientPesel)
-                        
-                        </div>
-                        <br>
-
-                        <input type="submit" id="temperatureInput" class="btn btn-primary btn-lg" value="Check Temperatures"/>
-                    }
-                 
-                    </div>
-                    <div class="absolute"> 
+                <div>
                     @using (Html.BeginForm("Result", "Result", FormMethod.Post, new { target = "_blank" }))
                     {
-                        <div style="display:none">
-                            <input type="text" name="patientId" value=@Model.PatientId />
-                        </div>
-                        <input type="submit" id="resultInput" class="btn btn-primary btn-lg" value="Examination results"/>
+                            <div style="display:none">
+                                <input type="text" name="patientId" value=@Model.PatientId />
+                            </div>
+                            <input type="submit" id="resultInput" class="btn btn-primary btn-lg" value="Examination results"/>
                     }
-                    </div>
-                    <div class="absolute"> 
+
                     @using (Html.BeginForm("Examination", "Examination", FormMethod.Post, new { target = "_blank" }))
                     {
-                        <div style="display:none">
+                            <div style="display:none">
                             @Html.TextBoxFor(model=>model.PatientPesel)
                             @Html.TextBoxFor(model=>model.PatientId)
-                        </div>
-                        <br>
+                            </div>
+                            <br>
 
-                        <input type="submit" id="orderInput" class="btn btn-primary btn-lg" value="Order an examination"/>
+                            <input type="submit" id="orderInput" class="btn btn-primary btn-lg" value="Order an examination"/>
                     }
 
-                   </div>
                 </div>
 
             </div>
@@ -82,21 +57,53 @@
 
             @using (Html.BeginForm("NewCheckUp", "CheckUp", FormMethod.Post))
             {
-                <div style="display:none">
+                    <div style="display:none">
                     @Html.TextBoxFor(model=>model.PatientPesel)
                     @Html.TextBoxFor(model=>model.PatientId)
-                </div>
+                    </div>
 
-                <div class="checkUp">
-                    @Html.TextAreaFor(x => x.Description, new { @class = "checkUp",  @rows = 14, @value = @Model.Description})
-                </div>
-                <br>
-                <button id="finishButton" typeof="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">  Finish visit  </button>
+                    <div class="checkUp">
+                    @Html.TextAreaFor(x => x.Description, new { @class = "checkUp",  @rows = 14, @value = @Model.Description, id="descriptionTextArea"})
+                    </div>
+                    <br>
+                    <button id="finishButton" typeof="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">  Finish visit  </button>
             }
 
 
 
         </div>
+
+
+
+             <div id="Temporary">
+                            <div id="absolute">    
+                        <form  id="kkk" action="/Temperature/AddNewTemperatureToPatient" method="POST" target="_blank">
+
+
+                         <div style="display:none">
+                        <input type="text" name="patientPesel" value=@Model.PatientPesel />
+                         </div>
+                         <input type="text" id="actualPatientTemperature" name="actualPatientTemperature" class="btn"  placeholder="Input temperature" onclick="closeWindow()"/>
+
+                         <input type="submit" id="newTemperatureInput" class="btn btn-primary btn-lg" value="Save" />
+                        </form>
+                        </div>
+                     <div> 
+                    @using (Html.BeginForm("TemperatureControl", "Temperature", FormMethod.Post, new { target = "_blank" }))
+                    {
+                                            <div style="display:none">
+                            @Html.TextBoxFor(model=>model.PatientPesel)
+
+                                            </div>
+                                            <br>
+
+                                            <input type="submit" id="temperatureInput" class="btn btn-primary btn-lg" value="Check Temperatures"/>
+                    }
+
+                   </div>
+           </div>
+
+           </div>
     </content>
 
 
@@ -106,3 +113,8 @@ window.close();
 }
 </script>
 </body>
+
+
+
+
+

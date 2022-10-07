@@ -11,14 +11,16 @@
      
                     <table class="table table-hover table-striped">  
                         <tr>  
-                            <th>Id </th>  
+                            <th>Id </th> 
+                            <th>Examination</th>
                             <th>Description </th>  
                             <th>Status </th>  
                         </tr>  
                         @foreach (var d in Model)  
                         {  
-                            <tr>  
+                            <tr style="height:70px">  
                                 <td>@d.Id</td>  
+                                <td>@d.TypeName</td>
                                 <td>@d.Description</td> 
                                 <td>@d.Status</td>
                             </tr>  

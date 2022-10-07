@@ -54,7 +54,7 @@ namespace Hospitality.Web.Controllers
         private async Task SaveNewCheckupAsync(NewCheckUpDTO newCheckup, string url)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
-            await _httpClient.PostAsync(url, new StringContent(JsonConvert.SerializeObject(newCheckup), Encoding.UTF8, "application/json"));
+            var dupa = await _httpClient.PostAsync(url, new StringContent(JsonConvert.SerializeObject(newCheckup), Encoding.UTF8, "application/json"));
         }
     }
 }
