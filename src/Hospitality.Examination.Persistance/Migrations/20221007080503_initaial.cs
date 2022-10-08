@@ -4,11 +4,7 @@
 
 namespace Hospitality.Examination.Persistance.Migrations
 {
-<<<<<<<< HEAD:src/Hospitality.Examination.Persistance/Migrations/20221006183521_Initial.cs
-    public partial class Initial : Migration
-========
-    public partial class init : Migration
->>>>>>>> master:src/Hospitality.Examination.Persistance/Migrations/20221006122933_init.cs
+    public partial class initaial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -12,17 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hospitality.Patient.API.Migrations
 {
     [DbContext(typeof(PatientContext))]
-<<<<<<<< HEAD:src/Hospitality.Patient.API/Migrations/20221006131723_initial.Designer.cs
-<<<<<<<< HEAD:src/Hospitality.Patient.API/Migrations/20221006131723_initial.Designer.cs
-    [Migration("20221006131723_initial")]
-========
-    [Migration("20221006120926_initial")]
->>>>>>>> ExaminationTypeChange:src/Hospitality.Patient.API/Migrations/20221006120926_initial.Designer.cs
-    partial class initial
-========
-    [Migration("20221006122716_init")]
-    partial class init
->>>>>>>> master:src/Hospitality.Patient.API/Migrations/20221006122716_init.Designer.cs
+    [Migration("20221007080857_initaial")]
+    partial class initaial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

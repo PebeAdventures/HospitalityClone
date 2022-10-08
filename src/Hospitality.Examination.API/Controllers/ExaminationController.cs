@@ -27,14 +27,14 @@ namespace Hospitality.Examination.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewExamination(CreateExaminationDto examinationDto)
         {
-            var examination = await _mediator.Send(new AddNewExaminationCommand()
+            var adNewExaminationCommand = new AddNewExaminationCommand()
             {
                 Status = (int)ExaminationStatus.InProgress,
                 ExaminationTypeId = examinationDto.ExaminationTypeId,
                 PatientId = examinationDto.PatientId,
                 Description = ""
-               
-            });
+            };
+            var examination = await _mediator.Send(adNewExaminationCommand);
             return CreatedAtAction("GetExaminationById", new { id = examination.Id }, examination);
         }
     }

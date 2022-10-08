@@ -18,15 +18,13 @@ namespace Hospitality.Web.Controllers
         private IMapper _mapper;
         private IInsuranceService _insuranceService;
         private readonly IConfiguration _configuration;
-        private IPatientService _patientService;
 
-        public CheckUpController(IHttpClientFactory httpClientFactory, IMapper mapper, IInsuranceService insuranceService, IConfiguration configuration, IPatientService petientService)
+        public CheckUpController(IHttpClientFactory httpClientFactory, IMapper mapper, IInsuranceService insuranceService, IConfiguration configuration)
         {
             _httpClient = httpClientFactory.CreateClient();
             _mapper = mapper;
             _insuranceService = insuranceService;
             _configuration = configuration;
-            _patientService = petientService;
         }
 
         [HttpGet]
@@ -34,9 +32,8 @@ namespace Hospitality.Web.Controllers
         {
             if (patientDataCheckUpViewModel.PatientId == 0)
                 throw new Exception("Wrong order of quests");
-            if (patientDataCheckUpViewModel.IsInsured == null)
-                patientDataCheckUpViewModel.IsInsured = await _insuranceService.CheckHealthInsurance(
-                    patientDataCheckUpViewModel.PatientId, HttpContext.Session.GetString("token"));
+            patientDataCheckUpViewModel.IsInsured = await _insuranceService.CheckHealthInsurance(
+                patientDataCheckUpViewModel.PatientId, HttpContext.Session.GetString("token"));
             return View(patientDataCheckUpViewModel);
         }
 
@@ -54,7 +51,7 @@ namespace Hospitality.Web.Controllers
         private async Task SaveNewCheckupAsync(NewCheckUpDTO newCheckup, string url)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
-            var dupa = await _httpClient.PostAsync(url, new StringContent(JsonConvert.SerializeObject(newCheckup), Encoding.UTF8, "application/json"));
+            await _httpClient.PostAsync(url, new StringContent(JsonConvert.SerializeObject(newCheckup), Encoding.UTF8, "application/json"));
         }
     }
 }

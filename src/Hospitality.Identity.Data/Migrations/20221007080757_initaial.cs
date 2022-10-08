@@ -5,11 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Hospitality.Identity.Data.Migrations
 {
-<<<<<<<< HEAD:src/Hospitality.Identity.Data/Migrations/20221006091535_init.cs
-    public partial class init : Migration
-========
-    public partial class initial : Migration
->>>>>>>> ExaminationTypeChange:src/Hospitality.Identity.Data/Migrations/20221006115136_initial.cs
+    public partial class initaial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -163,13 +159,8 @@ namespace Hospitality.Identity.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-<<<<<<<< HEAD:src/Hospitality.Identity.Data/Migrations/20221006091535_init.cs
-                    { "5dda6473-4e0e-4aa0-8fc5-12a14d6fb8c6", "d3e79d9d-cad5-417f-bf5a-584a35203611", "Doctor", "DOCTOR" },
-                    { "fb37470a-e9ba-4db6-ac77-36068236fcdd", "4b18777b-d294-4a45-8889-5f0e807596de", "Receptionist", "RECEPTIONIST" }
-========
-                    { "14744a2e-94bb-4810-886f-a6b2c94e431b", "bc73cf08-c01f-4c70-8583-a80f25e797a7", "Receptionist", "RECEPTIONIST" },
-                    { "466a21fd-72e1-48df-9596-c5d29a857391", "79ceeccd-438e-4c49-a458-2dee59e263f9", "Doctor", "DOCTOR" }
->>>>>>>> ExaminationTypeChange:src/Hospitality.Identity.Data/Migrations/20221006115136_initial.cs
+                    { "190ed155-e3bf-488a-9276-ffeccd76f23b", "86b51614-372d-46be-baf1-0d37b054869f", "Doctor", "DOCTOR" },
+                    { "67d107c6-c917-46c2-8646-d5ffd46fed1b", "e5d7a50d-9294-4269-be02-3937057137f6", "Receptionist", "RECEPTIONIST" }
                 });
 
             migrationBuilder.InsertData(
@@ -177,32 +168,24 @@ namespace Hospitality.Identity.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-<<<<<<<< HEAD:src/Hospitality.Identity.Data/Migrations/20221006091535_init.cs
-                    { "a39c518b-2174-4a12-8ba6-9212b21a800d", 0, "faedb380-d6bc-44ad-9271-a0df6c67e420", "receptionist", false, false, null, "RECEPTIONIST", null, "AQAAAAEAACcQAAAAEFCaG77SFb3WEhKEE/uBYxl/fj5lnDi2kiv1CaDUo/Cggf7wjUUJK+v/wQDv+Aw+6w==", null, false, "4780b93f-11d3-493b-8dda-fc166a6196c6", false, "Danuta Nowak" },
-                    { "bfa6e69c-054b-4c13-a38a-cda77dd8d713", 0, "d0862d16-fe7a-44d5-96c4-cec929a013e7", "doctor", false, false, null, "DOCTOR", null, "AQAAAAEAACcQAAAAEHVOqYsH8aGrFpZMWcfpZ4NankrP83IbNLW4SWL3AAJfOIqgGjEq7gMSDpXlEwQNmQ==", null, false, "9dd3aa4f-047d-4b4a-9aeb-7ad29ddf04d6", false, "Dr. House" }
-========
-                    { "1e4fcfcc-2095-4de9-a254-ff810ea082be", 0, "d39bf3f5-7b05-4288-a174-3191fae2ed20", "receptionist", false, false, null, "RECEPTIONIST", null, "AQAAAAEAACcQAAAAEAN1HqzyvTO77LRifcMzRvr45UStX8eZkb4BHAjFY/Qkdbpo7wczin5uvFbmp6HJeQ==", null, false, "50ee14ce-75be-4ca1-a2b3-4684107f1899", false, "Danuta Nowak" },
-                    { "bab7096a-2eaa-42e7-8733-70908f272c41", 0, "325be775-8e4f-4ef1-9c23-95246ef900ff", "doctor", false, false, null, "DOCTOR", null, "AQAAAAEAACcQAAAAEFWFlujeGkMhSN6IhqXgyVJ65hiurpUeI42aNZqAXJDY2Ax+6fL2/q85+HoPVrCdnQ==", null, false, "d97d67e5-83d6-4019-a715-636c27614ac6", false, "Dr. House" }
->>>>>>>> ExaminationTypeChange:src/Hospitality.Identity.Data/Migrations/20221006115136_initial.cs
+                    { "209bb65e-6eb1-4b37-a6fb-b725cd9ff5d3", 0, "7817a30f-c6b1-42b7-93a4-84d2e7dd00e3", "rafik", false, false, null, "RAFIK", null, "AQAAAAEAACcQAAAAEMADTxDYJTFPTxeSvdSAMTUc3fnLOKYLb/qGOyb+smV5fFKKNYQwao93PcHBuZeBAg==", null, false, "4eda161a-080e-48b4-84ce-5e0e244ca72f", false, "Rafał Wyrwikoński" },
+                    { "28379208-f3eb-466c-b990-c2600ec94798", 0, "15196150-13b0-4304-acad-a04372a26394", "oetker", false, false, null, "OETKER", null, "AQAAAAEAACcQAAAAEP4/jnG/RX0zDGJB+D4t5V77lgBfRbRS0G3atArxUai/nNeEVYtuO2+x4cUFf1Jm6g==", null, false, "6dfd26e3-e320-4ca3-a155-427218e4b551", false, "Dr. oetker" },
+                    { "3d80832e-f26e-457e-9da4-5e964850b8c7", 0, "5e680356-6eb2-44cc-bd93-779ccb1f3b93", "doctor", false, false, null, "DOCTOR", null, "AQAAAAEAACcQAAAAEDP7iBLXc5NPzIdpH/mAdQ+tRd2iMtJ3n6AmAosHEy0uNGJQVo4gZhjEA25DUizGBQ==", null, false, "e3972597-8d58-4d7c-8205-7056ca69b2c9", false, "Dr. House" },
+                    { "7355041e-54f1-4769-a53d-9b24eeaf8087", 0, "9b45cd5e-838f-4ec8-865a-eea2c72c58b6", "dolittle", false, false, null, "DOLITTLE", null, "AQAAAAEAACcQAAAAEGP19L0keULgXd5gY5VZOJ/CkdQz8dL1zIygEWlpeOXCbZBS8Ozw+8/eKUHLa9cBNg==", null, false, "85804e7d-e980-457a-900e-ecd4dd206bda", false, "Dr. Dolittle" },
+                    { "b68091f6-6ed7-4763-8ed5-12f2533c3528", 0, "afb02c70-c922-41ab-a46c-e04232d3131e", "receptionist", false, false, null, "RECEPTIONIST", null, "AQAAAAEAACcQAAAAEHEz64jYCt3NBlYYYk/Xg4MxI73V3zLNBfGCVxllVm8xsmykQV7T3CocOHXk1XpJQg==", null, false, "6cf0d25c-d5b1-41f3-ad4d-bc237cb772e6", false, "Danuta Nowak" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-<<<<<<<< HEAD:src/Hospitality.Identity.Data/Migrations/20221006091535_init.cs
-                values: new object[] { "fb37470a-e9ba-4db6-ac77-36068236fcdd", "a39c518b-2174-4a12-8ba6-9212b21a800d" });
-========
-                values: new object[] { "14744a2e-94bb-4810-886f-a6b2c94e431b", "1e4fcfcc-2095-4de9-a254-ff810ea082be" });
->>>>>>>> ExaminationTypeChange:src/Hospitality.Identity.Data/Migrations/20221006115136_initial.cs
-
-            migrationBuilder.InsertData(
-                table: "AspNetUserRoles",
-                columns: new[] { "RoleId", "UserId" },
-<<<<<<<< HEAD:src/Hospitality.Identity.Data/Migrations/20221006091535_init.cs
-                values: new object[] { "5dda6473-4e0e-4aa0-8fc5-12a14d6fb8c6", "bfa6e69c-054b-4c13-a38a-cda77dd8d713" });
-========
-                values: new object[] { "466a21fd-72e1-48df-9596-c5d29a857391", "bab7096a-2eaa-42e7-8733-70908f272c41" });
->>>>>>>> ExaminationTypeChange:src/Hospitality.Identity.Data/Migrations/20221006115136_initial.cs
+                values: new object[,]
+                {
+                    { "67d107c6-c917-46c2-8646-d5ffd46fed1b", "209bb65e-6eb1-4b37-a6fb-b725cd9ff5d3" },
+                    { "190ed155-e3bf-488a-9276-ffeccd76f23b", "28379208-f3eb-466c-b990-c2600ec94798" },
+                    { "190ed155-e3bf-488a-9276-ffeccd76f23b", "3d80832e-f26e-457e-9da4-5e964850b8c7" },
+                    { "190ed155-e3bf-488a-9276-ffeccd76f23b", "7355041e-54f1-4769-a53d-9b24eeaf8087" },
+                    { "67d107c6-c917-46c2-8646-d5ffd46fed1b", "b68091f6-6ed7-4763-8ed5-12f2533c3528" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

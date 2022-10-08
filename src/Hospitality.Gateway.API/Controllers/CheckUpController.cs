@@ -24,9 +24,7 @@ namespace Hospitality.Gateway.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateNewCheckupAsync(NewCheckUpDTO newCheckup)
         {
-            var kupa = _configuration["Paths:CreateCheckup"];
-            var dupa = await GetContentAsync(newCheckup, kupa);
-            return Ok(dupa);
+            return Ok(await GetContentAsync(newCheckup, _configuration["Paths:CreateCheckup"]));
         }
 
         private async Task<HttpResponseMessage> GetContentAsync(NewCheckUpDTO newCheckup, string url)
