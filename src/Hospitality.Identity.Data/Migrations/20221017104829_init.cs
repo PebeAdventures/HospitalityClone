@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Hospitality.Identity.Data.Migrations
 {
-    public partial class initaial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -159,8 +159,8 @@ namespace Hospitality.Identity.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "190ed155-e3bf-488a-9276-ffeccd76f23b", "86b51614-372d-46be-baf1-0d37b054869f", "Doctor", "DOCTOR" },
-                    { "67d107c6-c917-46c2-8646-d5ffd46fed1b", "e5d7a50d-9294-4269-be02-3937057137f6", "Receptionist", "RECEPTIONIST" }
+                    { "0a37bd75-b6cc-45fd-8df3-f218c26091e0", "88fa303e-71e2-458f-b14d-16cca2cb9d4d", "Receptionist", "RECEPTIONIST" },
+                    { "80a69908-d17f-484f-b914-c2a7e0de991d", "4fffdd90-3ac9-47a7-811b-5e3024c038d6", "Doctor", "DOCTOR" }
                 });
 
             migrationBuilder.InsertData(
@@ -168,11 +168,11 @@ namespace Hospitality.Identity.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "209bb65e-6eb1-4b37-a6fb-b725cd9ff5d3", 0, "7817a30f-c6b1-42b7-93a4-84d2e7dd00e3", "rafik", false, false, null, "RAFIK", null, "AQAAAAEAACcQAAAAEMADTxDYJTFPTxeSvdSAMTUc3fnLOKYLb/qGOyb+smV5fFKKNYQwao93PcHBuZeBAg==", null, false, "4eda161a-080e-48b4-84ce-5e0e244ca72f", false, "Rafał Wyrwikoński" },
-                    { "28379208-f3eb-466c-b990-c2600ec94798", 0, "15196150-13b0-4304-acad-a04372a26394", "oetker", false, false, null, "OETKER", null, "AQAAAAEAACcQAAAAEP4/jnG/RX0zDGJB+D4t5V77lgBfRbRS0G3atArxUai/nNeEVYtuO2+x4cUFf1Jm6g==", null, false, "6dfd26e3-e320-4ca3-a155-427218e4b551", false, "Dr. oetker" },
-                    { "3d80832e-f26e-457e-9da4-5e964850b8c7", 0, "5e680356-6eb2-44cc-bd93-779ccb1f3b93", "doctor", false, false, null, "DOCTOR", null, "AQAAAAEAACcQAAAAEDP7iBLXc5NPzIdpH/mAdQ+tRd2iMtJ3n6AmAosHEy0uNGJQVo4gZhjEA25DUizGBQ==", null, false, "e3972597-8d58-4d7c-8205-7056ca69b2c9", false, "Dr. House" },
-                    { "7355041e-54f1-4769-a53d-9b24eeaf8087", 0, "9b45cd5e-838f-4ec8-865a-eea2c72c58b6", "dolittle", false, false, null, "DOLITTLE", null, "AQAAAAEAACcQAAAAEGP19L0keULgXd5gY5VZOJ/CkdQz8dL1zIygEWlpeOXCbZBS8Ozw+8/eKUHLa9cBNg==", null, false, "85804e7d-e980-457a-900e-ecd4dd206bda", false, "Dr. Dolittle" },
-                    { "b68091f6-6ed7-4763-8ed5-12f2533c3528", 0, "afb02c70-c922-41ab-a46c-e04232d3131e", "receptionist", false, false, null, "RECEPTIONIST", null, "AQAAAAEAACcQAAAAEHEz64jYCt3NBlYYYk/Xg4MxI73V3zLNBfGCVxllVm8xsmykQV7T3CocOHXk1XpJQg==", null, false, "6cf0d25c-d5b1-41f3-ad4d-bc237cb772e6", false, "Danuta Nowak" }
+                    { "2f01fe6a-7ab9-4822-9c27-0f379169fb18", 0, "ce5682e2-823e-4a94-8fe1-97cd7948c677", "oetker", false, false, null, "OETKER", null, "AQAAAAEAACcQAAAAEAny6RZypLv2sc5MdEzE9UR6BnK1oE+4eb1AcgCAHb3bVRj0Bo8dOuZzouGXRG+LqA==", null, false, "2eff81a0-73d4-48a9-88d0-fb615eb5d2b1", false, "Dr. oetker" },
+                    { "7dbaa17d-2be3-4ee4-ac23-bde619ecf601", 0, "c2440f82-fb3c-420f-8e05-c0ba63369866", "dolittle", false, false, null, "DOLITTLE", null, "AQAAAAEAACcQAAAAEBxzcn9CXkw4veXSCLroicQ9YXJHLidPLcBL39GFQr4iwauouqUUQL7klXN/lsFK3g==", null, false, "085f2626-39f9-459c-9a78-bde243853848", false, "Dr. Dolittle" },
+                    { "dcf2dab1-c760-4c8c-b658-7d5d04488a40", 0, "9a125451-b31b-4e77-99f4-a0f1993f28f7", "doctor", false, false, null, "DOCTOR", null, "AQAAAAEAACcQAAAAEAxvsWmmKGQLnKoIYKa+wc+lYT8u5ELqj22Sd1PJPd6i5JZkrxYJRXq0rPvPUKi6UA==", null, false, "f2b8197d-ab09-4f5f-99d8-edd3d930c52f", false, "Dr. House" },
+                    { "f03c49e0-bd2e-40ff-a0be-fe3511c424c3", 0, "21536fdd-4082-49bf-8d76-eff222008a62", "receptionist", false, false, null, "RECEPTIONIST", null, "AQAAAAEAACcQAAAAEDmbwg9yBzaFoA9GStkSHazpPfpDMGgVI00NnKPNhc23Ub2iKNHrIId/PS1TaMD4oQ==", null, false, "8f8c5011-9390-4792-9d72-6ad4f048c6d3", false, "Danuta Nowak" },
+                    { "f8454cab-a31b-4ea9-9c86-dbdb6bd2a4c8", 0, "2c266b47-ff68-4d35-bb3c-bdc40f194674", "rafik", false, false, null, "RAFIK", null, "AQAAAAEAACcQAAAAEOSQcBZPhe2LlS0g7/6+B5YbJqkhvpblpgwU7ufbrvfldOIuFj5+af1HolEMP+HUDA==", null, false, "ce81515f-30c5-4744-be60-88c17d27ab25", false, "Rafał Wyrwikoński" }
                 });
 
             migrationBuilder.InsertData(
@@ -180,11 +180,11 @@ namespace Hospitality.Identity.Data.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "67d107c6-c917-46c2-8646-d5ffd46fed1b", "209bb65e-6eb1-4b37-a6fb-b725cd9ff5d3" },
-                    { "190ed155-e3bf-488a-9276-ffeccd76f23b", "28379208-f3eb-466c-b990-c2600ec94798" },
-                    { "190ed155-e3bf-488a-9276-ffeccd76f23b", "3d80832e-f26e-457e-9da4-5e964850b8c7" },
-                    { "190ed155-e3bf-488a-9276-ffeccd76f23b", "7355041e-54f1-4769-a53d-9b24eeaf8087" },
-                    { "67d107c6-c917-46c2-8646-d5ffd46fed1b", "b68091f6-6ed7-4763-8ed5-12f2533c3528" }
+                    { "80a69908-d17f-484f-b914-c2a7e0de991d", "2f01fe6a-7ab9-4822-9c27-0f379169fb18" },
+                    { "80a69908-d17f-484f-b914-c2a7e0de991d", "7dbaa17d-2be3-4ee4-ac23-bde619ecf601" },
+                    { "80a69908-d17f-484f-b914-c2a7e0de991d", "dcf2dab1-c760-4c8c-b658-7d5d04488a40" },
+                    { "0a37bd75-b6cc-45fd-8df3-f218c26091e0", "f03c49e0-bd2e-40ff-a0be-fe3511c424c3" },
+                    { "0a37bd75-b6cc-45fd-8df3-f218c26091e0", "f8454cab-a31b-4ea9-9c86-dbdb6bd2a4c8" }
                 });
 
             migrationBuilder.CreateIndex(

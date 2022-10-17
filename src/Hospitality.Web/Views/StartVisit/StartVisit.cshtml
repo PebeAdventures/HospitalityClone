@@ -51,10 +51,43 @@
 
 
     }
+
+    @if (ViewBag.Show == "notForThisDoctor")
+    {
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="errorModalLabel"></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="informationMessage fs-5">This Patient was assign to another doctor</p>
+                            </div>
+                            <div class="modal-footer" id="modalForm">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    }
+
+
+
+
+
 </body>
 
 @section Scripts {
-    @if (ViewBag.Show == "show")
+    @if (ViewBag.Show == "notForThisDoctor")
+    {
+                <script>
+                    $(function(){
+                        $("#exampleModal").modal("show");
+                    });
+                </script>
+    }
+     @if (ViewBag.Show == "show")
     {
                 <script>
                     $(function(){

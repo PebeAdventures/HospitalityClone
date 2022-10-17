@@ -25,9 +25,10 @@ namespace Hospitality.Web.Controllers
             _configuration = configuration;
         }
         [HttpGet]
-        public IActionResult StartVisit(bool? result)
+        public IActionResult StartVisit(bool? isInDB, bool? isForThisDoctor)
         {
-            if (result == false) ViewBag.Show = "show";
+            if (isInDB == false) ViewBag.Show = "show";
+            if (isForThisDoctor == false) ViewBag.Show = "notForThisDoctor";
             return View(); 
         }
 
@@ -38,13 +39,13 @@ namespace Hospitality.Web.Controllers
                 + model.PatientPesel, HttpContext.Session.GetString("token"));
 
             if (model.PatientId == 0)
-                return RedirectToAction("StartVisit", "StartVisit", new { result = false });
+                return RedirectToAction("StartVisit", "StartVisit", new { isInDB = false });
             
             model.DoctorId = Guid.Parse(User.Claims.Where(x => x.Type == "Id").First().Value);
             if (!(await IfPatientIsAssignToLoggedDoctor(model)))
-                return RedirectToAction("StartVisit", "StartVisit", model);
+                return RedirectToAction("StartVisit", "StartVisit", new { isForThisDoctor = false });
 
-            return RedirectToAction("CheckUp", "CheckUp", model);
+                return RedirectToAction("CheckUp", "CheckUp", model);
         }
 
         private async Task<bool> IfPatientIsAssignToLoggedDoctor(PatientDataCheckUpViewModel model)

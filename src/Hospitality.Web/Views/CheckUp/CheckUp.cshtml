@@ -66,8 +66,28 @@
                     @Html.TextAreaFor(x => x.Description, new { @class = "checkUp",  @rows = 14, @value = @Model.Description, id="descriptionTextArea"})
                     </div>
                     <br>
-                    <button id="finishButton" typeof="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">  Finish visit  </button>
-            }
+                    <button id="finishButton" type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-dismiss="modal">  Finish visit  </button>
+
+                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header  text-black">
+                                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body justify-content-center" id="modalContactBody">
+                                        <p class="errorMessage fs-5">Would you like to save patient visit?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="modal-footer " id="modalForm">
+                                            <button id="saveButton" type="submit" class="btn btn-secondary fs-6" data-save="modal">Save</button>
+                                            <button id="cancelButton" type="button" class="btn btn-secondary fs-6" data-bs-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>      
+                }
 
 
 
@@ -97,13 +117,14 @@
                                             </div>
                                             <br>
 
-                                            <input type="submit" id="temperatureInput" class="btn btn-primary btn-lg" value="Check Temperatures"/>
+                    <input type="submit" id="temperatureInput" class="btn btn-primary btn-lg" value="Check Temperatures"/>
                     }
 
                    </div>
            </div>
 
            </div>
+            
     </content>
 
 

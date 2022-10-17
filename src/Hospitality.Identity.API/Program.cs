@@ -10,8 +10,21 @@ using Hospitality.Identity.API.Services;
 using System.Text;
 using AutoMapper;
 using Hospitality.Identity.API.Profiles;
+using Microsoft.Extensions.Logging.AzureAppServices;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.AddAzureWebAppDiagnostics();
+builder.Services.Configure<AzureFileLoggerOptions>(options =>
+{
+    options.FileName = "azure-diagnostics-";
+    options.FileSizeLimit = 1000 * 1024;
+    options.RetainedFileCountLimit = 5;
+});
+builder.Services.Configure<AzureBlobLoggerOptions>(options =>
+{
+    options.BlobName = "log.txt";
+});
+
 builder.Configuration.
     AddEnvironmentVariables(prefix: "IDENTITY_");
 builder.Services.AddDbContext<IdentityContext>(options => options.UseSqlServer(builder.Configuration.GetValue<string>("IDENTITY_SQL_CONNECTONSTRING")));

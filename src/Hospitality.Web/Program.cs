@@ -3,11 +3,22 @@ using Hospitality.Web.Mapper;
 using Hospitality.Web.Services;
 using Hospitality.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Logging.AzureAppServices;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Logging.AddAzureWebAppDiagnostics();
+builder.Services.Configure<AzureFileLoggerOptions>(options =>
+{
+    options.FileName = "azure-diagnostics-";
+    options.FileSizeLimit = 1000 * 1024;
+    options.RetainedFileCountLimit = 5;
+});
+builder.Services.Configure<AzureBlobLoggerOptions>(options =>
+{
+    options.BlobName = "log.txt";
+});
 // Add services to the container.
 builder.Services.AddScoped<IPatientService, PatientService>();
 builder.Services.AddScoped<IIdentityService, IdentityService>();
