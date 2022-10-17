@@ -13,7 +13,7 @@ builder.Services.AddHealthChecks().AddSqlServer(builder.Configuration.GetValue<s
 
 builder.Services.AddCustomServices();
 builder.Services.AddControllers();
-builder.Services.AddHostedService<PatientHostedServiceConsumer>();
+//builder.Services.AddHostedService<PatientHostedServiceConsumer>();
 
 builder.Services.AddCustomCors();
 
