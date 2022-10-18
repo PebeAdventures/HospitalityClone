@@ -10,12 +10,58 @@ using Hospitality.Identity.API.Services;
 using System.Text;
 using AutoMapper;
 using Hospitality.Identity.API.Profiles;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+//var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+//{
+//    Args = args,
+//    ApplicationName = typeof(Program).Assembly.FullName,
+//    WebRootPath = "customwwwroot"
+//});
+//builder.Host.ConfigureAppConfiguration((hostingContext, config) =>
+//{
+//    var settings = config.Build();
+
+//    config.AddAzureAppConfiguration(options =>
+//    {
+//        options.Connect(settings["ConnectionStrings:AppConfig"])
+//                .ConfigureKeyVault(kv =>
+//                {
+//                    kv.SetCredential(new DefaultAzureCredential());
+//                });
+//    });
+//});
+//Console.WriteLine($"Application Name: {builder.Environment.ApplicationName}");
+//Console.WriteLine($"WebRootPath: {builder.Environment.WebRootPath}");
+
+
+
+
 builder.Configuration.
     AddEnvironmentVariables(prefix: "IDENTITY_");
-builder.Services.AddDbContext<IdentityContext>(options => options.UseSqlServer(builder.Configuration.GetValue<string>("IDENTITY_SQL_CONNECTONSTRING")));
-builder.Services.AddHealthChecks().AddSqlServer(builder.Configuration.GetValue<string>("IDENTITY_SQL_CONNECTONSTRING"));
+
+var kvUrl = builder.Configuration["AzureKeyVaultUri"];
+var secretsClient = new SecretClient(new Uri(kvUrl), new DefaultAzureCredential());
+var sqlConnectionString = secretsClient.GetSecret("connectionstring").Value.Value;
+
+builder.Services.AddDbContext<IdentityContext>(options => options.UseSqlServer(sqlConnectionString));
+
+
+//builder.Services.AddDbContext<IdentityContext>(options => options.UseSqlServer(builder.Configuration.GetValue<string>("IDENTITY_SQL_CONNECTONSTRING")));
+//builder.Services.AddHealthChecks().AddSqlServer(builder.Configuration.GetValue<string>("IDENTITY_SQL_CONNECTONSTRING"));
+
+//builder.Services.AddDbContext<IdentityContext>(
+//    options => options.UseSqlServer(builder.Configuration.GetConnectionString("AzureDb")));
+//builder.Services.AddHealthChecks().AddSqlServer(builder.Configuration.GetConnectionString("AzureDb"));
+
+//builder.Services.AddDbContext<IdentityContext>(options => options.UseSqlServer(builder.Configuration.GetValue<string>("AzureDb")));
+builder.Services.AddHealthChecks().AddSqlServer(sqlConnectionString);
+
+
 builder.Services.AddScoped<ILogInService, LogInServicert>();
 builder.Services.AddTransient<IDoctorService, DoctorService>();
 var mapConfig = new MapperConfiguration(c =>

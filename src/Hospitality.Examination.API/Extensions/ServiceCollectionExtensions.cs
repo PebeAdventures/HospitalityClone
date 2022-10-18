@@ -31,9 +31,9 @@ namespace Hospitality.Examination.API.Extensions
             services.AddTransient<IExaminationRepository, ExaminationRepository>();
             services.AddTransient<IExaminationTypesRepository, ExaminationTypesRepository>();
             services.AddTransient<IUpdateExamination, UpdateExamination>();
-            services.AddTransient<IRabbitMqService, RabbitMQPublisher>();
+           // services.AddTransient<IRabbitMqService, RabbitMQPublisher>();
             services.AddCustomCors();
-            services.AddHostedService<RabbitMQConsumer>();
+            //services.AddHostedService<RabbitMQConsumer>();
             services.AddHealthChecks()
                 .AddSqlServer(configuration.GetValue<string>("EXAMINATION_SQL_CONNECTONSTRING"))
                 .AddRabbitMQ(
