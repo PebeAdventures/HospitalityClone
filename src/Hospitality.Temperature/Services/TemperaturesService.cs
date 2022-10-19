@@ -13,7 +13,7 @@ namespace PatientTemperatureControl.Services
         public TemperaturesService(IOptions<PatientTemperaturesDatabaseSettings> temperaturesDatabaseSettings, IConfiguration configuration)
         {
             _configuration = configuration;
-            var mongoClient = new MongoClient(_configuration.GetValue<string>("MONGO_CONNECTION_STRING"));
+            var mongoClient = new MongoClient(_configuration["cosmos--connectionstring"]);
 
             var mongoDatabase = mongoClient.GetDatabase(temperaturesDatabaseSettings.Value.DatabaseName);
 
