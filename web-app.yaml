@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: webapp 
-        image: tomakovv/hospitality_webapp:latest
+        image: hospitalitytestpebe.azurecr.io/HospitalityBackup/hospitality_webapp:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
