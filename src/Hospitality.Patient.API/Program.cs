@@ -5,11 +5,12 @@ using Hospitality.Patient.API.PatientHostedService;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Configuration.AddEnvironmentVariables(prefix: "PATIENT_");
 
 builder.Services.AddDbContext<PatientContext>(options => options
-    .UseSqlServer(builder.Configuration.GetValue<string>("PATIENT_SQL_CONNECTONSTRING")), ServiceLifetime.Transient, ServiceLifetime.Transient);
-builder.Services.AddHealthChecks().AddSqlServer(builder.Configuration.GetValue<string>("PATIENT_SQL_CONNECTONSTRING"));
+    .UseSqlServer(builder.Configuration.GetValue<string>("AzureSql")), ServiceLifetime.Transient, ServiceLifetime.Transient);
+builder.Services.AddHealthChecks().AddSqlServer(builder.Configuration.GetValue<string>("AzureSql"));
 
 builder.Services.AddCustomServices();
 builder.Services.AddControllers();

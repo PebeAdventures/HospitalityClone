@@ -11,24 +11,25 @@ using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 
 var builder = WebApplication.CreateBuilder(args);
-var kvUrl = builder.Configuration["VaultUri"];
-var secretClient = new SecretClient(new Uri(kvUrl), new DefaultAzureCredential());
-var sqlConnectionString = secretClient.GetSecret("checkupDB").Value.Value;
+//var kvUrl = builder.Configuration["VaultUri"];
+//var secretClient = new SecretClient(new Uri(kvUrl), new DefaultAzureCredential());
+//var sqlConnectionString = secretClient.GetSecret("checkupDB").Value.Value;
 
 //var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("VaultUri"));
 //builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
 builder.Configuration.AddEnvironmentVariables(prefix: "CHECKUP_");
 
-builder.Services.AddHttpClient();
+//builder.Services.AddHttpClient();
 builder.Services.AddControllers();
 builder.Services.AddScoped<ICheckUpService, CheckUpService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-//builder.Services.AddHealthChecks().AddSqlServer(builder.Configuration.GetValue<string>("CHECKUP_SQL_CONNECTONSTRING"));
 
 builder.Services.AddDbContext<CheckUpContext>(options => options
-    .UseSqlServer(builder.Configuration.GetValue<string>("CHECKUP_SQL_CONNECTONSTRING")), ServiceLifetime.Transient, ServiceLifetime.Transient);
+    .UseSqlServer(builder.Configuration.GetValue<string>("VaultUri")), 
+    ServiceLifetime.Transient, ServiceLifetime.Transient);
+builder.Services.AddHealthChecks().AddSqlServer(builder.Configuration.GetValue<string>("VaultUri"));
 
 builder.Services.AddCustomCors();
 var app = builder.Build();
